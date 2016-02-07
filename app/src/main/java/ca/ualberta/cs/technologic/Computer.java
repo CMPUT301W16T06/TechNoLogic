@@ -1,6 +1,5 @@
 package ca.ualberta.cs.technologic;
 
-<<<<<<< HEAD
 import java.util.Date;
 import java.util.UUID;
 
@@ -35,6 +34,7 @@ public class Computer {
 
     /**
      * Returns the make of the computer
+     *
      * @return
      */
     public String getMake() {
@@ -43,6 +43,7 @@ public class Computer {
 
     /**
      * Sets the make of the computer
+     *
      * @param make
      */
     public void setMake(String make) {
@@ -51,6 +52,7 @@ public class Computer {
 
     /**
      * Returns the model of the computer
+     *
      * @return
      */
     public String getModel() {
@@ -59,6 +61,7 @@ public class Computer {
 
     /**
      * Sets the model of the computer
+     *
      * @param model
      */
     public void setModel(String model) {
@@ -67,6 +70,7 @@ public class Computer {
 
     /**
      * Returns the year of the computer
+     *
      * @return
      */
     public Integer getYear() {
@@ -75,6 +79,7 @@ public class Computer {
 
     /**
      * Sets the year of the computer
+     *
      * @param year
      */
     public void setYear(Integer year) {
@@ -83,6 +88,7 @@ public class Computer {
 
     /**
      * Returns the processor type of the computer
+     *
      * @return
      */
     public String getProcessor() {
@@ -91,6 +97,7 @@ public class Computer {
 
     /**
      * Sets the type of processor in the computer
+     *
      * @param processor
      */
     public void setProcessor(String processor) {
@@ -99,6 +106,7 @@ public class Computer {
 
     /**
      * Returns the amount of ram in the computer
+     *
      * @return
      */
     public Integer getRam() {
@@ -107,6 +115,7 @@ public class Computer {
 
     /**
      * Sets the amount of ram in the computer
+     *
      * @param ram
      */
     public void setRam(Integer ram) {
@@ -115,6 +124,7 @@ public class Computer {
 
     /**
      * Returns the size of the harddrive of the computer in gigabytes
+     *
      * @return
      */
     public Integer getHardDrive() {
@@ -123,6 +133,7 @@ public class Computer {
 
     /**
      * Sets the size of the computers harddrive in gigabytes
+     *
      * @param hardDrive
      */
     public void setHardDrive(Integer hardDrive) {
@@ -131,6 +142,7 @@ public class Computer {
 
     /**
      * Returns the operating system that is on the computer
+     *
      * @return
      */
     public String getOs() {
@@ -139,6 +151,7 @@ public class Computer {
 
     /**
      * Sets the type of operating system on the computer
+     *
      * @param os
      */
     public void setOs(String os) {
@@ -147,6 +160,7 @@ public class Computer {
 
     /**
      * Returns the minimum bid price on the computer
+     *
      * @return
      */
     public Float getPrice() {
@@ -155,6 +169,7 @@ public class Computer {
 
     /**
      * Sets the minimum bid price on the computer
+     *
      * @param price
      */
     public void setPrice(Float price) {
@@ -163,6 +178,7 @@ public class Computer {
 
     /**
      * Returns the description of the computer
+     *
      * @return
      */
     public String getDescription() {
@@ -171,36 +187,10 @@ public class Computer {
 
     /**
      * Sets the description of the computer
+     *
      * @param description
      */
     public void setDescription(String description) {
         this.description = description;
     }
-=======
-/**
- * Created by Jordan on 06/02/2016.
- */
-public class Computer {
-    private String description;
-    private String harddrive;
-    private String RAM;
-    private String processor;
-    private String model;
-    private String make;
-    private String OS;
-    private int year;
-    private int computerID;
-
-    public Computer(String description, String harddrive, String RAM, String processor,
-                    String model, String make, String OS, int year) {
-        this.description = description;
-        this.harddrive = harddrive;
-        this.RAM = RAM;
-        this.processor = processor;
-        this.model = model;
-        this.make = make;
-        this.OS = OS;
-        this.year = year;
-    }
->>>>>>> 99e611386d39c74913553686d9e78c157c11c687
 }
