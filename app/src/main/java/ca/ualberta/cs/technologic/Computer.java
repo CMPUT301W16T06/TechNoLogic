@@ -1,5 +1,6 @@
 package ca.ualberta.cs.technologic;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.UUID;
 
@@ -175,4 +176,31 @@ public class Computer {
     public void setDescription(String description) {
         this.description = description;
     }
+=======
+/**
+ * Created by Jordan on 06/02/2016.
+ */
+public class Computer {
+    private String description;
+    private String harddrive;
+    private String RAM;
+    private String processor;
+    private String model;
+    private String make;
+    private String OS;
+    private int year;
+    private int computerID;
+
+    public Computer(String description, String harddrive, String RAM, String processor,
+                    String model, String make, String OS, int year) {
+        this.description = description;
+        this.harddrive = harddrive;
+        this.RAM = RAM;
+        this.processor = processor;
+        this.model = model;
+        this.make = make;
+        this.OS = OS;
+        this.year = year;
+    }
+>>>>>>> 99e611386d39c74913553686d9e78c157c11c687
 }

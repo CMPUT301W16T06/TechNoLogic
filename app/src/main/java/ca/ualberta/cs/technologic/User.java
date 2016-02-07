@@ -1,5 +1,6 @@
 package ca.ualberta.cs.technologic;
 
+<<<<<<< HEAD
 import android.location.Address;
 import android.provider.ContactsContract;
 
@@ -10,10 +11,17 @@ import java.util.UUID;
 
 /**
  * Created by gknoblau on 2016-02-06.
+=======
+import java.util.ArrayList;
+
+/**
+ * Created by Jordan on 06/02/2016.
+>>>>>>> 99e611386d39c74913553686d9e78c157c11c687
  */
 public class User {
     private String name;
     private String username;
+<<<<<<< HEAD
     private ContactsContract.CommonDataKinds.Email email;
     private ContactsContract.CommonDataKinds.Phone phone;
     private KeyStore.PasswordProtection password;
@@ -140,5 +148,29 @@ public class User {
 
     public void addComputer(UUID ID) {
         computers.add(ID);
+=======
+    private String email;
+    private String phonenum;
+    private String password;
+    private String address;
+    private ArrayList<Computer> CmputArray;
+    private int userID;
+
+    public User(String name, String username, String email, String phonenum, String password, String address) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.phonenum = phonenum;
+        this.password = password;
+        this.address = address;
+    }
+
+    public ArrayList<Computer> getCmputArray() {
+        return CmputArray;
+    }
+
+    public void setCmputArray(ArrayList<Computer> cmputArray) {
+        CmputArray = cmputArray;
+>>>>>>> 99e611386d39c74913553686d9e78c157c11c687
     }
 }
