@@ -1,10 +1,13 @@
 package ca.ualberta.cs.technologic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
 /**
  * Created by gknoblau on 2016-02-06.
+ * I added a status variable that can only be Available, Bidded or Borrowed- Jordan
  */
 public class Computer {
     private UUID id;
@@ -17,6 +20,7 @@ public class Computer {
     private String os;
     private Float price;
     private String description;
+    private String status = "Available";
 
     public Computer(String make, String model, Integer year, String processor, Integer ram,
                     Integer hardDrive, String os, Float price, String description) {
@@ -192,5 +196,28 @@ public class Computer {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+
+    //Sets string status, will not accept any value other than Available, Bidded or Borrowed
+    public void setStatus(String status) throws IllegalArgumentException {
+        ArrayList<String> statusOptions = new ArrayList<String>();
+        statusOptions.add("Available");
+        statusOptions.add("Bidded");
+        statusOptions.add("Borrowed");
+        if (statusOptions.contains(status)){
+            this.status = status;
+        }
+        else {
+            throw new IllegalArgumentException();
+        }
     }
 }

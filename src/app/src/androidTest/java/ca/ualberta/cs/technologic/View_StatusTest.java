@@ -50,3 +50,4 @@ public class View_StatusTest extends ActivityInstrumentationTestCase2{
         assertEquals("Borrowing", comp3.getStatus());
     }
 }
+

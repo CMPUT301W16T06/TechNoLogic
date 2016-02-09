@@ -8,6 +8,9 @@ import java.util.UUID;
 
 /**
  * Created by gknoblau on 2016-02-06.
+ * Changed the password back to just a string - Jordan
+ * Added deleteComputer, addComputer, editComputer and getComputerIndex methods (not implemented)
+ * We have to add checking that username is unique in constructor and setUsername
 **/
 
 public class User {
@@ -15,19 +18,50 @@ public class User {
     private String username;
     private ContactsContract.CommonDataKinds.Email email;
     private ContactsContract.CommonDataKinds.Phone phone;
-    private KeyStore.PasswordProtection password;
+    private String password;
     private Address address;
 
-    //I think this should be an array of ints for the ID's of the computers they own
-    // If you think this is the wrong implimentation let me know
-    private ArrayList<UUID> computers;
+    //The user holds an array of all the computer objects they own
+    private ArrayList<Computer> computers;
+
+    //Will add a Computer to the END of the computers array
+    //Throws IllegalArgumentException if you try to add another computer with the same UUID
+    public void addComputer(Computer newComputer) throws IllegalArgumentException{
+        //NEED TO IMPLEMENT
+
+    }
+
+    //Will delete the computer that matches the UUID passed in from the list of computers
+    //that the user owns
+    //If ID not found in computer list throws IllegalArgumentException
+    public void deleteComputer(UUID ID) throws IllegalArgumentException{
+        //NEED TO IMPLEMENT
+    }
+
+    //Pass in the UUID of the computer you wish to change as well as all the information about
+    //that computer and "editComputer" will find the computer that match the UUID and change
+    //it's attributes
+    public void editComputer(UUID ID,String make, String model, Integer year, String processor,
+                             Integer ram, Integer hardDrive, String os, Float price,
+                             String description){
+        //NEED TO IMPLEMENT
+    }
+
+
+    //Searches for computer in list user's computers, returns index
+    //if not in the user's computers returns -1
+    public int getComputerIndex(UUID ID){
+        //NEED TO IMPLEMENT
+        return -1;
+    }
+
 
     /**
      * Minimum amount required to create an account
      * @param username
      * @param password
      */
-    public User(String username,KeyStore.PasswordProtection password ) {
+    public User(String username,String password ) {
         this.username = username;
         this.password = password;
     }
@@ -58,9 +92,10 @@ public class User {
 
     /**
      * Set the username for the user
+     * Will throw IllegalArgumentException if username is not Unique
      * @param username
      */
-    public void setUsername(String username) {
+    public void setUsername(String username) throws IllegalArgumentException{
         this.username = username;
     }
 
@@ -100,7 +135,7 @@ public class User {
      * Gets the password from password protection of the user
      * @return
      */
-    public KeyStore.PasswordProtection getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -108,7 +143,7 @@ public class User {
      * Sets the password through Password protection for the user
      * @param password
      */
-    public void setPassword(KeyStore.PasswordProtection password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -132,12 +167,8 @@ public class User {
      * Get list of computers ID's that the user owns
      * @return
      */
-    public ArrayList<UUID> getComputers() {
+    public ArrayList<Computer> getComputers() {
         return computers;
-    }
-
-    public void addComputer(UUID ID) {
-        computers.add(ID);
     }
 
 }
