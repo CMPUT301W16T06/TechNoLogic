@@ -100,6 +100,10 @@ public class User {
         // NEED TO IMPLEMENT
     }
 
+    // decline a bid from myComputerBid list
+    public void declineComputerBid(Bid bid) {
+        //TODO
+    }
 
     /**
      * Minimum amount required to create an account
@@ -247,14 +251,16 @@ public class User {
      * A Lent out computer has been returned
      */
     public void returnLent(UUID compID) {
-        // NEED TO IMPLEMENT
+        //TODO
     }
 
     /**
      * User has possession of another User's Computer
      */
     public void addBorrowing(UUID compID) {
-
+        //TODO
     }
+
+
 }
 

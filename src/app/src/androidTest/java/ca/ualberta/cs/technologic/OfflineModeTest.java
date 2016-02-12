@@ -1,5 +1,9 @@
 package ca.ualberta.cs.technologic;
 
+import android.content.ContentResolver;
+import android.net.Uri;
+import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
@@ -17,6 +21,13 @@ public class OfflineModeTest extends ActivityInstrumentationTestCase2 {
      */
     public void testOfflineMode() {
 
+        AirplaneMode mode = new AirplaneMode();
+        mode.setEnabled(false);
+
+        assertEquals("Expect airplane mode off", false, mode.getEnabled());
+
+        mode.setEnabled(true);
+        assertEquals("Expect airplane mode on", true, mode.getEnabled());
     }
 
 }

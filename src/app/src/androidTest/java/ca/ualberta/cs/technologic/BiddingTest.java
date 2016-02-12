@@ -197,7 +197,39 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+    /**
+     * testDeclinebid tests if a declined bid still exists
+     *  Corresponds to US 05.07.01
+     */
 
+    public void testDeclinebid() {
+        // Initialize Users and Computers
+        User user1 = new User("Tom", "thetankengine");
 
+        Computer comp1 = new Computer("Apple", "MacBook", 2013, "intel i5", 8,
+                500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
+
+        // Place three bids on comp1
+        Bid bid1 = new Bid(comp1.getId(), 19.3);
+        Bid bid2 = new Bid(comp1.getId(), 24.3);
+        Bid bid3 = new Bid(comp1.getId(), 22.7);
+        user1.addMyComputerBid(bid1);
+        user1.addMyComputerBid(bid2);
+        user1.addMyComputerBid(bid3);
+
+        // user1 declines bid1
+        user1.declineComputerBid(bid1);
+
+        // Expecting bid2 and bid3
+        ArrayList<Bid> expectedBids = new ArrayList<>();
+        expectedBids.add(bid2);
+        expectedBids.add(bid3);
+
+        // Expecting empty because comp1 is declined, not lent out
+        ArrayList<UUID> expectedUUID = new ArrayList<>();
+
+        assertEquals("Expected same bid array", expectedBids, user1.getComputerBids(comp1.getId()));
+        assertEquals("Expected expect empty", expectedUUID, user1.getLentOut());
+    }
 
 }

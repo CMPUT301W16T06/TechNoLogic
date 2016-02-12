@@ -14,16 +14,21 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         super(Computer.class);
     }
 
+    /**
+     * testViewBorrower tests if the Borrowing view is correct
+     *  Corresponds to US 06.01.01
+     */
     public void testViewBorrower() {
+        // Initialize Users and Computers
         User user1 = new User("Tom", "thetankengine");
         User user2 = new User("Ashley", "strongpassword");
-
 
         Computer comp1 = new Computer("Apple", "MacBook", 2013, "intel i5", 8,
                 500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
         Computer comp2 = new Computer("Apple", "MacBook", 2015, "intel i7", 8,
                 500, "Ios", Float.parseFloat("18.3"), "Much faster");
 
+        // user1 owns and lends out Computers
         user1.addComputer(comp1);
         user1.addComputer(comp2);
         user1.addLentOut(comp1.getId());
@@ -33,13 +38,19 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         compID.add(comp1.getId());
         compID.add(comp2.getId());
 
+        // User2 borrows Computers from user1
         user2.addBorrowing(comp1.getId());
         user2.addBorrowing(comp2.getId());
 
         assertEquals("Should be same UUID", compID, user2.getBorrowing());
     }
 
+    /**
+     * testViewOwner tests if Lending out is correct
+     * Corresponds to US 06.02.01
+     */
     public void testViewOwner() {
+        // Initialize Users and Computers
         User user1 = new User("Tom", "thetankengine");
         User user2 = new User("Ashley", "strongpassword");
 
@@ -48,6 +59,7 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         Computer comp2 = new Computer("Apple", "MacBook", 2015, "intel i7", 8,
                 500, "Ios", Float.parseFloat("18.3"), "Much faster");
 
+        // user1 owns and lends out Computers
         user1.addComputer(comp1);
         user1.addComputer(comp2);
         user1.addLentOut(comp1.getId());
@@ -57,6 +69,7 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         compID.add(comp1.getId());
         compID.add(comp2.getId());
 
+        // user2 borrows Computers from user1
         user2.addBorrowing(comp1.getId());
         user2.addBorrowing(comp2.getId());
 
