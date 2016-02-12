@@ -35,3 +35,6 @@ proguard/
 *.war
 *.ear
 app/app.iml
+
+# other files
+.DS_Store
