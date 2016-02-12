@@ -33,6 +33,9 @@ public class User {
     //The user will hold an array of all newBids for notification purposes
     private ArrayList<Bid> newBids;
 
+    // Holds an array of all computer IDs that are in current possession
+    private ArrayList<UUID> borrowing;
+
     //Will add a Computer to the END of the computers array
     //Throws IllegalArgumentException if you try to add another computer with the same UUID
     public void addComputer(Computer newComputer) throws IllegalArgumentException{
@@ -95,6 +98,7 @@ public class User {
     public void clearNewBids(){
         // NEED TO IMPLEMENT
     }
+
 
     /**
      * Minimum amount required to create an account
@@ -233,6 +237,23 @@ public class User {
      */
     public ArrayList<Bid> getNewBids() {
         return newBids;
+    }
+
+    public ArrayList<UUID> getBorrowing(){
+        return borrowing;
+    }
+    /**
+     * A Lent out computer has been returned
+     */
+    public void returnLent(UUID compID) {
+        // NEED TO IMPLEMENT
+    }
+
+    /**
+     * User has possession of another User's Computer
+     */
+    public void addBorrowing(UUID compID) {
+
     }
 }
 
