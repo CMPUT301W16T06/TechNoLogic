@@ -11,15 +11,16 @@ import java.util.UUID;
  * Changed the password back to just a string - Jordan
  * Added deleteComputer, addComputer, editComputer and getComputerIndex methods (not implemented)
  * We have to add checking that username is unique in constructor and setUsername
+ * Changed everything to strings cause its not working and I don't wanna deal with typecasting right now... -greg
 **/
 
 public class User {
     private String name;
     private String username;
-    private ContactsContract.CommonDataKinds.Email email;
-    private ContactsContract.CommonDataKinds.Phone phone;
+    private String email;
+    private String phone;
     private String password;
-    private Address address;
+    private String address;
 
     //The user holds an array of all the computer objects they own
     private ArrayList<Computer> computers;
@@ -143,7 +144,7 @@ public class User {
      * Returns the email of the user
      * @return
      */
-    public ContactsContract.CommonDataKinds.Email getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -151,7 +152,7 @@ public class User {
      * Set the email for the user
      * @param email
      */
-    public void setEmail(ContactsContract.CommonDataKinds.Email email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -159,7 +160,7 @@ public class User {
      * Returns the phone number of the user
      * @return
      */
-    public ContactsContract.CommonDataKinds.Phone getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -167,7 +168,7 @@ public class User {
      * Set the phone number of the user
      * @param phone
      */
-    public void setPhone(ContactsContract.CommonDataKinds.Phone phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -191,7 +192,7 @@ public class User {
      * Returns the address of the user
      * @return
      */
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
@@ -199,7 +200,7 @@ public class User {
      * Sets the address of the user
      * @param address
      */
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

@@ -87,8 +87,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
         //check that it returns the right index
         assertEquals(1, testUser.getComputerIndex(testcomputer2.getId()));
-        assertEquals("COMPUTER 2",testUser.getComputers().get(1).getDescription());
-        assertEquals("Available",testUser.getComputers().get(1).getStatus());
+        assertEquals("COMPUTER 2", testUser.getComputers().get(1).getDescription());
+        assertEquals("Available", testUser.getComputers().get(1).getStatus());
         //check to make sure if not in the user's computers returns -1
         assertEquals(-1,testUser.getComputerIndex(testcomputer3.getId()));
     }
@@ -179,4 +179,94 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         testUser.setName("John Buckingham");
         assertEquals("John Buckingham",testUser.getName());
     }
+
+    //03.02.01 As a user, I want to edit the contact information in my profile
+    public void testEditUser() {
+        User testUser = new User("connor","mcdavid");
+
+        //Initialize user contact information
+        testUser.setName("Connor");
+        testUser.setAddress("Rexall place");
+        testUser.setEmail("allstar@oilers.ca");
+        testUser.setPhone("7801231234");
+
+        //Check to see if that is set to the user
+        assertEquals(testUser.getName(), "Connor");
+        assertEquals(testUser.getAddress(), "Rexall Place");
+        assertEquals(testUser.getEmail(), "allstar@oilers.ca");
+        assertEquals(testUser.getPhone(), "7801231234");
+
+        //Edit the user information
+        testUser.setName("Connor123");
+        testUser.setAddress("Rexall place123");
+        testUser.setEmail("allstar123@oilers.ca");
+        testUser.setPhone("7801234567");
+
+        //Check to see if the user information is updated
+        assertEquals(testUser.getName(), "Connor123");
+        assertEquals(testUser.getAddress(), "Rexall Place123");
+        assertEquals(testUser.getEmail(), "allstar123@oilers.ca");
+        assertEquals(testUser.getPhone(), "7801234567");
+
+    }
+
+    //03.03.01 As a user, I want to, when a username is presented for a thing, retrieve and show
+    // its contact information
+    public void testViewRentersInfo () {
+        //Create User
+        User testUser = new User("connor","mcdavid");
+        testUser.setName("Connor");
+        testUser.setAddress("Rexall place");
+        testUser.setEmail("allstar@oilers.ca");
+        testUser.setPhone("7801231234");
+        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
+                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+
+        testcomputer.setStatus("Bidded");
+        testUser.addComputer(testcomputer);
+
+        //Simulate a cliok on an object where that user owns it
+        assertTrue(testUser.getComputers().contains(testcomputer.getId()));
+
+        assertEquals(testUser.getName(), "Connor");
+        assertEquals(testUser.getAddress(), "Rexall Place");
+        assertEquals(testUser.getEmail(), "allstar@oilers.ca");
+        assertEquals(testUser.getPhone(), "7801231234");
+    }
+
+
+    //04.01.01 As a borrower, I want to specify a set of keywords, and search for all things not
+    // currently borrowed whose description contains all the keywords
+
+    // and 04.01.01 As a borrower, I want search results to show each thing not currently borrowed
+    // with its description, owner username, and status
+    public void testSearch () {
+        //Create user and computer and add computer to user
+        User testUser = new User("cooljohn123","password");
+        User testUser2 = new User("thisssucks", "passwrord");
+        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
+                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        String testWords = "Microsoft surface this is a cool computer";
+
+        testcomputer.setStatus("Bidded");
+        testUser2.addComputer(testcomputer);
+
+        //Tests that the search works
+        if (testcomputer.getStatus() == "Bidded") {
+            assertTrue(testcomputer.getDescription().contains(testWords));
+            assertTrue(testcomputer.getMake().contains(testWords));
+            assertTrue(testcomputer.getModel().contains(testWords));
+            assertEquals(testUser2.getComputers().get(0).getDescription(), "this is a cool computer");
+            assertEquals(testUser2.getUsername(), "cooljohn123");
+            assertEquals(testUser2.getComputers().get(0).getStatus(), "bidded");
+
+        } else {
+            assertFalse(testcomputer.getDescription().contains(testWords));
+            assertFalse(testcomputer.getMake().contains(testWords));
+            assertFalse(testcomputer.getModel().contains(testWords));
+        }
+
+
+    }
 }
+

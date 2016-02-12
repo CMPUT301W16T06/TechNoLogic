@@ -14,6 +14,68 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         super(activityClass);
     }
 
+    //05.01.01 As a borrower, I want to bid for an available thing, with a monetary rate
+    // (in dollars per hour)
+    public void testPlaceBid () {
+        //initial setup of test variables
+        User testUser = new User("cooljohn123","password");
+        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
+                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        testcomputer.setStatus("Bidded");
+
+        //add into list that holds bids on a owners computers
+        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        testUser.addMyComputerBid(bid);
+
+        //check that it has the new bid
+        ArrayList<Bid> newBids = testUser.getNewBids();
+        assertEquals(newBids.size(), 1);
+        assertEquals(newBids.get(0).getComputerID(), testcomputer.getId());
+
+    }
+
+
+    //05.02.01 | As a borrower, I want to view a list of things I have bidded on that are pending,
+    // each thing with its description, owner username, and my bid
+    public void testMyBids () {
+        //initial setup of test variables
+        User testUser = new User("cooljohn123","password");
+        User testUser2 = new User("thisssucks", "passwrord");
+        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
+                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+
+        testcomputer.setStatus("Bidded");
+        testUser2.addComputer(testcomputer);
+
+        //add into list that holds bids on a owners computers
+        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        testUser.addMyComputerBid(bid);
+
+        //Gets list of all the computers I bidded on
+        ArrayList<Bid> test = testUser.getMyComputerBids();
+
+        //Makes sure there is only one bid
+        assertEquals(test.size(), 1);
+
+        //get's the only bid in the list
+        Bid bidTest = test.get(0);
+
+        //Tests to ensure it is the same bid
+        assertEquals(bidTest.getComputerID(), testcomputer.getId());
+
+        //Makes sure the correct bid price is shown
+        assertEquals(bidTest.getPrice(), 1.12);
+
+        //Makes sure the owner username is correct
+        assertEquals(testUser2.getComputerIndex(bidTest.getComputerID()), testcomputer);
+
+        //get list of all bids for a specific computer
+        ArrayList<Bid> computerBids = testUser.getComputerBids(testcomputer.getId());
+
+
+
+    }
+
     //Test for viewing the bids on an owners computer
     //Test that corresponds with US 5.03.01 (Bid_Notification)
     public void testNotifications(){
@@ -134,6 +196,8 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         assertEquals(lentOutCompters.get(0), testcomputer.getId());
 
     }
+
+
 
 
 }

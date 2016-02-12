@@ -1,4 +1,4 @@
-————————————————————————————————————————————————————————————————————————————————————————————————————
+﻿————————————————————————————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————————————————————————————
 Things
 ————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -225,7 +225,7 @@ Trigger
 Precondition
 	Login, View List of Computers
 Postcondition
-	-
+	Main Menu
 
 Basic Flow
 	1. Open App
@@ -265,7 +265,7 @@ US 04.02.01 | As a borrower, I want search results to show each thing not curren
 Use Case Name
 	
 Use Case Name
-	Search
+	Search_Results
 Participating Actors
 	Borrowers
 Goal
