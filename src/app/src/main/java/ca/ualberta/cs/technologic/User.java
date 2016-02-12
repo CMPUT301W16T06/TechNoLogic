@@ -24,17 +24,49 @@ public class User {
     //The user holds an array of all the computer objects they own
     private ArrayList<Computer> computers;
 
+    //The user holds an array of all of their computers that have bids on them
+    private ArrayList<Bid> myComputerBids;
+
+    //The user holds an array of all computer ID that are lent out
+    private ArrayList<UUID> LentOut;
+
+    //The user will hold an array of all newBids for notification purposes
+    private ArrayList<Bid> newBids;
+
     //Will add a Computer to the END of the computers array
     //Throws IllegalArgumentException if you try to add another computer with the same UUID
     public void addComputer(Computer newComputer) throws IllegalArgumentException{
         //NEED TO IMPLEMENT
-
     }
 
     //Will delete the computer that matches the UUID passed in from the list of computers
     //that the user owns
     //If ID not found in computer list throws IllegalArgumentException
     public void deleteComputer(UUID ID) throws IllegalArgumentException{
+        //NEED TO IMPLEMENT
+    }
+
+    //Will add a ID of Computer that has been bid on to the END of the myComputerBids array
+    //Throws IllegalArgumentException if you try to add another computer with the same UUID
+    public void addMyComputerBid(Bid newBid) throws IllegalArgumentException{
+        //NEED TO IMPLEMENT
+
+    }
+
+    //add a computer id to the list of computers that are lent out to people
+    public void addLentOut(UUID id){
+        //NEED TO IMPLEMENT
+    }
+
+    //Returns all bids of computers of the specified ID
+    public ArrayList<Bid> getComputerBids(UUID id){
+        //NEED TO IMPLEMENT
+        return new ArrayList<Bid>();
+    }
+
+    //after a bid is accpeted all bids with that computer id must be
+    //removed from myComputerBids
+    public void removeComputerBids(UUID id){
         //NEED TO IMPLEMENT
     }
 
@@ -55,6 +87,14 @@ public class User {
         return -1;
     }
 
+    //add a new bid to the bid list
+    public void addNewBid(Bid bid){
+        //NEED TO IMPLEMENT
+    }
+
+    public void clearNewBids(){
+        // NEED TO IMPLEMENT
+    }
 
     /**
      * Minimum amount required to create an account
@@ -171,4 +211,28 @@ public class User {
         return computers;
     }
 
+    /**
+     * Get list of computers bids on the owners computers
+     * @return
+     */
+    public ArrayList<Bid> getMyComputerBids() {
+        return myComputerBids;
+    }
+
+    /**
+     * Gets the list of computer IDs of the owners computers that are lent out
+     * @return
+     */
+    public ArrayList<UUID> getLentOut() {
+        return LentOut;
+    }
+
+    /**
+     * Gets the list of new bids
+     * @return
+     */
+    public ArrayList<Bid> getNewBids() {
+        return newBids;
+    }
 }
+
