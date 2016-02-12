@@ -1,0 +1,557 @@
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Things
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 01.01.01 | As an owner, I want to add a thing in my things, each denoted with a clear, suitable description
+
+Use Case Name
+	Add_Computer
+Participating Actors
+	Owner of Computers
+Goal
+	Add a new computer to my computers list
+Trigger
+	Add new item button
+Precondition
+	Login, My_Computers, Add button
+Postcondition
+	Valid Fields entered (none left blank)
+Basic Flow
+	1. Open app
+	2. Enter username, password
+	3. Select My Computers from main menu
+	4. Select add computer button 
+	5. Enter description and fill out fields
+	6. Save the entry
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 01.02.01 | As an owner, I want to view a list of all my things, and their descriptions and statuses
+
+Use Case Name
+	View_Computer_List
+Participating Actors
+	Owner of Computers
+Goal
+	View list of computers
+Trigger
+	My Computer button (menu)
+Precondition
+	Login, My_Computers
+Postcondition
+	-	
+
+Basic Flow
+	1. Open app
+	2. Enter username, password
+	3. Select My Computers from main menu
+	4. View List of Computers	
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 01.03.01 | As an owner, I want to view one of my things, its description and status
+
+Use Case Name
+	View_Computer
+Participating Actors
+	Owner of Computers
+Goal
+	View individual Computer
+Trigger
+	My Computer button (menu)
+Precondition
+	Login, My_Computers, Computer List View, save button
+Postcondition
+	-
+
+Basic Flow
+	1. Open app
+	2. Enter username, password
+	3. Select My Computers from main menu
+	4. View List of Computers
+	5. Click on Computer from list
+	6. View the Computer and all of its details
+	7. Click on save button to return to list of computers
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 01.04.01 | As an owner, I want to edit a thing in my things
+
+Use Case Name
+	Edit_Computer
+Participating Actors
+	Owner of Computers
+Goal
+	Edit the qualities of a Computer 
+Trigger
+	Clicking on the Computer in a list 
+Precondition
+	Login, My_Computers, Computer Listview, save button
+Postcondition
+	Valid entries in all fields (none left blank)
+Basic Flow
+	1. Open app
+	2. Enter username, password
+	3. Select My Computers from main menu
+	4. View List of Computers
+	5. Click on Computer from list
+	6. Edit details on the Computer
+	7. Click on save button to return to list of computers
+	
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 01.05.01 | As an owner, I want to delete a thing in my things
+
+Use Case Name
+	Delete_Computer
+Participating Actors
+	Owner of Computers
+Goal
+	Delete an Computer from the app
+Trigger
+	Delete button
+Precondition
+	Login, My_Computers, Computer Listview, delete button
+Postcondition
+	-
+
+Basic Flow
+	1. Open app
+	2. Enter username, password
+	3. Select My Computers from main menu
+	4. View list of Computers
+	5. Click on Computer from list that you want to delete
+	6. Click on the delete button
+	7. View list of computers without the one you just deleted 
+	
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Status
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 02.01.01 | As an owner or borrower, I want a thing to have a status of one of: available, bidded, or         
+
+Use Case Name
+	View_Status
+Participating Actors
+	Owner of the computers, Borrower
+Goal
+	View the status of any computer
+Trigger
+	Clicking on a computer in a list
+Precondition
+	Login, My_Computers, Computer List View, save button
+Postcondition
+	-
+
+Basic Flow
+	Checking the status on an item you already own
+	1. Open app
+	2. Enter username, password
+	3. Select My Computers from main menu
+	4. View List of Computers
+	5. Click on Computer from list
+	6. View the Computer and all of its details including status
+	7. Click on save button to return to list of computers
+
+
+	Checking the status on other items
+	1. Open app
+	2. Enter username, password
+	3. Search for computer in search bar at top of main screen
+	* or simply scroll through computer list
+	1. Select computer from list
+	2. View the computer and all of its details including status
+	3. Click back button to return to list of all computers
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+User
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 03.01.01 | As a user, I want a profile with a unique username and my contact information
+
+Use Case Name
+	Unique_Profile
+Participating Actors
+	Owner of computers
+Goal
+	To make a unique profile, with unique username and contact information
+Trigger
+	New User button on sign in page
+Precondition
+	Save button
+Postcondition
+	Correct information entered in fields and unique username
+
+Basic Flow
+	1. Open app
+	2. Click the new user button
+	3. Enter information in the appropriate fields
+	4. Press save button
+	5. If username is not unique you will get an error and be prompted for a new username
+	6. Press save button
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 03.02.01 | As a user, I want to edit the contact information in my profile
+
+Use Case Name
+	Edit_User
+Participating Actors
+	All Users
+Goal
+	Edit User Information
+Trigger
+	Select Account Settings from Main Menu
+Precondition
+	Account Settings (Button)
+Postcondition
+	Saves updated information and returns to main menu
+	
+Basic Flow
+	1. Open App
+	2. Login with Valid Username and Password
+	3. Select Main Menu button 
+	4. Select Account Settings button
+	5. Update appropriate user fields
+	6. Press save button
+	7. Returns to Home screen 
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 03.03.01 | As a user, I want to, when a username is presented for a thing, retrieve and show its contact information
+
+Use Case Name
+	View_Renters_Info
+Participating Actors
+	Borrowers
+Goal
+	View Contact Information of a Computer Item
+Trigger
+	Selecting “user” from the Computer Item
+Precondition
+	Login, View List of Computers
+Postcondition
+	-
+
+Basic Flow
+	1. Open App
+	2. Login with Valid Username and Password
+	3. View list of computers
+	4. Select “user” on a particular computer
+	5. View user’s information
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Searching
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 04.01.01 | As a borrower, I want to specify a set of keywords, and search for all things not currently borrowed whose description contains all the keywords
+
+Use Case Name
+	Search
+Participating Actors
+	Borrowers
+Goal
+	Search for a computer by keyword
+Trigger
+	Input in search bar and search button
+Precondition
+	Login
+Postcondition
+	Search results displayed
+	
+Basic Flow
+	1. Open App
+	2. Login with Valid Username and Password
+	3. Input keywords into search bar
+	4. Press search button
+	5. View Search Results 
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 04.02.01 | As a borrower, I want search results to show each thing not currently borrowed with its description, owner username, and status
+Use Case Name
+	
+Use Case Name
+	Search
+Participating Actors
+	Borrowers
+Goal
+	Search for a computer by keyword
+Trigger
+	Input in search bar and search button
+Precondition
+	Login
+Postcondition
+	Search results displayed
+	
+Basic Flow
+	1. Open App
+	2. Login with Valid Username and Password
+	3. Input keywords into search bar
+	4. Press search button
+	5. View Search Results 
+	
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Bidding
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.01.01 | As a borrower, I want to bid for an available thing, with a monetary rate (in dollars per hour)
+
+Use Case Name
+	Place_Bid
+Participating Actors
+	Bidders
+Goal
+	Place a bid on an Computer
+Trigger
+	Bid Button
+Precondition
+	Login, Select Computer
+Postcondition
+	Computer has a new bid
+	
+Basic Flow
+	1. Open App
+	2. Login with Valid Username and Password
+	3. Select Computer from View
+	4. Enter bid into text field
+	5. Select “Bid” Button
+	6. Return to Home Screen
+	
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.02.01 | As a borrower, I want to view a list of things I have bidded on that are pending, each thing with its description, owner username, and my bid
+
+Use Case Name
+	My_Bids
+Participating Actors
+	Bidders
+Goal
+	View Items the User has bidded on
+Trigger
+	My Bids Button in main menu
+Precondition
+	Login, Main Menu
+Postcondition
+	-
+
+Basic Flow
+	1. Open App
+	2. Login with Valid Username and Password
+	3. Select main Menu
+	4. Select My Bids
+	5. View the items you have bidden on and their status
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.03.01 | As an owner, I want to be notified of a bid
+
+Use Case Name
+	Bid_Notification
+Participating Actors
+	Owner of computer
+Goal
+	Notify owner of a computer that bid has been made
+Trigger
+	Opening App
+Precondition
+	Owner must have computer in system and bid must be made since owner was last in system
+Postcondition
+	-
+
+Basic Flow
+	1. Open App
+	2. Login with valid username and password
+	3. Pop up with notification of new bids
+	4. Owner can click pop up to view new bids
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.04.01 | As an owner, I want to view a list of my things with bids
+
+Use Case Name
+	View_My_Computer_Bids_List
+Participating Actors
+	Owner of Computer
+Goal
+	Display list of my Computers that have been bid on
+Trigger
+	Select My Computer Bids from main menu
+Precondition
+	Bid must be made on owner’s Computer, owner logins in to app
+Postcondition
+	-
+
+Basic Flow
+	1. Open App
+	2. Login with valid username and password
+	3. Select Main Menu
+	4. Select My Computer Bids
+	5. View list of owner’s computers that have been bid on
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.05.01 | As an owner, I want to view the bids on one of my things
+
+Use Case Name
+	View_Computer_Bids
+Participating Actors
+	Owner of computers
+Goal
+	Display the bids made on one of the owner’s computer
+Trigger
+	Select computer from the owner’s My Computer Bids Iist
+Precondition
+	Computer must have at least one bid
+Postcondition
+	-
+
+Basic Flow
+	1. Open App
+	2. Login with valid username and password
+	3. Select Main Menu
+	4. Select My Computer Bids
+	5. Select Computer from My Computer Bids list
+	6. Display Computer details page with bids made
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.06.01 | As an owner, I want to accept a bid on one of my things, setting its status to borrowed (Any other bids are declined)
+
+Use Case Name
+	Accept_Bid
+Participating Actors
+	Owner of computer
+Goal
+	Accept bid on computer
+Trigger
+	Select Accept button for bid
+Precondition
+	Computer must have bid
+Postcondition
+	Computer status changes to “borrowed” and all other bids are declined
+	
+Basic Flow
+	1. Open App
+	2. Login with valid username and password
+	3. Select Main Menu
+	4. Select My Computer Bids
+	5. Select Computer from My Computer Bids list
+	6. Select bid and select accept button
+	7. Computer status changes from “bidded” to “borrowed”
+	8. Computer moves from My Computer Bid to Lent Out
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 05.07.01 | As an owner, I want to decline a bid on one of my things
+
+Use Case Name
+	Decline_Bid
+Participating Actors
+	Owner of the Computer
+Goal
+	To decline a placed bid by another person
+Trigger
+	Decline button inside the My Item Bids view
+Precondition
+	Login, at least one added Computer, another user has placed bid
+Postcondition
+	Removal of bid information
+	
+Basic Flow
+	1. Open app
+	2. Enter username and password
+	3. Press MyItemBids button in the menu
+	4. Press the decline button matching to a bid
+	5. Bid disappears
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Borrowing
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 06.01.01 | As a borrower, I want to view a list of things I am borrowing, each thing with its description and owner username
+
+Use Case Name
+	View_Borrowing_Computers
+Participating Actors
+	Owner of the Computer, User of the app
+Goal
+	View a list of Computers the user is currently borrowing
+Trigger
+	My Borrows button in the menu
+Precondition
+	Login
+Postcondition
+	-
+
+Basic Flow
+	1. Open app
+	2. Enter username and password
+	3. Press the MyBorrows button in the menu
+	4. View List of currently borrowed Computers
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 06.02.01 | As an owner, I want to view a list of my things being borrowed, each thing with its description and borrower username
+
+Use Case Name
+	View_Borrowed_Computer
+Participating Actors
+	Owner of the Computer, Borrower of the Computer
+Goal
+	View a list and information of a borrowed Computer
+Trigger
+	Lent Out button in main menu
+Precondition
+	Login, at least one added Computer
+Postcondition
+	-
+
+Basic Flow
+	1. Open app
+	2. Enter username and password
+	3. Press Lent Out button in menu
+	4. View List of currently owned items which are being borrowed
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Returning
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 07.01.01 | As an owner, I want to set a borrowed thing to be available when it is returned
+
+Use Case Name
+	Return_Computer
+Participating Actors
+	Owner of the Computer
+Goal
+	Change the status of a borrowed Computer to available
+Trigger
+	Button in the Lent Out view
+Precondition
+	Login, an already borrowed out Computer owned by the user
+Postcondition
+	Status of My Computer changed to available
+	
+Basic Flow
+	1. Open app
+	2. Press Lent Out button in menu
+	3. Click Return button on an Lent Out Computer
+	4. Status has been changed to available
+
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Offline Behaviour
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 08.01.01 | As an owner, I want to define new things while offline, and push the additions once I get connectivity
+
+Use Case Name
+	Offline_Mode
+Participating Actors
+	Owner of the Computer
+Goal
+	Add Computers
+Trigger
+	Opening the application while Airplane mode is on
+Precondition
+	Airplane mode is on, Login
+Postcondition
+	Server is updated with the new information of My Computers
+	
+Basic Flow
+	1. Turn on airplane mode
+	2. Open app
+	3. Enter username and password
+	4. Go to My Computers in the menu
+	5. Add a new Computer
+	6. Exit app and turn off airplane mode
+	7. Reopen app
+	8. Go to My Computers in the menu
+	9. View the newly added Computer
+
+
