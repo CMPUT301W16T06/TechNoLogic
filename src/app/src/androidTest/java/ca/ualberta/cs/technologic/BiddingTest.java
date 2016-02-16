@@ -221,12 +221,12 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         user1.declineComputerBid(bid1);
 
         // Expecting bid2 and bid3
-        ArrayList<Bid> expectedBids = new ArrayList<>();
+        ArrayList<Bid> expectedBids = new ArrayList<Bid>();
         expectedBids.add(bid2);
         expectedBids.add(bid3);
 
         // Expecting empty because comp1 is declined, not lent out
-        ArrayList<UUID> expectedUUID = new ArrayList<>();
+        ArrayList<UUID> expectedUUID = new ArrayList<UUID>();
 
         assertEquals("Expected same bid array", expectedBids, user1.getComputerBids(comp1.getId()));
         assertEquals("Expected expect empty", expectedUUID, user1.getLentOut());

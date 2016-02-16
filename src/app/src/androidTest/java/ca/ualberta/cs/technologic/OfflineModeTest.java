@@ -1,9 +1,6 @@
 package ca.ualberta.cs.technologic;
 
-import android.content.ContentResolver;
-import android.net.Uri;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
+
 import android.test.ActivityInstrumentationTestCase2;
 
 /**

@@ -34,7 +34,7 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         user1.addLentOut(comp1.getId());
         user1.addLentOut(comp2.getId());
 
-        ArrayList<UUID> compID = new ArrayList<>();
+        ArrayList<UUID> compID = new ArrayList<UUID>();
         compID.add(comp1.getId());
         compID.add(comp2.getId());
 
@@ -65,7 +65,7 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         user1.addLentOut(comp1.getId());
         user1.addLentOut(comp2.getId());
 
-        ArrayList<UUID> compID = new ArrayList<>();
+        ArrayList<UUID> compID = new ArrayList<UUID>();
         compID.add(comp1.getId());
         compID.add(comp2.getId());
 
