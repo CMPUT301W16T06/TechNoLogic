@@ -2,6 +2,19 @@ package ca.ualberta.cs.technologic;
 
 import android.provider.ContactsContract;
 import android.location.Address;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -21,89 +34,9 @@ public class User {
     private String phone;
     private String password;
     private String address;
+    private static final String FILENAME = "users.sav";
+    private ArrayList<User> users = new ArrayList<User>();
 
-    //The user holds an array of all the computer objects they own
-    private ArrayList<Computer> computers;
-
-    //The user holds an array of all of their computers that have bids on them
-    private ArrayList<Bid> myComputerBids;
-
-    //The user holds an array of all computer ID that are lent out
-    private ArrayList<UUID> LentOut;
-
-    //The user will hold an array of all newBids for notification purposes
-    private ArrayList<Bid> newBids;
-
-    // Holds an array of all computer IDs that are in current possession
-    private ArrayList<UUID> borrowing;
-
-    //Will add a Computer to the END of the computers array
-    //Throws IllegalArgumentException if you try to add another computer with the same UUID
-    public void addComputer(Computer newComputer) throws IllegalArgumentException{
-        //NEED TO IMPLEMENT
-    }
-
-    //Will delete the computer that matches the UUID passed in from the list of computers
-    //that the user owns
-    //If ID not found in computer list throws IllegalArgumentException
-    public void deleteComputer(UUID ID) throws IllegalArgumentException{
-        //NEED TO IMPLEMENT
-    }
-
-    //Will add a ID of Computer that has been bid on to the END of the myComputerBids array
-    //Throws IllegalArgumentException if you try to add another computer with the same UUID
-    public void addMyComputerBid(Bid newBid) throws IllegalArgumentException{
-        //NEED TO IMPLEMENT
-
-    }
-
-    //add a computer id to the list of computers that are lent out to people
-    public void addLentOut(UUID id){
-        //NEED TO IMPLEMENT
-    }
-
-    //Returns all bids of computers of the specified ID
-    public ArrayList<Bid> getComputerBids(UUID id){
-        //NEED TO IMPLEMENT
-        return new ArrayList<Bid>();
-    }
-
-    //after a bid is accpeted all bids with that computer id must be
-    //removed from myComputerBids
-    public void removeComputerBids(UUID id){
-        //NEED TO IMPLEMENT
-    }
-
-    //Pass in the UUID of the computer you wish to change as well as all the information about
-    //that computer and "editComputer" will find the computer that match the UUID and change
-    //it's attributes
-    public void editComputer(UUID ID,String make, String model, Integer year, String processor,
-                             Integer ram, Integer hardDrive, String os, Float price,
-                             String description){
-        //NEED TO IMPLEMENT
-    }
-
-
-    //Searches for computer in list user's computers, returns index
-    //if not in the user's computers returns -1
-    public int getComputerIndex(UUID ID){
-        //NEED TO IMPLEMENT
-        return -1;
-    }
-
-    //add a new bid to the bid list
-    public void addNewBid(Bid bid){
-        //NEED TO IMPLEMENT
-    }
-
-    public void clearNewBids(){
-        // NEED TO IMPLEMENT
-    }
-
-    // decline a bid from myComputerBid list
-    public void declineComputerBid(Bid bid) {
-        //TODO
-    }
 
     /**
      * Minimum amount required to create an account
@@ -111,8 +44,54 @@ public class User {
      * @param password
      */
     public User(String username,String password ) {
+        loadFromFile();
         this.username = username;
         this.password = password;
+        //need to add a check to see if the username is unique
+        users.add(this);
+        saveInFile();
+    }
+    /**
+     * Load the array from the file
+     */
+    private void loadFromFile() {
+        try {
+            //I dont know why this is giving me errors!! I copied it from lonely twitter
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
+            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
+            users = gson.fromJson(in, listType);
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            users = new ArrayList<User>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+    /**
+     * Save the array into the file
+     */
+    private void saveInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+            gson.toJson(users, out);
+            out.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
     }
 
     /**

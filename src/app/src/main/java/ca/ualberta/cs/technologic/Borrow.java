@@ -16,28 +16,25 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Created by Jessica on 2016-02-11.
+ * Created by gknoblau on 2016-02-16.
  */
-public class Bid {
+public class Borrow {
     private UUID computerID;
-    private Float price;
     private String username;
     private String owner;
-    private static final String FILENAME = "bids.sav";
-    private ArrayList<Bid> bids = new ArrayList<Bid>();
+    private static final String FILENAME = "borrows.sav";
+    private ArrayList<Borrow> borrows = new ArrayList<Borrow>();
 
     /**
      * Create a Bid Object
      * @param computerID Id that corresponds to the computer
-     * @param price price of the bid
      */
-    public Bid(UUID computerID, Float price, String username) {
+    public Borrow(UUID computerID, String username) {
         loadFromFile();
         this.computerID = computerID;
-        this.price = price;
         this.username = username;
         this.owner = getOwner(computerID);
-        bids.add(this);
+        borrows.add(this);
     }
     /**
      * Load the array from the file
@@ -50,12 +47,12 @@ public class Bid {
             Gson gson = new Gson();
 
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<Bid>>() {}.getType();
-            bids = gson.fromJson(in, listType);
+            Type listType = new TypeToken<ArrayList<Borrow>>() {}.getType();
+            borrows = gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            bids = new ArrayList<Bid>();
+            borrows = new ArrayList<Borrow>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
@@ -70,7 +67,7 @@ public class Bid {
             FileOutputStream fos = openFileOutput(FILENAME);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
             Gson gson = new Gson();
-            gson.toJson(bids, out);
+            gson.toJson(borrows, out);
             out.flush();
             fos.close();
         } catch (FileNotFoundException e) {
@@ -90,12 +87,12 @@ public class Bid {
         this.computerID = computerID;
     }
 
-    public Float getPrice() {
-        return price;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getUsername() {
@@ -105,14 +102,8 @@ public class Bid {
     public void setUsername(String username) {
         this.username = username;
     }
-
     //Has to be implemented that it gets the owner from the computer ID
     public String getOwner(UUID computerID) {
         return owner;
-    }
-
-    //Never will be used can be removed
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 }
