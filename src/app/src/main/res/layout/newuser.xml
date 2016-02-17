@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/nameTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Full Name:" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/name"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Username:" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/username"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/passwordTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Your Password:" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number|numberDecimal"
+        android:ems="10"
+        android:id="@+id/password"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/fuelGradeTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the Fuel Grade:" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:id="@+id/fuelGrade"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/fuelAmountTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the amount of Fuel (L):" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/fuelAmount"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/fuelPriceTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the Fuel Price (cent/L):" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/fuelPrice"
+        android:layout_gravity="center_horizontal" />
+    <Button
+        android:id="@+id/saveLog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Log" />
+
+</LinearLayout>

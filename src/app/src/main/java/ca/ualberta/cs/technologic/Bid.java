@@ -1,24 +1,13 @@
 package ca.ualberta.cs.technologic;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
+import android.app.Activity;
 import java.util.ArrayList;
 import java.util.UUID;
 
 /**
  * Created by Jessica on 2016-02-11.
  */
-public class Bid {
+public class Bid{
     private UUID computerID;
     private Float price;
     private String username;
@@ -32,55 +21,12 @@ public class Bid {
      * @param price price of the bid
      */
     public Bid(UUID computerID, Float price, String username) {
-        loadFromFile();
         this.computerID = computerID;
         this.price = price;
         this.username = username;
         this.owner = getOwner(computerID);
-        bids.add(this);
-    }
-    /**
-     * Load the array from the file
-     */
-    private void loadFromFile() {
-        try {
-            //I dont know why this is giving me errors!! I copied it from lonely twitter
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<Bid>>() {}.getType();
-            bids = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            bids = new ArrayList<Bid>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
     }
 
-    /**
-     * Save the array into the file
-     */
-    private void saveInFile() {
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(bids, out);
-            out.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
 
     public UUID getComputerID() {
         return computerID;
