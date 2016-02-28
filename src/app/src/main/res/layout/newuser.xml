@@ -8,7 +8,7 @@
         android:id="@+id/nameTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Full Name:" />
+        android:text="Enter your full name:" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,10 +18,10 @@
         android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/usernameTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Username:" />
+        android:text="Enter a username:" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:id="@+id/passwordTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Your Password:" />
+        android:text="Enter a password:" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,47 +44,59 @@
         android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:id="@+id/fuelGradeTitle"
+        android:id="@+id/emailTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the Fuel Grade:" />
+        android:text="Enter your Email:" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:ems="10"
-        android:id="@+id/fuelGrade"
+        android:id="@+id/email"
         android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:id="@+id/fuelAmountTitle"
+        android:id="@+id/phoneTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the amount of Fuel (L):" />
+        android:text="Enter your phone number:" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/fuelAmount"
+        android:id="@+id/phoneNum"
         android:layout_gravity="center_horizontal" />
 
     <TextView
-        android:id="@+id/fuelPriceTitle"
+        android:id="@+id/addressTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the Fuel Price (cent/L):" />
+        android:text="Enter your address" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/fuelPrice"
+        android:id="@+id/address"
         android:layout_gravity="center_horizontal" />
-    <Button
-        android:id="@+id/saveLog"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Save Log" />
-
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/cancelNewUser"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/confirmNewUser"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Create New User!"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </LinearLayout>
