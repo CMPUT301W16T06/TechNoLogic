@@ -32,7 +32,7 @@ public class NewUserActivity extends Activity {
                 // TODO: Check if the filled in information is correct. No missing information and valid Username
                 // TODO: Return to LoginActivity if correct, otherwise stay and give notice
 
-                getUserInput();
+                pendingUser = getUserInput();
                 // Validate the username. Do we want to validate all other String fields?
                 if (validUsername(pendingUser.getUsername())) {
                     // Add to existingUsers and return Intent
@@ -78,7 +78,7 @@ public class NewUserActivity extends Activity {
     /**
      * Gets the input text fields filled out by the User
      */
-    public void getUserInput() {
+    public User getUserInput() {
         // TODO: get the user's input from the EditText fields
         /*
         android:id="@+id/name"
@@ -104,8 +104,9 @@ public class NewUserActivity extends Activity {
         String newAddress = EditTextToString(ET_newAddress);
 
         //TODO: Create a new user object. Depends on our constructor
-        //pendingUser = new User()
-
+        //User inputUser = new User();
+        //return inputUser;
+        return null;
     }
 
 
