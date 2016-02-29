@@ -1,0 +1,47 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.jordan.schraa_fueltrack.MainActivity">
+
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:fontFamily="sans-serif-light"
+        />
+
+    <item
+        android:id="@+id/myitems"
+        android:title="My Items"
+        android:fontFamily="sans-serif-light" />
+
+    <item
+        android:id="@+id/myitembids"
+        android:title="My Item Bids"
+        android:fontFamily="sans-serif-light" />
+
+    <item
+        android:id="@+id/lentout"
+        android:title="Lent Out"
+        android:fontFamily="sans-serif-light" />
+
+    <item
+        android:id="@+id/myborrows"
+        android:title="My Borrows"
+        android:fontFamily="sans-serif-light" />
+
+    <item
+        android:id="@+id/mybids"
+        android:title="My Bids"
+        android:fontFamily="sans-serif-light" />
+
+    <item
+        android:id="@+id/accountsettings"
+        android:title="Account Settings"
+        android:fontFamily="sans-serif-light" />
+
+    <item
+        android:id="@+id/logout"
+        android:title="Log Out"
+        android:fontFamily="sans-serif-light" />
+
+</menu>

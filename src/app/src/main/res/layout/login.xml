@@ -5,10 +5,14 @@
     android:gravity="center">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Title"
-        android:textSize="40sp" />
+        android:text="PC 4 HIRE"
+        android:layout_marginTop="-100dp"
+        android:textSize="30sp"
+        android:layout_marginBottom="50dp"
+        />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,31 +23,45 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Username"
-                android:id="@+id/username" />
+                android:fontFamily="sans-serif-light"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittextlight"
+                android:id="@+id/username"
+                android:hint="Username" />
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Password"
-                android:inputType="textPassword"
+                android:fontFamily="sans-serif-light"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="20dp"
+                android:background="@drawable/edittextlight"
                 android:id="@+id/password"
-                android:password="true" />
+                android:password="true"
+                android:hint="Password" />
         </LinearLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter!"
-            android:onClick=""
-            android:id="@+id/login" />
 
     </LinearLayout>
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New User"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittextdark"
+            android:text="LOG  IN"
             android:onClick=""
-            android:id="@+id/newUser" />
+            android:id="@+id/login"
+            android:fontFamily="sans-serif-light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#616161"
+        android:text="New User? Sign Up"
+        android:id="@+id/newUser"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true" />
+
 </LinearLayout>

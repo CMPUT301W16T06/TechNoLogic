@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ca.ualberta.cs.technologic.Activities.AddItems">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ID# 12345679"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Model"
+        android:id="@+id/model"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Harddrive"
+        android:id="@+id/harddrive"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/model"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Memory"
+        android:id="@+id/memory"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/harddrive"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Processor"
+        android:id="@+id/processor"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/memory"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="OS"
+        android:id="@+id/os"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/processor"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Year"
+        android:id="@+id/year"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/os"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Base Rate"
+        android:id="@+id/baserate"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/year"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Status"
+        android:id="@+id/status"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/baserate"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Description"
+        android:id="@+id/description"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/status"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edittextdark"
+        android:text="SUBMIT"
+        android:id="@+id/submit"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/description"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light" />
+    />
+
+
+</RelativeLayout>

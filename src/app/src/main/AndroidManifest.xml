@@ -14,14 +14,52 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".LoginActivity">
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity
+            android:name=".Activities.NewUser"
+            android:label="@string/title_activity_new_user"
+            android:parentActivityName=".Activities.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.ualberta.cs.technologic.Activities.LoginActivity" />
+        </activity>
+        <activity
+            android:name=".Activities.HomePage"
+            android:label="@string/title_activity_home_page" />
+        <activity
+            android:name=".Activities.MyItems"
+            android:label="@string/title_activity_my_items" />
+        <activity
+            android:name=".Activities.AddItems"
+            android:label="@string/title_activity_add_items" />
+        <activity
+            android:name=".Activities.ItemInfo"
+            android:label="@string/title_activity_item_info" />
+        <activity
+            android:name=".Activities.LentOut"
+            android:label="@string/title_activity_lent_out" />
+        <activity
+            android:name=".Activities.MyBorrows"
+            android:label="@string/title_activity_my_borrows" />
+        <activity
+            android:name=".Activities.MyItemBids"
+            android:label="@string/title_activity_my_item_bids" />
+        <activity
+            android:name=".Activities.AcceptBid"
+            android:label="@string/title_activity_bids" />
+        <activity
+            android:name=".Activities.Bids"
+            android:label="@string/title_activity_bids"></activity>
+=======
+        <activity android:name=".NewUserActivity"></activity>
+>>>>>>> origin/master
     </application>
-
 
 </manifest>

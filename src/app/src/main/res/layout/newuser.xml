@@ -4,87 +4,81 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/nameTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter Full Name:" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:ems="10"
-        android:id="@+id/name"
-        android:layout_gravity="center_horizontal" />
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userUsername"
+        android:hint="Username" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter Username:" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/username"
-        android:layout_gravity="center_horizontal" />
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userPassword"
+        android:hint="Password" />
 
-    <TextView
-        android:id="@+id/passwordTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter Your Password:" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number|numberDecimal"
-        android:ems="10"
-        android:id="@+id/password"
-        android:layout_gravity="center_horizontal" />
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userName"
+        android:hint="Name" />
 
-    <TextView
-        android:id="@+id/fuelGradeTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter the Fuel Grade:" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:ems="10"
-        android:id="@+id/fuelGrade"
-        android:layout_gravity="center_horizontal" />
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userEmail"
+        android:hint="Email Address" />
 
-    <TextView
-        android:id="@+id/fuelAmountTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter the amount of Fuel (L):" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/fuelAmount"
-        android:layout_gravity="center_horizontal" />
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userPhone"
+        android:hint="Phone Number" />
 
-    <TextView
-        android:id="@+id/fuelPriceTitle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Enter the Fuel Price (cent/L):" />
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/fuelPrice"
-        android:layout_gravity="center_horizontal" />
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userAddress"
+        android:hint="Address" />
+
     <Button
-        android:id="@+id/saveLog"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Log" />
-
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextdark"
+        android:text="SUBMIT"
+        android:onClick=""
+        android:id="@+id/userSubmit"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center"/>
 </LinearLayout>

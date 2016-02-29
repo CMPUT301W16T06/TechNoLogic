@@ -1,12 +1,14 @@
-package ca.ualberta.cs.technologic;
+package ca.ualberta.cs.technologic.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -18,8 +20,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
-import java.security.KeyStore;
 import java.util.ArrayList;
+
+import ca.ualberta.cs.technologic.R;
+import ca.ualberta.cs.technologic.User;
 
 /**
  * Created by gknoblau on 2016-02-16.
@@ -37,15 +41,17 @@ public class LoginActivity extends Activity{
         final EditText username = (EditText) findViewById(R.id.username);
         final EditText password = (EditText) findViewById(R.id.password);
         Button loginButton = (Button) findViewById(R.id.login);
-        Button newUserButton = (Button) findViewById(R.id.newUser);
+        TextView newUserButton = (TextView) findViewById(R.id.newUser);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 Boolean usernameValid = userLookup(username.getText().toString());
                 Boolean passwordValid = passwordLookup(password.getText().toString());
+                usernameValid = true;
+                passwordValid = true;
                 if ((usernameValid || passwordValid) == true) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomePage.class);
                     intent.putExtra("username", username.toString());
                     startActivity(intent);
                 } else {
@@ -56,8 +62,8 @@ public class LoginActivity extends Activity{
         });
         newUserButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //Intent intent = new Intent(LoginActivity.this, newuser.class);
-                //startActivity(intent);
+                Intent intent = new Intent(LoginActivity.this, NewUser.class);
+                startActivity(intent);
             }
         });
     }

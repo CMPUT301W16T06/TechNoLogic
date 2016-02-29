@@ -1,13 +1,20 @@
-package ca.ualberta.cs.technologic;
+
+
+//I changed the structure of the activities but I didn't want to just get rid of gregs work
+
+package ca.ualberta.cs.technologic.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+        import android.widget.Button;
+        import android.widget.EditText;
+        import android.widget.Toast;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
+
+import ca.ualberta.cs.technologic.R;
+import ca.ualberta.cs.technologic.User;
 
 
 /**
