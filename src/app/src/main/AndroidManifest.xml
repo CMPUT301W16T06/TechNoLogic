@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity
             android:name=".Activities.NewUser"
             android:label="@string/title_activity_new_user"
@@ -57,9 +56,6 @@
         <activity
             android:name=".Activities.Bids"
             android:label="@string/title_activity_bids"></activity>
-=======
-        <activity android:name=".NewUserActivity"></activity>
->>>>>>> origin/master
     </application>
 
 </manifest>

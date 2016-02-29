@@ -25,7 +25,7 @@
         android:layout_gravity="center"
         android:id="@+id/userPassword"
         android:hint="Password" />
-
+    
     <EditText
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
@@ -81,4 +81,5 @@
         android:id="@+id/userSubmit"
         android:fontFamily="sans-serif-light"
         android:layout_gravity="center"/>
+
 </LinearLayout>
