@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+            android:paddingLeft="20dp"
+        android:background="@drawable/edittextdark"
+        android:text="Username"
+        android:layout_gravity="center"
+        android:gravity="left|center"
+        android:fontFamily="sans-serif-light"
+        android:id="@+id/userUsername"
+        android:hint="Username" />
+
+    <EditText
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userPassword"
+        android:hint="Password" />
+
+    <EditText
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userName"
+        android:hint="Name" />
+
+    <EditText
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userEmail"
+        android:hint="Email Address" />
+
+    <EditText
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userPhone"
+        android:hint="Phone Number" />
+
+    <EditText
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/userAddress"
+        android:hint="Address" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextdark"
+        android:text="CHANGE INFORMATION"
+        android:onClick=""
+        android:id="@+id/userSubmit"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
