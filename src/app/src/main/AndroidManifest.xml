@@ -24,11 +24,7 @@
         <activity
             android:name=".Activities.NewUser"
             android:label="@string/title_activity_new_user"
-            android:parentActivityName=".Activities.LoginActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.ualberta.cs.technologic.Activities.LoginActivity" />
-        </activity>
+            android:parentActivityName=".Activities.LoginActivity"/>
         <activity
             android:name=".Activities.HomePage"
             android:label="@string/title_activity_home_page" />
