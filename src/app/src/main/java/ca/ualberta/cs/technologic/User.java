@@ -42,11 +42,9 @@ public class User{
     /**
      * Minimum amount required to create an account
      * @param username
-     * @param password
      */
-    public User(String username,String password ) {
+    public User(String username) {
         this.username = username;
-        this.password = password;
         //need to add a check to see if the username is unique
         //jk check is done in the controller
         users.add(this);
@@ -115,22 +113,6 @@ public class User{
      */
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    /**
-     * Gets the password from password protection of the user
-     * @return
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Sets the password through Password protection for the user
-     * @param password
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**

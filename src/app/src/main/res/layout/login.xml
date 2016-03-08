@@ -30,6 +30,7 @@
                 android:background="@drawable/edittextlight"
                 android:id="@+id/username"
                 android:hint="Username" />
+            <!--
             <EditText
                 android:fontFamily="sans-serif-light"
                 android:layout_width="250dp"
@@ -40,6 +41,7 @@
                 android:id="@+id/password"
                 android:password="true"
                 android:hint="Password" />
+                -->
         </LinearLayout>
 
     </LinearLayout>

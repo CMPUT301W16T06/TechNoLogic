@@ -15,7 +15,7 @@ import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
 public class NewUser extends ActionBarActivity {
-        private ArrayList<User> existingUsers;
+        //private ArrayList<User> existingUsers;
         private User pendingUser;
 
     @Override
@@ -36,7 +36,7 @@ public class NewUser extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newuser);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        existingUsers = getUsers();
+        //existingUsers = getUsers();
 
         // Set confirmUserButton click. Return Intent will be implemented along with LoginActivity
         Button confirmUserButton = (Button) findViewById(R.id.userSubmit);
@@ -51,7 +51,7 @@ public class NewUser extends ActionBarActivity {
                 //TODO: Validate the username. Do we want to validate all other String fields?
                 if (validUsername(pendingUser.getUsername())) {
                     // Add to existingUsers, save and return Intent
-
+                    finish();
                 } else {
                     // Error message. Username already taken
                     Toast takenUser = Toast.makeText(getApplicationContext(),
@@ -78,13 +78,13 @@ public class NewUser extends ActionBarActivity {
      * gets the Users
      * @return an ArrayList<User> of all User's who currently exist
      */
-    public ArrayList<User> getUsers() {
+    /*public ArrayList<User> getUsers() {
         // TODO: Load up or get the ArrayList of current Users
         return null;
-    }
+    }*/
 
     /**
-     * Checks if the User's inputted username is unique
+     * Checks if the User's inputted username is unique, use elastic search
      * @param wantedUsername a String
      * @return true if the String is unique to the ArrayList, false if otherwise
      */
@@ -101,7 +101,6 @@ public class NewUser extends ActionBarActivity {
         // TODO: get the user's input from the EditText fields
         // Get all EditText view inputs
         EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
-        EditText ET_newPassword = (EditText) findViewById(R.id.userPassword);
         EditText ET_newName = (EditText) findViewById(R.id.userName);
         EditText ET_newEmail = (EditText) findViewById(R.id.userEmail);
         EditText ET_newPhoneNum = (EditText) findViewById(R.id.userPhone);
@@ -109,14 +108,13 @@ public class NewUser extends ActionBarActivity {
 
         // Get all Strings from EditText views
         String newUserName = EditTextToString(ET_newUserName);
-        String newPassword = EditTextToString(ET_newPassword);
         String newName = EditTextToString(ET_newName);
         String newEmail = EditTextToString(ET_newEmail);
         String newPhoneNum = EditTextToString(ET_newPhoneNum);
         String newAddress = EditTextToString(ET_newAddress);
 
         // Create new user with the input information
-        User inputUser = new User(newUserName, newPassword);
+        User inputUser = new User(newUserName);
 
         inputUser.setName(newName);
         inputUser.setEmail(newEmail);

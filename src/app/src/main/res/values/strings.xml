@@ -33,4 +33,6 @@
     <string name="title_activity_my_borrows">MyBorrows</string>
     <string name="title_activity_my_item_bids">MyItemBids</string>
     <string name="title_activity_bids">Bids</string>
+
+    <string name="USERNAME">""</string>
 </resources>

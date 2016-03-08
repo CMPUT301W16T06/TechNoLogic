@@ -39,7 +39,7 @@ public class LoginActivity extends Activity{
         setContentView(R.layout.login);
 
         final EditText username = (EditText) findViewById(R.id.username);
-        final EditText password = (EditText) findViewById(R.id.password);
+        //final EditText password = (EditText) findViewById(R.id.password);
         Button loginButton = (Button) findViewById(R.id.login);
         TextView newUserButton = (TextView) findViewById(R.id.newUser);
 
@@ -47,10 +47,10 @@ public class LoginActivity extends Activity{
 
             public void onClick(View v) {
                 Boolean usernameValid = userLookup(username.getText().toString());
-                Boolean passwordValid = passwordLookup(password.getText().toString());
+                //Boolean passwordValid = passwordLookup(password.getText().toString());
                 usernameValid = true;
-                passwordValid = true;
-                if ((usernameValid || passwordValid) == true) {
+                //passwordValid = true;
+                if ((usernameValid) == true) {
                     Intent intent = new Intent(LoginActivity.this, HomePage.class);
                     intent.putExtra("username", username.toString());
                     startActivity(intent);
@@ -69,14 +69,18 @@ public class LoginActivity extends Activity{
     }
 
     public Boolean userLookup(String username) {
-        loadFromFile();
+        /*loadFromFile();
         for(int i=0; i < users.size(); i++) {
             if(users.get(i).getUsername() == username){
                 return true;
             }
         }
         return false;
+        */
+        return null;
     }
+
+    /*
     public Boolean passwordLookup(String password) {
         loadFromFile();
         for(int i=0; i < users.size(); i++) {
@@ -86,9 +90,11 @@ public class LoginActivity extends Activity{
         }
         return false;
     }
+    */
     /**
      * Load the array from the file
      */
+    /*
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -107,7 +113,7 @@ public class LoginActivity extends Activity{
             throw new RuntimeException();
         }
     }
-
+    */
 
     @Override
     protected void onStart() {
