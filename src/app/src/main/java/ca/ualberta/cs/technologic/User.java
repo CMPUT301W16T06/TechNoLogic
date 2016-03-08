@@ -33,7 +33,6 @@ public class User{
     private String username;
     private String email;
     private String phone;
-    private String password;
     private String address;
     private static final String FILENAME = "users.sav";
     private ArrayList<User> users = new ArrayList<User>();

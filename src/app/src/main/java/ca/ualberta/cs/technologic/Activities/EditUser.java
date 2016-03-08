@@ -1,5 +1,6 @@
 package ca.ualberta.cs.technologic.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -12,16 +13,15 @@ import android.widget.Toast;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
-public class NewUser extends ActionBarActivity {
-        //private ArrayList<User> existingUsers;
-        private User pendingUser;
+/**
+ * Created by Eric on 2016-03-08.
+ */
+public class EditUser extends ActionBarActivity {
+        private User loggedUser;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        // Do not give access to Users who have not signed up
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -33,10 +33,17 @@ public class NewUser extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newuser);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //existingUsers = getUsers();
 
-        // Set confirmUserButton click. Return Intent will be implemented along with LoginActivity
+        // Set username uneditable
+        EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
+        ET_newUserName.setEnabled(false);
+
+        // Get the User and fill out current information
+        Intent intent = getIntent();
+        //String username = intent.getStringExtra("user");
+        //loggedUser = getUserInfo(username);
+        //displayUserInfo(loggedUser);
+
         Button confirmUserButton = (Button) findViewById(R.id.userSubmit);
         confirmUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,37 +51,39 @@ public class NewUser extends ActionBarActivity {
                 // TODO: Check if the filled in information is correct. No missing information and valid Username
                 // TODO: Return to LoginActivity if correct, otherwise stay and give notice
 
-                pendingUser = getUserInput();
+                loggedUser = getUserInput();
 
-                //TODO: Validate the username. Do we want to validate all other String fields?
-                if (validUsername(pendingUser.getUsername())) {
-                    // Add to existingUsers, save and return Intent
-                    finish();
-                } else {
-                    // Error message. Username already taken
-                    Toast takenUser = Toast.makeText(getApplicationContext(),
-                            "Username is already taken", Toast.LENGTH_SHORT);
-                    takenUser.show();
+                //TODO: Update the existing user with new information
+                // Add to existingUsers, save and return Intent
+                finish();
                 }
-
-            }
         });
     }
 
     /**
-     * Checks if the User's inputted username is unique, use elastic search
-     * @param wantedUsername a String
-     * @return true if the String is unique to the ArrayList, false if otherwise
+     * Uses elastic search and gets the User infomation
+     *  of the given username
+     * @param username string to search for
+     * @return user information
      */
-    public boolean validUsername(String wantedUsername) {
-        // TODO: Check wantedUsername against existing Users
-        return false;
+    //TODO: Finish elastic search, search for the username
+    public User getUserInfo(String username) {
+        return null;
     }
 
-    /**
-     * Gets the input text fields filled out by the User
-     * @return User object
-     */
+    public void displayUserInfo(User user){
+        EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
+        EditText ET_newName = (EditText) findViewById(R.id.userName);
+        EditText ET_newEmail = (EditText) findViewById(R.id.userEmail);
+        EditText ET_newPhoneNum = (EditText) findViewById(R.id.userPhone);
+        EditText ET_newAddress = (EditText) findViewById(R.id.userAddress);
+
+        ET_newUserName.setText(user.getUsername());
+        ET_newName.setText(user.getName());
+        ET_newEmail.setText(user.getEmail());
+        ET_newPhoneNum.setText(user.getPhone());
+        ET_newAddress.setText(user.getAddress());
+    }
     public User getUserInput() {
         // TODO: get the user's input from the EditText fields
         // Get all EditText view inputs
@@ -102,7 +111,6 @@ public class NewUser extends ActionBarActivity {
         return inputUser;
     }
 
-
     /**
      * Helper function for getting the text as a string from an EditText object
      * @param editText is an EditText object
@@ -113,4 +121,3 @@ public class NewUser extends ActionBarActivity {
     }
 
 }
-
