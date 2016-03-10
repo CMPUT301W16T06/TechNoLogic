@@ -13,10 +13,16 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ElasticSearch;
 import ca.ualberta.cs.technologic.R;
+import ca.ualberta.cs.technologic.User;
 
 public class MyItems extends ActionBarActivity {
+
+    private ArrayList<Computer> comps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +48,37 @@ public class MyItems extends ActionBarActivity {
         });
 
         //This is just testing... DELETE LATER
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+//        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
+//                "Jupiter", "Saturn", "Uranus", "Neptune"};
+//        ArrayList<String> planetList = new ArrayList<String>();
+//        planetList.addAll(Arrays.asList(planets));
+//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+//        myitemslist.setAdapter(listAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        ListView myitemslist = (ListView) findViewById(R.id.myitemslist);
+        // TODO Auto-generated method stub
+        super.onStart();
+        // Load the latest tweets (in a new thread, because of networkonmainthread stuff...
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                comps = ElasticSearch.getComputers();
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ArrayAdapter<Computer> listAdapter = new ArrayAdapter<Computer>(this, R.layout.listviewtext, comps);
         myitemslist.setAdapter(listAdapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

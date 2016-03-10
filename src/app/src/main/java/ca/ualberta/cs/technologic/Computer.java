@@ -3,11 +3,14 @@ package ca.ualberta.cs.technologic;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by gknoblau on 2016-02-06.
  * I added a status variable that can only be Available, Bidded or Borrowed- Jordan
  */
 public class Computer {
+    @JestId
     private UUID id;
     private String username;
     private String make;
@@ -256,6 +259,12 @@ public class Computer {
         else {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Computer:" + this.id.toString() + " | " + this.description
+                + " | status:" + this.status;
     }
 
 }
