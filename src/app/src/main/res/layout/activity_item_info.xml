@@ -61,4 +61,21 @@
         android:layout_marginTop="54dp"
         android:fontFamily="sans-serif-light"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/btnDelete"
+        android:layout_alignBottom="@+id/infodescription"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/textView4" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="update"
+        android:id="@+id/btnUpdate"
+        android:layout_above="@+id/btnDelete"
+        android:layout_alignEnd="@+id/textView3" />
+
 </RelativeLayout>

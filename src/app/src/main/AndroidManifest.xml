@@ -7,11 +7,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<<<<<<< HEAD
-    <uses-permission android:name="android.permission.INTERNET" />
-=======
     <uses-permission android:name="android.permission.INTERNET"/>
->>>>>>> b346f81efe3df2aa30211c5d55719bd9579abdb7
+
 
     <application
         android:allowBackup="true"

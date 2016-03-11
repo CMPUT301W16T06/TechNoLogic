@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import ca.ualberta.cs.technologic.ElasticsearchController;
+import ca.ualberta.cs.technologic.ElasticSearchController;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
@@ -101,7 +101,7 @@ public class NewUser extends ActionBarActivity {
      */
     public boolean validUsername(String wantedUsername) {
         // TODO: Check wantedUsername against existing Users
-        ElasticsearchController.GetUsersTask getUserTask = new ElasticsearchController.GetUsersTask();
+        ElasticSearchController.GetUsersTask getUserTask = new ElasticSearchController.GetUsersTask();
         getUserTask.execute(wantedUsername);
         try {
             ArrayList<User> foundUsers;

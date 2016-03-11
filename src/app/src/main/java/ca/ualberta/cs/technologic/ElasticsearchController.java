@@ -17,7 +17,7 @@ import io.searchbox.core.SearchResult;
 /**
  * Created by Eric on 2016-03-08.
  */
-public class ElasticsearchController {
+public class ElasticSearchController {
     private static JestDroidClient JDC;
 
     public static void verifyConfig() {

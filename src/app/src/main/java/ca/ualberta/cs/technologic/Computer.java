@@ -23,8 +23,8 @@ public class Computer {
     private Float price;
     private String description;
     private String status = "Available";
-    private static final String FILENAME = "computers.sav";
-    private ArrayList<Computer> computers = new ArrayList<Computer>();
+//    private static final String FILENAME = "computers.sav";
+//    private ArrayList<Computer> computers = new ArrayList<Computer>();
 
     /**
      * Contructor of a computer
@@ -52,8 +52,12 @@ public class Computer {
         this.os = os;
         this.price = price;
         this.description = description;
-        computers.add(this);
+        //computers.add(this);
 
+    }
+
+    public Computer(String username){
+        this.username = username;
     }
 
     /**
@@ -61,6 +65,7 @@ public class Computer {
      * @return
      */
     public UUID getId () {return id;}
+
 
     /**
      * Returns the username of the owner of the computer

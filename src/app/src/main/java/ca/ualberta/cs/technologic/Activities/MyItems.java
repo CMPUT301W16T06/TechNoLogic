@@ -12,13 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 
 import ca.ualberta.cs.technologic.Computer;
-import ca.ualberta.cs.technologic.ElasticSearch;
+import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
-import ca.ualberta.cs.technologic.User;
 
 public class MyItems extends ActionBarActivity {
 
@@ -42,18 +39,13 @@ public class MyItems extends ActionBarActivity {
         myitemslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Computer entry = (Computer) parent.getAdapter().getItem(position);
                 Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
+                goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
             }
         });
 
-        //This is just testing... DELETE LATER
-//        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-//                "Jupiter", "Saturn", "Uranus", "Neptune"};
-//        ArrayList<String> planetList = new ArrayList<String>();
-//        planetList.addAll(Arrays.asList(planets));
-//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
-//        myitemslist.setAdapter(listAdapter);
     }
 
     @Override
@@ -64,7 +56,7 @@ public class MyItems extends ActionBarActivity {
         // Load the latest tweets (in a new thread, because of networkonmainthread stuff...
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                comps = ElasticSearch.getComputers();
+                comps = ElasticSearchComputer.getComputers("");
             }
         });
         thread.start();

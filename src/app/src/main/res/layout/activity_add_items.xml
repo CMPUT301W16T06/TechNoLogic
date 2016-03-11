@@ -23,10 +23,20 @@
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
         android:paddingLeft="20dp"
+        android:hint="Make"
+        android:id="@+id/make"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
         android:hint="Model"
         android:id="@+id/model"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/make"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -99,20 +109,10 @@
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
         android:paddingLeft="20dp"
-        android:hint="Status"
-        android:id="@+id/status"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/baserate"
-        android:layout_centerHorizontal="true" />
-    <EditText
-        android:layout_width="280dp"
-        android:layout_height="40dp"
-        android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
         android:hint="Description"
         android:id="@+id/description"
         android:layout_marginTop="5dp"
-        android:layout_below="@+id/status"
+        android:layout_below="@+id/baserate"
         android:layout_centerHorizontal="true" />
 
     <Button
