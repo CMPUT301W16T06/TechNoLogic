@@ -16,15 +16,16 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //05.01.01 As a borrower, I want to bid for an available thing, with a monetary rate
     // (in dollars per hour)
+
     public void testPlaceBid () {
         //initial setup of test variables
-        User testUser = new User("cooljohn123","password");
-        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        User testUser = new User("cooljohn123");
+        Computer testcomputer = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("Bidded");
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
 
         //check that it has the new bid
@@ -39,16 +40,16 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     // each thing with its description, owner username, and my bid
     public void testMyBids () {
         //initial setup of test variables
-        User testUser = new User("cooljohn123","password");
-        User testUser2 = new User("thisssucks", "passwrord");
-        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        User testUser = new User("cooljohn123");
+        User testUser2 = new User("thisssucks");
+        Computer testcomputer = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
 
         testcomputer.setStatus("Bidded");
         testUser2.addComputer(testcomputer);
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
 
         //Gets list of all the computers I bidded on
@@ -80,14 +81,14 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     //Test that corresponds with US 5.03.01 (Bid_Notification)
     public void testNotifications(){
         //initial setup of test variables
-        User testUser = new User("cooljohn123","password");
-        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        User testUser = new User("cooljohn123");
+        Computer testcomputer = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("Bidded");
 
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
 
         //add to newBid list
@@ -108,19 +109,19 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     //Test that corresponds with US 5.04.01 (View_My_Computer_Bids_List)
     public void testViewMyComputerBids(){
         //initial setup of test variables
-        User testUser = new User("cooljohn123","password");
-        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        User testUser = new User("cooljohn123");
+        Computer testcomputer = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("Bidded");
 
-        Computer testcomputer2 = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        Computer testcomputer2 = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("Bidded");
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
-        Bid bid2 = new Bid(testcomputer2.getId(), 2.34);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("2.34"),"tom","bob");
         testUser.addMyComputerBid(bid2);
 
         //get list of computers with bids on them that will be displayed
@@ -137,13 +138,13 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     //Test that corresponds with US 5.05.01 (View_Computer_Bids)
     public void testViewComputerBids(){
         //initial setup of test variables
-        User testUser = new User("cooljohn123","password");
-        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        User testUser = new User("cooljohn123");
+        Computer testcomputer = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("Bidded");
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
 
         //get list of all bids for a specific computer
@@ -159,13 +160,13 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     //Test that corresponds with US 5.05.01 (View_Computer_Bids)
     public void acceptBid(){
         //initial setup of test variables
-        User testUser = new User("cooljohn123","password");
-        Computer testcomputer = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"this is a cool computer");
+        User testUser = new User("cooljohn123");
+        Computer testcomputer = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("Bidded");
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer.getId(), 1.12);
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
 
         //get list of all bids for a specific computer
@@ -204,15 +205,15 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     public void testDeclinebid() {
         // Initialize Users and Computers
-        User user1 = new User("Tom", "thetankengine");
+        User user1 = new User("Tom");
 
-        Computer comp1 = new Computer("Apple", "MacBook", 2013, "intel i5", 8,
-                500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
+        Computer comp1 = new Computer("cooljohn123", "Mircosoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
 
         // Place three bids on comp1
-        Bid bid1 = new Bid(comp1.getId(), 19.3);
-        Bid bid2 = new Bid(comp1.getId(), 24.3);
-        Bid bid3 = new Bid(comp1.getId(), 22.7);
+        Bid bid1 = new Bid(comp1.getId(), Float.parseFloat("19.3"),"tom","bob");
+        Bid bid2 = new Bid(testcomputer.getId(), Float.parseFloat("24.3"),"tom","bob");
+        Bid bid3 = new Bid(testcomputer.getId(), Float.parseFloat("22.7"),"tom","bob");
         user1.addMyComputerBid(bid1);
         user1.addMyComputerBid(bid2);
         user1.addMyComputerBid(bid3);

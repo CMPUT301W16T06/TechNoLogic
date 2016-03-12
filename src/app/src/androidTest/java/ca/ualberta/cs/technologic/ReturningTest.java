@@ -16,9 +16,9 @@ public class ReturningTest extends ActivityInstrumentationTestCase2 {
      *  Corresponds to US 07.01.01
      */
     public void testReturn() {
-        User user1 = new User("Tom", "thetankengine");
-        Computer comp = new Computer("Apple","MacBook",2013,"intel i5", 8,
-                500,"Ios",Float.parseFloat("18.3"),"Sort of fast");
+        User user1 = new User("Tom");
+        Computer comp = new Computer(user1.getUsername(),"Apple", "MacBook", 2013, "intel i5", 8,
+                500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
 
         // Check before return
         user1.addLentOut(comp.getId());

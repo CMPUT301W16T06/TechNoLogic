@@ -57,7 +57,7 @@ public class Computer {
     }
 
     public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description, String stauts) {
+                    Integer hardDrive, String os, Float price, String description, String status) {
         this.id = id;
         this.username = username;
         this.make = make;

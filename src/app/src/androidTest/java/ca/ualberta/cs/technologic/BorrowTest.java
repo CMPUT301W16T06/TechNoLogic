@@ -20,8 +20,8 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
      */
     public void testViewBorrower() {
         // Initialize Users and Computers
-        User user1 = new User("Tom", "thetankengine");
-        User user2 = new User("Ashley", "strongpassword");
+        User user1 = new User("Tom");
+        User user2 = new User("Ashley");
 
         Computer comp1 = new Computer(user1.getUsername(),"Apple", "MacBook", 2013, "intel i5", 8,
                 500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
@@ -47,12 +47,12 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
      */
     public void testViewOwner() {
         // Initialize Users and Computers
-        User user1 = new User("Tom", "thetankengine");
-        User user2 = new User("Ashley", "strongpassword");
+        User user1 = new User("Tom");
+        User user2 = new User("Ashley");
 
-        Computer comp1 = new Computer("Apple", "MacBook", 2013, "intel i5", 8,
+        Computer comp1 = new Computer(user1.getUsername(),"Apple", "MacBook", 2013, "intel i5", 8,
                 500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
-        Computer comp2 = new Computer("Apple", "MacBook", 2015, "intel i7", 8,
+        Computer comp2 = new Computer(user1.getUsername(),"Apple", "MacBook", 2015, "intel i7", 8,
                 500, "Ios", Float.parseFloat("18.3"), "Much faster");
 
         // user1 owns and lends out Computers

@@ -16,8 +16,9 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
     //Test to make sure the status of a Computer can only be Available, Bidded or Borrowed
     //Test for corresponding US 2.01.01 (View_Status)
     public void testsetStatus(){
-        Computer testcomputer1 = new Computer("Mircosoft","surface",2014,"intel i7", 8,
-                500,"windows",Float.parseFloat("34.2"),"COMPUTER 1");
+        User user1 = new User("Tom");
+        Computer testcomputer1 = new Computer(user1.getUsername(),"Apple", "MacBook", 2013, "intel i5", 8,
+                500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
 
         //Make sure the default value of Computer is "Available"
         assertEquals("Available", testcomputer1.getStatus());

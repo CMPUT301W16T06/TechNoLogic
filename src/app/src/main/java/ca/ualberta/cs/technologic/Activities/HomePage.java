@@ -14,37 +14,60 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ComputerAdapter;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class HomePage extends ActionBarActivity {
-    String username;
+
+    private ArrayList<Computer> comps = null;
     private CurrentUser cu = CurrentUser.getInstance();
+    String username = cu.toString();
+    ListView itemslist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        ListView homelist = (ListView) findViewById(R.id.homelist);
+        itemslist = (ListView) findViewById(R.id.homelist);
 
-        Intent intent = getIntent();
-        username = intent.getStringExtra("USERNAME");
-
-        homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Computer entry = (Computer) parent.getAdapter().getItem(position);
                 Intent goToInfo = new Intent(HomePage.this, ItemInfo.class);
+                goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
             }
         });
+    }
 
-        //This is just testing... DELETE LATER
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll( Arrays.asList(planets) );
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
-        homelist.setAdapter( listAdapter );
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+
+        getComputers();
+        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
+        itemslist.setAdapter(listAdapter);
+    }
+
+    public void getComputers(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                comps = ElasticSearchComputer.getComputers("");
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
