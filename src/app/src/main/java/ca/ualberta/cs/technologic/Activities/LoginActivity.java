@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
@@ -19,8 +20,9 @@ import ca.ualberta.cs.technologic.User;
  * Created by gknoblau on 2016-02-16.
  */
 public class LoginActivity extends Activity{
-    private static final String FILENAME = "users.sav";
-    private ArrayList<User> users;
+
+    private ArrayList<User> users =  new ArrayList<User>();
+    private CurrentUser cu = CurrentUser.getInstance();
 
     /** Called when the activity is first created. */
     @Override
@@ -37,12 +39,11 @@ public class LoginActivity extends Activity{
 
             public void onClick(View v) {
                 Boolean usernameValid = userLookup(username.getText().toString());
-                //Boolean passwordValid = passwordLookup(password.getText().toString());
                 //usernameValid = true;
-                //passwordValid = true;
+
                 if (usernameValid) {
                     Intent intent = new Intent(LoginActivity.this, HomePage.class);
-                    intent.putExtra("USERNAME", username.toString());
+                    cu.setCurrentUser(username.getText().toString());
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
@@ -59,7 +60,6 @@ public class LoginActivity extends Activity{
     }
 
     public Boolean userLookup(final String username) {
-        users = new ArrayList<User>();
             // TODO: Check wantedUsername against existing Users
             // TODO: Fix lowercase problem
             if (username.equals("")) {
@@ -80,41 +80,6 @@ public class LoginActivity extends Activity{
             }
             return (users.size() == 1);
     }
-
-    /*
-    public Boolean passwordLookup(String password) {
-        loadFromFile();
-        for(int i=0; i < users.size(); i++) {
-            if(users.get(i).getPassword() == password){
-                return true;
-            }
-        }
-        return false;
-    }
-    */
-    /**
-     * Load the array from the file
-     */
-    /*
-    private void loadFromFile() {
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html 01-19 2016
-            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-            users = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            users = new ArrayList<User>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
-    */
 
     @Override
     protected void onStart() {

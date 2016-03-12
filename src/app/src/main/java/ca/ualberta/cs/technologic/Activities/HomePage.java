@@ -9,14 +9,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.R;
 
 public class HomePage extends ActionBarActivity {
     String username;
+    private CurrentUser cu = CurrentUser.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,9 @@ public class HomePage extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
+                //I used this for testing to make sure the username could be accessed from anywhere.
+                //Toast toast = Toast.makeText(getApplicationContext(), cu.getCurrentUser(), Toast.LENGTH_SHORT);
+                //toast.show();
                 startActivity(new Intent(this, HomePage.class));
                 break;
             case R.id.myitems:
