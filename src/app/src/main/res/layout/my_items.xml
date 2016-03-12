@@ -23,7 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/edittextdark"
-        android:text="Add"
+        android:text="ADD"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light"
         android:id="@+id/addnewitem"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />

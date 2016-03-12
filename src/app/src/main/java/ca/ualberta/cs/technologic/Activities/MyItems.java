@@ -69,8 +69,8 @@ public class MyItems extends ActionBarActivity {
     public void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                //comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
-                comps = ElasticSearchComputer.getComputers("");
+                comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
+                //comps = ElasticSearchComputer.getComputers("");
             }
         });
         thread.start();

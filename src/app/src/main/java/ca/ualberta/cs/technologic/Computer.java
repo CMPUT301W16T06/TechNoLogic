@@ -22,7 +22,7 @@ public class Computer {
     private String os;
     private Float price;
     private String description;
-    private String status = "Available";
+    private String status = "available";
 //    private static final String FILENAME = "computers.sav";
 //    private ArrayList<Computer> computers = new ArrayList<Computer>();
 

@@ -1,8 +1,10 @@
 package ca.ualberta.cs.technologic.Activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,6 +100,7 @@ public class ItemInfo extends ActionBarActivity {
         }
     }
 
+
     private void updateComputer() {
         String make = ((EditText)findViewById(R.id.infoMake)).getText().toString();
         String model = ((EditText)findViewById(R.id.infoModel)).getText().toString();
@@ -110,6 +113,7 @@ public class ItemInfo extends ActionBarActivity {
         String description = ((EditText)findViewById(R.id.infoDescription)).getText().toString();
         String status = comp.getStatus();
         String username = cu.getCurrentUser();
+        Log.d("USERNAME TEST", username);
 
 
         final Computer computer;
@@ -137,8 +141,10 @@ public class ItemInfo extends ActionBarActivity {
 
     }
 
+    //Fill in all the fields of computer
     public void setComputerValues(Computer c){
         ((TextView)findViewById(R.id.infoStatus)).setText(c.getStatus());
+        ((TextView)findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
         ((EditText)findViewById(R.id.infoModel)).setText(c.getModel());
         ((EditText)findViewById(R.id.infoYear)).setText(c.getYear().toString());
@@ -150,6 +156,17 @@ public class ItemInfo extends ActionBarActivity {
         ((EditText)findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
 
+        TextView status = (TextView) findViewById(R.id.infoStatus);
+
+        if (c.getStatus().equals("available")){
+            status.setTextColor(Color.parseColor("#3b5323"));
+        }
+        else if (c.getStatus().equals("bidded")){
+            status.setTextColor(Color.parseColor("#e6e600"));
+        }
+        else{
+            status.setTextColor(Color.parseColor("#b20000"));
+        }
 
     }
 
