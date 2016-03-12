@@ -48,10 +48,14 @@ public class ElasticSearchComputer {
         verifyClient();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
 
-        String query = "";
+        String query = "{\n" +
+                        "\"size\" : 1000\n" +
+                        "}";
         if (username != ""){
             query = "{\n" +
+                    "\"size\": 1000,\n" +
                     "\"query\": {\n" +
                     "\"term\": { \"username\" : \"" + username + "\" }\n" +
                     "}\n" +
@@ -62,7 +66,7 @@ public class ElasticSearchComputer {
             SearchResult result = client.execute(search);
             if (result.isSucceeded()) {
                 List<Computer> found = result.getSourceAsObjectList(Computer.class);
-
+                hits = result.getHits(Map.class);
                 computers.addAll(found);
             }
         } catch (IOException e) {
@@ -76,7 +80,9 @@ public class ElasticSearchComputer {
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
 
-        String queryId = "";
+        String queryId = "{\n" +
+                "\"size\" : 1000\n" +
+                "}";
 
         Search search = new Search.Builder(queryId).addIndex("computers").addType("computer").build();
         try {
@@ -134,6 +140,15 @@ public class ElasticSearchComputer {
         addComputer(computer);
     }
 
+    public static void updateComputerStatus(UUID compID, String status) {
+        Computer computer = getComputersById(compID);
+        if (computer != null) {
+            computer.setStatus(status);
+            deleteComputer(computer.getId().toString());
+            addComputer(computer);
+        }
+    }
+
     /**
      * Delete the computer given the id
      * @param id id of the computer to be delete
@@ -144,8 +159,11 @@ public class ElasticSearchComputer {
         ArrayList<Computer> computers = new ArrayList<Computer>();
         List<SearchResult.Hit<Map,Void>> hits = null;
         String elasticSearchID = "";
+        String q = "{\n" +
+                "\"size\" : 1000\n" +
+                "}";
 
-        Search search = new Search.Builder("").addIndex("computers").addType("computer").build();
+        Search search = new Search.Builder(q).addIndex("computers").addType("computer").build();
         try {
             SearchResult result = client.execute(search);
             if (result.isSucceeded()) {

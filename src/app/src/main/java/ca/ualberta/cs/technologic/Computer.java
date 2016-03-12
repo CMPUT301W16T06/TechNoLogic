@@ -267,7 +267,7 @@ public class Computer {
 
 
     //Sets string status, will not accept any value other than Available, Bidded or Borrowed
-    public void setStatus(String status) throws IllegalArgumentException {
+    public void setStatus(String status) {
         status = status.toLowerCase();
         ArrayList<String> statusOptions = new ArrayList<String>();
         statusOptions.add("available");
@@ -277,7 +277,7 @@ public class Computer {
             this.status = status;
         }
         else {
-            throw new IllegalArgumentException();
+            this.status = "available";
         }
     }
 

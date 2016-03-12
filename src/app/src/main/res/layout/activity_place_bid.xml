@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="ca.ualberta.cs.technologic.Activities.PlaceBid">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="16sp"
+        android:text="ID# "
+        android:id="@+id/lbl_Id"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingRight="40dp"
+        android:text="Make:"
+        android:id="@+id/lbl_Make"
+        android:layout_below="@+id/lbl_Id"
+        android:layout_alignParentStart="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="make"
+        android:id="@+id/info_Make"
+        android:layout_below="@+id/lbl_Id"
+        android:layout_toRightOf="@+id/lbl_Make"
+        android:layout_alignTop="@+id/lbl_Make" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Model:"
+        android:id="@+id/lbl_Model"
+        android:layout_below="@+id/lbl_Make" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="model"
+        android:id="@+id/info_Model"
+        android:layout_toRightOf="@+id/lbl_Model"
+        android:layout_alignTop="@+id/lbl_Model"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Harddrive:"
+        android:id="@+id/lbl_Harddive"
+        android:layout_below="@+id/lbl_Model" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="harddrive"
+        android:id="@+id/info_Harddrive"
+        android:layout_toRightOf="@+id/lbl_Harddive"
+        android:layout_alignTop="@+id/lbl_Harddive"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Memory:"
+        android:id="@+id/lbl_Memory"
+        android:layout_below="@+id/lbl_Harddive" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="memory"
+        android:id="@+id/info_Memory"
+        android:layout_toRightOf="@+id/lbl_Memory"
+        android:layout_alignTop="@+id/lbl_Memory"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Processor:"
+        android:id="@+id/lbl_Processor"
+        android:layout_below="@+id/lbl_Memory" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="processor"
+        android:id="@+id/info_Processor"
+        android:layout_toRightOf="@+id/lbl_Processor"
+        android:layout_alignTop="@+id/lbl_Processor"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="OS:"
+        android:id="@+id/lbl_Os"
+        android:layout_below="@+id/lbl_Processor" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="os"
+        android:id="@+id/info_Os"
+        android:layout_toRightOf="@+id/lbl_Os"
+        android:layout_alignTop="@+id/lbl_Os"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Year:"
+        android:id="@+id/lbl_Year"
+        android:layout_below="@+id/lbl_Os" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="year"
+        android:id="@+id/info_Year"
+        android:layout_toRightOf="@+id/lbl_Year"
+        android:layout_alignTop="@+id/lbl_Year"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Base Rate:"
+        android:id="@+id/lbl_Baserate"
+        android:layout_below="@+id/lbl_Year" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="rate"
+        android:id="@+id/info_Baserate"
+        android:layout_toRightOf="@+id/lbl_Baserate"
+        android:layout_alignTop="@+id/lbl_Baserate"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="5dp"
+        android:text="Description:"
+        android:id="@+id/lbl_Description"
+        android:layout_below="@+id/lbl_Baserate" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="description"
+        android:id="@+id/info_Description"
+        android:layout_toRightOf="@+id/lbl_Description"
+        android:layout_alignTop="@+id/lbl_Description"
+        android:layout_alignLeft="@id/info_Make"/>
+
+    <TextView
+        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:layout_marginTop="30dp"
+        android:text="Owner:"
+        android:id="@+id/lbl_Owner"
+        android:layout_below="@+id/lbl_Description" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="5dp"
+        android:paddingLeft="20dp"
+        android:text="owner"
+        android:id="@+id/info_Owner"
+        android:layout_toRightOf="@+id/lbl_Owner"
+        android:layout_alignTop="@+id/lbl_Owner"
+        android:layout_alignLeft="@id/info_Make"/>
+
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:paddingLeft="20dp"
+        android:hint="Bid"
+        android:id="@+id/info_bid"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/lbl_Owner" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextdark"
+        android:textSize="15sp"
+        android:text="PLACE BID"
+        android:id="@+id/btnBid"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/info_bid"
+        android:layout_alignTop="@+id/info_bid"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light" />
+
+
+</RelativeLayout>

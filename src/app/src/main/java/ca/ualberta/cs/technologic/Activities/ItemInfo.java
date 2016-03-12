@@ -64,6 +64,7 @@ public class ItemInfo extends ActionBarActivity {
                 updateComputer();
 //                Intent goToItems = new Intent(ItemInfo.this, MyItems.class);
 //                startActivity(goToItems);
+//                onBackPressed();
             }
         });
     }

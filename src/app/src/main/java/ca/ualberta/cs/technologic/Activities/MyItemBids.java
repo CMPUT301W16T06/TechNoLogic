@@ -13,9 +13,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ca.ualberta.cs.technologic.Bid;
+import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
 public class MyItemBids extends ActionBarActivity {
+    private ArrayList<Bid> bids;
+    private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,18 +31,41 @@ public class MyItemBids extends ActionBarActivity {
         myitemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent goToBids = new Intent(MyItemBids.this, AcceptBid.class);
-                startActivity(goToBids);
+//                Intent goToBids = new Intent(MyItemBids.this, AcceptBid.class);
+//                startActivity(goToBids);
             }
         });
 
-        //This is just testing... DELETE LATER
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+//        //This is just testing... DELETE LATER
+//        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
+//                "Jupiter", "Saturn", "Uranus", "Neptune"};
+//        ArrayList<String> planetList = new ArrayList<String>();
+//        planetList.addAll(Arrays.asList(planets));
+//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+//        myitemlist.setAdapter(listAdapter);
+    }
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                bids = ElasticSearchBidding.getMyItemBids(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ListView myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
+        ArrayAdapter<Bid> listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         myitemlist.setAdapter(listAdapter);
+
     }
 
     @Override

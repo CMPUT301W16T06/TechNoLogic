@@ -21,15 +21,17 @@ import ca.ualberta.cs.technologic.R;
 
 public class MyItems extends ActionBarActivity {
 
-    private ArrayList<Computer> comps;
+    private ArrayList<Computer> comps = null;
     private CurrentUser cu = CurrentUser.getInstance();
+    ListView myitemslist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_items);
         Button addNewItem = (Button) findViewById(R.id.addnewitem);
-        ListView myitemslist = (ListView) findViewById(R.id.myitemslist);
+        myitemslist = (ListView) findViewById(R.id.myitemslist);
 
         addNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +48,9 @@ public class MyItems extends ActionBarActivity {
                 Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
+//                Intent goToInfo = new Intent(MyItems.this, PlaceBid.class);
+//                goToInfo.putExtra("id", entry.getId().toString());
+//                startActivity(goToInfo);
             }
         });
 
@@ -53,10 +58,15 @@ public class MyItems extends ActionBarActivity {
 
     @Override
     protected void onStart() {
-        ListView myitemslist = (ListView) findViewById(R.id.myitemslist);
         // TODO Auto-generated method stub
         super.onStart();
-        // Load the latest tweets (in a new thread, because of networkonmainthread stuff...
+
+        getComputers();
+        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
+        myitemslist.setAdapter(listAdapter);
+    }
+
+    public void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 //comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
@@ -70,9 +80,6 @@ public class MyItems extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
-        myitemslist.setAdapter(listAdapter);
     }
 
 

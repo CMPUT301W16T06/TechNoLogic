@@ -52,6 +52,9 @@
             android:name=".Activities.AcceptBid"
             android:label="@string/title_activity_bids" />
         <activity
+            android:name=".Activities.PlaceBid"
+            android:label="@string/title_activity_bids" />
+        <activity
             android:name=".Activities.Bids"
             android:label="@string/title_activity_bids"></activity>
     </application>

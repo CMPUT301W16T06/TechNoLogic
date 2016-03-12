@@ -14,9 +14,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import ca.ualberta.cs.technologic.Bid;
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
+import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class Bids extends ActionBarActivity {
+    private ArrayList<Bid> bids;
+    private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +35,31 @@ public class Bids extends ActionBarActivity {
         bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent goToInfo = new Intent(Bids.this, ItemInfo.class);
-                startActivity(goToInfo);
+//                Intent goToInfo = new Intent(Bids.this, ItemInfo.class);
+//                startActivity(goToInfo);
             }
         });
+    }
 
-        //This is just testing... DELETE LATER
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                bids = ElasticSearchBidding.getMyBids(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ListView bidslist = (ListView) findViewById(R.id.bidslist);
+        ArrayAdapter<Bid> listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         bidslist.setAdapter(listAdapter);
     }
 
