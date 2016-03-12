@@ -12,7 +12,6 @@ public class Bid{
     private Float price;
     private String username;
     private String owner;
-    private static final String FILENAME = "bids.sav";
     private ArrayList<Bid> bids = new ArrayList<Bid>();
 
     /**
