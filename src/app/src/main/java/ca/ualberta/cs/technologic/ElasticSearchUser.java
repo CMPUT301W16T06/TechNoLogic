@@ -45,7 +45,7 @@ public class ElasticSearchUser {
         if (!username.equals("")){
             query = "{\n" +
                     "\"query\": {\n" +
-                    "\"term\": { \"username\" : \"" + username + "\" }\n" +
+                    "\"match\": { \"username\" : \"" + username + "\" }\n" +
                     "}\n" +
                     "}\n";
         }
