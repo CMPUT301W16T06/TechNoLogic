@@ -14,12 +14,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class MyItems extends ActionBarActivity {
 
     private ArrayList<Computer> comps;
+    private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +59,7 @@ public class MyItems extends ActionBarActivity {
         // Load the latest tweets (in a new thread, because of networkonmainthread stuff...
         Thread thread = new Thread(new Runnable() {
             public void run() {
+                //comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
                 comps = ElasticSearchComputer.getComputers("");
             }
         });
@@ -67,7 +71,7 @@ public class MyItems extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        ArrayAdapter<Computer> listAdapter = new ArrayAdapter<Computer>(this, R.layout.listviewtext, comps);
+        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
         myitemslist.setAdapter(listAdapter);
     }
 
