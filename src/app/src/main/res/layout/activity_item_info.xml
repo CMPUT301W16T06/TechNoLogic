@@ -7,75 +7,249 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ca.ualberta.cs.technologic.Activities.ItemInfo">
+    tools:context="ca.ualberta.cs.technologic.Activities.AddItems">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="COMPUTER INFO"
-        android:id="@+id/textView3"
+        android:textSize="16sp"
+        android:text="ID# 12345679"
+        android:id="@+id/lblId"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:fontFamily="sans-serif-light"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="COMPUTER ID#"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3"
-        android:fontFamily="sans-serif-light"/>
+        android:layout_height="35dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:paddingRight="50dp"
+        android:text="Make:"
+        android:id="@+id/lblMake"
+        android:layout_below="@+id/lblId"
+        android:layout_alignParentStart="true" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Make"
+        android:id="@+id/infoMake"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblMake"
+        android:layout_alignTop="@+id/lblMake" />
 
     <TextView
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:id="@+id/infoowner"
-        android:background="@drawable/edittextlight"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:gravity="center_horizontal"
-        android:textAlignment="textStart"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
-        android:text="Owner: Bob"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="162dp"
-        android:fontFamily="sans-serif-light"/>
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Model:"
+        android:id="@+id/lblModel"
+        android:layout_below="@+id/lblMake" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Model"
+        android:id="@+id/infoModel"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblModel"
+        android:layout_alignTop="@+id/lblModel"
+        android:layout_alignLeft="@id/infoMake"/>
 
     <TextView
-        android:layout_width="250dp"
-        android:layout_height="150dp"
-        android:id="@+id/infodescription"
-        android:background="@drawable/edittextlight"
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:gravity="center_horizontal"
-        android:textAlignment="textStart"
-        android:paddingStart="5dp"
-        android:paddingTop="5dp"
-        android:text="Description: We can edit this to whatever with intents..."
-        android:layout_alignTop="@+id/infoowner"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="54dp"
-        android:fontFamily="sans-serif-light"/>
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Harddrive:"
+        android:id="@+id/lblHarddive"
+        android:layout_below="@+id/lblModel" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Harddrive"
+        android:id="@+id/infoHarddrive"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblHarddive"
+        android:layout_alignTop="@+id/lblHarddive"
+        android:layout_alignLeft="@id/infoModel"/>
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Memory:"
+        android:id="@+id/lblMemory"
+        android:layout_below="@+id/lblHarddive" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Memory"
+        android:id="@+id/infoMemory"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblMemory"
+        android:layout_alignTop="@+id/lblMemory"
+        android:layout_alignLeft="@id/infoHarddrive"/>
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Processor:"
+        android:id="@+id/lblProcessor"
+        android:layout_below="@+id/lblMemory" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Processor"
+        android:id="@+id/infoProcessor"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblProcessor"
+        android:layout_alignTop="@+id/lblProcessor"
+        android:layout_alignLeft="@id/infoMemory"/>
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="OS:"
+        android:id="@+id/lblOs"
+        android:layout_below="@+id/lblProcessor" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="OS"
+        android:id="@+id/infoOs"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblOs"
+        android:layout_alignTop="@+id/lblOs"
+        android:layout_alignLeft="@id/infoProcessor"/>
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Year:"
+        android:id="@+id/lblYear"
+        android:layout_below="@+id/lblOs" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Year"
+        android:id="@+id/infoYear"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblYear"
+        android:layout_alignTop="@+id/lblYear"
+        android:layout_alignLeft="@id/infoOs"/>
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Base Rate:"
+        android:id="@+id/lblBaserate"
+        android:layout_below="@+id/lblYear" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Base Rate"
+        android:id="@+id/infoBaserate"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblBaserate"
+        android:layout_alignTop="@+id/lblBaserate"
+        android:layout_alignLeft="@id/infoYear"/>
+
+    <TextView
+        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:layout_marginTop="5dp"
+        android:text="Description:"
+        android:id="@+id/lblDescription"
+        android:layout_below="@+id/lblBaserate" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="60dp"
+        android:background="@drawable/edittextlight"
+        android:textSize="15sp"
+        android:paddingLeft="20dp"
+        android:hint="Description"
+        android:id="@+id/infoDescription"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/lblDescription"
+        android:layout_alignTop="@+id/lblDescription"
+        android:layout_alignLeft="@id/infoBaserate"/>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:id="@+id/btnDelete"
-        android:layout_alignBottom="@+id/infodescription"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/textView4" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="update"
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextdark"
+        android:textSize="15sp"
+        android:text="UPDATE"
         android:id="@+id/btnUpdate"
-        android:layout_above="@+id/btnDelete"
-        android:layout_alignEnd="@+id/textView3" />
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/infoDescription"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light" />
+
+    <Button
+        android:layout_width="280dp"
+        android:layout_height="35dp"
+        android:background="@drawable/edittextdark"
+        android:textSize="15sp"
+        android:text="DELETE"
+        android:id="@+id/btnDelete"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/btnUpdate"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light" />
 
 </RelativeLayout>

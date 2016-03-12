@@ -56,10 +56,23 @@ public class Computer {
 
     }
 
-    public Computer(String username){
+    public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
+                    Integer hardDrive, String os, Float price, String description) {
+        this.id = id;
         this.username = username;
-    }
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.processor = processor;
+        this.ram = ram;
+        this.hardDrive = hardDrive;
+        this.os = os;
+        this.price = price;
+        this.description = description;
+        //computers.add(this);
 
+    }
+    
     /**
      * Returns the unique ID
      * @return

@@ -7,12 +7,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
+import java.util.UUID;
+
+import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class ItemInfo extends ActionBarActivity {
     private String id;
+    private Computer comp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,23 @@ public class ItemInfo extends ActionBarActivity {
         Button updateBtn = (Button) findViewById(R.id.btnUpdate);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
+        TextView lblID = (TextView)findViewById(R.id.lblId);
+        lblID.setText("ID: " + id);
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                comp = ElasticSearchComputer.getComputersById(UUID.fromString(id));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        setComputerValues(comp);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +62,7 @@ public class ItemInfo extends ActionBarActivity {
                 updateComputer();
                 //Intent goToItems = new Intent(ItemInfo.this, MyItems.class);
                 //startActivity(goToItems);
+                onBackPressed();
             }
         });
     }
@@ -92,6 +116,21 @@ public class ItemInfo extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setComputerValues(Computer c){
+        ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
+        ((EditText)findViewById(R.id.infoModel)).setText(c.getModel());
+        ((EditText)findViewById(R.id.infoYear)).setText(c.getYear().toString());
+        ((EditText)findViewById(R.id.infoProcessor)).setText(c.getProcessor());
+        ((EditText)findViewById(R.id.infoMemory)).setText(c.getRam().toString());
+        ((EditText)findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
+        ((EditText)findViewById(R.id.infoOs)).setText(c.getOs());
+        ((EditText)findViewById(R.id.infoBaserate)).setText(c.getPrice().toString());
+        ((EditText)findViewById(R.id.infoDescription)).setText(c.getDescription());
+        ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
+
+
     }
 
     @Override

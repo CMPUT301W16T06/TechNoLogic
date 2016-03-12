@@ -37,13 +37,13 @@ public class AddItems extends ActionBarActivity {
         Integer ram = Integer.parseInt(((EditText) findViewById(R.id.memory)).getText().toString());
         Integer hardDrive = Integer.parseInt(((EditText) findViewById(R.id.harddrive)).getText().toString());
         String os = ((EditText)findViewById(R.id.os)).getText().toString();
-        Float price = Float.parseFloat(((EditText) findViewById(R.id.memory)).getText().toString());
+        Float price = Float.parseFloat(((EditText) findViewById(R.id.baserate)).getText().toString());
         String description = ((EditText)findViewById(R.id.description)).getText().toString();
 
 
         final Computer computer;
         try {
-            computer = new Computer("jklotz",make, model, year, processor, ram,
+            computer = new Computer("username",make, model, year, processor, ram,
                     hardDrive, os, price, description);
 
             Thread thread = new Thread(new Runnable() {

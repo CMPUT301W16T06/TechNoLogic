@@ -11,9 +11,14 @@ import org.apache.http.client.HttpClient;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
+import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
@@ -21,6 +26,8 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 import io.searchbox.core.search.aggregation.MetricAggregation;
+
+import static io.searchbox.core.SearchResult.*;
 
 /**
  * Created by Jessica on 2016-03-10.
@@ -63,6 +70,33 @@ public class ElasticSearchComputer {
         }
         return computers;
     }
+
+    public static Computer getComputersById(UUID id) {
+        verifyClient();
+
+        ArrayList<Computer> computers = new ArrayList<Computer>();
+
+        String queryId = "";
+
+        Search search = new Search.Builder(queryId).addIndex("computers").addType("computer").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Computer> found = result.getSourceAsObjectList(Computer.class);
+                computers.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (Computer c : computers){
+            if (c.getId().equals(id)){
+                return c;
+            }
+        }
+        return null;
+    }
+
+
 
 
     /**
@@ -125,19 +159,53 @@ public class ElasticSearchComputer {
     public static void deleteComputer(String id) {
         verifyClient();
 
-        Delete delete = new Delete.Builder(id).index("computers").type("computer").build();
+        ArrayList<Computer> computers = new ArrayList<Computer>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+        String elasticSearchID = "";
+
+        Search search = new Search.Builder("").addIndex("computers").addType("computer").build();
         try {
-            DocumentResult execute = client.execute(delete);
-            if(execute.isSucceeded()) {
-                //TODO: something
-            } else {
-                Log.i("what", execute.getJsonString());
-                Log.i("what", Integer.toString(execute.getResponseCode()));
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Computer> found = result.getSourceAsObjectList(Computer.class);
+                hits = result.getHits(Map.class);
+                computers.addAll(found);
             }
-            return;
         } catch (IOException e) {
-            // TODO: Something more useful
             e.printStackTrace();
+        }
+
+        for(int i = 0; i < computers.size(); i++){
+            SearchResult.Hit hit = hits.get(i);
+            Map source = (Map)hit.source;
+            Set<Map.Entry> s =  source.entrySet();
+
+
+            for (Map.Entry entry : s) {
+                if (entry.getKey().equals("id")) {
+                    if (entry.getValue().equals(id)) {
+                        elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
+
+                    }
+                }
+            }
+        }
+
+        if (elasticSearchID != "") {
+            Delete delete = new Delete.Builder(elasticSearchID).index("computers").type("computer").build();
+            try {
+                DocumentResult execute = client.execute(delete);
+                if (execute.isSucceeded()) {
+                    //TODO: something
+                } else {
+                    Log.i("what", execute.getJsonString());
+                    Log.i("what", Integer.toString(execute.getResponseCode()));
+                }
+                return;
+            } catch (IOException e) {
+                // TODO: Something more useful
+                e.printStackTrace();
+            }
         }
     }
 
