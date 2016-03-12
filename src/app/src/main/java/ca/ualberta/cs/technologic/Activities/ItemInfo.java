@@ -13,12 +13,14 @@ import android.widget.TextView;
 import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class ItemInfo extends ActionBarActivity {
     private String id;
     private Computer comp;
+    private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,8 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
-                //Intent goToItems = new Intent(ItemInfo.this, MyItems.class);
-                //startActivity(goToItems);
-                onBackPressed();
+//                Intent goToItems = new Intent(ItemInfo.this, MyItems.class);
+//                startActivity(goToItems);
             }
         });
     }
@@ -97,11 +98,27 @@ public class ItemInfo extends ActionBarActivity {
     }
 
     private void updateComputer() {
+        String make = ((EditText)findViewById(R.id.infoMake)).getText().toString();
+        String model = ((EditText)findViewById(R.id.infoModel)).getText().toString();
+        Integer year = Integer.parseInt(((EditText) findViewById(R.id.infoYear)).getText().toString());
+        String processor= ((EditText)findViewById(R.id.infoProcessor)).getText().toString();
+        Integer ram = Integer.parseInt(((EditText) findViewById(R.id.infoMemory)).getText().toString());
+        Integer hardDrive = Integer.parseInt(((EditText) findViewById(R.id.infoHarddrive)).getText().toString());
+        String os = ((EditText)findViewById(R.id.infoOs)).getText().toString();
+        Float price = Float.parseFloat(((EditText) findViewById(R.id.infoBaserate)).getText().toString());
+        String description = ((EditText)findViewById(R.id.infoDescription)).getText().toString();
+        String status = comp.getStatus();
+        String username = cu.getCurrentUser();
+
+
+        final Computer computer;
         try {
+            computer = new Computer(comp.getId(), username, make, model, year, processor, ram,
+                    hardDrive, os, price, description, status);
 
             Thread thread = new Thread(new Runnable() {
                 public void run() {
-                    ElasticSearchComputer.updateComputer(id);
+                    ElasticSearchComputer.updateComputer(computer);
                 }
             });
             thread.start();
@@ -116,9 +133,11 @@ public class ItemInfo extends ActionBarActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public void setComputerValues(Computer c){
+        ((TextView)findViewById(R.id.infoStatus)).setText(c.getStatus());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
         ((EditText)findViewById(R.id.infoModel)).setText(c.getModel());
         ((EditText)findViewById(R.id.infoYear)).setText(c.getYear().toString());

@@ -124,32 +124,14 @@ public class ElasticSearchComputer {
 
     }
 
-    //DOESN'T WORK
-    public static void updateComputer(String id) {
-        verifyClient();
-
-        String query = "";
-        query = "{\n" +
-                "    \"script\" : \"ctx._source.tags += tag\",\n" +
-                "    \"params\" : {\n" +
-                "        \"tag\" : \"1\"\n" +
-                "    }\n" +
-                "}";
-
-        Update update = new Update.Builder(query).index("computers").type("computers").id(id).build();
-        try {
-            DocumentResult execute = client.execute(update);
-            if(execute.isSucceeded()) {
-                //TODO: something
-            } else {
-                Log.i("what", execute.getJsonString());
-                Log.i("what", Integer.toString(execute.getResponseCode()));
-            }
-            return;
-        } catch (IOException e) {
-            // TODO: Something more useful
-            e.printStackTrace();
-        }
+    /**
+     * Updates the computer
+     * removes the existing computer and add a new one with the same id
+     * @param computer new computer
+     */
+    public static void updateComputer(Computer computer) {
+        deleteComputer(computer.getId().toString());
+        addComputer(computer);
     }
 
     /**

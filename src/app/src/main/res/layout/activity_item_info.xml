@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="16sp"
-        android:text="ID# 12345679"
+        android:text="ID# "
         android:id="@+id/lblId"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -25,11 +25,34 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
+        android:paddingRight="40dp"
+        android:text="Status:"
+        android:id="@+id/lblStatus"
+        android:layout_below="@+id/lblId"
+        android:layout_alignParentStart="true" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:text="test"
+        android:id="@+id/infoStatus"
+        android:layout_below="@+id/lblId"
+        android:layout_toRightOf="@+id/lblStatus"
+        android:layout_alignTop="@+id/lblStatus" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp"
+        android:paddingTop="10dp"
         android:paddingRight="50dp"
         android:text="Make:"
         android:id="@+id/lblMake"
-        android:layout_below="@+id/lblId"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/lblStatus" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
@@ -40,7 +63,8 @@
         android:id="@+id/infoMake"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblMake"
-        android:layout_alignTop="@+id/lblMake" />
+        android:layout_alignTop="@+id/lblMake"
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -227,27 +251,29 @@
         android:layout_alignLeft="@id/infoBaserate"/>
 
     <Button
-        android:layout_width="280dp"
+        android:layout_width="100dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextdark"
         android:textSize="15sp"
         android:text="UPDATE"
         android:id="@+id/btnUpdate"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="10dp"
         android:layout_below="@+id/infoDescription"
-        android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif-light" />
 
     <Button
-        android:layout_width="280dp"
+        android:layout_width="100dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextdark"
         android:textSize="15sp"
         android:text="DELETE"
         android:id="@+id/btnDelete"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/btnUpdate"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/btnUpdate"
+        android:layout_below="@+id/infoDescription"
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif-light" />

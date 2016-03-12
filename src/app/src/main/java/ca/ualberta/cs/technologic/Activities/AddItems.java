@@ -7,10 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class AddItems extends ActionBarActivity {
+    private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,12 @@ public class AddItems extends ActionBarActivity {
         String os = ((EditText)findViewById(R.id.os)).getText().toString();
         Float price = Float.parseFloat(((EditText) findViewById(R.id.baserate)).getText().toString());
         String description = ((EditText)findViewById(R.id.description)).getText().toString();
+        String username = cu.getCurrentUser();
 
 
         final Computer computer;
         try {
-            computer = new Computer("username",make, model, year, processor, ram,
+            computer = new Computer(username,make, model, year, processor, ram,
                     hardDrive, os, price, description);
 
             Thread thread = new Thread(new Runnable() {

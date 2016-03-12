@@ -57,7 +57,7 @@ public class Computer {
     }
 
     public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description) {
+                    Integer hardDrive, String os, Float price, String description, String stauts) {
         this.id = id;
         this.username = username;
         this.make = make;
@@ -69,10 +69,11 @@ public class Computer {
         this.os = os;
         this.price = price;
         this.description = description;
+        this.setStatus(status);
         //computers.add(this);
 
     }
-    
+
     /**
      * Returns the unique ID
      * @return
@@ -267,10 +268,11 @@ public class Computer {
 
     //Sets string status, will not accept any value other than Available, Bidded or Borrowed
     public void setStatus(String status) throws IllegalArgumentException {
+        status = status.toLowerCase();
         ArrayList<String> statusOptions = new ArrayList<String>();
-        statusOptions.add("Available");
-        statusOptions.add("Bidded");
-        statusOptions.add("Borrowed");
+        statusOptions.add("available");
+        statusOptions.add("bidded");
+        statusOptions.add("borrowed");
         if (statusOptions.contains(status)){
             this.status = status;
         }
