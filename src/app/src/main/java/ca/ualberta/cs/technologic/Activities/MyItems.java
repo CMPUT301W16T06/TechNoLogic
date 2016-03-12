@@ -59,8 +59,8 @@ public class MyItems extends ActionBarActivity {
         // Load the latest tweets (in a new thread, because of networkonmainthread stuff...
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                //comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
-                comps = ElasticSearchComputer.getComputers("");
+                comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
+                //comps = ElasticSearchComputer.getComputers("");
             }
         });
         thread.start();
