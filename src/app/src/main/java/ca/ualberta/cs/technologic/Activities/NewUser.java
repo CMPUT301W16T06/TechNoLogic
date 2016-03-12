@@ -12,15 +12,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
-import ca.ualberta.cs.technologic.ElasticSearchController;
+import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
+//TODO: IMPLEMENT EditUSER
 public class NewUser extends ActionBarActivity {
     boolean isEdit;
     private User pendingUser;
+    private ArrayList<User> currentUsers;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,23 +71,49 @@ public class NewUser extends ActionBarActivity {
                 // TODO: Return to LoginActivity if correct, otherwise stay and give notice
 
                 pendingUser = getUserInput();
-
                 //TODO: Validate the username. Do we want to validate all other String fields?
-                if (isEdit) {
+                if (pendingUser == null) {
+                    Toast takenUser = Toast.makeText(getApplicationContext(),
+                            "One or more fields are empty", Toast.LENGTH_SHORT);
+                    takenUser.show();
+                } else if (isEdit) {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is edit user", Toast.LENGTH_SHORT);
                     takenUser.show();
                     finish();
-                } else if (validUsername(pendingUser.getUsername())) {
+                } else if (availUsername(pendingUser.getUsername())) {
                     // Add to existingUsers, save and return Intent
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is new user", Toast.LENGTH_SHORT);
                     takenUser.show();
+
+                    // TODO: Adding a new user
+                    try {
+                        Thread thread = new Thread(new Runnable() {
+                            public void run() {
+                                ElasticSearchUser.addUser(pendingUser);
+                            }
+                        });
+
+                        thread.start();
+                        try {
+                            thread.join();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Everything is OK!
+                        setResult(RESULT_OK);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     finish();
+
                 } else {
                     // Error message. Username already taken
                     Toast takenUser = Toast.makeText(getApplicationContext(),
-                            "Username is already taken", Toast.LENGTH_SHORT);
+                            "Username already taken!", Toast.LENGTH_SHORT);
                     takenUser.show();
                 }
 
@@ -95,24 +122,28 @@ public class NewUser extends ActionBarActivity {
     }
 
     /**
-     * Checks if the User's inputted username is unique, use elastic search
+     * Checks if the User's inputted username is available, use elastic search
      * @param wantedUsername a String
      * @return true if the String is unique to the ArrayList, false if otherwise
      */
-    public boolean validUsername(String wantedUsername) {
+    public boolean availUsername(final String wantedUsername) {
         // TODO: Check wantedUsername against existing Users
-        ElasticSearchController.GetUsersTask getUserTask = new ElasticSearchController.GetUsersTask();
-        getUserTask.execute(wantedUsername);
+        currentUsers = new ArrayList<User>();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                currentUsers = ElasticSearchUser.getUsers(wantedUsername);
+            }
+        });
+        thread.start();
+
         try {
-            ArrayList<User> foundUsers;
-            foundUsers = getUserTask.get();
-            return foundUsers.size() == 0;
+            thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
         }
-        return false;
+
+        return (currentUsers.size() == 0);
     }
 
     /**
@@ -120,20 +151,16 @@ public class NewUser extends ActionBarActivity {
      * @return User object
      */
     public User getUserInput() {
-        // Get all EditText view inputs
-        EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
-        EditText ET_newName = (EditText) findViewById(R.id.userName);
-        EditText ET_newEmail = (EditText) findViewById(R.id.userEmail);
-        EditText ET_newPhoneNum = (EditText) findViewById(R.id.userPhone);
-        EditText ET_newAddress = (EditText) findViewById(R.id.userAddress);
-
         // Get all Strings from EditText views
-        String newUserName = EditTextToString(ET_newUserName);
-        String newName = EditTextToString(ET_newName);
-        String newEmail = EditTextToString(ET_newEmail);
-        String newPhoneNum = EditTextToString(ET_newPhoneNum);
-        String newAddress = EditTextToString(ET_newAddress);
+        String newUserName = EditTextToString((EditText) findViewById(R.id.userUsername));
+        String newName = EditTextToString((EditText) findViewById(R.id.userName));
+        String newEmail = EditTextToString((EditText) findViewById(R.id.userEmail));
+        String newPhoneNum = EditTextToString((EditText) findViewById(R.id.userPhone));
+        String newAddress = EditTextToString((EditText) findViewById(R.id.userAddress));
 
+        if (newUserName.equals("") || newName.equals("") || newEmail.equals("") || newPhoneNum.equals("") || newAddress.equals("")) {
+            return null;
+        }
         // Create new user with the input information
         User inputUser = new User(newUserName);
 
@@ -141,6 +168,10 @@ public class NewUser extends ActionBarActivity {
         inputUser.setEmail(newEmail);
         inputUser.setPhone(newPhoneNum);
         inputUser.setAddress(newAddress);
+
+        Toast takenUser = Toast.makeText(getApplicationContext(),
+                inputUser.getUsername() + '|' + inputUser.getName() + '|' +inputUser.getEmail() + '|' + inputUser.getPhone() + '|' + inputUser.getAddress(), Toast.LENGTH_SHORT);
+        takenUser.show();
 
         return inputUser;
     }
@@ -150,8 +181,22 @@ public class NewUser extends ActionBarActivity {
      * @param username elastic search for this user
      * @return User corrisponding to the username
      */
-    public User getUserInfo(String username) {
+    public User getUserInfo(final String username) {
         //TODO: elastic search implementation
+        currentUsers = new ArrayList<User>();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                currentUsers = ElasticSearchUser.getUsers(username);
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

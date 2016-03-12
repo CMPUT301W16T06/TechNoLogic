@@ -20,6 +20,8 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by gknoblau on 2016-02-06.
  * Changed the password back to just a string - Jordan
@@ -29,13 +31,12 @@ import java.util.UUID;
 **/
 
 public class User{
+    @JestId
     private String name;
     private String username;
     private String email;
     private String phone;
     private String address;
-    private static final String FILENAME = "users.sav";
-    private ArrayList<User> users = new ArrayList<User>();
 
 
     /**
@@ -46,7 +47,6 @@ public class User{
         this.username = username;
         //need to add a check to see if the username is unique
         //jk check is done in the controller
-        users.add(this);
     }
 
     /**
@@ -146,6 +146,9 @@ public class User{
         //TODO
     }
 
-
+    @Override
+    public String toString() {
+        return this.getUsername() + '|' + this.getName() + '|' + this.getEmail() + '|' + this.getPhone() + '|' + this.getAddress();
+    }
 }
 

@@ -16,12 +16,15 @@ import java.util.Arrays;
 import ca.ualberta.cs.technologic.R;
 
 public class HomePage extends ActionBarActivity {
-
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         ListView homelist = (ListView) findViewById(R.id.homelist);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("USERNAME");
 
         homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -59,7 +62,7 @@ public class HomePage extends ActionBarActivity {
                 startActivity(new Intent(this, MyItems.class));
                 break;
             case R.id.accountsettings:
-                startActivity((new Intent(this, NewUser.class).putExtra("bool", true)));
+                startActivity((new Intent(this, NewUser.class).putExtra("bool", true).putExtra("USERNAME", username)));
                 break;
             case R.id.logout:
                 startActivity(new Intent(this, LoginActivity.class));

@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
+import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
@@ -20,7 +20,7 @@ import ca.ualberta.cs.technologic.User;
  */
 public class LoginActivity extends Activity{
     private static final String FILENAME = "users.sav";
-    private ArrayList<User> users = new ArrayList<User>();
+    private ArrayList<User> users;
 
     /** Called when the activity is first created. */
     @Override
@@ -38,11 +38,11 @@ public class LoginActivity extends Activity{
             public void onClick(View v) {
                 Boolean usernameValid = userLookup(username.getText().toString());
                 //Boolean passwordValid = passwordLookup(password.getText().toString());
-                usernameValid = true;
+                //usernameValid = true;
                 //passwordValid = true;
-                if (usernameValid == true) {
+                if (usernameValid) {
                     Intent intent = new Intent(LoginActivity.this, HomePage.class);
-                    intent.putExtra("username", username.toString());
+                    intent.putExtra("USERNAME", username.toString());
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
@@ -58,15 +58,27 @@ public class LoginActivity extends Activity{
         });
     }
 
-    public Boolean userLookup(String username) {
-        /*loadFromFile();
-        for(int i=0; i < users.size(); i++) {
-            if(users.get(i).getUsername() == username){
-                return true;
+    public Boolean userLookup(final String username) {
+        users = new ArrayList<User>();
+            // TODO: Check wantedUsername against existing Users
+            // TODO: Fix lowercase problem
+            if (username.equals("")) {
+                return false;
             }
-        }
-        */
-        return false;
+
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    users = ElasticSearchUser.getUsers(username);
+                }
+            });
+            thread.start();
+
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return (users.size() == 1);
     }
 
     /*

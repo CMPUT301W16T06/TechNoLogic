@@ -42,7 +42,7 @@ public class ElasticSearchUser {
         ArrayList<User> users = new ArrayList<User>();
 
         String query = "";
-        if (username != ""){
+        if (!username.equals("")){
             query = "{\n" +
                     "\"query\": {\n" +
                     "\"term\": { \"username\" : \"" + username + "\" }\n" +
