@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class MyItems extends ActionBarActivity {
     private ArrayList<Computer> comps = null;
     private CurrentUser cu = CurrentUser.getInstance();
     ListView myitemslist;
+    ComputerAdapter listAdapter;
 
 
     @Override
@@ -33,14 +35,17 @@ public class MyItems extends ActionBarActivity {
         Button addNewItem = (Button) findViewById(R.id.addnewitem);
         myitemslist = (ListView) findViewById(R.id.myitemslist);
 
+        //when add button clicked bring up activity to add a new computer
         addNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent goToAddItems = new Intent(MyItems.this, AddItems.class);
                 startActivity(goToAddItems);
+                onBackPressed();
             }
         });
 
+        //when an entry from the list of items selected, bring up that computer information
         myitemslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,6 +53,7 @@ public class MyItems extends ActionBarActivity {
                 Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
+                onBackPressed();
             }
         });
 
@@ -55,12 +61,16 @@ public class MyItems extends ActionBarActivity {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-
+        //get all computer belonging to this user
         getComputers();
-        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
+        listAdapter = new ComputerAdapter(this, comps);
         myitemslist.setAdapter(listAdapter);
+
+        if (comps.size() == 0){
+            Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
+            myitems.show();
+        }
     }
 
     @Override
@@ -71,11 +81,13 @@ public class MyItems extends ActionBarActivity {
         myitemslist.setAdapter(listAdapter);
     }
 
+    /**
+     *     gets all computers belonging to the current logged in user
+     */
     public void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
-                //comps = ElasticSearchComputer.getComputers("");
             }
         });
         thread.start();

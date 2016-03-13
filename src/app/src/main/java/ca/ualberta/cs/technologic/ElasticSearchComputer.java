@@ -74,16 +74,6 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //This is not the way to do it...
-        ArrayList<Computer> remove = new ArrayList<Computer>();
-        for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser())) {
-                remove.add(temp);
-            }
-        }
-        for (Computer temp : remove){
-            computers.remove(temp);
-        }
 
         return computers;
     }

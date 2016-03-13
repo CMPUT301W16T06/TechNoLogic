@@ -25,10 +25,6 @@ import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-// So there's a bug where if you add item it won't update the MyItems page, even if you try
-// to update or delete a new item, so right now I have to going to the home page
-// everytime you update, delete, or add a new computer
-
 public class ItemInfo extends ActionBarActivity {
     private String id;
     private Computer comp;
@@ -46,6 +42,7 @@ public class ItemInfo extends ActionBarActivity {
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
 
+        //gets the selected informaiton of the selected computer
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comp = ElasticSearchComputer.getComputersById(UUID.fromString(id));
@@ -59,30 +56,30 @@ public class ItemInfo extends ActionBarActivity {
             e.printStackTrace();
         }
 
+        //links the vlaues of the computer to the UI
         setComputerValues(comp);
 
+        //delete the selected computer
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteComputer();
                 //Intent goToItems3 = new Intent(ItemInfo.this, HomePage.class);
-                SystemClock.sleep(100);
                 //startActivity(goToItems3);
                 onBackPressed();
             }
         });
 
+        //update the computer when button pressed
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateComputer();
                 //Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
-                //SystemClock.sleep(500);
                 //startActivity(goToItems2);
                // onBackPressed();
                 Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
                 toast1.show();
-
             }
         });
     }
@@ -94,7 +91,12 @@ public class ItemInfo extends ActionBarActivity {
         return true;
     }
 
+    /**
+     * delete the computer
+     */
     private void deleteComputer() {
+        //first check the status of the computer
+        //will not delete a computer if it is bidded or borrowed
         if (comp.getStatus().equals("available")) {
             try {
                 Thread thread = new Thread(new Runnable() {
@@ -121,7 +123,10 @@ public class ItemInfo extends ActionBarActivity {
         }
     }
 
-
+    /**
+     *    gets the new infomation when updating the
+     *    and saved the information
+     */
     private void updateComputer() {
         String make = ((EditText)findViewById(R.id.infoMake)).getText().toString();
         String model = ((EditText)findViewById(R.id.infoModel)).getText().toString();
@@ -161,7 +166,10 @@ public class ItemInfo extends ActionBarActivity {
 
     }
 
-    //Fill in all the fields of computer
+    /**
+     *     Fill in all the fields of computer
+     *     on loading
+     */
     public void setComputerValues(Computer c){
         ((TextView)findViewById(R.id.infoStatus)).setText(c.getStatus());
         ((TextView)findViewById(R.id.infoUsername)).setText(c.getUsername());
