@@ -46,6 +46,7 @@ public class ElasticSearchComputer {
      */
     public static ArrayList<Computer> getComputers(String username) {
         verifyClient();
+        CurrentUser cu = CurrentUser.getInstance();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
         List<SearchResult.Hit<Map,Void>> hits = null;
@@ -73,6 +74,17 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //This is not the way to do it...
+        ArrayList<Computer> remove = new ArrayList<Computer>();
+        for (Computer temp : computers){
+            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser())) {
+                remove.add(temp);
+            }
+        }
+        for (Computer temp : remove){
+            computers.remove(temp);
+        }
+
         return computers;
     }
 
@@ -102,21 +114,19 @@ public class ElasticSearchComputer {
             e.printStackTrace();
         }
         //This is not the way to do it...
+        ArrayList<Computer> remove = new ArrayList<Computer>();
         for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed")) {
-                computers.remove(temp);
+            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser())) {
+                remove.add(temp);
             }
         }
-        for (Computer temp : computers){
-            if(temp.getUsername().equals(cu.getCurrentUser())) {
-                computers.remove(temp);
-            }
+        for (Computer temp : remove){
+            computers.remove(temp);
         }
         return computers;
     }
 
     /**
-<<<<<<< HEAD
      * Get computers
      * Can specify the username, gets all the computers belonging to that user
      * If username is "" then all computers will be return
