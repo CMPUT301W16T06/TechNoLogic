@@ -1,4 +1,4 @@
-﻿————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
 ————————————————————————————————————————————————————————————————————————————————————————————————————
 Things
 ————————————————————————————————————————————————————————————————————————————————————————————————————
@@ -553,5 +553,137 @@ Basic Flow
 	7. Reopen app
 	8. Go to My Computers in the menu
 	9. View the newly added Computer
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Photographs————————————————————————————————————————————————————————————————————————————————————————————————————
+US 09.01.01 | As an owner, I want to optionally attach a photograph to a thing of mine
 
+Use Case Name
+	Attach_Photo
+Participating Actors
+	Owner of the Computer
+Goal
+	Attach photo
+Trigger
+	Button clicked to attach photo
+Precondition
+	Owner has a phone that has a camera
+Postcondition
+	 Server is updated with the new information of My Computers
+Basic Flow
+	1. Open app
+	2. Select side menu to open
+	3. Select My Computers
+	4. Select an item to edit/Select the add button
+	5. Select the option to add photo
+	6. Camera will open and allow to take a picture
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 09.02.01 | As an owner, I want to delete any attached photograph for a thing of mine
+
+Use Case Name
+	Delete_Photo
+Participating Actors
+	Owner of the Computer
+Goal
+	Delete photo on a computer item of mine
+Trigger
+	Button selected to delete photo
+Precondition
+	Photo attached to a computer item
+Postcondition
+	Computer item with no photo attached
+Basic Flow
+	1. Open app
+	2. Select side menu to open
+	3. Select My Computers
+	4. Select an item to edit
+	5. Select the photo
+	6. Select option to delete
+	7. Confirm to delete by pressing ‘OK’
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 09.03.01 | As an owner or borrower, I want to view any attached photograph for a thing
+
+Use Case Name
+	View_Photo
+Participating Actors
+	Owner of the Computer
+Goal
+	View an attached photograph of any computer chosen
+Trigger
+	Computer item selected
+Precondition
+	Photo attached to a computer item
+Postcondition
+	View of photo
+Basic Flow
+	1. Open app
+	2. Select side menu to open/Search
+	3. Select any item
+	4. View photo in Computer Item Description
+————————————————————————————————————————————————————————————————————————————————————————————————————
+US 09.04.01 | As a sys admin, I want each photograph to be under 65536 bytes in size
+
+Use Case Name
+	Check_Photo_Size
+Participating Actors
+	System Admin
+Goal
+	Have all photos under 65536 bytes
+Trigger
+	-
+Precondition
+	Database has photos
+Postcondition
+	Potential error if there is a photo over 65536 bytes in size
+Basic Flow
+	1. Open app
+	2. Select side menu to open
+	3. Select My Computers
+	4. Click add button
+	5. Select option to add photo
+	6. Add photo over 65536 bytes
+	7. System prompts an error message
+————————————————————————————————————————————————————————————————————————————————————————————————————
+————————————————————————————————————————————————————————————————————————————————————————————————————
+Location————————————————————————————————————————————————————————————————————————————————————————————————————
+US 10.01.01 | As an owner, I want to specify a geo location on a map of where to receive a thing when I accept a bid on a thing
+
+Use Case Name
+	Attach_Photo
+Participating Actors
+	Owner of the Computer
+Goal
+	Attach a geo location
+Trigger
+	Button clicked to attach a geo location
+Precondition
+	Owner has a phone that can access gps location
+Postcondition
+	Server will be updated with a geo location under their user profile 
+Basic Flow
+	1. Open app
+	2. Select side menu to open
+	3. Select My Item Bids
+	4. Accept Bid
+	5. User types in postal code————————————————————————————————————————————————————————————————————————————————————————————————————
+US 10.02.01 | As a borrower, I want to view the geo location of where to receive a thing I will be borrowing
+
+Use Case Name
+	View_Location
+Participating Actors
+	Borrower of the Computer
+Goal
+	View geo location
+Trigger
+	Button clicked to view location
+Precondition
+	Bid was accepted
+Postcondition
+	View of location
+Basic Flow
+	1. Open app
+	2. Select side menu to open
+	3. Select My Bids
+	4. Select an accepted bid
+	5. System will show the geo location
 
