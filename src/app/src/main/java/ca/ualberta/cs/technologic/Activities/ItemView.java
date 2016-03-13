@@ -110,7 +110,6 @@ public class ItemView extends ActionBarActivity {
 
     //Fill in all the fields of computer
     public void setComputerValues(Computer c) {
-        ((TextView) findViewById(R.id.infoStatus)).setText(c.getStatus());
         ((TextView) findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
         ((TextView) findViewById(R.id.infoModel)).setText(c.getModel());
@@ -123,15 +122,6 @@ public class ItemView extends ActionBarActivity {
         ((TextView) findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
 
-        TextView status = (TextView) findViewById(R.id.infoStatus);
-
-        if (c.getStatus().equals("available")) {
-            status.setTextColor(Color.parseColor("#3b5323"));
-        } else if (c.getStatus().equals("bidded")) {
-            status.setTextColor(Color.parseColor("#e6e600"));
-        } else {
-            status.setTextColor(Color.parseColor("#b20000"));
-        }
     }
 
 }

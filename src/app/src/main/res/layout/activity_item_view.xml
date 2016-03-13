@@ -49,29 +49,6 @@
             android:layout_alignTop="@+id/lblUsername"
             android:clickable="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:textStyle="bold"
-            android:layout_height="35dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp"
-            android:paddingTop="10dp"
-            android:paddingRight="42dp"
-            android:text="Status:"
-            android:id="@+id/lblStatus"
-            android:layout_below="@+id/lblUsername"
-            android:layout_alignParentStart="true" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="15sp"
-            android:paddingTop="10dp"
-            android:text="Test"
-            android:id="@+id/infoStatus"
-            android:layout_below="@+id/lblUsername"
-            android:layout_toRightOf="@+id/lblStatus"
-            android:layout_alignTop="@+id/lblStatus" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,7 +60,7 @@
             android:paddingRight="50dp"
             android:text="Make:"
             android:id="@+id/lblMake"
-            android:layout_below="@+id/lblStatus" />
+            android:layout_below="@+id/lblUsername" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
@@ -94,7 +71,7 @@
             android:text="Make"
             android:id="@+id/infoMake"
             android:layout_toRightOf="@+id/lblMake"
-            android:layout_below="@+id/lblStatus" />
+            android:layout_below="@+id/lblUsername" />
 
         <TextView
             android:layout_width="wrap_content"
