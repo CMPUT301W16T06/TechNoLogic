@@ -23,7 +23,7 @@ US 01.05.01
 As an owner, I want to delete a thing in my things.
 
 ##Status
-- [ ]
+- [x]
 US 02.01.01
 As an owner or borrower, I want a thing to have a status of one of: available, bidded, or borrowed.
 
