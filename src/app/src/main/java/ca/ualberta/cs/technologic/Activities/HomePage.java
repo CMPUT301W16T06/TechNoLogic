@@ -37,7 +37,7 @@ public class HomePage extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Computer entry = (Computer) parent.getAdapter().getItem(position);
-                Intent goToInfo = new Intent(HomePage.this, ItemInfo.class);
+                Intent goToInfo = new Intent(HomePage.this, ItemView.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
             }

@@ -66,6 +66,14 @@ public class MyItems extends ActionBarActivity {
         myitemslist.setAdapter(listAdapter);
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        getComputers();
+        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
+        myitemslist.setAdapter(listAdapter);
+    }
+
     public void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {

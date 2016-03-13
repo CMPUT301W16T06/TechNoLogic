@@ -3,6 +3,7 @@ package ca.ualberta.cs.technologic.Activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,10 @@ import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
+
+// So there's a bug where if you add item it won't update the MyItems page, even if you try
+// to update or delete a new item, so right now I have to going to the home page
+// everytime you update, delete, or add a new computer
 
 public class ItemInfo extends ActionBarActivity {
     private String id;
@@ -54,9 +59,9 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 deleteComputer();
-                //Intent goToItems = new Intent(ItemInfo.this, MyItems.class);
-                //startActivity(goToItems);
-                onBackPressed();
+                Intent goToItems3 = new Intent(ItemInfo.this, HomePage.class);
+                SystemClock.sleep(100);
+                startActivity(goToItems3);
             }
         });
 
@@ -64,9 +69,9 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
-//                Intent goToItems = new Intent(ItemInfo.this, MyItems.class);
-//                startActivity(goToItems);
-//                onBackPressed();
+                Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
+                SystemClock.sleep(100);
+                startActivity(goToItems2);
             }
         });
     }
@@ -113,7 +118,6 @@ public class ItemInfo extends ActionBarActivity {
         String description = ((EditText)findViewById(R.id.infoDescription)).getText().toString();
         String status = comp.getStatus();
         String username = cu.getCurrentUser();
-        Log.d("USERNAME TEST", username);
 
 
         final Computer computer;

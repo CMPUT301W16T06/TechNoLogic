@@ -1,5 +1,6 @@
 package ca.ualberta.cs.technologic.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -25,8 +26,8 @@ public class AddItems extends ActionBarActivity {
             public void onClick(View v) {
                 saveComputer();
                 onBackPressed();
-                //Intent goToItems = new Intent(AddItems.this, MyItems.class);
-                //startActivity(goToItems);
+                Intent goToItems1 = new Intent(AddItems.this, HomePage.class);
+                startActivity(goToItems1);
             }
         });
     }

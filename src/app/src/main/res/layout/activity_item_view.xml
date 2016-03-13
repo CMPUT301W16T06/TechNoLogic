@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="ca.ualberta.cs.technologic.Activities.AddItems">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="16sp"
+            android:text="ID# "
+            android:id="@+id/lblId"
+            android:layout_alignParentTop="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="40dp"
+            android:text="Seller:"
+            android:id="@+id/lblUsername"
+            android:layout_below="@+id/lblId"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/lblStatus"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:text="Test"
+            android:id="@+id/infoUsername"
+            android:layout_below="@+id/lblId"
+            android:layout_toRightOf="@+id/lblUsername"
+            android:layout_alignTop="@+id/lblUsername"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="42dp"
+            android:text="Status:"
+            android:id="@+id/lblStatus"
+            android:layout_below="@+id/lblUsername"
+            android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:text="Test"
+            android:id="@+id/infoStatus"
+            android:layout_below="@+id/lblUsername"
+            android:layout_toRightOf="@+id/lblStatus"
+            android:layout_alignTop="@+id/lblStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Make:"
+            android:id="@+id/lblMake"
+            android:layout_below="@+id/lblStatus" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Make"
+            android:id="@+id/infoMake"
+            android:layout_toRightOf="@+id/lblMake"
+            android:layout_below="@+id/lblStatus" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Model:"
+            android:id="@+id/lblModel"
+            android:layout_below="@+id/lblMake" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Model"
+            android:id="@+id/infoModel"
+            android:layout_toRightOf="@+id/lblMake"
+            android:layout_below="@+id/lblMake" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="22dp"
+            android:text="Harddrive:"
+            android:id="@+id/lblHarddive"
+            android:layout_below="@+id/lblModel" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Harddrive"
+            android:id="@+id/infoHarddrive"
+            android:layout_toRightOf="@+id/lblHarddive"
+            android:layout_below="@+id/lblModel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="32dp"
+            android:text="Memory:"
+            android:id="@+id/lblMemory"
+            android:layout_below="@+id/lblHarddive" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Memory"
+            android:id="@+id/infoMemory"
+            android:layout_toRightOf="@+id/lblMemory"
+            android:layout_below="@+id/lblHarddive" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="18dp"
+            android:text="Processor:"
+            android:id="@+id/lblProcessor"
+            android:layout_below="@+id/lblMemory" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Processor"
+            android:id="@+id/infoProcessor"
+            android:layout_toRightOf="@+id/lblProcessor"
+            android:layout_below="@+id/lblMemory" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="68dp"
+            android:text="OS:"
+            android:id="@+id/lblOs"
+            android:layout_below="@+id/lblProcessor" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="OS"
+            android:id="@+id/infoOs"
+            android:layout_toRightOf="@+id/lblOs"
+            android:layout_below="@+id/lblProcessor" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="58dp"
+            android:text="Year:"
+            android:id="@+id/lblYear"
+            android:layout_below="@+id/lblOs" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Year"
+            android:id="@+id/infoYear"
+            android:layout_toRightOf="@+id/lblYear"
+            android:layout_below="@+id/lblOs" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="30dp"
+            android:text="Baserate:"
+            android:id="@+id/lblBaserate"
+            android:layout_below="@+id/lblYear" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Baserate"
+            android:id="@+id/infoBaserate"
+            android:layout_toRightOf="@+id/lblBaserate"
+            android:layout_below="@+id/lblYear" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="35dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="14dp"
+            android:text="Description:"
+            android:id="@+id/lblDescription"
+            android:layout_below="@+id/lblBaserate" />
+        <TextView
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="15sp"
+            android:paddingTop="10dp"
+            android:paddingRight="50dp"
+            android:text="Description "
+            android:id="@+id/infoDescription"
+            android:layout_toRightOf="@+id/lblDescription"
+            android:layout_below="@+id/lblBaserate" />
+
+        <EditText
+            android:layout_width="90dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/placebid"
+            android:background="@drawable/edittextlight"
+            android:paddingLeft="20dp"
+            android:fontFamily="sans-serif-light"
+            android:textSize="15sp"
+            android:hint="BID"/>
+
+
+        <Button
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:background="@drawable/edittextdark"
+            android:textSize="15sp"
+            android:text="PLACE BID"
+            android:id="@+id/placebid"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@+id/infoDescription"
+            android:textColor="#ffffff"
+            android:fontFamily="sans-serif-light"
+            android:layout_alignLeft="@+id/infoDescription"/>
+
+
+
+    </RelativeLayout>
+</ScrollView>
