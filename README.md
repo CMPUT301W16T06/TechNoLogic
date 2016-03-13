@@ -2,7 +2,7 @@
 CMPUT 301 Winter 2016 University of Alberta
 
 ##Things
--[]
+- [x]
 US 01.01.01
 As an owner, I want to add a thing in my things, each denoted with a clear, suitable description.
 
