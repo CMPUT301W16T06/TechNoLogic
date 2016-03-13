@@ -95,9 +95,14 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //This is not he way to do it...
+        //This is not the way to do it...
         for (Computer temp : computers){
-            if(temp.getUsername() == cu.getCurrentUser()) {
+            if(temp.getStatus().equals("borrowed")) {
+                computers.remove(temp);
+            }
+        }
+        for (Computer temp : computers){
+            if(temp.getUsername().equals(cu.getCurrentUser())) {
                 computers.remove(temp);
             }
         }
