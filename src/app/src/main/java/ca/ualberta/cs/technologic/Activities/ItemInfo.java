@@ -91,8 +91,8 @@ public class ItemInfo extends ActionBarActivity {
                 //SystemClock.sleep(500);
                 //startActivity(goToItems2);
                 //onBackPressed();
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
+                AlertDialog compUpdated = builder1.create();
+                compUpdated.show();
             }
         });
     }

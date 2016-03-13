@@ -1,5 +1,7 @@
 package ca.ualberta.cs.technologic.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,8 +14,10 @@ import android.widget.TextView;
 
 import java.util.UUID;
 
+import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
@@ -33,6 +37,17 @@ public class ItemView extends ActionBarActivity {
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
+
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Bid has been placed on computer.");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -59,11 +74,40 @@ public class ItemView extends ActionBarActivity {
         placebid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: what happens when you click place bid
+                placeBid();
+                AlertDialog alertBidPlaced = builder1.create();
+                alertBidPlaced.show();
             }
         });
 
     }
+
+    private void placeBid() {
+
+        Float price = Float.parseFloat(((EditText) findViewById(R.id.infoBid)).getText().toString());
+        String username = cu.getCurrentUser();
+
+        final Bid bid;
+        try {
+            bid = new Bid(comp.getId(), price, username, comp.getUsername());
+
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    ElasticSearchBidding.placeBid(bid);
+                }
+            });
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     //Fill in all the fields of computer
     public void setComputerValues(Computer c) {
         ((TextView) findViewById(R.id.infoStatus)).setText(c.getStatus());

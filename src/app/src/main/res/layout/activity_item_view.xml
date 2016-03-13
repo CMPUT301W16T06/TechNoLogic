@@ -288,6 +288,7 @@
             android:paddingLeft="20dp"
             android:fontFamily="sans-serif-light"
             android:textSize="15sp"
+            android:id="@+id/infoBid"
             android:hint="BID"/>
 
 
