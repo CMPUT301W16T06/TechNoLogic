@@ -110,6 +110,11 @@ public class ElasticSearchUser {
         }
     }
 
+    public static void updateUser(User user) {
+        deleteUser(user.getUsername().toString());
+        addUser(user);
+    }
+
     /**
      * Verifies the elastic search DB
      */
