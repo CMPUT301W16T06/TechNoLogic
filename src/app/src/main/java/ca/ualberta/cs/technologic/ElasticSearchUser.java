@@ -109,7 +109,10 @@ public class ElasticSearchUser {
             e.printStackTrace();
         }
     }
-
+    public static void updateUser(User user) {
+        deleteUser(user.getUsername().toString());
+        addUser(user);
+    }
 
     public static void verifyClient() {
         if(client == null) {

@@ -60,6 +60,7 @@ public class NewUser extends ActionBarActivity {
             displayUserInfo(pendingUser);
         }
 
+
         // Set confirmUserButton click. Return Intent will be implemented along with LoginActivity
         Button confirmUserButton = (Button) findViewById(R.id.userSubmit);
         confirmUserButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +80,7 @@ public class NewUser extends ActionBarActivity {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is edit user", Toast.LENGTH_SHORT);
                     takenUser.show();
-                    add(pendingUser);
+                    update(pendingUser);
                     finish();
 
                 } else if (availUsername(pendingUser.getUsername())) {
@@ -232,6 +233,28 @@ public class NewUser extends ActionBarActivity {
             e.printStackTrace();
         }
 
+    }
+    public void update(final User user) {
+
+        try {
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    ElasticSearchUser.updateUser(user);
+                }
+            });
+
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Everything is OK!
+            setResult(RESULT_OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
