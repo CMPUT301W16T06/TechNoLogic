@@ -649,7 +649,7 @@ Location————————————————————————
 US 10.01.01 | As an owner, I want to specify a geo location on a map of where to receive a thing when I accept a bid on a thing
 
 Use Case Name
-	Attach_Photo
+	Set_Location
 Participating Actors
 	Owner of the Computer
 Goal
