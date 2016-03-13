@@ -87,6 +87,10 @@ public class Bid{
         this.username = username;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
     /**
      * format the bid object for display when listed
      * shows the description of computer, owner, bidder and price
