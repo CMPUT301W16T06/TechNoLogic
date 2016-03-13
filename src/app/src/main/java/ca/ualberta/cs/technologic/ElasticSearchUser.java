@@ -111,7 +111,7 @@ public class ElasticSearchUser {
     }
 
     public static void updateUser(User user) {
-        deleteUser(user.getUsername().toString());
+        deleteUser(user.getUsername());
         addUser(user);
     }
 
