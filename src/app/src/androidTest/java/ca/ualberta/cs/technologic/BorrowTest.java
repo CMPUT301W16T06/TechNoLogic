@@ -18,15 +18,20 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
      * testViewBorrower tests if the Borrowing view is correct
      *  Corresponds to US 06.01.01
      */
+    //***EDIT
     public void testViewBorrower() {
         // Initialize Users and Computers
         User user1 = new User("Tom");
         User user2 = new User("Ashley");
 
-        Computer comp1 = new Computer(user1.getUsername(),"Apple", "MacBook", 2013, "intel i5", 8,
-                500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
-        Computer comp2 = new Computer(user1.getUsername(),"Apple", "MacBook", 2015, "intel i7", 8,
-                500, "Ios", Float.parseFloat("18.3"), "Much faster");
+        Computer testcomputer1 = null;
+        Computer testcomputer2 = null;
+        testcomputer1 = new Computer(testcomputer1.getId(), user1.getUsername(),"Apple",
+                "MacBook", 2013, "intel i5", 8, 500, "Ios", Float.parseFloat("18.3"),
+                "Sort of fast", "available");
+        testcomputer2 = new Computer(testcomputer1.getId(), user1.getUsername(),"Apple",
+                "MacBook", 2015, "intel i7", 8, 500, "Ios", Float.parseFloat("18.3"),
+                "Much faster", "available");
 
         // User1 owns and lends out Computers to user2
         ArrayList<Borrow> testBorrow = new ArrayList<Borrow>();
@@ -45,6 +50,7 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
      * testViewOwner tests if Lending out is correct
      * Corresponds to US 06.02.01
      */
+    //***EDIT
     public void testViewOwner() {
         // Initialize Users and Computers
         User user1 = new User("Tom");
