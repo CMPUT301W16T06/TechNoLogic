@@ -1,26 +1,8 @@
 # TechNoLogic
 CMPUT 301 Winter 2016 University of Alberta
 
-Project Problem Description
-Warning: This is subject to change!
-
-You are to design and implement a simple, attractive, and easy-to-use Android application to satisfy the following goals. Your design must be flexible enough to allow developers to extend or migrate it.
-
-We want a mobile application that allows owners to record the things they have and share them with borrowers. For example, a thing could be a good (like a piece of camera equipment), a service (like giving a ride in a car), or a resource (like a parking spot). Generally, a thing should be something reusable and typical underused. It is up to each team to choose some specific thing of focus, with approval from the TA.
-
-In general, a user can be both an owner of their own things and a borrower of someone else's things. A borrower can borrow a thing by making a monetary bid for it. The owner can accept a bid, so the thing becomes borrowed. The owner can denote when a borrowed thing is returned and available again.
-
-Needs in (Partial) User Story Form
-
-User needs are expressed in the form of partial user stories:
-
-As a <role>, I want <goal>.
-
-These descriptions may change to correct omissions and clarify noticed issues. New requirements will be introduced for the final project part.
-
-Things
-
-US 01.01.01
+##Things
+[]US 01.01.01
 As an owner, I want to add a thing in my things, each denoted with a clear, suitable description.
 
 US 01.02.01
