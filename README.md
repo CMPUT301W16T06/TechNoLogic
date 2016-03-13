@@ -100,3 +100,27 @@ Offline behavior
 US 08.01.01
 As an owner, I want to define new things while offline, and push the additions once I get connectivity.
 
+Photographs
+
+US 09.01.01 (added 2016-02-29)
+As an owner, I want to optionally attach a photograph to a thing of mine.
+
+US 09.02.01 (added 2016-02-29)
+As an owner, I want to delete any attached photograph for a thing of mine.
+
+US 09.03.01 (added 2016-02-29)
+As an owner or borrower, I want to view any attached photograph for a thing.
+
+US 09.04.01 (added 2016-02-29)
+As a sys admin, I want each photograph to be under 65536 bytes in size.
+
+Location
+
+US 10.01.01 (added 2016-02-29)
+As an owner, I want to specify a geo location on a map of where to receive a thing when I accept a bid on the thing.
+
+US 10.02.01 (added 2016-02-29)
+As a borrower, I want to view the geo location of where to receive a thing I will be borrowing.
+
+
+
