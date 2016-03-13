@@ -110,7 +110,14 @@ public class ElasticSearchUser {
         }
     }
 
+    public static void updateUser(User user) {
+        deleteUser(user.getUsername().toString());
+        addUser(user);
+    }
 
+    /**
+     * Verifies the elastic search DB
+     */
     public static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");

@@ -16,7 +16,7 @@ public class Bid{
     private Float price;
     private String username;
     private String owner;
-    //private ArrayList<Bid> bids = new ArrayList<Bid>();
+
 
     /**
      * Create a Bid Object
@@ -31,38 +31,67 @@ public class Bid{
         this.owner = owner;
     }
 
+    /**
+     * Returns the bid ID of the Bid
+     * @return
+     */
     public UUID getBidID() {
         return bidID;
     }
 
+    /**
+     * Returns the Computer ID of the bid
+     * @return
+     */
     public UUID getComputerID() {
         return computerID;
     }
 
+    /**
+     * Sets the computer ID of the bid
+     * @param computerID
+     */
     public void setComputerID(UUID computerID) {
         this.computerID = computerID;
     }
 
+    /**
+     * Returns the price of the bid
+     * @return
+     */
     public Float getPrice() {
         return price;
     }
 
+    /**
+     * Sets the price of the bid
+     * @param price
+     */
     public void setPrice(Float price) {
         this.price = price;
     }
 
+    /**
+     * Returns the username of the bidder
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username of the bidder
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getOwner() {
-        return owner;
-    }
-
+    /**
+     * format the bid object for display when listed
+     * shows the description of computer, owner, bidder and price
+     * @return
+     */
     @Override
     public String toString() {
         final Computer[] comp = {null};

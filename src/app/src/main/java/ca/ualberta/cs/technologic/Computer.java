@@ -73,7 +73,6 @@ public class Computer {
         //computers.add(this);
 
     }
-
     /**
      * Returns the unique ID
      * @return
@@ -261,12 +260,19 @@ public class Computer {
     }
 
 
+    /**
+     * Returns the status of the computer
+     * @return
+     */
     public String getStatus() {
         return status;
     }
 
 
-    //Sets string status, will not accept any value other than Available, Bidded or Borrowed
+    /**
+     * Sets string status, will not accept any value other than Available, Bidded or Borrowed
+     * @param status
+     */
     public void setStatus(String status) {
         status = status.toLowerCase();
         ArrayList<String> statusOptions = new ArrayList<String>();

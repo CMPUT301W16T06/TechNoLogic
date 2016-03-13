@@ -209,7 +209,9 @@ public class ElasticSearchBidding {
         }
     }
 
-
+    /**
+     * Verifies the elastic search DB
+     */
     public static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");
