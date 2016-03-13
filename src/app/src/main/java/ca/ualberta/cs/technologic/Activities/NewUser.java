@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
@@ -22,6 +23,7 @@ public class NewUser extends ActionBarActivity {
     boolean isEdit;
     private User pendingUser;
     private ArrayList<User> currentUsers;
+    private CurrentUser cu;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -51,15 +53,11 @@ public class NewUser extends ActionBarActivity {
 
         Intent intent = getIntent();
         isEdit = intent.getBooleanExtra("bool",false);
+
         if (isEdit) {
-            EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
-            ET_newUserName.setEnabled(false);
-            ET_newUserName.setTextColor(Color.parseColor("#ffffff"));
-            ET_newUserName.setBackgroundResource(R.drawable.edittextdark);
-            String username = intent.getStringExtra("user");
-            ET_newUserName.setText("USERNAME");
-            //pendingUser = getUserInfo(username);
-            //displayUserInfo(pendingUser);
+            cu = CurrentUser.getInstance();
+            pendingUser = getUserInfo(cu.getCurrentUser());
+            displayUserInfo(pendingUser);
         }
 
         // Set confirmUserButton click. Return Intent will be implemented along with LoginActivity
@@ -76,38 +74,20 @@ public class NewUser extends ActionBarActivity {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "One or more fields are empty", Toast.LENGTH_SHORT);
                     takenUser.show();
+
                 } else if (isEdit) {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is edit user", Toast.LENGTH_SHORT);
                     takenUser.show();
+                    add(pendingUser);
                     finish();
+
                 } else if (availUsername(pendingUser.getUsername())) {
                     // Add to existingUsers, save and return Intent
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is new user", Toast.LENGTH_SHORT);
                     takenUser.show();
-
-                    // TODO: Adding a new user
-                    try {
-                        Thread thread = new Thread(new Runnable() {
-                            public void run() {
-                                ElasticSearchUser.addUser(pendingUser);
-                            }
-                        });
-
-                        thread.start();
-                        try {
-                            thread.join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        // Everything is OK!
-                        setResult(RESULT_OK);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
+                    add(pendingUser);
                     finish();
 
                 } else {
@@ -116,7 +96,6 @@ public class NewUser extends ActionBarActivity {
                             "Username already taken!", Toast.LENGTH_SHORT);
                     takenUser.show();
                 }
-
             }
         });
     }
@@ -127,7 +106,6 @@ public class NewUser extends ActionBarActivity {
      * @return true if the String is unique to the ArrayList, false if otherwise
      */
     public boolean availUsername(final String wantedUsername) {
-        // TODO: Check wantedUsername against existing Users
         currentUsers = new ArrayList<User>();
 
         Thread thread = new Thread(new Runnable() {
@@ -179,7 +157,7 @@ public class NewUser extends ActionBarActivity {
     /**
      *  Get the user information on the given username
      * @param username elastic search for this user
-     * @return User corrisponding to the username
+     * @return User corresponding to the username
      */
     public User getUserInfo(final String username) {
         //TODO: elastic search implementation
@@ -197,7 +175,7 @@ public class NewUser extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return null;
+        return currentUsers.get(0);
     }
 
     /**
@@ -207,6 +185,10 @@ public class NewUser extends ActionBarActivity {
      */
     public void displayUserInfo(User user){
         EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
+        ET_newUserName.setEnabled(false);
+        ET_newUserName.setTextColor(Color.parseColor("#ffffff"));
+        ET_newUserName.setBackgroundResource(R.drawable.edittextdark);
+
         EditText ET_newName = (EditText) findViewById(R.id.userName);
         EditText ET_newEmail = (EditText) findViewById(R.id.userEmail);
         EditText ET_newPhoneNum = (EditText) findViewById(R.id.userPhone);
@@ -228,5 +210,28 @@ public class NewUser extends ActionBarActivity {
         return editText.getText().toString();
     }
 
-}
+    public void add(final User user) {
+        // TODO: Adding a new user
+        try {
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    ElasticSearchUser.addUser(user);
+                }
+            });
 
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Everything is OK!
+            setResult(RESULT_OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}
