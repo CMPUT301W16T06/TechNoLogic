@@ -1,5 +1,7 @@
 package ca.ualberta.cs.technologic.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.UUID;
@@ -29,6 +33,7 @@ public class ItemInfo extends ActionBarActivity {
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +44,18 @@ public class ItemInfo extends ActionBarActivity {
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
+
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setMessage("Computer entry has been updated!");
+        builder1.setCancelable(true);
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -59,9 +76,10 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 deleteComputer();
-                Intent goToItems3 = new Intent(ItemInfo.this, HomePage.class);
+                //Intent goToItems3 = new Intent(ItemInfo.this, HomePage.class);
                 SystemClock.sleep(100);
-                startActivity(goToItems3);
+                //startActivity(goToItems3);
+                onBackPressed();
             }
         });
 
@@ -69,9 +87,12 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
-                Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
-                SystemClock.sleep(100);
-                startActivity(goToItems2);
+                //Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
+                //SystemClock.sleep(500);
+                //startActivity(goToItems2);
+                //onBackPressed();
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
     }

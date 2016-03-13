@@ -26,8 +26,8 @@ public class AddItems extends ActionBarActivity {
             public void onClick(View v) {
                 saveComputer();
                 onBackPressed();
-                Intent goToItems1 = new Intent(AddItems.this, HomePage.class);
-                startActivity(goToItems1);
+                //Intent goToItems1 = new Intent(AddItems.this, HomePage.class);
+                //startActivity(goToItems1);
             }
         });
     }

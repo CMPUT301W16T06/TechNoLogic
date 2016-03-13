@@ -48,9 +48,6 @@ public class MyItems extends ActionBarActivity {
                 Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
-//                Intent goToInfo = new Intent(MyItems.this, PlaceBid.class);
-//                goToInfo.putExtra("id", entry.getId().toString());
-//                startActivity(goToInfo);
             }
         });
 
