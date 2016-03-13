@@ -39,7 +39,7 @@ US 03.03.01
 As a user, I want to, when a username is presented for a thing, retrieve and show its contact information.
 
 ##Searching
-- [ ]
+- [x]
 US 04.01.01
 As a borrower, I want to specify a set of keywords, and search for all things not currently borrowed whose description contains all the keywords.
 - [x]
