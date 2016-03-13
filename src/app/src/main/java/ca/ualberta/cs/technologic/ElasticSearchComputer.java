@@ -75,6 +75,11 @@ public class ElasticSearchComputer {
         return computers;
     }
 
+    /**
+     * Returns the list of computers that matched the search description
+     * @param searchString
+     * @return
+     */
     public static ArrayList<Computer> getComputersSearch(String searchString) {
         verifyClient();
         CurrentUser cu = CurrentUser.getInstance();
@@ -109,6 +114,11 @@ public class ElasticSearchComputer {
         return computers;
     }
 
+    /**
+     * Gets the computer that has the specified ID
+     * @param id
+     * @return
+     */
     public static Computer getComputersById(UUID id) {
         verifyClient();
 
@@ -243,7 +253,9 @@ public class ElasticSearchComputer {
         }
     }
 
-
+    /**
+     * Verifies the elastic search DB
+     */
     public static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");

@@ -31,6 +31,10 @@ public class HomePage extends ActionBarActivity {
     Button go;
     EditText search;
 
+    /**
+     * Set up on click listeners for itemlist click and go click
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +61,9 @@ public class HomePage extends ActionBarActivity {
         });
     }
 
-
+    /**
+     * Loads computers into listview
+     */
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
@@ -68,6 +74,10 @@ public class HomePage extends ActionBarActivity {
         itemslist.setAdapter(listAdapter);
     }
 
+    /**
+     * Gets all computers from the DB
+     * @see ElasticSearchComputer
+    */
     public void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -82,9 +92,13 @@ public class HomePage extends ActionBarActivity {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Gets computers from search from DB
+     */
     public void getComputersSearch(){
-        Toast toast1 = Toast.makeText(getApplicationContext(), search.getText().toString(), Toast.LENGTH_SHORT);
-        toast1.show();
+        //Toast toast1 = Toast.makeText(getApplicationContext(), search.getText().toString(), Toast.LENGTH_SHORT);
+        //toast1.show();
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchComputer.getComputersSearch(search.getText().toString());
@@ -97,8 +111,8 @@ public class HomePage extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Toast toast = Toast.makeText(getApplicationContext(), comps.toString(), Toast.LENGTH_SHORT);
-        toast.show();
+        //Toast toast = Toast.makeText(getApplicationContext(), comps.toString(), Toast.LENGTH_SHORT);
+        //toast.show();
         ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
         itemslist.setAdapter(listAdapter);
     }

@@ -24,26 +24,50 @@ public class Borrow{
 
     }
 
+    /**
+     * Returns the computer Id of the borrowed computer
+     * @return
+     */
     public UUID getComputerID() {
         return computerID;
     }
 
+    /**
+     * Sets the computer ID of the borrowed computer
+     * @param computerID
+     */
     public void setComputerID(UUID computerID) {
         this.computerID = computerID;
     }
 
+    /**
+     * Returns the owner of the computer being borrowed
+     * @return
+     */
     public String getOwner() {
         return owner;
     }
 
+    /**
+     * Sets the owener of the computer being borrowed
+     * @param owner
+     */
     public void setOwner(String owner) {
         this.owner = owner;
     }
 
+    /**
+     * Returns the username of the borrower of the computer
+     * @return
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username of the borrower of the computer
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
