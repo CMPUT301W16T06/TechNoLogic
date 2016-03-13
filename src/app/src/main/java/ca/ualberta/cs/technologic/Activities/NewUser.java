@@ -81,6 +81,7 @@ public class NewUser extends ActionBarActivity {
                             "Is edit user", Toast.LENGTH_SHORT);
                     takenUser.show();
                     update(pendingUser);
+                    cu.setCurrentUser(pendingUser.getUsername());
                     finish();
 
                 } else if (availUsername(pendingUser.getUsername())) {
