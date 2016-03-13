@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -38,16 +39,6 @@ public class ItemView extends ActionBarActivity {
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
 
-        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Bid has been placed on computer.");
-        builder1.setCancelable(true);
-        builder1.setPositiveButton(
-                "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -75,8 +66,8 @@ public class ItemView extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 placeBid();
-                AlertDialog alertBidPlaced = builder1.create();
-                alertBidPlaced.show();
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Your bid has been placed", Toast.LENGTH_SHORT);
+                toast1.show();
             }
         });
 

@@ -54,12 +54,13 @@ public class ElasticSearchComputer {
                         "\"size\" : 1000\n" +
                         "}";
         if (username != ""){
-            query = "{\n" +
-                    "\"size\": 1000,\n" +
-                    "\"query\": {\n" +
-                    "\"term\": { \"username\" : \"" + username + "\" }\n" +
-                    "}\n" +
-                    "}\n";
+//            query = "{\n" +
+//                    "\"size\": 1000,\n" +
+//                    "\"query\": {\n" +
+//                    "\"term\": { \"username\" : \"" + username + "\" }\n" +
+//                    "}\n" +
+//                    "}\n";
+            query ="{\"query\":{\"match\":{\"username\":\"" + username + "\"}}}";
         }
         Search search = new Search.Builder(query).addIndex("computers").addType("computer").build();
         try {
@@ -109,15 +110,56 @@ public class ElasticSearchComputer {
         return computers;
     }
 
+    /**
+     * Get computers
+     * Can specify the username, gets all the computers belonging to that user
+     * If username is "" then all computers will be return
+     * @param username
+     * @return Arraylist of computers
+     */
+    public static ArrayList<Computer> getComputersBidded(String username) {
+        verifyClient();
+        CurrentUser cu = CurrentUser.getInstance();
+
+        ArrayList<Computer> computers = new ArrayList<Computer>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+
+        String query ="{\"query\":{\"match\":{\"username\":\"" + username + "\"}}}";
+
+        Search search = new Search.Builder(query).addIndex("computers").addType("computer").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Computer> found = result.getSourceAsObjectList(Computer.class);
+                hits = result.getHits(Map.class);
+                computers.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //This is not the way to do it...
+        for (Computer temp : computers){
+            if(temp.getStatus().equals("borrowed")) {
+                computers.remove(temp);
+            }
+            if(temp.getStatus().equals("available")) {
+                computers.remove(temp);
+            }
+        }
+        return computers;
+    }
+
+
     public static Computer getComputersById(UUID id) {
         verifyClient();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
 
-        String queryId = "{\n" +
-                "\"size\" : 1000\n" +
-                "}";
+//        String queryId = "{\n" +
+//                "\"size\" : 1000\n" +
+//                "}";
 
+        String queryId ="{\"query\":{\"match\":{\"id\":\"" + id + "\"}}}";
         Search search = new Search.Builder(queryId).addIndex("computers").addType("computer").build();
         try {
             SearchResult result = client.execute(search);
@@ -128,12 +170,13 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Computer c : computers){
-            if (c.getId().equals(id)){
-                return c;
-            }
-        }
-        return null;
+        return computers.get(0);
+//        for (Computer c : computers){
+//            if (c.getId().equals(id)){
+//                return c;
+//            }
+//        }
+//        return null;
     }
 
 
@@ -193,10 +236,10 @@ public class ElasticSearchComputer {
         ArrayList<Computer> computers = new ArrayList<Computer>();
         List<SearchResult.Hit<Map,Void>> hits = null;
         String elasticSearchID = "";
-        String q = "{\n" +
-                "\"size\" : 1000\n" +
-                "}";
-
+//        String q = "{\n" +
+//                "\"size\" : 1000\n" +
+//                "}";
+        String q ="{\"query\":{\"match\":{\"id\":\"" + id + "\"}}}";
         Search search = new Search.Builder(q).addIndex("computers").addType("computer").build();
         try {
             SearchResult result = client.execute(search);
@@ -209,21 +252,28 @@ public class ElasticSearchComputer {
             e.printStackTrace();
         }
 
-        for(int i = 0; i < computers.size(); i++){
-            SearchResult.Hit hit = hits.get(i);
-            Map source = (Map)hit.source;
-            Set<Map.Entry> s =  source.entrySet();
+        SearchResult.Hit hit = hits.get(0);
+        Map source = (Map)hit.source;
+        Set<Map.Entry> s =  source.entrySet();
+        elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
 
 
-            for (Map.Entry entry : s) {
-                if (entry.getKey().equals("id")) {
-                    if (entry.getValue().equals(id)) {
-                        elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
 
-                    }
-                }
-            }
-        }
+//        for(int i = 0; i < computers.size(); i++){
+//            SearchResult.Hit hit = hits.get(i);
+//            Map source = (Map)hit.source;
+//            Set<Map.Entry> s =  source.entrySet();
+//
+//
+//            for (Map.Entry entry : s) {
+//                if (entry.getKey().equals("id")) {
+//                    if (entry.getValue().equals(id)) {
+//                        elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
+//
+//                    }
+//                }
+//            }
+//        }
 
         if (elasticSearchID != "") {
             Delete delete = new Delete.Builder(elasticSearchID).index("computers").type("computer").build();

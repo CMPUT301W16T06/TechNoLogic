@@ -13,41 +13,117 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
+import ca.ualberta.cs.technologic.Bid;
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
 public class AcceptBid extends ActionBarActivity {
+    private ArrayList<Bid> bids = null;
+    private CurrentUser cu = CurrentUser.getInstance();
+    private String compID;
+    private UUID bidID;
+    private Bid selectedBid;
+    private ArrayAdapter<Bid> listAdapter;
+    private ListView bidslist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_bids);
-        ListView bidslist = (ListView) findViewById(R.id.acceptbidslist);
+        bidslist = (ListView) findViewById(R.id.acceptbidslist);
         Button acceptBtn = (Button) findViewById(R.id.accept);
+        Button declineBtn = (Button) findViewById(R.id.decline);
+        Intent intent = getIntent();
+        compID = intent.getStringExtra("id");
 
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AcceptBid.this, MyItemBids.class);
-                startActivity(intent);
+                //TODO: move entry to borrowed
+                //TODO: remove all other bid entries
+                //TODO: update computer status
+//                Intent intent = new Intent(AcceptBid.this, MyItemBids.class);
+//                startActivity(intent);
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        ElasticSearchBidding.acceptBid(selectedBid, bids);
+                    }
+                });
+                thread.start();
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                onBackPressed();
+            }
+        });
+
+        declineBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: remove bid
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        ElasticSearchBidding.declineBid(selectedBid,bids.size());
+                    }
+                });
+                thread.start();
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                bids.remove(selectedBid);
+                listAdapter.notifyDataSetChanged();
+//
             }
         });
 
         bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent goToInfo = new Intent(AcceptBid.this, ItemInfo.class);
-                startActivity(goToInfo);
+                selectedBid = (Bid) parent.getAdapter().getItem(position);
+                bidID = selectedBid.getBidID();
+//                Intent goToInfo = new Intent(AcceptBid.this, ItemInfo.class);
+//                startActivity(goToInfo);
             }
         });
 
-        //This is just testing... DELETE LATER
-        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+    }
+
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                bids = ElasticSearchBidding.getAllBids(UUID.fromString(compID));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         bidslist.setAdapter(listAdapter);
+//        ListView myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
+//        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
+//        myitemlist.setAdapter(listAdapter);
+
     }
 
     @Override

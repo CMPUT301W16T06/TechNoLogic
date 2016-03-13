@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.UUID;
 
@@ -44,18 +45,6 @@ public class ItemInfo extends ActionBarActivity {
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
-
-        final AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
-        builder1.setMessage("Computer entry has been updated!");
-        builder1.setCancelable(true);
-        builder1.setPositiveButton(
-                "OK",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -91,8 +80,9 @@ public class ItemInfo extends ActionBarActivity {
                 //SystemClock.sleep(500);
                 //startActivity(goToItems2);
                 //onBackPressed();
-                AlertDialog compUpdated = builder1.create();
-                compUpdated.show();
+                Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
+                toast1.show();
+
             }
         });
     }

@@ -14,25 +14,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import ca.ualberta.cs.technologic.Bid;
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ComputerAdapter;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
 public class MyItemBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
+    private ArrayList<Computer> comps;
     private CurrentUser cu = CurrentUser.getInstance();
+    ComputerAdapter listAdapter;
+    ListView myitemlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_item_bids);
-        ListView myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
+        myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
 
         myitemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent goToBids = new Intent(MyItemBids.this, AcceptBid.class);
-//                startActivity(goToBids);
+                Computer entry = (Computer) parent.getAdapter().getItem(position);
+                Intent goToBids = new Intent(MyItemBids.this, AcceptBid.class);
+                goToBids.putExtra("id", entry.getId().toString());
+                startActivity(goToBids);
+                listAdapter.notifyDataSetChanged();
             }
         });
 
@@ -52,7 +60,7 @@ public class MyItemBids extends ActionBarActivity {
 
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                bids = ElasticSearchBidding.getMyItemBids(cu.getCurrentUser());
+                comps = ElasticSearchBidding.getMyItemBids(cu.getCurrentUser());
             }
         });
         thread.start();
@@ -62,8 +70,7 @@ public class MyItemBids extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ListView myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
-        ArrayAdapter<Bid> listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
+        listAdapter = new ComputerAdapter(this, comps);
         myitemlist.setAdapter(listAdapter);
 
     }

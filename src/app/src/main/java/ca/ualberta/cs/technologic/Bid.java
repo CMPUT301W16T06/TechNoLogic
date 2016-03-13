@@ -59,6 +59,10 @@ public class Bid{
         this.username = username;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
     @Override
     public String toString() {
         final Computer[] comp = {null};
