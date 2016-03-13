@@ -40,17 +40,10 @@ public class MyItemBids extends ActionBarActivity {
                 Intent goToBids = new Intent(MyItemBids.this, AcceptBid.class);
                 goToBids.putExtra("id", entry.getId().toString());
                 startActivity(goToBids);
-                listAdapter.notifyDataSetChanged();
+
             }
         });
 
-//        //This is just testing... DELETE LATER
-//        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-//                "Jupiter", "Saturn", "Uranus", "Neptune"};
-//        ArrayList<String> planetList = new ArrayList<String>();
-//        planetList.addAll(Arrays.asList(planets));
-//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
-//        myitemlist.setAdapter(listAdapter);
     }
 
     @Override
@@ -58,6 +51,14 @@ public class MyItemBids extends ActionBarActivity {
         // TODO Auto-generated method stub
         super.onStart();
 
+        getMyItems();
+
+        listAdapter = new ComputerAdapter(this, comps);
+        myitemlist.setAdapter(listAdapter);
+
+    }
+
+    public void getMyItems(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchBidding.getMyItemBids(cu.getCurrentUser());
@@ -70,9 +71,6 @@ public class MyItemBids extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        listAdapter = new ComputerAdapter(this, comps);
-        myitemlist.setAdapter(listAdapter);
-
     }
 
     @Override

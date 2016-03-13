@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class AcceptBid extends ActionBarActivity {
     private String compID;
     private UUID bidID;
     private Bid selectedBid;
+    private boolean selected = false;
     private ArrayAdapter<Bid> listAdapter;
     private ListView bidslist;
 
@@ -44,46 +46,50 @@ public class AcceptBid extends ActionBarActivity {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: move entry to borrowed
-                //TODO: remove all other bid entries
-                //TODO: update computer status
-//                Intent intent = new Intent(AcceptBid.this, MyItemBids.class);
-//                startActivity(intent);
-                Thread thread = new Thread(new Runnable() {
-                    public void run() {
-                        ElasticSearchBidding.acceptBid(selectedBid, bids);
-                    }
-                });
-                thread.start();
+                if (selected) {
+                    Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            ElasticSearchBidding.acceptBid(selectedBid, bids);
+                        }
+                    });
+                    thread.start();
 
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Toast bidAccepted = Toast.makeText(getApplicationContext(), "Bid has been accepted!", Toast.LENGTH_SHORT);
+                    bidAccepted.show();
+                    bids.clear();
+                    listAdapter.notifyDataSetChanged();
+                    //onBackPressed();
                 }
-                onBackPressed();
             }
         });
 
         declineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: remove bid
-                Thread thread = new Thread(new Runnable() {
-                    public void run() {
-                        ElasticSearchBidding.declineBid(selectedBid,bids.size());
+                if (selected) {
+                    Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            ElasticSearchBidding.declineBid(selectedBid, bids.size());
+                        }
+                    });
+                    thread.start();
+
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                });
-                thread.start();
+                    Toast bidDeclined = Toast.makeText(getApplicationContext(), "Bid has been declined.", Toast.LENGTH_SHORT);
+                    bidDeclined.show();
 
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    bids.remove(selectedBid);
+                    listAdapter.notifyDataSetChanged();
                 }
-
-                bids.remove(selectedBid);
-                listAdapter.notifyDataSetChanged();
 //
             }
         });
@@ -91,6 +97,7 @@ public class AcceptBid extends ActionBarActivity {
         bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selected = true;
                 selectedBid = (Bid) parent.getAdapter().getItem(position);
                 bidID = selectedBid.getBidID();
 //                Intent goToInfo = new Intent(AcceptBid.this, ItemInfo.class);

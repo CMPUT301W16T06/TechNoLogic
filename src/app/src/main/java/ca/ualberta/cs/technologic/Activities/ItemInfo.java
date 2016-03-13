@@ -79,7 +79,7 @@ public class ItemInfo extends ActionBarActivity {
                 //Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
                 //SystemClock.sleep(500);
                 //startActivity(goToItems2);
-                //onBackPressed();
+               // onBackPressed();
                 Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
                 toast1.show();
 
@@ -95,24 +95,29 @@ public class ItemInfo extends ActionBarActivity {
     }
 
     private void deleteComputer() {
-        try {
-
-            Thread thread = new Thread(new Runnable() {
-                public void run() {
-                    ElasticSearchComputer.deleteComputer(id);
-                }
-            });
-            thread.start();
+        if (comp.getStatus().equals("available")) {
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        ElasticSearchComputer.deleteComputer(id);
+                    }
+                });
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Everything is OK!
+                setResult(RESULT_OK);
+            }catch(Exception e){
                 e.printStackTrace();
             }
-
-            // Everything is OK!
-            setResult(RESULT_OK);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            Toast toast1 = Toast.makeText(getApplicationContext(), "Cannot delete computer," +
+                    " status must be \"available\" to delete computer", Toast.LENGTH_SHORT);
+            toast1.show();
         }
     }
 

@@ -47,11 +47,11 @@ US 04.02.01
 As a borrower, I want search results to show each thing not currently borrowed with its description, owner username, and status.
 
 ##Bidding
-- [ ]
+- [x]
 US 05.01.01
 As a borrower, I want to bid for an available thing, with a monetary rate (in dollars per hour).
 
-- [ ]
+- [x]
 US 05.02.01
 As a borrower, I want to view a list of things I have bidded on that are pending, each thing with its description, owner username, and my bid.
 
@@ -59,19 +59,19 @@ As a borrower, I want to view a list of things I have bidded on that are pending
 US 05.03.01
 As an owner, I want to be notified of a bid.
 
-- [ ]
+- [x]
 US 05.04.01
 As an owner, I want to view a list of my things with bids.
 
-- [ ]
+- [x]
 US 05.05.01
 As an owner, I want to view the bids on one of my things.
 
-- [ ]
+- [x]
 US 05.06.01
 As an owner, I want to accept a bid on one of my things, setting its status to borrowed. (Any other bids are declined.)
 
-- [ ]
+- [x]
 US 05.07.01
 As an owner, I want to decline a bid on one of my things.
 

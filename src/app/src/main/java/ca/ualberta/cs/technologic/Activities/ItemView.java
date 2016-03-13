@@ -66,8 +66,8 @@ public class ItemView extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 placeBid();
-                Toast toast1 = Toast.makeText(getApplicationContext(), "Your bid has been placed", Toast.LENGTH_SHORT);
-                toast1.show();
+                Toast bidplaced = Toast.makeText(getApplicationContext(), "Your bid has been placed", Toast.LENGTH_SHORT);
+                bidplaced.show();
             }
         });
 
