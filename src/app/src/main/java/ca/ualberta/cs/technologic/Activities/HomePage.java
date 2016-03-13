@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,12 +28,16 @@ public class HomePage extends ActionBarActivity {
     private CurrentUser cu = CurrentUser.getInstance();
     String username = cu.toString();
     ListView itemslist;
+    Button go;
+    EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         itemslist = (ListView) findViewById(R.id.homelist);
+        go = (Button) findViewById(R.id.go);
+        search = (EditText) findViewById(R.id.search);
 
         itemslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -40,6 +46,13 @@ public class HomePage extends ActionBarActivity {
                 Intent goToInfo = new Intent(HomePage.this, ItemView.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
+            }
+        });
+        go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //scriptInput.getText();
+                getComputersSearch();
             }
         });
     }
@@ -68,6 +81,26 @@ public class HomePage extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void getComputersSearch(){
+        Toast toast1 = Toast.makeText(getApplicationContext(), search.getText().toString(), Toast.LENGTH_SHORT);
+        toast1.show();
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                comps = ElasticSearchComputer.getComputersSearch(search.getText().toString());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Toast toast = Toast.makeText(getApplicationContext(), comps.toString(), Toast.LENGTH_SHORT);
+        toast.show();
+        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
+        itemslist.setAdapter(listAdapter);
     }
 
     @Override

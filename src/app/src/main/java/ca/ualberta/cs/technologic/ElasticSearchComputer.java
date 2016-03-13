@@ -75,6 +75,35 @@ public class ElasticSearchComputer {
         return computers;
     }
 
+    public static ArrayList<Computer> getComputersSearch(String searchString) {
+        verifyClient();
+        CurrentUser cu = CurrentUser.getInstance();
+
+        ArrayList<Computer> computers = new ArrayList<Computer>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+
+        String query ="{\"query\":{\"match\":{\"description\":\"" + searchString + "\"}}}";
+
+        Search search = new Search.Builder(query).addIndex("computers").addType("computer").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Computer> found = result.getSourceAsObjectList(Computer.class);
+                hits = result.getHits(Map.class);
+                computers.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //This is not he way to do it...
+        for (Computer temp : computers){
+            if(temp.getUsername() == cu.getCurrentUser()) {
+                computers.remove(temp);
+            }
+        }
+        return computers;
+    }
+
     public static Computer getComputersById(UUID id) {
         verifyClient();
 
