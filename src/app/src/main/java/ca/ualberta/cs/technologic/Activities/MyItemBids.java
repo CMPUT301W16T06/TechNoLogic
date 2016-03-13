@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,8 @@ public class MyItemBids extends ActionBarActivity {
         setContentView(R.layout.activity_my_item_bids);
         myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
 
+        //when an computer is selected then user will be brought to a
+        //different activity to see all bids for tha computer
         myitemlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,16 +51,23 @@ public class MyItemBids extends ActionBarActivity {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-
+        //gets all computer that user owns that have been bid on
         getMyItems();
 
         listAdapter = new ComputerAdapter(this, comps);
         myitemlist.setAdapter(listAdapter);
 
+        if (comps.size() == 0){
+            Toast msg = Toast.makeText(getApplicationContext(), "No bids on your computers", Toast.LENGTH_SHORT);
+            msg.show();
+        }
     }
 
+    /**
+     * gets all computers that the user owns that have
+     * been bid on by other users
+     */
     public void getMyItems(){
         Thread thread = new Thread(new Runnable() {
             public void run() {

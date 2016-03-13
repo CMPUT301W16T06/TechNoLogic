@@ -43,9 +43,12 @@ public class AcceptBid extends ActionBarActivity {
         Intent intent = getIntent();
         compID = intent.getStringExtra("id");
 
+        //when accept button is pressed, bid is converted to borrowed
+        //all other bids must be rejected and status of computer changes
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check if bid is selected
                 if (selected) {
                     Thread thread = new Thread(new Runnable() {
                         public void run() {
@@ -68,9 +71,13 @@ public class AcceptBid extends ActionBarActivity {
             }
         });
 
+        //decline button is pressed
+        //the bid is declined, check if there are any other bids
+        //if no other bid, then status is changed back to available
         declineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check if an entry(bid) is selected
                 if (selected) {
                     Thread thread = new Thread(new Runnable() {
                         public void run() {
@@ -90,18 +97,16 @@ public class AcceptBid extends ActionBarActivity {
                     bids.remove(selectedBid);
                     listAdapter.notifyDataSetChanged();
                 }
-//
             }
         });
 
+        //selects the selected bid as the bid for action
         bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selected = true;
                 selectedBid = (Bid) parent.getAdapter().getItem(position);
                 bidID = selectedBid.getBidID();
-//                Intent goToInfo = new Intent(AcceptBid.this, ItemInfo.class);
-//                startActivity(goToInfo);
             }
         });
 
@@ -112,6 +117,7 @@ public class AcceptBid extends ActionBarActivity {
         // TODO Auto-generated method stub
         super.onStart();
 
+        //gets all bids for the current computer
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 bids = ElasticSearchBidding.getAllBids(UUID.fromString(compID));
@@ -127,10 +133,6 @@ public class AcceptBid extends ActionBarActivity {
 
         listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         bidslist.setAdapter(listAdapter);
-//        ListView myitemlist = (ListView) findViewById(R.id.myitemsbidlist);
-//        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
-//        myitemlist.setAdapter(listAdapter);
-
     }
 
     @Override

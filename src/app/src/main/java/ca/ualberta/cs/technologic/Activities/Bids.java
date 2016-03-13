@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,13 +33,13 @@ public class Bids extends ActionBarActivity {
         setContentView(R.layout.activity_bids);
         ListView bidslist = (ListView) findViewById(R.id.bidslist);
 
-        bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent goToInfo = new Intent(Bids.this, ItemInfo.class);
-//                startActivity(goToInfo);
-            }
-        });
+//        bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+////                Intent goToInfo = new Intent(Bids.this, ItemInfo.class);
+////                startActivity(goToInfo);
+//            }
+//        });
     }
 
     @Override
@@ -46,6 +47,7 @@ public class Bids extends ActionBarActivity {
         // TODO Auto-generated method stub
         super.onStart();
 
+        //get all bids that the current user has made on other computers
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 bids = ElasticSearchBidding.getMyBids(cu.getCurrentUser());
@@ -61,6 +63,11 @@ public class Bids extends ActionBarActivity {
         ListView bidslist = (ListView) findViewById(R.id.bidslist);
         ArrayAdapter<Bid> listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         bidslist.setAdapter(listAdapter);
+
+        if (bids.size() == 0){
+            Toast bidMsg = Toast.makeText(getApplicationContext(), "You have made no bids", Toast.LENGTH_SHORT);
+            bidMsg.show();
+        }
     }
 
     @Override

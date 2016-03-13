@@ -32,6 +32,10 @@ public class AddItems extends ActionBarActivity {
         });
     }
 
+    /**
+     * save the new computer
+     * needs to retrieve all values from the UI
+     */
     private void saveComputer(){
         String make = ((EditText)findViewById(R.id.make)).getText().toString();
         String model = ((EditText)findViewById(R.id.model)).getText().toString();

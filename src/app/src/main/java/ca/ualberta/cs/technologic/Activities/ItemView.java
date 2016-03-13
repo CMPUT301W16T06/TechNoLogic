@@ -39,7 +39,7 @@ public class ItemView extends ActionBarActivity {
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
 
-
+        //gets the computer information to display
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comp = ElasticSearchComputer.getComputersById(UUID.fromString(id));
@@ -53,6 +53,7 @@ public class ItemView extends ActionBarActivity {
             e.printStackTrace();
         }
 
+        //binds the computer values to UI objects
         setComputerValues(comp);
 
         username.setOnClickListener(new View.OnClickListener(){
@@ -62,23 +63,29 @@ public class ItemView extends ActionBarActivity {
             }
         });
 
+        //when place bid button is pressed the bid is made on the current computer
         placebid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 placeBid();
-                Toast bidplaced = Toast.makeText(getApplicationContext(), "Your bid has been placed", Toast.LENGTH_SHORT);
+                Toast bidplaced = Toast.makeText(getApplicationContext(),
+                        "Your bid has been placed", Toast.LENGTH_SHORT);
                 bidplaced.show();
             }
         });
 
     }
 
+    /**
+     * bid is made on the current computer object
+     */
     private void placeBid() {
-
+        //get the inputted bid price
         Float price = Float.parseFloat(((EditText) findViewById(R.id.infoBid)).getText().toString());
         String username = cu.getCurrentUser();
 
         final Bid bid;
+        //save the bid that was made
         try {
             bid = new Bid(comp.getId(), price, username, comp.getUsername());
 
@@ -99,7 +106,10 @@ public class ItemView extends ActionBarActivity {
 
     }
 
-    //Fill in all the fields of computer
+    /**
+     * bind computer vlaues to the UI
+     * @param c the computer
+     */
     public void setComputerValues(Computer c) {
         ((TextView) findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
