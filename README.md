@@ -23,7 +23,7 @@ US 01.05.01
 As an owner, I want to delete a thing in my things.
 
 ##Status
-- [ ]
+- [x]
 US 02.01.01
 As an owner or borrower, I want a thing to have a status of one of: available, bidded, or borrowed.
 
@@ -39,7 +39,7 @@ US 03.03.01
 As a user, I want to, when a username is presented for a thing, retrieve and show its contact information.
 
 ##Searching
-- [ ]
+- [x]
 US 04.01.01
 As a borrower, I want to specify a set of keywords, and search for all things not currently borrowed whose description contains all the keywords.
 - [x]
