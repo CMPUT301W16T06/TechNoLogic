@@ -19,7 +19,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //05.01.01 As a borrower, I want to bid for an available thing, with a monetary rate
     // (in dollars per hour)
-    //***EDIT
+    //***EDITED
     public void testPlaceBid () {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
@@ -41,7 +41,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //05.02.01 | As a borrower, I want to view a list of things I have bidded on that are pending,
     // each thing with its description, owner username, and my bid
-    //***EDIT
+    //***EDITED
     public void testMyBids () {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
@@ -74,7 +74,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //Test for viewing the bids on an owners computer
     //Test that corresponds with US 5.03.01 (Bid_Notification)
-    //***EDIT
+    //***EDITED
     public void testNotifications(){
         //initial setup of test variables
         User testUser = new User("george");
@@ -117,7 +117,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //Test for viewing the bids on an owners computer
     //Test that corresponds with US 5.04.01 (View_My_Computer_Bids_List)
-    //***EDIT
+    //***EDITED
     public void testViewMyComputerBids(){
         //initial setup
         User testUser = new User("george");
@@ -152,7 +152,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //Test for view of the bids on a specific computer
     //Test that corresponds with US 5.05.01 (View_Computer_Bids)
-    //***EDIT
+    //***EDITED
     public void testViewComputerBids(){
         //initial setup of test variables
         //initial setup
@@ -183,7 +183,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
     //testDeclinebid tests if a declined bid still exists
     //Corresponds to US 05.07.01
-    //***EDIT
+    //***EDITED
     public void testDeclineBid() {
         //initial setup
         User testUser = new User("george");
