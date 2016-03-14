@@ -2,6 +2,8 @@ package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.ArrayList;
+
 /**
  * Created by Eric on 2016-02-11.
  */
@@ -15,17 +17,26 @@ public class ReturningTest extends ActivityInstrumentationTestCase2 {
      * testReturn checks the state of a Computer before and after the return.
      *  Corresponds to US 07.01.01
      */
+    //***EDITED
     public void testReturn() {
+        //initial setup of test variables
+        ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User user1 = new User("Tom");
-        Computer comp = new Computer(user1.getUsername(),"Apple", "MacBook", 2013, "intel i5", 8,
-                500, "Ios", Float.parseFloat("18.3"), "Sort of fast");
+        Computer testcomputer1 = null;
+        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available");
+
 
         // Check before return
-        user1.addLentOut(comp.getId());
-        assertEquals("Should be borrowed", comp.getStatus(), "Borrowed");
+        ElasticSearchComputer.addComputer(testcomputer1);
+        ElasticSearchComputer.getComputersById(testcomputer1.getId()).setStatus("borrowed");
+        assertEquals("Should be borrowed",
+                ElasticSearchComputer.getComputersById(testcomputer1.getId()).getStatus(), "borrowed");
 
         // Check after return
-        user1.returnLent(comp.getId());
-        assertEquals("Should be available", comp.getStatus(), "Available");
+        ElasticSearchComputer.getComputersById(testcomputer1.getId()).setStatus("available");
+        assertEquals("Should be available",
+                ElasticSearchComputer.getComputersById(testcomputer1.getId()).getStatus(), "available");
     }
 }
