@@ -14,6 +14,8 @@ import io.searchbox.core.Index;
 
 /**
  * Created by Jessica on 2016-03-10.
+ *
+ * Adapted from https://github.com/earthiverse/lonelyTwitter/blob/complete/app/src/main/java/ca/ualberta/cs/lonelytwitter/ElasticsearchTweetController.java 2016-03-10
  */
 public class ElasticSearchBorrowing {
     private static JestDroidClient client;
