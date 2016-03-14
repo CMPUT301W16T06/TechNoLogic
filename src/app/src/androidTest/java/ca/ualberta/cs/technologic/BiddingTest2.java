@@ -11,9 +11,9 @@ import ca.ualberta.cs.technologic.Activities.Bids;
 /**
  * Created by Jessica on 2016-02-11.
  */
-public class BiddingTest extends ActivityInstrumentationTestCase2 {
+public class BiddingTest2 extends ActivityInstrumentationTestCase2 {
 
-    public BiddingTest() {
+    public BiddingTest2() {
         super(BiddingTest.class);
     }
 
