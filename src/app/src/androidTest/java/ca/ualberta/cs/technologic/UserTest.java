@@ -34,7 +34,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         ElasticSearchComputer.addComputer(testcomputer1);
 
         //checks if the computer is in the elastic search
-        assertEquals(testcomputer1, ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
+        assertEquals(testcomputer1, ElasticSearchComputer.getComputersById(testcomputer1.getId()));
 
         //try adding the same computer twice, and make sure it raises error
         try {
