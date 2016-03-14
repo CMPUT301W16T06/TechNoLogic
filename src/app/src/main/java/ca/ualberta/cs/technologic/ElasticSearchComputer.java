@@ -78,6 +78,42 @@ public class ElasticSearchComputer {
         return computers;
     }
 
+    public static ArrayList<Computer> getAllComputers() {
+        verifyClient();
+        CurrentUser cu = CurrentUser.getInstance();
+
+        ArrayList<Computer> computers = new ArrayList<Computer>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+
+        String query = "{\n" +
+                "\"size\" : 1000\n" +
+                "}";
+
+        Search search = new Search.Builder(query).addIndex("computers").addType("computer").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Computer> found = result.getSourceAsObjectList(Computer.class);
+                hits = result.getHits(Map.class);
+                computers.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //This is not the way to do it...
+        ArrayList<Computer> remove = new ArrayList<Computer>();
+        for (Computer temp : computers){
+            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser()))  {
+                remove.add(temp);
+            }
+        }
+        for (Computer temp : remove){
+            computers.remove(temp);
+        }
+
+        return computers;
+    }
+
     /**
      * Returns the list of computers that matched the search description
      * @param searchString
@@ -106,7 +142,7 @@ public class ElasticSearchComputer {
         //This is not the way to do it...
         ArrayList<Computer> remove = new ArrayList<Computer>();
         for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser())) {
+            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser()))  {
                 remove.add(temp);
             }
         }
@@ -143,15 +179,20 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //This is not the way to do it...
+
+        ArrayList<Computer> remove = new ArrayList<Computer>();
         for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed")) {
-                computers.remove(temp);
+            if(temp.getStatus().equals("borrowed"))  {
+                remove.add(temp);
             }
-            if(temp.getStatus().equals("available")) {
-                computers.remove(temp);
+            if (temp.getUsername().equals("available")) {
+                remove.add(temp);
             }
         }
+        for (Computer temp : remove){
+            computers.remove(temp);
+        }
+
         return computers;
     }
 

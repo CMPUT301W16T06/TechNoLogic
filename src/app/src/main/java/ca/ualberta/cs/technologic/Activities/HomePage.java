@@ -81,7 +81,7 @@ public class HomePage extends ActionBarActivity {
     public void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                comps = ElasticSearchComputer.getComputers("");
+                comps = ElasticSearchComputer.getAllComputers();
             }
         });
         thread.start();

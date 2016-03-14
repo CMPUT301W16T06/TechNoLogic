@@ -32,6 +32,7 @@ import io.searchbox.annotations.JestId;
 
 public class User{
     @JestId
+    private UUID id;
     private String name;
     private String username;
     private String email;
@@ -45,10 +46,18 @@ public class User{
      */
     public User(String username) {
         this.username = username;
+        this.id = UUID.randomUUID();
         //need to add a check to see if the username is unique
         //jk check is done in the controller
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
     /**
      * Returns the name for the user
      * @return

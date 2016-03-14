@@ -12,8 +12,11 @@ import org.apache.http.client.HttpClient;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
+import io.searchbox.client.JestResult;
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
@@ -89,15 +92,40 @@ public class ElasticSearchUser {
 
     /**
      * Delete the user given the username
-     * @param username id of the computer to be delete
+     * @param id of the User to be delete
      */
-    public static void deleteUser(String username) {
+    public static void deleteUser(UUID id) {
         verifyClient();
 
-        Delete delete = new Delete.Builder(username).index("users").type("user").build();
+
+        ArrayList<User> users = new ArrayList<User>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+        String elasticSearchID = "";
+
+        String q ="{\"query\":{\"match\":{\"id\":\"" + id + "\"}}}";
+        Search search = new Search.Builder(q).addIndex("users").addType("user").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<User> found = result.getSourceAsObjectList(User.class);
+                users.addAll(found);
+
+                hits = result.getHits(Map.class);
+                users.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        SearchResult.Hit hit = hits.get(0);
+        Map source = (Map)hit.source;
+        Set<Map.Entry> s =  source.entrySet();
+        elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
+
+        Delete delete = new Delete.Builder(elasticSearchID).index("users").type("user").build();
         try {
             DocumentResult execute = client.execute(delete);
-            if(execute.isSucceeded()) {
+            if (execute.isSucceeded()) {
                 //TODO: something
             } else {
                 Log.i("what", execute.getJsonString());
@@ -110,9 +138,9 @@ public class ElasticSearchUser {
         }
     }
 
-    public static void updateUser(User user) {
-        deleteUser(user.getUsername());
-        addUser(user);
+    public static void updateUser(User oldUser, User newUser) {
+        deleteUser(oldUser.getId());
+        addUser(newUser);
     }
 
     /**
