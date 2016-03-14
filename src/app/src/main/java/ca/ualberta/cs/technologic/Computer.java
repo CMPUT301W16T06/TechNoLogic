@@ -1,5 +1,7 @@
 package ca.ualberta.cs.technologic;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -293,4 +295,25 @@ public class Computer {
                 + " | status:" + this.status;
     }
 
+    public void takePhoto() {
+    }
+
+    public void deletePhoto() {
+    }
+
+    public int getPhoto(){
+        return 0;
+    }
+
+    public int getPhotoSize() {
+        return 0;
+    }
+
+    public String getLocation() {
+        return "location";
+    }
+
+    public void setLocation(Location location) {
+
+    }
 }
