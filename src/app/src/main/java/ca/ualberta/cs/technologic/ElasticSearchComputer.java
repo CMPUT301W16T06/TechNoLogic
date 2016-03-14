@@ -74,6 +74,18 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //This is not the way to do it...
+        ArrayList<Computer> remove = new ArrayList<Computer>();
+        for (Computer temp : computers){
+            if(temp.getStatus().equals("borrowed"))  {
+                remove.add(temp);
+            }
+            if (temp.getUsername().equals(cu.getCurrentUser())) {
+                remove.add(temp);}
+        }
+        for (Computer temp : remove){
+            computers.remove(temp);
+        }
 
         return computers;
     }
@@ -106,7 +118,10 @@ public class ElasticSearchComputer {
         //This is not the way to do it...
         ArrayList<Computer> remove = new ArrayList<Computer>();
         for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed") || temp.getUsername().equals(cu.getCurrentUser())) {
+            if(temp.getStatus().equals("borrowed"))  {
+                remove.add(temp);
+            }
+            if (temp.getUsername().equals(cu.getCurrentUser())) {
                 remove.add(temp);
             }
         }
@@ -142,15 +157,6 @@ public class ElasticSearchComputer {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        //This is not the way to do it...
-        for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed")) {
-                computers.remove(temp);
-            }
-            if(temp.getStatus().equals("available")) {
-                computers.remove(temp);
-            }
         }
         return computers;
     }
