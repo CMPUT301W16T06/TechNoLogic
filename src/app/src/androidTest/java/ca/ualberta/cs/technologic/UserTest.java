@@ -6,6 +6,7 @@ import junit.framework.Assert;
 
 import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Jordan on 08/02/2016.
@@ -36,7 +37,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         testcomputer1.setStatus("bidded");
         ElasticSearchComputer.addComputer(testcomputer1);
 
-        //checks if the computer is in the test array
+        //checks if the computer is in the elastic search
         assertEquals(testcomputer1, ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
 
         //try adding the same computer twice, and make sure it raises error
@@ -63,7 +64,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         testcomputer2 = new Computer(testcomputer2.getId(),"cooljohn123", "Apple","MacBook",
                 2014,"intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
 
-        //add computer objects to array
+        //add computer objects to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
         ElasticSearchComputer.addComputer(testcomputer2);
 
@@ -95,7 +96,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         testcomputer3 = new Computer(testcomputer3.getId(), "cooljohn123","Linux","Computer",
                 2014,"intel i7", 8, 500,"Linux",Float.parseFloat("51.2"),"COMPUTER 3", "available");
 
-        //add computer objects to array
+        //add computer objects to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
         ElasticSearchComputer.addComputer(testcomputer2);
 
@@ -114,20 +115,24 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser = new User("cooljohn123");
         Computer testcomputer1 = null;
-        Computer testcomputer2 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),"COMPUTER 1", "available");
-        testcomputer2 = new Computer(testcomputer2.getId(),"cooljohn123", "Apple","MacBook",2014,
-                "intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
 
-        //add computer object to array
+        //stores initial UUID
+        UUID tempId = testcomputer1.getId();
+
+        //add computer object to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
 
-        ElasticSearchComputer.getComputersById(testcomputer1.getId()).updateComputer(testcomputer2);
+        //edited computer
+        testcomputer1 = new Computer(testcomputer1.getId(),"cooljohn123", "Apple","MacBook",2014,
+                "intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
+
+        //updates computer with information
+        ElasticSearchComputer.updateComputer(testcomputer1);
 
         //make sure the userComputer maintains unique UUID
-        assertNotSame(testcomputer1.getId(),
-                ElasticSearchComputer.getComputersById(testcomputer2.getId()).getId());
+        assertNotSame(tempId, ElasticSearchComputer.getComputersById(testcomputer1.getId()).getId());
 
     }
 
@@ -145,7 +150,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         testcomputer2 = new Computer(testcomputer2.getId(),"cooljohn123", "Apple","MacBook",
                 2014,"intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
 
-        //add computer objects to array
+        //add computer objects to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
         ElasticSearchComputer.addComputer(testcomputer2);
 

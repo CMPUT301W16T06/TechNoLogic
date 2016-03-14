@@ -20,18 +20,18 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     public void testPlaceBid () {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
+        Computer testcomputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
                 500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-        testcomputer1.setStatus("Bidded");
+        testcomputer.setStatus("Bidded");
 
         //add into list that holds bids on a owners computers
-        Bid bid = new Bid(testcomputer1.getId(), Float.parseFloat("1.12"),"tom","bob");
+        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
         testUser.addMyComputerBid(bid);
 
         //check that it has the new bid
         ArrayList<Bid> newBids = testUser.getNewBids();
         assertEquals(newBids.size(), 1);
-        assertEquals(newBids.get(0).getComputerID(), testcomputer1.getId());
+        assertEquals(newBids.get(0).getComputerID(), testcomputer.getId());
 
     }
 
@@ -41,7 +41,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testMyBids () {
         //initial setup of test variables
-        User testUser = new User("cooljohn123");
+        User testUser1 = new User("cooljohn123");
         User testUser2 = new User("thisssucks");
         Computer testcomputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
                 500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
@@ -51,10 +51,10 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
         //add into list that holds bids on a owners computers
         Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),"tom","bob");
-        testUser.addMyComputerBid(bid);
+        testUser1.addMyComputerBid(bid);
 
         //Gets list of all the computers I bidded on
-        ArrayList<Bid> test = testUser.getMyComputerBids();
+       // ArrayList<Bid> test = testUser.getMyComputerBids();
 
         //Makes sure there is only one bid
         assertEquals(test.size(), 1);
@@ -72,7 +72,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         assertEquals(testUser2.getComputerIndex(bidTest.getComputerID()), testcomputer);
 
         //get list of all bids for a specific computer
-        ArrayList<Bid> computerBids = testUser.getComputerBids(testcomputer.getId());
+        ArrayList<Bid> computerBids = testUser1.getComputerBids(testcomputer.getId());
 
 
 
@@ -84,7 +84,8 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     public void testNotifications(){
         //initial setup of test variables
         User testUser = new User("cooljohn123");
-        Computer testcomputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
+        Computer testcomputer = null;
+        testcomputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
                 500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         testcomputer.setStatus("bidded");
 
@@ -190,7 +191,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
         //get list of all bids on the computer that was accpeted
         //the list should be zero
-        ArrayList<Bid> computerBids2 = testUser.getComputerBids(testcompute1r.getId());
+        ArrayList<Bid> computerBids2 = testUser.getComputerBids(testcomputer1.getId());
         assertEquals(computerBids2.size(), 0);
 
         //the computer must then be added to the LentOut list
@@ -210,7 +211,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testDeclinebid() {
         // Initialize Users and Computers
-        User user1 = new User("Tom");
+        User testuser1 = new User("Tom");
 
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",2014,"intel i7", 8,
@@ -220,12 +221,12 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         Bid bid1 = new Bid(testcomputer1.getId(), Float.parseFloat("19.3"),"tom","bob");
         Bid bid2 = new Bid(testcomputer1.getId(), Float.parseFloat("24.3"),"tom","bob");
         Bid bid3 = new Bid(testcomputer1.getId(), Float.parseFloat("22.7"),"tom","bob");
-        user1.addMyComputerBid(bid1);
-        user1.addMyComputerBid(bid2);
-        user1.addMyComputerBid(bid3);
+        testuser1.addMyComputerBid(bid1);
+        testuser1.addMyComputerBid(bid2);
+        testuser1.addMyComputerBid(bid3);
 
         // user1 declines bid1
-        user1.declineComputerBid(bid1);
+        testuser1.declineComputerBid(bid1);
 
         // Expecting bid2 and bid3
         ArrayList<Bid> expectedBids = new ArrayList<Bid>();
@@ -235,8 +236,8 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         // Expecting empty because comp1 is declined, not lent out
         ArrayList<UUID> expectedUUID = new ArrayList<UUID>();
 
-        assertEquals("Expected same bid array", expectedBids, user1.getComputerBids(comp1.getId()));
-        assertEquals("Expected expect empty", expectedUUID, user1.getLentOut());
+        assertEquals("Expected same bid array", expectedBids, testuser1.getComputerBids(testcomputer1.getId()));
+        assertEquals("Expected expect empty", expectedUUID, testuser1.getLentOut());
     }
 
 }
