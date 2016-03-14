@@ -126,7 +126,7 @@ public class ElasticSearchComputer {
         ArrayList<Computer> computers = new ArrayList<Computer>();
         List<SearchResult.Hit<Map,Void>> hits = null;
 
-        String query ="{\"query\":{\"match\":{\"description\":\"" + searchString + "\"}}}";
+        String query ="{\"query\":{\"match_phrase\":{\"description\":\"" + searchString + "\"}}}";
 
         Search search = new Search.Builder(query).addIndex("computers").addType("computer").build();
         try {
