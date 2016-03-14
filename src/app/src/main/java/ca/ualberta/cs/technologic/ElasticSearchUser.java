@@ -28,6 +28,8 @@ import io.searchbox.core.Update;
  * Created by Jessica on 2016-03-10.
  *
  * Adapted from https://github.com/earthiverse/lonelyTwitter/blob/complete/app/src/main/java/ca/ualberta/cs/lonelytwitter/ElasticsearchTweetController.java 2016-03-10
+ *
+ * This class holds methods for creating and executing an Elastic Search query
  */
 
 public class ElasticSearchUser {

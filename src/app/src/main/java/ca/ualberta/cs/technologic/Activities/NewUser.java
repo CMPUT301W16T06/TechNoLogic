@@ -18,7 +18,18 @@ import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
-//TODO: IMPLEMENT EditUSER
+/**
+ * The NewUser class is an activity for creating a new user or editing an existing user.
+ * It will take inputs from the User and check if the Username exists in ElasticSearch.
+ *
+ * A few errors or issues that currently exist is the displaying of a return button which directs a
+ * logged in user to the login screen and the possible duplication of a username.
+ *
+ * A fix or adjustment which will be done later is the splitting of this activity into
+ * a EditUser and NewUser. This activity currently contains functions for both editing and
+ * creating a new User which has gotten fairly large. This split will also solve the previous
+ * issue of the menu bar and return button.
+ */
 public class NewUser extends ActionBarActivity {
     boolean isEdit;
     private User pendingUser;
