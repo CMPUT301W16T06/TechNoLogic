@@ -74,6 +74,32 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return computers;
+    }
+
+    public static ArrayList<Computer> getAllComputers() {
+        verifyClient();
+        CurrentUser cu = CurrentUser.getInstance();
+
+        ArrayList<Computer> computers = new ArrayList<Computer>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+
+        String query = "{\n" +
+                "\"size\" : 1000\n" +
+                "}";
+
+        Search search = new Search.Builder(query).addIndex("computers").addType("computer").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Computer> found = result.getSourceAsObjectList(Computer.class);
+                hits = result.getHits(Map.class);
+                computers.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //This is not the way to do it...
         ArrayList<Computer> remove = new ArrayList<Computer>();
         for (Computer temp : computers){
