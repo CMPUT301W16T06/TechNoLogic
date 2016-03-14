@@ -179,6 +179,20 @@ public class ElasticSearchComputer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        ArrayList<Computer> remove = new ArrayList<Computer>();
+        for (Computer temp : computers){
+            if(temp.getStatus().equals("borrowed"))  {
+                remove.add(temp);
+            }
+            if (temp.getUsername().equals("available")) {
+                remove.add(temp);
+            }
+        }
+        for (Computer temp : remove){
+            computers.remove(temp);
+        }
+
         return computers;
     }
 
