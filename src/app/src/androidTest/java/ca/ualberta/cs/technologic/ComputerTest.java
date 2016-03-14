@@ -1,42 +1,42 @@
-//package ca.ualberta.cs.technologic;
-//
-//import android.location.Location;
-//import android.test.ActivityInstrumentationTestCase2;
-//
-//import junit.framework.Assert;
-//
-//import java.util.ArrayList;
-//
-///**
-// * Created by Jordan on 08/02/2016.
-// */
-//public class ComputerTest extends ActivityInstrumentationTestCase2 {
-//
-//    public ComputerTest() {
-//        super(Computer.class);
-//    }
-//
-//    //Test to make sure the status of a Computer can only be Available, Bidded or Borrowed
-//    //Test for corresponding US 2.01.01 (View_Status)
-//    //***EDITED
-//    public void testsetStatus(){
-//        User user1 = new User("Tom");
-//        Computer testcomputer1 = null;
-//        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft",
-//                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-//                "this is a cool computer", "available");
-//
-//        testcomputer1.setStatus("bidded");
-//        assertEquals("bidded",testcomputer1.getStatus());
-//
-//        try {
-//            testcomputer1.setStatus("Hello");
-//            assertTrue(Boolean.FALSE);
-//        } catch (IllegalArgumentException e){
-//            assertTrue(Boolean.TRUE);
-//        }
-//    }
-//
+package ca.ualberta.cs.technologic;
+
+import android.location.Location;
+import android.test.ActivityInstrumentationTestCase2;
+
+import junit.framework.Assert;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Jordan on 08/02/2016.
+ */
+public class ComputerTest extends ActivityInstrumentationTestCase2 {
+
+    public ComputerTest() {
+        super(Computer.class);
+    }
+
+    //Test to make sure the status of a Computer can only be Available, Bidded or Borrowed
+    //Test for corresponding US 2.01.01 (View_Status)
+    //***EDITED
+    public void testsetStatus(){
+        User user1 = new User("Tom");
+        Computer testcomputer1 = null;
+        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available");
+
+        testcomputer1.setStatus("bidded");
+        assertEquals("bidded",testcomputer1.getStatus());
+
+        try {
+            testcomputer1.setStatus("Hello");
+            assertTrue(Boolean.FALSE);
+        } catch (IllegalArgumentException e){
+            assertTrue(Boolean.TRUE);
+        }
+    }
+
 //    //Test to make sure a user can attach a photograph to a computer object
 //    //Test for corresponding US 09.01.01 (Attach_photo)
 //    //***EDIT
@@ -153,4 +153,4 @@
 //        ElasticSearchComputer.getComputersById(testcomputer1.getId()).setLocation(location);
 //        assertEquals("T6R 0M7", ElasticSearchComputer.getComputersById(testcomputer1.getId()).getLocation());
 //    }
-//}
+}
