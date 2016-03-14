@@ -182,10 +182,7 @@ public class ElasticSearchComputer {
 
         ArrayList<Computer> remove = new ArrayList<Computer>();
         for (Computer temp : computers){
-            if(temp.getStatus().equals("borrowed"))  {
-                remove.add(temp);
-            }
-            if (temp.getUsername().equals("available")) {
+            if(temp.getStatus().equals("borrowed") || temp.getStatus().equals("available"))  {
                 remove.add(temp);
             }
         }
