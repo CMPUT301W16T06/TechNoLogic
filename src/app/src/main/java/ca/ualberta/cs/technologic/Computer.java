@@ -54,6 +54,7 @@ public class Computer {
         this.os = os;
         this.price = price;
         this.description = description;
+        this.setStatus(status);
         //computers.add(this);
 
     }

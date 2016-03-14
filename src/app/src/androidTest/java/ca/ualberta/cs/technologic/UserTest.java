@@ -20,13 +20,12 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //Tests the adding of a computer item to the user's computer list
     //Test that corresponds with US 1.01.01 (Add_Computer)
     // ***EDITED
-    public void testaddComputer(){
+    public void testaddComputer() {
         //initial setup of test variables
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
-                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
+                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
                 "this is a cool computer", "available");
 
 
@@ -38,10 +37,10 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         assertEquals(testcomputer1, ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
 
         //try adding the same computer twice, and make sure it raises error
-        try{
+        try {
             ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
             assertTrue(Boolean.FALSE);
-        }catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             assertTrue(Boolean.TRUE);
         }
     }
@@ -50,16 +49,14 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //                  descriptions of all computers
     //Test that corresponds with US 1.02.01 (View_Computer_List)
     //***EDITED
-    public void testgetComputers(){
+    public void testgetComputers() {
         //initial setup of test variables
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = null;
-        Computer testcomputer2 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
-                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),"COMPUTER 1", "available");
-        testcomputer2 = new Computer(testcomputer2.getId(),"cooljohn123", "Apple","MacBook",
-                2014,"intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
+        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
+                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"), "COMPUTER 1", "available");
+        Computer testcomputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Apple", "MacBook",
+                2014, "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
 
         //add computer objects to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
@@ -79,19 +76,16 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //     after you've found the computer
     //Test that corresponds with US 1.03.01 (View_Computer)
     //***EDITED
-    public void testgetComputerIndex(){
+    public void testgetComputerIndex() {
         //initial setup of test variables
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = null;
-        Computer testcomputer2 = null;
-        Computer testcomputer3 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
-                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),"COMPUTER 1", "available");
-        testcomputer2 = new Computer(testcomputer2.getId(),"cooljohn123", "Apple","MacBook",2014,
-                "intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
-        testcomputer3 = new Computer(testcomputer3.getId(), "cooljohn123","Linux","Computer",
-                2014,"intel i7", 8, 500,"Linux",Float.parseFloat("51.2"),"COMPUTER 3", "available");
+        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
+                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"), "COMPUTER 1", "available");
+        Computer testcomputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Apple", "MacBook", 2014,
+                "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
+        Computer testcomputer3 = new Computer(UUID.randomUUID(), "cooljohn123", "Linux", "Computer",
+                2014, "intel i7", 8, 500, "Linux", Float.parseFloat("51.2"), "COMPUTER 3", "available");
 
         //add computer objects to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
@@ -107,13 +101,12 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     // Tests the ability to edit a computer if you know it's UUID
     // Test that corresponds to US 1.04.01 (Edit_Computer)
     //***EDITED
-    public void testeditComputer(){
+    public void testeditComputer() {
         //initial setup of test variables
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
-                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),"COMPUTER 1", "available");
+        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
+                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"), "COMPUTER 1", "available");
 
         //stores initial UUID
         UUID tempId = testcomputer1.getId();
@@ -122,30 +115,28 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         ElasticSearchComputer.addComputer(testcomputer1);
 
         //edited computer
-        testcomputer1 = new Computer(testcomputer1.getId(),"cooljohn123", "Apple","MacBook",2014,
-                "intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
+        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Apple", "MacBook", 2014,
+                "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
 
         //updates computer with information
         ElasticSearchComputer.updateComputer(testcomputer1);
 
         //make sure the userComputer maintains unique UUID/
-         assertNotSame(tempId, ElasticSearchComputer.getComputersById(testcomputer1.getId()).getId());
+        assertNotSame(tempId, ElasticSearchComputer.getComputersById(testcomputer1.getId()).getId());
 
     }
 
     //Test that corresponds with US 1.05.01 (Delete_Computer)
     //***EDITED
-    public void testdeleteComputer(){
+    public void testdeleteComputer() {
         //initial setup of test variables
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = null;
-        Computer testcomputer2 = null;
-        testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft","surface",
-                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
+                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
                 "COMPUTER 1", "available");
-        testcomputer2 = new Computer(testcomputer2.getId(),"cooljohn123", "Apple","MacBook",
-                2014,"intel i7", 8, 500,"Mac",Float.parseFloat("56.2"),"COMPUTER 2", "available");
+        Computer testcomputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Apple", "MacBook",
+                2014, "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
 
         //add computer objects to elastic search
         ElasticSearchComputer.addComputer(testcomputer1);
@@ -163,7 +154,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         try {
             ElasticSearchComputer.deleteComputer(String.valueOf(testcomputer1.getId()));
             assertFalse(Boolean.TRUE);
-        } catch (Exception e){
+        } catch (Exception e) {
             assertTrue(Boolean.TRUE);
         }
 
@@ -173,7 +164,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //test creation of account and unique usernames as well as some getters and setters for User
     //Test corresponds to US 03.01.01 (Unique_Profile)
     //***EDITED
-    public void testsetUsername (){
+    public void testsetUsername() {
         User testUser1 = new User("cooljohn123");
         User testUser2 = new User("coolbob123");
 
@@ -182,19 +173,19 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         try {
             testUser1.setUsername("coolbob123");
 
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(Boolean.TRUE);
         }
 
         //Make sure your username is unique when you create an account
-        try{
+        try {
             User testUser3 = new User("coolbob123");
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             assertTrue(Boolean.TRUE);
         }
 
         testUser1.setName("John Buckingham");
-        assertEquals("John Buckingham",testUser1.getName());
+        assertEquals("John Buckingham", testUser1.getName());
     }
 
     //03.02.01 As a user, I want to edit the contact information in my profile
@@ -229,50 +220,46 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     }
     //03.03.01 As a user, I want to, when a username is presented for a thing, retrieve and show
     // its contact information
-    //***EDITED
-    /*
-    public void testViewRentersInfo () {
-        //initial setup of test variables
-        ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
-        User testUser = new User("connor");
-        testUser.setName("Connor");
-        testUser.setAddress("Rexall place");
-        testUser.setEmail("allstar@oilers.ca");
-        testUser.setPhone("7801231234");
-        Computer testcomputer1 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft",
-                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "COMPUTER 1", "available");
+    //***EDIT
 
-        testcomputer1.setStatus("bidded");
-        ElasticSearchComputer.addComputer(testcomputer1);
-
-        //Simulate a click on an object where that user owns it
-        assertTrue(ElasticSearchComputer.getComputers(testcomputer1.getUsername()).contains(testcomputer1.getId()));
-
-
-        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getUserName(), "Connor");
-        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getAddress(), "Rexall Place");
-        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getEmail(), "allstar@oilers.ca");
-        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getPhone(), "7801231234");
-        }
-*/
+//    public void testViewRentersInfo() {
+//        //initial setup of test variables
+//        ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
+//        User testUser = new User("connor");
+//        testUser.setName("Connor");
+//        testUser.setAddress("Rexall place");
+//        testUser.setEmail("allstar@oilers.ca");
+//        testUser.setPhone("7801231234");
+//        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+//                "surface", 2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
+//                "COMPUTER 1", "available");
+//
+//        testcomputer1.setStatus("bidded");
+//        ElasticSearchComputer.addComputer(testcomputer1);
+//
+//        //Simulate a click on an object where that user owns it
+//        assertTrue(ElasticSearchComputer.getComputers(testcomputer1.getUsername()).contains(testcomputer1.getId()));
+//
+//
+//        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getUserName(), "Connor");
+//        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getAddress(), "Rexall Place");
+//        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getEmail(), "allstar@oilers.ca");
+//        assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getPhone(), "7801231234");
+//    }
 
     //04.01.01 As a borrower, I want to specify a set of keywords, and search for all things not
     // currently borrowed whose description contains all the keywords
 
     // and 04.01.01 As a borrower, I want search results to show each thing not currently borrowed
     // with its description, owner username, and status
-    //***EDITED
-    /*
-    public void testSearch () {
+    //***EDIT
+    public void testSearch() {
         //initial setup of test variables
         ElasticSearchComputer ElasticSearchComputer = new ElasticSearchComputer();
         User testUser1 = new User("cooljohn123");
         User testUser2 = new User("thissucks");
-        Computer testcomputer1 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
-                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
+                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
                 "this is a cool computer", "available");
         String testWords = "Microsoft surface this is a cool computer";
 
@@ -284,7 +271,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
             assertTrue(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription().contains(testWords));
             assertTrue(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getMake().contains(testWords));
             assertTrue(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getModel().contains(testWords));
-            assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription(), "this is a cool computer");/            assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getUsername(), "cooljohn123");
+            assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription(), "this is a cool computer");
+            assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getUsername(), "cooljohn123");
             assertEquals(ElasticSearchComputer.getComputersById(testcomputer1.getId()).getStatus(), "bidded");
 
         } else {
@@ -295,6 +283,6 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
 
 
     }
-    */
+
 }
 

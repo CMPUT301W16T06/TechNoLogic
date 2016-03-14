@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import junit.framework.Assert;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by Jordan on 08/02/2016.
@@ -21,31 +22,25 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
     //***EDITED
     public void testsetStatus(){
         User user1 = new User("Tom");
-<<<<<<< HEAD
-        Computer testcomputer1 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft",
+
+        Computer testcomputer1 = new Computer(UUID.randomUUID(),"cooljohn123", "Microsoft",
                 "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
                 "this is a cool computer", "available");
-=======
-        Computer testcomputer1 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
->>>>>>> origin/master
+
+        //Computer testcomputer2 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
+              //  500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+
 
         testcomputer1.setStatus("bidded");
         assertEquals("bidded",testcomputer1.getStatus());
 
         try {
             testcomputer1.setStatus("Hello");
-<<<<<<< HEAD
-            assertTrue(Boolean.FALSE);
-=======
->>>>>>> origin/master
         } catch (IllegalArgumentException e){
             assertTrue(Boolean.TRUE);
         }
     }
 
-<<<<<<< HEAD
 //    //Test to make sure a user can attach a photograph to a computer object
 //    //Test for corresponding US 09.01.01 (Attach_photo)
 //    //***EDIT
@@ -162,7 +157,7 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
 //        ElasticSearchComputer.getComputersById(testcomputer1.getId()).setLocation(location);
 //        assertEquals("T6R 0M7", ElasticSearchComputer.getComputersById(testcomputer1.getId()).getLocation());
 //    }
-=======
+
     //Test to make sure a user can attach a photograph to a computer object
     //Test for corresponding US 09.01.01 (Attach_photo)
     //***EDIT
@@ -280,5 +275,4 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         ElasticSearchComputer.getComputersById(testcomputer1.getId()).setLocation(location);
         assertEquals("T6R 0M7", ElasticSearchComputer.getComputersById(testcomputer1.getId()).getLocation());
     }
->>>>>>> origin/master
 }
