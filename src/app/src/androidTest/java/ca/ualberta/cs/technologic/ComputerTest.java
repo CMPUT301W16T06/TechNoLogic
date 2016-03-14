@@ -22,6 +22,7 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
     //***EDITED
     public void testsetStatus(){
         User user1 = new User("Tom");
+<<<<<<< HEAD
 
         Computer testcomputer1 = new Computer(UUID.randomUUID(),"cooljohn123", "Microsoft",
                 "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
@@ -30,6 +31,10 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         //Computer testcomputer2 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
               //  500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
 
+=======
+        Computer testcomputer1 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+>>>>>>> origin/master
 
         testcomputer1.setStatus("bidded");
         assertEquals("bidded",testcomputer1.getStatus());
@@ -41,6 +46,7 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         }
     }
 
+<<<<<<< HEAD
 //    //Test to make sure a user can attach a photograph to a computer object
 //    //Test for corresponding US 09.01.01 (Attach_photo)
 //    //***EDIT
@@ -158,6 +164,8 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
 //        assertEquals("T6R 0M7", ElasticSearchComputer.getComputersById(testcomputer1.getId()).getLocation());
 //    }
 
+=======
+>>>>>>> origin/master
     //Test to make sure a user can attach a photograph to a computer object
     //Test for corresponding US 09.01.01 (Attach_photo)
     //***EDIT
