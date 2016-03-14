@@ -24,6 +24,7 @@ public class NewUser extends ActionBarActivity {
     private User pendingUser;
     private ArrayList<User> currentUsers;
     private CurrentUser cu;
+    private User prevUser;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,8 +57,8 @@ public class NewUser extends ActionBarActivity {
 
         if (isEdit) {
             cu = CurrentUser.getInstance();
-            pendingUser = getUserInfo(cu.getCurrentUser());
-            displayUserInfo(pendingUser);
+            prevUser = getUserInfo(cu.getCurrentUser());
+            displayUserInfo(prevUser);
         }
 
 
@@ -80,7 +81,7 @@ public class NewUser extends ActionBarActivity {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is edit user", Toast.LENGTH_SHORT);
                     takenUser.show();
-                    update(pendingUser);
+                    update(prevUser, pendingUser);
                     cu.setCurrentUser(pendingUser.getUsername());
                     finish();
 
@@ -235,12 +236,12 @@ public class NewUser extends ActionBarActivity {
         }
 
     }
-    public void update(final User user) {
+    public void update(final User oldUser, final User newUser) {
 
         try {
             Thread thread = new Thread(new Runnable() {
                 public void run() {
-                    ElasticSearchUser.updateUser(user);
+                    ElasticSearchUser.updateUser(oldUser, newUser);
                 }
             });
 

@@ -91,28 +91,46 @@ public class ElasticSearchUser {
      * Delete the user given the username
      * @param username id of the computer to be delete
      */
-    public static void deleteUser(String username) {
+    public static void deleteUser(String username, String name) {
         verifyClient();
+        ArrayList<User> users = new ArrayList<User>();
 
-        Delete delete = new Delete.Builder(username).index("users").type("user").build();
+        String q = "{\"query\":{\"match\":{\"name\":\"" + name + "\"}}}";
+        Search search = new Search.Builder(q).addIndex("users").addType("user").build();
         try {
-            DocumentResult execute = client.execute(delete);
-            if(execute.isSucceeded()) {
-                //TODO: something
-            } else {
-                Log.i("what", execute.getJsonString());
-                Log.i("what", Integer.toString(execute.getResponseCode()));
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<User> found = result.getSourceAsObjectList(User.class);
+                users.addAll(found);
             }
-            return;
         } catch (IOException e) {
-            // TODO: Something more useful
             e.printStackTrace();
+        }
+
+        int i;
+        for (i = 0; i < users.size(); i++) {
+            if (username.equals(users.get(i).getUsername())) {
+                Delete delete = new Delete.Builder(users.get(i).getName()).index("users").type("user").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if (execute.isSucceeded()) {
+                        //TODO: something
+                    } else {
+                        Log.i("what", execute.getJsonString());
+                        Log.i("what", Integer.toString(execute.getResponseCode()));
+                    }
+                    return;
+                } catch (IOException e) {
+                    // TODO: Something more useful
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    public static void updateUser(User user) {
-        deleteUser(user.getUsername());
-        addUser(user);
+    public static void updateUser(User oldUser, User newUser) {
+        deleteUser(oldUser.getUsername(), oldUser.getName());
+        addUser(newUser);
     }
 
     /**
