@@ -31,7 +31,7 @@ As an owner or borrower, I want a thing to have a status of one of: available, b
 - [x]
 US 03.01.01
 As a user, I want a profile with a unique username and my contact information.
-- [ ]
+- [x]
 US 03.02.01
 As a user, I want to edit the contact information in my profile.
 - [ ]
