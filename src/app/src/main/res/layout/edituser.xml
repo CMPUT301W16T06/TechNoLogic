@@ -15,7 +15,7 @@
         android:layout_gravity="center"
         android:gravity="left|center"
         android:fontFamily="sans-serif-light"
-        android:id="@+id/userUsername"
+        android:id="@+id/edit_userUsername"
         android:hint="Username" />
 
     <EditText
@@ -26,7 +26,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/userName"
+        android:id="@+id/edit_userName"
         android:hint="Name" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/userEmail"
+        android:id="@+id/edit_userEmail"
         android:hint="Email Address" />
 
     <EditText
@@ -48,7 +48,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/userPhone"
+        android:id="@+id/edit_userPhone"
         android:hint="Phone Number" />
 
     <EditText
@@ -59,7 +59,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/userAddress"
+        android:id="@+id/edit_userAddress"
         android:hint="Address" />
 
     <Button
@@ -70,7 +70,7 @@
         android:background="@drawable/edittextdark"
         android:text="CHANGE INFORMATION"
         android:onClick=""
-        android:id="@+id/userSubmit"
+        android:id="@+id/edit_userSubmit"
         android:fontFamily="sans-serif-light"
         android:layout_gravity="center"/>
 

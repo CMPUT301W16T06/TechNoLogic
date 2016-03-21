@@ -247,6 +247,7 @@ public class NewUser extends ActionBarActivity {
         }
 
     }
+
     public void update(final User oldUser, final User newUser) {
 
         try {
