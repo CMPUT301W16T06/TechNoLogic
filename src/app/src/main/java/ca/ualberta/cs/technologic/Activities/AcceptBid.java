@@ -7,18 +7,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
-import ca.ualberta.cs.technologic.Computer;
-import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.BidAdapter;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
@@ -30,8 +27,9 @@ public class AcceptBid extends ActionBarActivity {
     private UUID bidID;
     private Bid selectedBid;
     private boolean selected = false;
-    private ArrayAdapter<Bid> listAdapter;
+    //private ArrayAdapter<Bid> listAdapter;
     private ListView bidslist;
+    private BidAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +129,8 @@ public class AcceptBid extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
+        //listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
+        listAdapter = new BidAdapter(this, bids, false);
         bidslist.setAdapter(listAdapter);
     }
 

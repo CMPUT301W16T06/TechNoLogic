@@ -119,7 +119,7 @@ public class ItemView extends ActionBarActivity {
         ((TextView) findViewById(R.id.infoMemory)).setText(c.getRam().toString());
         ((TextView) findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
         ((TextView) findViewById(R.id.infoOs)).setText(c.getOs());
-        ((TextView) findViewById(R.id.infoBaserate)).setText(c.getPrice().toString());
+        ((TextView) findViewById(R.id.infoBaserate)).setText(String.format("%.2f", c.getPrice()));
         ((TextView) findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
 

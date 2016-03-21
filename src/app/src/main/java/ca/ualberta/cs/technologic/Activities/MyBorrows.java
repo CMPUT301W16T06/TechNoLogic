@@ -8,46 +8,123 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
+import ca.ualberta.cs.technologic.Bid;
+import ca.ualberta.cs.technologic.Borrow;
+import ca.ualberta.cs.technologic.BorrowAdapter;
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
+import ca.ualberta.cs.technologic.ElasticSearchBorrowing;
 import ca.ualberta.cs.technologic.R;
 
 public class MyBorrows extends ActionBarActivity {
+    private ArrayList<Borrow> borrows;
+    private ArrayList<Computer> comps;
+    private CurrentUser cu = CurrentUser.getInstance();
+    //ComputerAdapter listAdapter;
+    ListView borrowlist;
+    BorrowAdapter listAdatper;
+    boolean selected;
+    Borrow selectedBorrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_borrows);
-        ListView borrowlist = (ListView) findViewById(R.id.borrowlist);
+        borrowlist = (ListView) findViewById(R.id.borrowlist);
+        Button returnBtn = (Button) findViewById(R.id.returnComp);
 
-        borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        //when accept button is pressed, bid is converted to borrowed
+        //all other bids must be rejected and status of computer changes
+        returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent goToInfo = new Intent(MyBorrows.this, ItemInfo.class);
-                startActivity(goToInfo);
+            public void onClick(View v) {
+                //check if bid is selected
+                if (selected) {
+                    Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            ElasticSearchBorrowing.returnComputer(selectedBorrow);
+                        }
+                    });
+                    thread.start();
+
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+//                    Toast bidAccepted = Toast.makeText(getApplicationContext(), "Bid has been accepted!", Toast.LENGTH_SHORT);
+//                    bidAccepted.show();
+                    borrows.remove(selectedBorrow);
+                    listAdatper.notifyDataSetChanged();
+                    //onBackPressed();
+                }
             }
         });
 
         borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent goToInfo = new Intent(MyBorrows.this, ItemInfo.class);
-                startActivity(goToInfo);
+                selected = true;
+                selectedBorrow = (Borrow) parent.getAdapter().getItem(position);
             }
         });
 
         //This is just testing... DELETE LATER
 //        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
 //                "Jupiter", "Saturn", "Uranus", "Neptune"};
-        String[] planets = new String[] {"Coming Soon!"};
-        ArrayList<String> planetList = new ArrayList<String>();
-        planetList.addAll(Arrays.asList(planets));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
-        borrowlist.setAdapter(listAdapter);
+//        String[] planets = new String[] {"Coming Soon!"};
+//        ArrayList<String> planetList = new ArrayList<String>();
+//        planetList.addAll(Arrays.asList(planets));
+//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
+//        borrowlist.setAdapter(listAdapter);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //gets all computers that user is borrowing
+        getMyBorrows();
+
+        //ArrayAdapter<Borrow> listAdapter = new ArrayAdapter<Borrow>(this, R.layout.listviewtext, borrows);
+        listAdatper = new BorrowAdapter(this, borrows, true);
+        borrowlist.setAdapter(listAdatper);
+
+        if (borrows.size() == 0){
+            Toast msg = Toast.makeText(getApplicationContext(), "You are borrowing no computers", Toast.LENGTH_SHORT);
+            msg.show();
+        }
+    }
+
+    /**
+     * gets all computers that the user is currenlty borrowing
+     * from other user
+     */
+    public void getMyBorrows(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                borrows = ElasticSearchBorrowing.getMyBorrows(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

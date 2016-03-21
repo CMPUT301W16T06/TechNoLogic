@@ -21,7 +21,8 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
+        android:listSelector="@android:color/darker_gray"
         android:id="@+id/borrowlist"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
@@ -29,4 +30,16 @@
         android:layout_above="@+id/addnewitem"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView" />
+
+    <Button
+        android:layout_width="150dp"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextdark"
+        android:text="Return"
+        android:id="@+id/returnComp"
+        android:layout_below="@+id/borrowlist"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

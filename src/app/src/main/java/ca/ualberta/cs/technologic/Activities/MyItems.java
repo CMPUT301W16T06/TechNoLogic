@@ -22,7 +22,8 @@ import ca.ualberta.cs.technologic.R;
 
 public class MyItems extends ActionBarActivity {
 
-    private ArrayList<Computer> comps = null;
+    private ArrayList<Computer> comps = new ArrayList<Computer>();
+    private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
     private CurrentUser cu = CurrentUser.getInstance();
     ListView myitemslist;
     ComputerAdapter listAdapter;
@@ -41,7 +42,7 @@ public class MyItems extends ActionBarActivity {
             public void onClick(View v) {
                 Intent goToAddItems = new Intent(MyItems.this, AddItems.class);
                 startActivity(goToAddItems);
-                onBackPressed();
+                //onBackPressed();
             }
         });
 
@@ -53,10 +54,12 @@ public class MyItems extends ActionBarActivity {
                 Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
-                onBackPressed();
+                //onBackPressed();
             }
         });
 
+        listAdapter = new ComputerAdapter(this, comps);
+        myitemslist.setAdapter(listAdapter);
     }
 
     @Override
@@ -64,30 +67,35 @@ public class MyItems extends ActionBarActivity {
         super.onStart();
         //get all computer belonging to this user
         getComputers();
-        listAdapter = new ComputerAdapter(this, comps);
-        myitemslist.setAdapter(listAdapter);
+
+        //comps.remove(0);
+        //comps.addAll(compsTemp);
+        //listAdapter.notifyDataSetChanged();
+
+//        listAdapter = new ComputerAdapter(this, comps);
+//        myitemslist.setAdapter(listAdapter);
 
         if (comps.size() == 0){
             Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
             myitems.show();
         }
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
         getComputers();
-        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
-        myitemslist.setAdapter(listAdapter);
     }
 
     /**
      *     gets all computers belonging to the current logged in user
      */
     public void getComputers(){
+        compsTemp.clear();
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
+                compsTemp = ElasticSearchComputer.getComputers(cu.getCurrentUser());
             }
         });
         thread.start();
@@ -97,6 +105,9 @@ public class MyItems extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        comps.clear();
+        comps.addAll(compsTemp);
+        listAdapter.notifyDataSetChanged();
     }
 
 

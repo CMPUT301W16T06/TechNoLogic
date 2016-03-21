@@ -75,11 +75,9 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
-                //Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
-                //startActivity(goToItems2);
-               // onBackPressed();
-                Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
-                toast1.show();
+                onBackPressed();
+                //Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
+                //toast1.show();
             }
         });
     }
@@ -180,7 +178,7 @@ public class ItemInfo extends ActionBarActivity {
         ((EditText)findViewById(R.id.infoMemory)).setText(c.getRam().toString());
         ((EditText)findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
         ((EditText)findViewById(R.id.infoOs)).setText(c.getOs());
-        ((EditText)findViewById(R.id.infoBaserate)).setText(c.getPrice().toString());
+        ((EditText)findViewById(R.id.infoBaserate)).setText(String.format("%.2f",c.getPrice()));
         ((EditText)findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
 
