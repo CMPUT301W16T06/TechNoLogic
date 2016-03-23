@@ -208,7 +208,7 @@ public class ItemInfo extends ActionBarActivity {
                 startActivity(new Intent(this, MyItems.class));
                 break;
             case R.id.accountsettings:
-                startActivity(new Intent(this, NewUser.class));
+                startActivity(new Intent(this, EditUser.class));
                 break;
             case R.id.logout:
                 startActivity(new Intent(this, LoginActivity.class));

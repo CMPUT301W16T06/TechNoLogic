@@ -34,16 +34,14 @@ public class NewUser extends ActionBarActivity {
     boolean isEdit;
     private User pendingUser;
     private ArrayList<User> currentUsers;
-    private CurrentUser cu;
+/*    private CurrentUser cu;
     private User prevUser;
-
+*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
@@ -57,12 +55,13 @@ public class NewUser extends ActionBarActivity {
         }
         return super.onPrepareOptionsMenu(menu);
     }
+*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newuser);
-
+/*
         Intent intent = getIntent();
         isEdit = intent.getBooleanExtra("bool",false);
 
@@ -71,7 +70,7 @@ public class NewUser extends ActionBarActivity {
             prevUser = getUserInfo(cu.getCurrentUser());
             displayUserInfo(prevUser);
         }
-
+*/
 
         // Set confirmUserButton click. Return Intent will be implemented along with LoginActivity
         Button confirmUserButton = (Button) findViewById(R.id.userSubmit);
@@ -87,7 +86,7 @@ public class NewUser extends ActionBarActivity {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "One or more fields are empty", Toast.LENGTH_SHORT);
                     takenUser.show();
-
+/*
                 } else if (isEdit) {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is edit user", Toast.LENGTH_SHORT);
@@ -95,7 +94,7 @@ public class NewUser extends ActionBarActivity {
                     update(prevUser, pendingUser);
                     cu.setCurrentUser(pendingUser.getUsername());
                     finish();
-
+*/
                 } else if (availUsername(pendingUser.getUsername())) {
                     // Add to existingUsers, save and return Intent
                     Toast takenUser = Toast.makeText(getApplicationContext(),
@@ -173,6 +172,7 @@ public class NewUser extends ActionBarActivity {
      * @param username elastic search for this user
      * @return User corresponding to the username
      */
+/*
     public User getUserInfo(final String username) {
         //TODO: elastic search implementation
         currentUsers = new ArrayList<User>();
@@ -191,13 +191,15 @@ public class NewUser extends ActionBarActivity {
         }
         return currentUsers.get(0);
     }
-
+*/
     /**
      *  Displays the User's current information so that they
      *      can edit.
      * @param user information to set the textfields to edit
      */
+/*
     public void displayUserInfo(User user){
+
         EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
         ET_newUserName.setEnabled(false);
         ET_newUserName.setTextColor(Color.parseColor("#ffffff"));
@@ -214,13 +216,15 @@ public class NewUser extends ActionBarActivity {
         ET_newPhoneNum.setText(user.getPhone());
         ET_newAddress.setText(user.getAddress());
     }
-
+*/
     /**
      * Helper function for getting the text as a string from an EditText object
      * @param editText is an EditText object
      * @return returns the string of the EditText object
      */
+
     public String EditTextToString (EditText editText) {
+
         return editText.getText().toString();
     }
 
@@ -247,7 +251,7 @@ public class NewUser extends ActionBarActivity {
         }
 
     }
-
+/*
     public void update(final User oldUser, final User newUser) {
 
         try {
@@ -270,5 +274,5 @@ public class NewUser extends ActionBarActivity {
             e.printStackTrace();
         }
     }
-
+*/
 }
