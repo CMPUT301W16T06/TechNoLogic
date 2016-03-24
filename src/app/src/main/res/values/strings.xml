@@ -36,4 +36,7 @@
 
     <string name="USERNAME">""</string>
     <string name="title_activity_item_view">ItemView</string>
+    <string name="location">Location</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
 </resources>

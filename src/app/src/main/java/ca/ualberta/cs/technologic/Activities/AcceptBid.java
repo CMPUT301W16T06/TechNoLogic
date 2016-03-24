@@ -1,17 +1,28 @@
 package ca.ualberta.cs.technologic.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
@@ -30,6 +41,8 @@ public class AcceptBid extends ActionBarActivity {
     //private ArrayAdapter<Bid> listAdapter;
     private ListView bidslist;
     private BidAdapter listAdapter;
+    private Double longitude;
+    private Double latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +61,10 @@ public class AcceptBid extends ActionBarActivity {
             public void onClick(View v) {
                 //check if bid is selected
                 if (selected) {
+                    getLocation();
                     Thread thread = new Thread(new Runnable() {
                         public void run() {
-                            ElasticSearchBidding.acceptBid(selectedBid, bids);
+                            ElasticSearchBidding.acceptBid(selectedBid, bids, longitude, latitude);
                         }
                     });
                     thread.start();
@@ -107,6 +121,65 @@ public class AcceptBid extends ActionBarActivity {
                 bidID = selectedBid.getBidID();
             }
         });
+
+    }
+    public void getLocation() {
+
+        //http://developer.android.com/guide/topics/ui/dialogs.html
+        //http://stackoverflow.com/questions/12799751/android-how-do-i-retrieve-edittext-gettext-in-custom-alertdialog
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater linf = LayoutInflater.from(this);
+        final View inflator = linf.inflate(R.layout.specifylocation, null);
+        builder.setView(inflator);
+
+        builder.setTitle("Pickup Location");
+        builder.setMessage("Specify Location for Pickup:");
+
+
+
+        // Add the buttons
+        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                EditText locationEdit = (EditText) inflator.findViewById(R.id.location);
+                String location = locationEdit.getText().toString();
+                getCoordinates(location);
+
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                onStart();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    public void getCoordinates(String location) {
+        //http://developer.android.com/reference/android/location/Geocoder.html
+        //http://stackoverflow.com/questions/3641304/get-latitude-and-longitude-using-zipcode
+        Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
+        try {
+            List<Address> addresses = geoCoder.getFromLocationName(location, 1);
+
+            if (addresses != null && !addresses.isEmpty()) {
+                Address address = addresses.get(0);
+                // Use the address as needed
+                longitude = address.getLongitude();
+                latitude = address.getLatitude();
+                String message = String.format("Latitude: %f, Longitude: %f",
+                        latitude, longitude);
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            } else {
+                // Display appropriate message when Geocoder services are not available
+                Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

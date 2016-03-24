@@ -14,8 +14,9 @@ public class Borrow{
     private UUID computerID;
     private String username;
     private String owner;
-//    private static final String FILENAME = "borrows.sav";
-//    private ArrayList<Borrow> borrows = new ArrayList<Borrow>();
+    private Double latitude;
+    private Double longitude;
+
 
     /**
      * Create a Bid Object
@@ -28,11 +29,13 @@ public class Borrow{
         this.owner = getOwner(computerID);
     }
 
-    public Borrow(UUID computerID, String username, String owner) {
+    public Borrow(UUID computerID, String username, String owner, Double latitude, Double longitude) {
         this.borrowID = UUID.randomUUID();
         this.computerID = computerID;
         this.username = username;
         this.owner = owner;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public UUID getBorrowID() {
@@ -89,6 +92,38 @@ public class Borrow{
     //Has to be implemented that it gets the owner from the computer ID
     public String getOwner(UUID computerID) {
         return owner;
+    }
+
+    /**
+     * Gets the latitude of pickup location
+     * @return
+     */
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    /**
+     * Sets the latitude of the pickup location
+     * @param latitude
+     */
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    /**
+     * Gets the longitude of the pickup location
+     * @return
+     */
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    /**
+     * Sets the longitude of the pickup location
+     * @param longitude
+     */
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     /**

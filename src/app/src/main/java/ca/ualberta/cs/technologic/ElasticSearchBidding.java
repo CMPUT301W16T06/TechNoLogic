@@ -28,7 +28,6 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticSearchBidding {
     private static JestDroidClient client;
-    private static Gson gson;
 
     /**
      * Get bids
@@ -139,10 +138,10 @@ public class ElasticSearchBidding {
      * @param bidAccepted the bid that was accepted
      * @param allBids all bids that correspond to the computer
      */
-    public static void acceptBid(Bid bidAccepted, ArrayList<Bid> allBids){
+    public static void acceptBid(Bid bidAccepted, ArrayList<Bid> allBids, Double longitude, Double latitude){
         //add new entry into borrowing for accpeted bid
         Borrow borrow = new Borrow(bidAccepted.getComputerID(),
-                bidAccepted.getUsername(),bidAccepted.getOwner());
+                bidAccepted.getUsername(),bidAccepted.getOwner(), longitude, latitude);
         ElasticSearchBorrowing.addBorrow(borrow);
 
         //change the status of the computer
