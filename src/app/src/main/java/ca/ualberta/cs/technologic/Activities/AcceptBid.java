@@ -25,18 +25,15 @@ import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.BidAdapter;
-import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
 public class AcceptBid extends ActionBarActivity {
     private ArrayList<Bid> bids = null;
-    private CurrentUser cu = CurrentUser.getInstance();
     private String compID;
     private UUID bidID;
     private Bid selectedBid;
     private boolean selected = false;
-    //private ArrayAdapter<Bid> listAdapter;
     private ListView bidslist;
     private BidAdapter listAdapter;
     private Double longitude;
