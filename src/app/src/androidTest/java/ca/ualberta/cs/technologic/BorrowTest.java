@@ -5,13 +5,10 @@ import android.test.ActivityInstrumentationTestCase2;
 import java.util.ArrayList;
 import java.util.UUID;
 
-/**
- * Created by Eric on 2016-02-11.
- */
 public class BorrowTest extends ActivityInstrumentationTestCase2 {
 
-    public BorrowTest() {
-        super(Computer.class);
+    public BorrowTest(Class activityClass) {
+        super(activityClass);
     }
 
     /**
@@ -21,7 +18,6 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testViewBorrower() {
         // Initialize Users and Computers
-        User testUser1 = new User("Tom");
         User testUser2 = new User("Ashley");
 
         Computer testcomputer1 = new Computer("Tom", "Microsoft", "surface", 2014, "intel i7", 8,
@@ -51,7 +47,6 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testViewOwner() {
         // Initialize Users and Computers
-        User testUser1 = new User("Tom");
         User testUser2 = new User("Ashley");
 
         Computer testcomputer1 = new Computer("Tom", "Microsoft", "surface", 2014, "intel i7", 8,

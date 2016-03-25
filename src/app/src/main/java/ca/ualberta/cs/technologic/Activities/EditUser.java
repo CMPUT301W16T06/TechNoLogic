@@ -18,9 +18,6 @@ import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
-/**
- * Created by Eric on 2016-03-21.
- */
 public class EditUser extends ActionBarActivity {
     private ArrayList<User> currentUsers;
     private CurrentUser cu;
@@ -88,7 +85,7 @@ public class EditUser extends ActionBarActivity {
         });
     }
 
-    public User getUserInput() {
+    private User getUserInput() {
         // Get all Strings from EditText views
         String newUserName = ((TextView) findViewById(R.id.edit_userUsername)).getText().toString();
         String newName = EditTextToString((EditText) findViewById(R.id.edit_userName));
@@ -115,7 +112,7 @@ public class EditUser extends ActionBarActivity {
         return inputUser;
     }
 
-    public void displayUserInfo(User user){
+    private void displayUserInfo(User user){
         TextView ET_newUserName = (TextView) findViewById(R.id.edit_userUsername);
         EditText ET_newName = (EditText) findViewById(R.id.edit_userName);
         EditText ET_newEmail = (EditText) findViewById(R.id.edit_userEmail);
@@ -129,11 +126,11 @@ public class EditUser extends ActionBarActivity {
         ET_newAddress.setText(user.getAddress());
     }
 
-    public String EditTextToString (EditText editText) {
+    private String EditTextToString (EditText editText) {
         return editText.getText().toString();
     }
 
-    public User getUserInfo(final String username) {
+    private User getUserInfo(final String username) {
         //TODO: elastic search implementation
         currentUsers = new ArrayList<User>();
 
@@ -152,7 +149,7 @@ public class EditUser extends ActionBarActivity {
         return currentUsers.get(0);
     }
 
-    public void update(final User oldUser, final User newUser) {
+    private void update(final User oldUser, final User newUser) {
 
         try {
             Thread thread = new Thread(new Runnable() {

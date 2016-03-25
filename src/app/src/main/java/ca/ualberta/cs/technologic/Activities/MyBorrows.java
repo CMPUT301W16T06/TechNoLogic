@@ -7,22 +7,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
 
-import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.Borrow;
 import ca.ualberta.cs.technologic.BorrowAdapter;
 import ca.ualberta.cs.technologic.Computer;
-import ca.ualberta.cs.technologic.ComputerAdapter;
 import ca.ualberta.cs.technologic.CurrentUser;
-import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchBorrowing;
 import ca.ualberta.cs.technologic.R;
 
@@ -30,11 +24,10 @@ public class MyBorrows extends ActionBarActivity {
     private ArrayList<Borrow> borrows;
     private ArrayList<Computer> comps;
     private CurrentUser cu = CurrentUser.getInstance();
-    //ComputerAdapter listAdapter;
-    ListView borrowlist;
-    BorrowAdapter listAdatper;
+    private ListView borrowlist;
+    private BorrowAdapter listAdatper;
     boolean selected;
-    Borrow selectedBorrow;
+    private Borrow selectedBorrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +103,7 @@ public class MyBorrows extends ActionBarActivity {
      * gets all computers that the user is currenlty borrowing
      * from other user
      */
-    public void getMyBorrows(){
+    private void getMyBorrows(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 borrows = ElasticSearchBorrowing.getMyBorrows(cu.getCurrentUser());

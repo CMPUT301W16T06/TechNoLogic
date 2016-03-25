@@ -2,7 +2,6 @@ package ca.ualberta.cs.technologic;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import io.searchbox.client.JestResult;
@@ -95,8 +93,7 @@ public class ElasticSearchBidding {
     public static ArrayList<Computer> getMyItemBids(String owner) {
         verifyClient();
 
-        ArrayList<Computer> comps = ElasticSearchComputer.getComputersBidded(owner);
-        return comps;
+        return ElasticSearchComputer.getComputersBidded(owner);
     }
 
     public static void placeBid(Bid bid){
@@ -110,7 +107,7 @@ public class ElasticSearchBidding {
      * adds a bid into the system
      * @param bid bid to be added
      */
-    public static void addBid(Bid bid) {
+    private static void addBid(Bid bid) {
         verifyClient();
 
         Index index = new Index.Builder(bid).index("bids").type("bid").build();
@@ -123,7 +120,6 @@ public class ElasticSearchBidding {
                 Log.i("what", execute.getJsonString());
                 Log.i("what", Integer.toString(execute.getResponseCode()));
             }
-            return;
         } catch (IOException e) {
             // TODO: Something more useful
             e.printStackTrace();
@@ -168,12 +164,12 @@ public class ElasticSearchBidding {
      * Removes the Bid given the id
      * @param bidID id of the bid to be delete
      */
-    public static void deleteBid(UUID bidID) {
+    private static void deleteBid(UUID bidID) {
         verifyClient();
 
         ArrayList<Bid> bids = new ArrayList<Bid>();
         List<SearchResult.Hit<Map,Void>> hits = null;
-        String elasticSearchID = "";
+        String elasticSearchID;
 
         String q ="{\"query\":{\"match\":{\"bidID\":\"" + bidID + "\"}}}";
         Search search = new Search.Builder(q).addIndex("bids").addType("bid").build();
@@ -202,7 +198,6 @@ public class ElasticSearchBidding {
                     Log.i("what", execute.getJsonString());
                     Log.i("what", Integer.toString(execute.getResponseCode()));
                 }
-                return;
             } catch (IOException e) {
                 // TODO: Something more useful
                 e.printStackTrace();
@@ -213,7 +208,7 @@ public class ElasticSearchBidding {
     /**
      * Verifies the elastic search DB
      */
-    public static void verifyClient() {
+    private static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");
             DroidClientConfig config = builder.build();

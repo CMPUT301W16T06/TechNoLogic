@@ -1,6 +1,4 @@
 package ca.ualberta.cs.technologic.Activities;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -13,7 +11,7 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class AddItems extends ActionBarActivity {
-    private CurrentUser cu = CurrentUser.getInstance();
+    final private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

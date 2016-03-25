@@ -7,14 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
@@ -26,10 +23,9 @@ public class HomePage extends ActionBarActivity {
 
     private ArrayList<Computer> comps = null;
     private CurrentUser cu = CurrentUser.getInstance();
-    String username = cu.toString();
-    ListView itemslist;
-    Button go;
-    EditText search;
+    private String username = cu.toString();
+    private ListView itemslist;
+    private EditText search;
 
     /**
      * Set up on click listeners for itemlist click and go click
@@ -37,6 +33,7 @@ public class HomePage extends ActionBarActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button go;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         itemslist = (ListView) findViewById(R.id.homelist);
@@ -78,7 +75,7 @@ public class HomePage extends ActionBarActivity {
      * Gets all computers from the DB
      * @see ElasticSearchComputer
     */
-    public void getComputers(){
+    private void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchComputer.getAllComputers();
@@ -96,7 +93,7 @@ public class HomePage extends ActionBarActivity {
     /**
      * Gets computers from search from DB
      */
-    public void getComputersSearch(){
+    private void getComputersSearch(){
         //Toast toast1 = Toast.makeText(getApplicationContext(), search.getText().toString(), Toast.LENGTH_SHORT);
         //toast1.show();
         Thread thread = new Thread(new Runnable() {

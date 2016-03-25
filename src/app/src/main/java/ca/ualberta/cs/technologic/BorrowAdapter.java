@@ -9,9 +9,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Jessica on 2016-03-18.
- */
 public class BorrowAdapter extends ArrayAdapter<Borrow> {
     private boolean myBorrows;
 

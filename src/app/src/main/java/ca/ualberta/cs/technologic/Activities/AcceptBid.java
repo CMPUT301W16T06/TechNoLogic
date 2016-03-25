@@ -17,8 +17,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +121,7 @@ public class AcceptBid extends ActionBarActivity {
         });
 
     }
-    public void getLocation() {
+    private void getLocation() {
 
         //http://developer.android.com/guide/topics/ui/dialogs.html
         //http://stackoverflow.com/questions/12799751/android-how-do-i-retrieve-edittext-gettext-in-custom-alertdialog
@@ -158,7 +156,7 @@ public class AcceptBid extends ActionBarActivity {
 
     }
 
-    public void getCoordinates(String location) {
+    private void getCoordinates(String location) {
         //http://developer.android.com/reference/android/location/Geocoder.html
         //http://stackoverflow.com/questions/3641304/get-latitude-and-longitude-using-zipcode
         Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());

@@ -1,13 +1,9 @@
 package ca.ualberta.cs.technologic;
 
-import java.util.ArrayList;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
 
-/**
- * Created by gknoblau on 2016-02-16.
- */
 public class Borrow{
     @JestId
     private UUID borrowID;

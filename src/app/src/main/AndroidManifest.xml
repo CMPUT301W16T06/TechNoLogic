@@ -24,41 +24,43 @@
         </activity>
         <activity
             android:name=".Activities.NewUser"
-            android:label="@string/title_activity_new_user"
+            android:label="@string/newuser"
             android:parentActivityName=".Activities.LoginActivity" />
         <activity
             android:name=".Activities.EditUser"
-            android:label="EditUser" />
+            android:label="@string/edituser" />
         <activity
             android:name=".Activities.HomePage"
-            android:label="@string/title_activity_home_page" />
+            android:label="@string/homepage" />
         <activity
             android:name=".Activities.MyItems"
-            android:label="@string/title_activity_my_items" />
+            android:label="@string/mycomputers" />
         <activity
             android:name=".Activities.AddItems"
-            android:label="@string/title_activity_add_items" />
+            android:label="@string/addcomputer" />
         <activity
             android:name=".Activities.ItemInfo"
-            android:label="@string/title_activity_item_info" />
+            android:label="@string/computerinfo" />
         <activity
             android:name=".Activities.LentOut"
-            android:label="@string/title_activity_lent_out" />
+            android:label="@string/lentout" />
         <activity
             android:name=".Activities.MyBorrows"
-            android:label="@string/title_activity_my_borrows" />
+            android:label="@string/myborrows" />
         <activity
             android:name=".Activities.MyItemBids"
-            android:label="@string/title_activity_my_item_bids" />
+            android:label="@string/myitembids" />
         <activity
             android:name=".Activities.AcceptBid"
-            android:label="@string/title_activity_bids" />
+            android:label="@string/acceptbid" />
         <activity
             android:name=".Activities.Bids"
-            android:label="@string/title_activity_bids" />
+            android:label="@string/mybids" />
         <activity
             android:name=".Activities.ItemView"
-            android:label="@string/title_activity_item_view"></activity>
+            android:label="@string/title_activity_item_view">
+
+        </activity>
     </application>
 
 </manifest>

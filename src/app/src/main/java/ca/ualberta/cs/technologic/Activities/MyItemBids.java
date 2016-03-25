@@ -22,9 +22,8 @@ import ca.ualberta.cs.technologic.R;
 public class MyItemBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private ArrayList<Computer> comps;
-    private CurrentUser cu = CurrentUser.getInstance();
-    ComputerAdapter listAdapter;
-    ListView myitemlist;
+    final private CurrentUser cu = CurrentUser.getInstance();
+    private ListView myitemlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +48,7 @@ public class MyItemBids extends ActionBarActivity {
 
     @Override
     protected void onStart() {
+        ComputerAdapter listAdapter;
         super.onStart();
         //gets all computer that user owns that have been bid on
         getMyItems();
@@ -66,7 +66,7 @@ public class MyItemBids extends ActionBarActivity {
      * gets all computers that the user owns that have
      * been bid on by other users
      */
-    public void getMyItems(){
+    private void getMyItems(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchBidding.getMyItemBids(cu.getCurrentUser());

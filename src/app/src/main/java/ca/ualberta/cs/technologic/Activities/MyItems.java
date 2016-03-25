@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -25,12 +24,12 @@ public class MyItems extends ActionBarActivity {
     private ArrayList<Computer> comps = new ArrayList<Computer>();
     private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
     private CurrentUser cu = CurrentUser.getInstance();
-    ListView myitemslist;
-    ComputerAdapter listAdapter;
+    private ComputerAdapter listAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ListView myitemslist;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_items);
         Button addNewItem = (Button) findViewById(R.id.addnewitem);
@@ -68,13 +67,6 @@ public class MyItems extends ActionBarActivity {
         //get all computer belonging to this user
         getComputers();
 
-        //comps.remove(0);
-        //comps.addAll(compsTemp);
-        //listAdapter.notifyDataSetChanged();
-
-//        listAdapter = new ComputerAdapter(this, comps);
-//        myitemslist.setAdapter(listAdapter);
-
         if (comps.size() == 0){
             Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
             myitems.show();
@@ -91,7 +83,7 @@ public class MyItems extends ActionBarActivity {
     /**
      *     gets all computers belonging to the current logged in user
      */
-    public void getComputers(){
+    private void getComputers(){
         compsTemp.clear();
         Thread thread = new Thread(new Runnable() {
             public void run() {

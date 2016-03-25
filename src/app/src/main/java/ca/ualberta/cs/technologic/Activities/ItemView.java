@@ -1,12 +1,8 @@
 package ca.ualberta.cs.technologic.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -110,7 +106,7 @@ public class ItemView extends ActionBarActivity {
      * bind computer vlaues to the UI
      * @param c the computer
      */
-    public void setComputerValues(Computer c) {
+    private void setComputerValues(Computer c) {
         ((TextView) findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
         ((TextView) findViewById(R.id.infoModel)).setText(c.getModel());

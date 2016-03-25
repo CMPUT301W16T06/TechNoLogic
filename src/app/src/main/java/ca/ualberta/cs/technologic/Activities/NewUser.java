@@ -1,11 +1,8 @@
 package ca.ualberta.cs.technologic.Activities;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +10,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
@@ -118,7 +114,7 @@ public class NewUser extends ActionBarActivity {
      * @param wantedUsername a String
      * @return true if the String is unique to the ArrayList, false if otherwise
      */
-    public boolean availUsername(final String wantedUsername) {
+    private boolean availUsername(final String wantedUsername) {
         currentUsers = new ArrayList<User>();
 
         Thread thread = new Thread(new Runnable() {
@@ -141,7 +137,7 @@ public class NewUser extends ActionBarActivity {
      * Gets the input text fields filled out by the User
      * @return User object
      */
-    public User getUserInput() {
+    private User getUserInput() {
         // Get all Strings from EditText views
         String newUserName = EditTextToString((EditText) findViewById(R.id.userUsername));
         String newName = EditTextToString((EditText) findViewById(R.id.userName));
@@ -223,12 +219,12 @@ public class NewUser extends ActionBarActivity {
      * @return returns the string of the EditText object
      */
 
-    public String EditTextToString (EditText editText) {
+    private String EditTextToString (EditText editText) {
 
         return editText.getText().toString();
     }
 
-    public void add(final User user) {
+    private void add(final User user) {
         // TODO: Adding a new user
         try {
             Thread thread = new Thread(new Runnable() {

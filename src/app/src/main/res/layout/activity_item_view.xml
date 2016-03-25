@@ -6,7 +6,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
@@ -34,8 +34,7 @@
             android:text="Seller:"
             android:id="@+id/lblUsername"
             android:layout_below="@+id/lblId"
-            android:layout_alignParentStart="true"
-            android:layout_alignRight="@+id/lblStatus"/>
+            android:layout_alignParentStart="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
@@ -68,7 +67,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Make"
+            android:text="@string/make"
             android:id="@+id/infoMake"
             android:layout_toRightOf="@+id/lblMake"
             android:layout_below="@+id/lblUsername" />
@@ -91,7 +90,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Model"
+            android:text="@string/model"
             android:id="@+id/infoModel"
             android:layout_toRightOf="@+id/lblMake"
             android:layout_below="@+id/lblMake" />
@@ -114,7 +113,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Harddrive"
+            android:text="@string/harddrive"
             android:id="@+id/infoHarddrive"
             android:layout_toRightOf="@+id/lblHarddive"
             android:layout_below="@+id/lblModel" />
@@ -137,7 +136,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Memory"
+            android:text="@string/memory"
             android:id="@+id/infoMemory"
             android:layout_toRightOf="@+id/lblMemory"
             android:layout_below="@+id/lblHarddive" />
@@ -160,7 +159,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Processor"
+            android:text="@string/processor"
             android:id="@+id/infoProcessor"
             android:layout_toRightOf="@+id/lblProcessor"
             android:layout_below="@+id/lblMemory" />
@@ -183,7 +182,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="OS"
+            android:text="@string/os"
             android:id="@+id/infoOs"
             android:layout_toRightOf="@+id/lblOs"
             android:layout_below="@+id/lblProcessor" />
@@ -206,7 +205,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Year"
+            android:text="@string/year"
             android:id="@+id/infoYear"
             android:layout_toRightOf="@+id/lblYear"
             android:layout_below="@+id/lblOs" />
@@ -229,7 +228,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Baserate"
+            android:text="@string/baserate"
             android:id="@+id/infoBaserate"
             android:layout_toRightOf="@+id/lblBaserate"
             android:layout_below="@+id/lblYear" />
@@ -252,7 +251,7 @@
             android:textSize="15sp"
             android:paddingTop="10dp"
             android:paddingRight="50dp"
-            android:text="Description "
+            android:text="@string/description"
             android:id="@+id/infoDescription"
             android:layout_toRightOf="@+id/lblDescription"
             android:layout_below="@+id/lblBaserate" />

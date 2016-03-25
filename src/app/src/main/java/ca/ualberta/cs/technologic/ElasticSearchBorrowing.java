@@ -2,7 +2,6 @@ package ca.ualberta.cs.technologic;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -27,7 +26,6 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticSearchBorrowing {
     private static JestDroidClient client;
-    private static Gson gson;
 
     /**
      * adds a borrow object into the system
@@ -46,7 +44,6 @@ public class ElasticSearchBorrowing {
                 Log.i("what", execute.getJsonString());
                 Log.i("what", Integer.toString(execute.getResponseCode()));
             }
-            return;
         } catch (IOException e) {
             // TODO: Something more useful
             e.printStackTrace();
@@ -126,12 +123,12 @@ public class ElasticSearchBorrowing {
      * remove the borrow entry from the system
      * @param borrowID
      */
-    public static void removeBorrow(UUID borrowID){
+    private static void removeBorrow(UUID borrowID){
         verifyClient();
 
         ArrayList<Borrow> borrows = new ArrayList<Borrow>();
         List<SearchResult.Hit<Map,Void>> hits = null;
-        String elasticSearchID = "";
+        String elasticSearchID;
 
         String q ="{\"query\":{\"match\":{\"borrowID\":\"" + borrowID + "\"}}}";
         Search search = new Search.Builder(q).addIndex("borrows").addType("borrow").build();
@@ -160,7 +157,6 @@ public class ElasticSearchBorrowing {
                     Log.i("what", execute.getJsonString());
                     Log.i("what", Integer.toString(execute.getResponseCode()));
                 }
-                return;
             } catch (IOException e) {
                 // TODO: Something more useful
                 e.printStackTrace();
@@ -168,7 +164,7 @@ public class ElasticSearchBorrowing {
         }
     }
 
-    public static void verifyClient() {
+    private static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");
             DroidClientConfig config = builder.build();

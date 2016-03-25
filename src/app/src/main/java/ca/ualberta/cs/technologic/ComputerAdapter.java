@@ -7,14 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-/**
- * Created by gknoblau on 2016-03-11.
- */
 public class ComputerAdapter extends ArrayAdapter<Computer>{
     public ComputerAdapter(Context context, ArrayList<Computer> computers) {
         super(context, 0, computers);

@@ -1,23 +1,5 @@
 package ca.ualberta.cs.technologic;
 
-import android.app.Activity;
-import android.provider.ContactsContract;
-import android.location.Address;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.security.KeyStore;
-import java.util.ArrayList;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;

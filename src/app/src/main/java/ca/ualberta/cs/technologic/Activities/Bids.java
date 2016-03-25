@@ -20,7 +20,6 @@ public class Bids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private CurrentUser cu = CurrentUser.getInstance();
     private ListView bidslist;
-    private BidAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +38,7 @@ public class Bids extends ActionBarActivity {
 
     @Override
     protected void onStart() {
+        BidAdapter listAdapter;
         // TODO Auto-generated method stub
         super.onStart();
 

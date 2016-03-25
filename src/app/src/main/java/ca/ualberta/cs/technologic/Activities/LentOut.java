@@ -5,15 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import ca.ualberta.cs.technologic.Borrow;
 import ca.ualberta.cs.technologic.BorrowAdapter;
@@ -26,9 +21,7 @@ public class LentOut extends ActionBarActivity {
     private ArrayList<Borrow> lentOut;
     private ArrayList<Computer> comps;
     private CurrentUser cu = CurrentUser.getInstance();
-    //ComputerAdapter listAdapter;
-    ListView lentlist;
-    BorrowAdapter listAdapter;
+    private ListView lentlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +29,11 @@ public class LentOut extends ActionBarActivity {
         setContentView(R.layout.activity_lent_out);
         lentlist = (ListView) findViewById(R.id.lentlist);
 
-//        lentlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent goToInfo = new Intent(LentOut.this, ItemInfo.class);
-//                startActivity(goToInfo);
-//            }
-//        });
-
-        //This is just testing... DELETE LATER
-//       String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-//                "Jupiter", "Saturn", "Uranus", "Neptune"};
-//        String[] planets = new String[] {"Coming Soon!"};
-//        ArrayList<String> planetList = new ArrayList<String>();
-//        planetList.addAll(Arrays.asList(planets));
-//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
-//        lentlist.setAdapter(listAdapter);
     }
 
     @Override
     protected void onStart() {
+        BorrowAdapter listAdapter;
         super.onStart();
         //gets all computers that user has lent out to other users
         getLentOut();
@@ -74,7 +52,7 @@ public class LentOut extends ActionBarActivity {
      * gets all computers that the user owns that have
      * been lent out to other users
      */
-    public void getLentOut(){
+    private void getLentOut(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 lentOut = ElasticSearchBorrowing.getLentOut(cu.getCurrentUser());

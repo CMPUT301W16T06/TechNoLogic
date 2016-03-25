@@ -25,8 +25,6 @@
         android:id="@+id/bidslist"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
-        android:layout_toStartOf="@+id/addnewitem"
-        android:layout_above="@+id/addnewitem"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView" />
 </RelativeLayout>

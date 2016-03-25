@@ -16,9 +16,6 @@ import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
-/**
- * Created by gknoblau on 2016-02-16.
- */
 public class LoginActivity extends Activity{
 
     private ArrayList<User> users =  new ArrayList<User>();
@@ -59,7 +56,7 @@ public class LoginActivity extends Activity{
         });
     }
 
-    public Boolean userLookup(final String username) {
+    private Boolean userLookup(final String username) {
             // TODO: Check wantedUsername against existing Users
             // TODO: Fix lowercase problem
             if (username.equals("")) {
