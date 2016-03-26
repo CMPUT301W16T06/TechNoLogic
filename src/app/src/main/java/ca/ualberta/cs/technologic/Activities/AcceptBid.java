@@ -154,6 +154,9 @@ public class AcceptBid extends ActionBarActivity {
             } else {
                 // Display appropriate message when Geocoder services are not available
                 Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
+                longitude = -17.666667;
+                latitude = -149.416667;
+                sendBid();
             }
         } catch (IOException e) {
             e.printStackTrace();
