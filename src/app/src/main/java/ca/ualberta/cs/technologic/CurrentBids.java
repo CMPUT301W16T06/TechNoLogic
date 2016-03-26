@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * Created by gknoblau on 3/26/16.
  */
 public class CurrentBids {
-    private ArrayList<Bid> currentBids;
+    private ArrayList<Computer> currentBids;
     private static CurrentBids firstInstance = null;
 
     private CurrentBids() {}
@@ -28,18 +28,22 @@ public class CurrentBids {
         return firstInstance;
     }
 
-    public ArrayList<Bid> getCurrentBids() {
+    public ArrayList<Computer> getCurrentBids() {
         return this.currentBids;
     }
 
-    public void setCurrentBids(ArrayList<Bid> currentBids) {
+    public void setCurrentBids(ArrayList<Computer> currentBids) {
         this.currentBids = currentBids;
     }
 
-    public void addCurrentComputer(Bid newCurrentBid){
+    public void addCurrentComputer(Computer newCurrentBid){
         this.currentBids.add(newCurrentBid);
     }
-    public void deleteCurrentComputer(Bid deleteCurrentBid){
+    public void deleteCurrentComputer(Computer deleteCurrentBid){
         this.currentBids.remove(deleteCurrentBid);
+    }
+
+    public void clear() {
+        currentBids.clear();
     }
 }

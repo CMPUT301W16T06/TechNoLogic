@@ -53,4 +53,7 @@ public class CurrentComputers {
             this.currentComputers.remove(index);
         }
     }
+    public void clear() {
+        currentComputers.clear();
+    }
 }

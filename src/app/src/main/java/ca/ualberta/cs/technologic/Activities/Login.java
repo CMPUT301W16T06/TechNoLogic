@@ -12,7 +12,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.technologic.CurrentBids;
-import ca.ualberta.cs.technologic.CurrentBorrows;
 import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
@@ -25,8 +24,8 @@ public class Login extends Activity{
     private ArrayList<User> users =  new ArrayList<User>();
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers cc = CurrentComputers.getInstance();
-    //private CurrentBids cb = CurrentBids.getInstance();
-    //private CurrentBorrows cbo = CurrentBorrows.getInstance();
+    private CurrentBids cb = CurrentBids.getInstance();
+    private EditText username;
 
     /** Called when the activity is first created. */
     @Override
@@ -34,10 +33,17 @@ public class Login extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        final EditText username = (EditText) findViewById(R.id.username);
-        //final EditText password = (EditText) findViewById(R.id.password);
+        username = (EditText) findViewById(R.id.username);
         Button loginButton = (Button) findViewById(R.id.login);
         TextView newUserButton = (TextView) findViewById(R.id.newUser);
+
+        try {
+            cu.clear();
+            cc.clear();
+            cb.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
@@ -47,10 +53,9 @@ public class Login extends Activity{
 
                 if (usernameValid) {
                     Intent intent = new Intent(Login.this, HomePage.class);
-                    cu.setCurrentUser(username.getText().toString());
+                    setUser();
                     getComputers();
-                    //cb.setCurrentBids();
-                    //cbo.setCurrentBorrows();
+                    getBids();
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
@@ -95,6 +100,11 @@ public class Login extends Activity{
         super.onStart();
 
     }
+    private  void setUser() {
+        cu.setCurrentUser(username.getText().toString());
+
+    }
+
     private void getComputers() {
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -109,11 +119,11 @@ public class Login extends Activity{
             e.printStackTrace();
         }
     }
-    /**
+
     private void getBids() {
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                cb.setCurrentComputers(ElasticSearchBidding.getComputers(cu.getCurrentUser()));
+                cb.setCurrentBids(ElasticSearchComputer.getComputersBidded(cu.getCurrentUser()));
             }
         });
         thread.start();
@@ -124,6 +134,6 @@ public class Login extends Activity{
             e.printStackTrace();
         }
     }
-     **/
+
 
 }
