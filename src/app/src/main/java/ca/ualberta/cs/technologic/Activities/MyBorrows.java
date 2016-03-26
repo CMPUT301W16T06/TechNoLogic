@@ -73,14 +73,6 @@ public class MyBorrows extends ActionBarActivity {
             }
         });
 
-        //This is just testing... DELETE LATER
-//        String[] planets = new String[] { "Mercury", "Venus", "Earth", "Mars",
-//                "Jupiter", "Saturn", "Uranus", "Neptune"};
-//        String[] planets = new String[] {"Coming Soon!"};
-//        ArrayList<String> planetList = new ArrayList<String>();
-//        planetList.addAll(Arrays.asList(planets));
-//        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.listviewtext, planetList);
-//        borrowlist.setAdapter(listAdapter);
     }
 
     @Override
