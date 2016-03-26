@@ -19,7 +19,7 @@ import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class MyItems extends ActionBarActivity {
+public class MyComputers extends ActionBarActivity {
 
     private ArrayList<Computer> comps = new ArrayList<Computer>();
     private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
@@ -39,7 +39,7 @@ public class MyItems extends ActionBarActivity {
         addNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToAddItems = new Intent(MyItems.this, AddItems.class);
+                Intent goToAddItems = new Intent(MyComputers.this, AddComputer.class);
                 startActivity(goToAddItems);
                 //onBackPressed();
             }
@@ -50,7 +50,7 @@ public class MyItems extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Computer entry = (Computer) parent.getAdapter().getItem(position);
-                Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
+                Intent goToInfo = new Intent(MyComputers.this, EditComputerInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
                 //onBackPressed();
@@ -120,16 +120,16 @@ public class MyItems extends ActionBarActivity {
                 startActivity(new Intent(this, HomePage.class));
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                startActivity(new Intent(this, MyComputers.class));
                 break;
             case R.id.accountsettings:
                 startActivity(new Intent(this, EditUser.class));
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, Login.class));
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                startActivity(new Intent(this, MyBids.class));
                 break;
             case R.id.myborrows:
                 startActivity(new Intent(this, MyBorrows.class));
@@ -138,7 +138,7 @@ public class MyItems extends ActionBarActivity {
                 startActivity(new Intent(this, LentOut.class));
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                startActivity(new Intent(this, ReceivedBids.class));
                 break;
         }
 

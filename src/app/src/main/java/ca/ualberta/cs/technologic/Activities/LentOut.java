@@ -83,16 +83,16 @@ public class LentOut extends ActionBarActivity {
                 startActivity(new Intent(this, HomePage.class));
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                startActivity(new Intent(this, MyComputers.class));
                 break;
             case R.id.accountsettings:
                 startActivity(new Intent(this, EditUser.class));
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                startActivity(new Intent(this, Login.class));
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                startActivity(new Intent(this, MyBids.class));
                 break;
             case R.id.myborrows:
                 startActivity(new Intent(this, MyBorrows.class));
@@ -101,7 +101,7 @@ public class LentOut extends ActionBarActivity {
                 startActivity(new Intent(this, LentOut.class));
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                startActivity(new Intent(this, ReceivedBids.class));
                 break;
         }
 

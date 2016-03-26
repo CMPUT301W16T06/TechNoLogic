@@ -10,7 +10,7 @@ import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class AddItems extends ActionBarActivity {
+public class AddComputer extends ActionBarActivity {
     final private CurrentUser cu = CurrentUser.getInstance();
 
     @Override
@@ -24,7 +24,7 @@ public class AddItems extends ActionBarActivity {
             public void onClick(View v) {
                 saveComputer();
                 onBackPressed();
-                //Intent goToItems1 = new Intent(AddItems.this, HomePage.class);
+                //Intent goToItems1 = new Intent(AddComputer.this, HomePage.class);
                 //startActivity(goToItems1);
             }
         });

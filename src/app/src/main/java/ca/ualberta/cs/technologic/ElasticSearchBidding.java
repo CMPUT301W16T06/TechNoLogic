@@ -62,7 +62,7 @@ public class ElasticSearchBidding {
     /**
      * gets all bids for the computer matching the passed in id
      * @param id computer ID
-     * @return arraylist of Bids
+     * @return arraylist of MyBids
      */
     public static ArrayList<Bid> getAllBids(UUID id) {
         verifyClient();

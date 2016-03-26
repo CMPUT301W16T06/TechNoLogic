@@ -18,7 +18,7 @@ import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class ItemView extends ActionBarActivity {
+public class ViewComputer extends ActionBarActivity {
 
     private String id;
     private Computer comp;

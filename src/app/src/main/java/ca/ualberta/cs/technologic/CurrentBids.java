@@ -15,7 +15,7 @@ public class CurrentBids {
 
     /**
      * Makes a singleton
-     * @return the instance of the Bids
+     * @return the instance of the MyBids
      */
     public static CurrentBids getInstance(){
         if(firstInstance == null){

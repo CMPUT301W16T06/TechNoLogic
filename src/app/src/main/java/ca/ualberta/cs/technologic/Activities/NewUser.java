@@ -68,13 +68,13 @@ public class NewUser extends ActionBarActivity {
         }
 */
 
-        // Set confirmUserButton click. Return Intent will be implemented along with LoginActivity
+        // Set confirmUserButton click. Return Intent will be implemented along with Login
         Button confirmUserButton = (Button) findViewById(R.id.userSubmit);
         confirmUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // TODO: Check if the filled in information is correct. No missing information and valid Username
-                // TODO: Return to LoginActivity if correct, otherwise stay and give notice
+                // TODO: Return to Login if correct, otherwise stay and give notice
 
                 pendingUser = getUserInput();
                 //TODO: Validate the username. Do we want to validate all other String fields?

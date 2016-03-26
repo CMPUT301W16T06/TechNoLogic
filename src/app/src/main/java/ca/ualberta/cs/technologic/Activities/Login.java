@@ -16,7 +16,7 @@ import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
-public class LoginActivity extends Activity{
+public class Login extends Activity{
 
     private ArrayList<User> users =  new ArrayList<User>();
     private CurrentUser cu = CurrentUser.getInstance();
@@ -39,7 +39,7 @@ public class LoginActivity extends Activity{
                 //usernameValid = true;
 
                 if (usernameValid) {
-                    Intent intent = new Intent(LoginActivity.this, HomePage.class);
+                    Intent intent = new Intent(Login.this, HomePage.class);
                     cu.setCurrentUser(username.getText().toString());
                     startActivity(intent);
                 } else {
@@ -50,7 +50,7 @@ public class LoginActivity extends Activity{
         });
         newUserButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, NewUser.class);
+                Intent intent = new Intent(Login.this, NewUser.class);
                 startActivity(intent);
             }
         });
