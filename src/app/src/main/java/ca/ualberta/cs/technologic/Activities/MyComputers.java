@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
@@ -24,8 +25,8 @@ public class MyComputers extends ActionBarActivity {
     private ArrayList<Computer> comps = new ArrayList<Computer>();
     private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers currentComps = CurrentComputers.getInstance();
     private ComputerAdapter listAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,6 @@ public class MyComputers extends ActionBarActivity {
             public void onClick(View v) {
                 Intent goToAddItems = new Intent(MyComputers.this, AddComputer.class);
                 startActivity(goToAddItems);
-                //onBackPressed();
             }
         });
 
@@ -53,35 +53,36 @@ public class MyComputers extends ActionBarActivity {
                 Intent goToInfo = new Intent(MyComputers.this, EditComputerInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
-                //onBackPressed();
             }
         });
 
-        listAdapter = new ComputerAdapter(this, comps);
+        listAdapter = new ComputerAdapter(this, currentComps.getCurrentComputers());
         myitemslist.setAdapter(listAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
+        listAdapter.notifyDataSetChanged();
         //get all computer belonging to this user
-        getComputers();
+        //getComputers();
 
-        if (comps.size() == 0){
-            Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
-            myitems.show();
-        }
+//        if (comps.size() == 0){
+//            Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
+//            myitems.show();
+//        }
 
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        getComputers();
-    }
+//    @Override
+//    protected void onResume(){
+//        super.onResume();
+//        getComputers();
+//    }
 
     /**
-     *     gets all computers belonging to the current logged in user
+     * gets all computers belonging to the current logged in user
      */
     private void getComputers(){
         compsTemp.clear();

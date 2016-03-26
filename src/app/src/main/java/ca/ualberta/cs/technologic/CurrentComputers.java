@@ -38,6 +38,8 @@ public class CurrentComputers {
         this.currentComputers.add(newCurrentComputer);
     }
     public void deleteCurrentComputer(Computer deleteCurrentComputer){
-        this.currentComputers.remove(deleteCurrentComputer);
+        int i = this.currentComputers.indexOf(deleteCurrentComputer);
+        this.currentComputers.remove(i);
+        //this.currentComputers.remove(deleteCurrentComputer);
     }
 }

@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
@@ -24,6 +26,7 @@ public class EditComputerInfo extends ActionBarActivity {
     private String id;
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers currentComputers = CurrentComputers.getInstance();
 
 
     @Override
@@ -70,6 +73,7 @@ public class EditComputerInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
+
                 onBackPressed();
                 //Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
                 //toast1.show();
@@ -132,6 +136,13 @@ public class EditComputerInfo extends ActionBarActivity {
         String description = ((EditText)findViewById(R.id.infoDescription)).getText().toString();
         String status = comp.getStatus();
         String username = cu.getCurrentUser();
+
+        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
+                hardDrive, os, price, description, status);
+        ArrayList <Computer> ccomps = currentComputers.getCurrentComputers();
+        ccomps.indexOf(comp);
+        currentComputers.deleteCurrentComputer(comp);
+        currentComputers.addCurrentComputer(c);
 
 
         final Computer computer;
