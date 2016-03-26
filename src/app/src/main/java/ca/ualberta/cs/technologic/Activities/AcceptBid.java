@@ -57,23 +57,10 @@ public class AcceptBid extends ActionBarActivity {
             public void onClick(View v) {
                 //check if bid is selected
                 if (selected){
-                    Thread thread = new Thread(new Runnable() {
-                        public void run() {
-                            ElasticSearchBidding.acceptBid(selectedBid, bids, longitude, latitude);
-                        }
-                    });
-                    thread.start();
-
-                    try {
-                        thread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    Toast bidAccepted = Toast.makeText(getApplicationContext(), "Bid has been accepted!", Toast.LENGTH_SHORT);
-                    bidAccepted.show();
-                    bids.clear();
-                    listAdapter.notifyDataSetChanged();
-                    //onBackPressed();
+                    getLocation();
+                } else {
+                    Toast noBidSelected = Toast.makeText(getApplicationContext(), "You must select a bid!", Toast.LENGTH_SHORT);
+                    noBidSelected.show();
                 }
             }
         });
@@ -114,7 +101,6 @@ public class AcceptBid extends ActionBarActivity {
                 selected = true;
                 selectedBid = (Bid) parent.getAdapter().getItem(position);
                 bidID = selectedBid.getBidID();
-                getLocation();
             }
         });
 
@@ -135,17 +121,12 @@ public class AcceptBid extends ActionBarActivity {
 
 
         // Add the buttons
-        builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 EditText locationEdit = (EditText) inflator.findViewById(R.id.location);
                 String location = locationEdit.getText().toString();
                 getCoordinates(location);
 
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                onStart();
             }
         });
 
@@ -166,10 +147,10 @@ public class AcceptBid extends ActionBarActivity {
                 // Use the address as needed
                 longitude = address.getLongitude();
                 latitude = address.getLatitude();
-                String message = String.format("Latitude: %f, Longitude: %f",
-                        latitude, longitude);
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-                done = Boolean.TRUE;
+                //String message = String.format("Latitude: %f, Longitude: %f",
+                //        latitude, longitude);
+                //Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                sendBid();
             } else {
                 // Display appropriate message when Geocoder services are not available
                 Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
@@ -177,6 +158,26 @@ public class AcceptBid extends ActionBarActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+    private void sendBid() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                ElasticSearchBidding.acceptBid(selectedBid, bids, longitude, latitude);
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Toast bidAccepted = Toast.makeText(getApplicationContext(), "Bid has been accepted!", Toast.LENGTH_SHORT);
+        bidAccepted.show();
+        bids.clear();
+        listAdapter.notifyDataSetChanged();
+        //onBackPressed();
 
     }
 

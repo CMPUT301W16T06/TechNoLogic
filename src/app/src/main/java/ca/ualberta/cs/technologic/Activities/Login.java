@@ -108,5 +108,21 @@ public class Login extends Activity{
             e.printStackTrace();
         }
     }
+    /**
+    private void getBids() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cb.setCurrentComputers(ElasticSearchBidding.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+     **/
 
 }
