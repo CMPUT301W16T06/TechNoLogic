@@ -38,6 +38,7 @@ public class AcceptBid extends ActionBarActivity {
     private BidAdapter listAdapter;
     private Double longitude;
     private Double latitude;
+    private Boolean done = Boolean.FALSE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +56,7 @@ public class AcceptBid extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //check if bid is selected
-                if (selected) {
-                    getLocation();
+                if (selected){
                     Thread thread = new Thread(new Runnable() {
                         public void run() {
                             ElasticSearchBidding.acceptBid(selectedBid, bids, longitude, latitude);
@@ -114,6 +114,7 @@ public class AcceptBid extends ActionBarActivity {
                 selected = true;
                 selectedBid = (Bid) parent.getAdapter().getItem(position);
                 bidID = selectedBid.getBidID();
+                getLocation();
             }
         });
 
@@ -168,6 +169,7 @@ public class AcceptBid extends ActionBarActivity {
                 String message = String.format("Latitude: %f, Longitude: %f",
                         latitude, longitude);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                done = Boolean.TRUE;
             } else {
                 // Display appropriate message when Geocoder services are not available
                 Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
