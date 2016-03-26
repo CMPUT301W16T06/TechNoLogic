@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.CurrentBids;
+import ca.ualberta.cs.technologic.CurrentBorrows;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
@@ -20,6 +24,9 @@ public class Login extends Activity{
 
     private ArrayList<User> users =  new ArrayList<User>();
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
+    //private CurrentBids cb = CurrentBids.getInstance();
+    //private CurrentBorrows cbo = CurrentBorrows.getInstance();
 
     /** Called when the activity is first created. */
     @Override
@@ -41,6 +48,9 @@ public class Login extends Activity{
                 if (usernameValid) {
                     Intent intent = new Intent(Login.this, HomePage.class);
                     cu.setCurrentUser(username.getText().toString());
+                    getComputers();
+                    //cb.setCurrentBids();
+                    //cbo.setCurrentBorrows();
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
@@ -83,6 +93,20 @@ public class Login extends Activity{
         // TODO Auto-generated method stub
         super.onStart();
 
+    }
+    private void getComputers() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cc.setCurrentComputers(ElasticSearchComputer.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

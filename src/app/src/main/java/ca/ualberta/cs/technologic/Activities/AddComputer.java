@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentUser;
@@ -18,6 +19,8 @@ public class AddComputer extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_items);
         Button submitBtn = (Button) findViewById(R.id.submit);
+        ImageButton pictureBtn = (ImageButton) findViewById(R.id.pictureButton);
+
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

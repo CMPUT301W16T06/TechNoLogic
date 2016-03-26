@@ -123,8 +123,18 @@
         android:id="@+id/submit"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/description"
-        android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
-        android:fontFamily="sans-serif-light" />
+        android:fontFamily="sans-serif-light"
+        android:layout_alignEnd="@+id/description"
+        android:layout_toEndOf="@+id/pictureButton"
+        android:layout_alignStart="@+id/textView2" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/pictureButton"
+        android:background="@android:drawable/ic_menu_camera"
+        android:layout_alignTop="@+id/submit"
+        android:layout_alignStart="@+id/description" />
 
 </RelativeLayout>
