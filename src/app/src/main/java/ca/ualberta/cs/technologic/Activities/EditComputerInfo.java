@@ -2,14 +2,17 @@ package ca.ualberta.cs.technologic.Activities;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,9 @@ public class EditComputerInfo extends ActionBarActivity {
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers currentComputers = CurrentComputers.getInstance();
+    private Bitmap thumbnail;
+    private ImageButton pictureBtn;
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
 
 
     @Override
@@ -35,6 +41,7 @@ public class EditComputerInfo extends ActionBarActivity {
         setContentView(R.layout.activity_item_info);
         Button deleteBtn = (Button) findViewById(R.id.btnDelete);
         Button updateBtn = (Button) findViewById(R.id.btnUpdate);
+        pictureBtn = (ImageButton) findViewById(R.id.pictureBtn);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
@@ -56,6 +63,17 @@ public class EditComputerInfo extends ActionBarActivity {
 
         //links the vlaues of the computer to the UI
         setComputerValues(comp);
+        pictureBtn.setImageBitmap(comp.getThumbnail());
+
+
+        pictureBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
 
         //delete the selected computer
         deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +91,6 @@ public class EditComputerInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
-
                 onBackPressed();
                 //Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
                 //toast1.show();
@@ -138,7 +155,7 @@ public class EditComputerInfo extends ActionBarActivity {
         String username = cu.getCurrentUser();
 
 //        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
-//                hardDrive, os, price, description, status);
+//                hardDrive, os, price, description, status, thumbnail);
 //        ArrayList <Computer> ccomps = currentComputers.getCurrentComputers();
 //        ccomps.indexOf(comp);
 //        currentComputers.deleteCurrentComputer(comp);
@@ -148,7 +165,7 @@ public class EditComputerInfo extends ActionBarActivity {
         final Computer computer;
         try {
             computer = new Computer(comp.getId(), username, make, model, year, processor, ram,
-                    hardDrive, os, price, description, status);
+                    hardDrive, os, price, description, status, thumbnail);
 
             Thread thread = new Thread(new Runnable() {
                 public void run() {
@@ -184,7 +201,7 @@ public class EditComputerInfo extends ActionBarActivity {
         ((EditText)findViewById(R.id.infoMemory)).setText(c.getRam().toString());
         ((EditText)findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
         ((EditText)findViewById(R.id.infoOs)).setText(c.getOs());
-        ((EditText)findViewById(R.id.infoBaserate)).setText(String.format("%.2f",c.getPrice()));
+        ((EditText)findViewById(R.id.infoBaserate)).setText(String.format("%.2f", c.getPrice()));
         ((EditText)findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
 
@@ -200,6 +217,15 @@ public class EditComputerInfo extends ActionBarActivity {
             status.setTextColor(Color.parseColor("#b20000"));
         }
 
+    }
+    //Took this from 301 Lab 10
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data .getExtras();
+            thumbnail = (Bitmap) extras.get("data");
+            pictureBtn.setImageBitmap(thumbnail);
+        }
     }
 
     @Override

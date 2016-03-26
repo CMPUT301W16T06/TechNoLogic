@@ -48,7 +48,7 @@ public class Computer {
      * @param description
      */
     public Computer(String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description) {
+                    Integer hardDrive, String os, Float price, String description, Bitmap thumbnail) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.make = make;
@@ -62,10 +62,11 @@ public class Computer {
         this.description = description;
         this.setStatus(status);
         this.time = new Date(System.currentTimeMillis());
+        addThumbnail(thumbnail);
     }
 
     public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description, String status) {
+                    Integer hardDrive, String os, Float price, String description, String status, Bitmap thumbnail) {
         this.id = id;
         this.username = username;
         this.make = make;
@@ -79,6 +80,7 @@ public class Computer {
         this.description = description;
         this.setStatus(status);
         this.time = new Date(System.currentTimeMillis());
+        addThumbnail(thumbnail);
     }
     /**
      * Returns the unique ID

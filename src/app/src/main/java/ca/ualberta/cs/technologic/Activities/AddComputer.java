@@ -66,7 +66,7 @@ public class AddComputer extends ActionBarActivity {
         final Computer computer;
         try {
             computer = new Computer(username,make, model, year, processor, ram,
-                    hardDrive, os, price, description);
+                    hardDrive, os, price, description, thumbnail);
             computer.addThumbnail(thumbnail);
 
             Thread thread = new Thread(new Runnable() {
