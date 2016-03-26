@@ -1,6 +1,7 @@
 package ca.ualberta.cs.technologic;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 /**
@@ -39,8 +40,23 @@ public class CurrentBids {
     public void addCurrentComputer(Computer newCurrentBid){
         this.currentBids.add(newCurrentBid);
     }
-    public void deleteCurrentComputer(Computer deleteCurrentBid){
-        this.currentBids.remove(deleteCurrentBid);
+
+//    public void deleteCurrentComputer(Computer deleteCurrentBid){
+//        this.currentBids.remove(deleteCurrentBid);
+//    }
+
+    public void deleteCurrentComputer(UUID deleteCurrentComputerID){
+        int index = -1;
+        for (int i = 0 ; i < this.currentBids.size() ; i++){
+            UUID id1 = (this.currentBids.get(i)).getId();
+            if (id1.equals(deleteCurrentComputerID)){
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            this.currentBids.remove(index);
+        }
     }
 
     public void clear() {

@@ -25,6 +25,7 @@ import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.BidAdapter;
+import ca.ualberta.cs.technologic.CurrentBids;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
@@ -39,6 +40,7 @@ public class AcceptBid extends ActionBarActivity {
     private Double longitude;
     private Double latitude;
     private Boolean done = Boolean.FALSE;
+    private CurrentBids cb = CurrentBids.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +75,7 @@ public class AcceptBid extends ActionBarActivity {
             public void onClick(View v) {
                 //check if an entry(bid) is selected
                 if (selected) {
+
                     Thread thread = new Thread(new Runnable() {
                         public void run() {
                             ElasticSearchBidding.declineBid(selectedBid, bids.size());
@@ -90,6 +93,11 @@ public class AcceptBid extends ActionBarActivity {
 
                     bids.remove(selectedBid);
                     listAdapter.notifyDataSetChanged();
+
+                    if (bids.size() == 0){
+                        cb.deleteCurrentComputer(selectedBid.getComputerID());
+                        onBackPressed();
+                    }
                 }
             }
         });
@@ -161,6 +169,7 @@ public class AcceptBid extends ActionBarActivity {
 
     }
     private void sendBid() {
+        cb.deleteCurrentComputer(selectedBid.getComputerID());
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 ElasticSearchBidding.acceptBid(selectedBid, bids, longitude, latitude);
@@ -176,8 +185,8 @@ public class AcceptBid extends ActionBarActivity {
         Toast bidAccepted = Toast.makeText(getApplicationContext(), "Bid has been accepted!", Toast.LENGTH_SHORT);
         bidAccepted.show();
         bids.clear();
-        listAdapter.notifyDataSetChanged();
-        //onBackPressed();
+        //listAdapter.notifyDataSetChanged();
+        onBackPressed();
 
     }
 

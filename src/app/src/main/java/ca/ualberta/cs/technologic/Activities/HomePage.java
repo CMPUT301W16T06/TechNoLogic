@@ -130,36 +130,36 @@ public class HomePage extends ActionBarActivity {
                 //I used this for testing to make sure the username could be accessed from anywhere.
                 //Toast toast = Toast.makeText(getApplicationContext(), cu.getCurrentUser(), Toast.LENGTH_SHORT);
                 //toast.show();
-                startActivity(new Intent(this, HomePage.class));
-                finish();
+//                startActivity(new Intent(this, HomePage.class));
+//                finish();
                 break;
             case R.id.myitems:
                 startActivity(new Intent(this, MyComputers.class));
-                finish();
+//                finish();
                 break;
             case R.id.accountsettings:
                 startActivity((new Intent(this, EditUser.class)));
-                finish();
+//                finish();
                 break;
             case R.id.logout:
                 startActivity(new Intent(this, Login.class));
-                finish();
+//                finish();
                 break;
             case R.id.mybids:
                 startActivity(new Intent(this, MyBids.class));
-                finish();
+//                finish();
                 break;
             case R.id.myborrows:
                 startActivity(new Intent(this, MyBorrows.class));
-                finish();
+//                finish();
                 break;
             case R.id.lentout:
                 startActivity(new Intent(this, LentOut.class));
-                finish();
+//                finish();
                 break;
             case R.id.myitembids:
                 startActivity(new Intent(this, ReceivedBids.class));
-                finish();
+//                finish();
                 break;
         }
 
