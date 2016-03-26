@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ public class ViewComputer extends ActionBarActivity {
         setContentView(R.layout.activity_item_view);
         Button placebid = (Button) findViewById(R.id.placebid);
         TextView username = (TextView) findViewById(R.id.infoUsername);
+        ImageView image = (ImageView) findViewById(R.id.image);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
@@ -51,6 +53,7 @@ public class ViewComputer extends ActionBarActivity {
 
         //binds the computer values to UI objects
         setComputerValues(comp);
+        image.setImageBitmap(comp.getThumbnail());
 
         username.setOnClickListener(new View.OnClickListener(){
             @Override

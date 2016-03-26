@@ -283,6 +283,12 @@
             android:fontFamily="sans-serif-light"
             android:layout_alignLeft="@+id/infoDescription"/>
 
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:id="@+id/image"
+            android:layout_alignTop="@+id/infoMake"
+            android:layout_toEndOf="@+id/infoProcessor" />
 
 
     </RelativeLayout>
