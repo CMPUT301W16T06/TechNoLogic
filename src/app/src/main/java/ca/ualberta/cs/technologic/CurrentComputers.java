@@ -1,6 +1,7 @@
 package ca.ualberta.cs.technologic;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created by gknoblau on 3/26/16.
@@ -37,9 +38,19 @@ public class CurrentComputers {
     public void addCurrentComputer(Computer newCurrentComputer){
         this.currentComputers.add(newCurrentComputer);
     }
+
     public void deleteCurrentComputer(Computer deleteCurrentComputer){
-        int i = this.currentComputers.indexOf(deleteCurrentComputer);
-        this.currentComputers.remove(i);
-        //this.currentComputers.remove(deleteCurrentComputer);
+        int index = -1;
+        for (int i = 0 ; i < this.currentComputers.size() ; i++){
+            UUID id1 = (this.currentComputers.get(i)).getId();
+            UUID id2 = deleteCurrentComputer.getId();
+            if (id1.equals(id2)){
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            this.currentComputers.remove(index);
+        }
     }
 }

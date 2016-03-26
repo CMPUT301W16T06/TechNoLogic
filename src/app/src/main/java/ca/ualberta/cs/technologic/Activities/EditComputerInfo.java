@@ -112,6 +112,7 @@ public class EditComputerInfo extends ActionBarActivity {
         //first check the status of the computer
         //will not delete a computer if it is bidded or borrowed
         if (comp.getStatus().equals("available")) {
+            currentComputers.deleteCurrentComputer(comp);
             try {
                 Thread thread = new Thread(new Runnable() {
                     public void run() {
@@ -154,12 +155,11 @@ public class EditComputerInfo extends ActionBarActivity {
         String status = comp.getStatus();
         String username = cu.getCurrentUser();
 
-//        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
-//                hardDrive, os, price, description, status, thumbnail);
-//        ArrayList <Computer> ccomps = currentComputers.getCurrentComputers();
-//        ccomps.indexOf(comp);
-//        currentComputers.deleteCurrentComputer(comp);
-//        currentComputers.addCurrentComputer(c);
+        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
+                hardDrive, os, price, description, status, thumbnail);
+
+        currentComputers.deleteCurrentComputer(comp);
+        currentComputers.addCurrentComputer(c);
 
 
         final Computer computer;
@@ -208,13 +208,13 @@ public class EditComputerInfo extends ActionBarActivity {
         TextView status = (TextView) findViewById(R.id.infoStatus);
 
         if (c.getStatus().equals("available")){
-            status.setTextColor(Color.parseColor("#3b5323"));
+            status.setTextColor(Color.parseColor("#008000"));
         }
         else if (c.getStatus().equals("bidded")){
-            status.setTextColor(Color.parseColor("#e6e600"));
+            status.setTextColor(Color.parseColor("#ff8c00"));
         }
         else{
-            status.setTextColor(Color.parseColor("#b20000"));
+            status.setTextColor(Color.parseColor("#0077ea"));
         }
 
     }

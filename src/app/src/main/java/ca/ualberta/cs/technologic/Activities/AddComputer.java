@@ -9,7 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import java.util.UUID;
+
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
@@ -19,6 +22,7 @@ public class AddComputer extends ActionBarActivity {
     static final int REQUEST_IMAGE_CAPTURE = 1234;
     private Bitmap thumbnail = null;
     private ImageButton pictureBtn;
+    private CurrentComputers currentComputers = CurrentComputers.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,7 @@ public class AddComputer extends ActionBarActivity {
      * needs to retrieve all values from the UI
      */
     private void saveComputer(){
+        UUID id = UUID.randomUUID();
         String make = ((EditText)findViewById(R.id.make)).getText().toString();
         String model = ((EditText)findViewById(R.id.model)).getText().toString();
         Integer year = Integer.parseInt(((EditText) findViewById(R.id.year)).getText().toString());
@@ -62,11 +67,16 @@ public class AddComputer extends ActionBarActivity {
         String description = ((EditText)findViewById(R.id.description)).getText().toString();
         String username = cu.getCurrentUser();
 
+        Computer c = new Computer(id, username, make, model, year, processor, ram,
+                hardDrive, os, price, description, "available", thumbnail);
+
+        currentComputers.addCurrentComputer(c);
+
 
         final Computer computer;
         try {
-            computer = new Computer(username,make, model, year, processor, ram,
-                    hardDrive, os, price, description, thumbnail);
+            computer = new Computer(id, username,make, model, year, processor, ram,
+                    hardDrive, os, price, description, "available", thumbnail);
 
             Thread thread = new Thread(new Runnable() {
                 public void run() {
