@@ -34,13 +34,13 @@ public class ComputerAdapter extends ArrayAdapter<Computer>{
 
         //change the color of the availability
         if (computer.getStatus().equals("available")){
-            status.setTextColor(Color.parseColor("#3b5323"));
+            status.setTextColor(Color.parseColor("#008000"));
         }
         else if (computer.getStatus().equals("bidded")){
             status.setTextColor(Color.parseColor("#ff8c00"));
         }
         else{
-            status.setTextColor(Color.parseColor("#b20000"));
+            status.setTextColor(Color.parseColor("#0077ea"));
         }
         // Return the completed view to render on screen
         return convertView;
