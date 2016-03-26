@@ -37,7 +37,7 @@ public class ComputerAdapter extends ArrayAdapter<Computer>{
             status.setTextColor(Color.parseColor("#3b5323"));
         }
         else if (computer.getStatus().equals("bidded")){
-            status.setTextColor(Color.parseColor("#e6e600"));
+            status.setTextColor(Color.parseColor("#ff8c00"));
         }
         else{
             status.setTextColor(Color.parseColor("#b20000"));

@@ -121,7 +121,7 @@ public class EditComputerInfo extends ActionBarActivity {
     }
 
     /**
-     *    gets the new infomation when updating the
+     *    gets the new information when updating the
      *    and saved the information
      */
     private void updateComputer() {
@@ -137,12 +137,12 @@ public class EditComputerInfo extends ActionBarActivity {
         String status = comp.getStatus();
         String username = cu.getCurrentUser();
 
-        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
-                hardDrive, os, price, description, status);
-        ArrayList <Computer> ccomps = currentComputers.getCurrentComputers();
-        ccomps.indexOf(comp);
-        currentComputers.deleteCurrentComputer(comp);
-        currentComputers.addCurrentComputer(c);
+//        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
+//                hardDrive, os, price, description, status);
+//        ArrayList <Computer> ccomps = currentComputers.getCurrentComputers();
+//        ccomps.indexOf(comp);
+//        currentComputers.deleteCurrentComputer(comp);
+//        currentComputers.addCurrentComputer(c);
 
 
         final Computer computer;
