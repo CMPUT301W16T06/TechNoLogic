@@ -1,5 +1,6 @@
 package ca.ualberta.cs.technologic;
 
+import java.util.Date;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
@@ -12,6 +13,7 @@ public class Borrow{
     private String owner;
     private Double latitude;
     private Double longitude;
+    private Date time;
 
 
     /**
@@ -23,6 +25,7 @@ public class Borrow{
         this.computerID = computerID;
         this.username = username;
         this.owner = getOwner(computerID);
+        this.time = new Date(System.currentTimeMillis());
     }
 
     public Borrow(UUID computerID, String username, String owner, Double latitude, Double longitude) {
@@ -32,6 +35,7 @@ public class Borrow{
         this.owner = owner;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.time = new Date(System.currentTimeMillis());
     }
 
     public UUID getBorrowID() {
@@ -120,6 +124,14 @@ public class Borrow{
      */
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    /**
+     * Get the time the borrowing was started
+     * @return time
+     */
+    public Date getTime() {
+        return time;
     }
 
     /**

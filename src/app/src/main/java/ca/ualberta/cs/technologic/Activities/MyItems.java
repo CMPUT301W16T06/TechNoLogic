@@ -97,6 +97,7 @@ public class MyItems extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         comps.clear();
         comps.addAll(compsTemp);
         listAdapter.notifyDataSetChanged();

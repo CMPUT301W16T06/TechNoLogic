@@ -3,6 +3,7 @@ package ca.ualberta.cs.technologic;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
@@ -25,8 +26,7 @@ public class Computer {
     private Float price;
     private String description;
     private String status = "available";
-//    private static final String FILENAME = "computers.sav";
-//    private ArrayList<Computer> computers = new ArrayList<Computer>();
+    private Date time;
 
     /**
      * Contructor of a computer
@@ -55,8 +55,7 @@ public class Computer {
         this.price = price;
         this.description = description;
         this.setStatus(status);
-        //computers.add(this);
-
+        this.time = new Date(System.currentTimeMillis());
     }
 
     public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
@@ -73,8 +72,7 @@ public class Computer {
         this.price = price;
         this.description = description;
         this.setStatus(status);
-        //computers.add(this);
-
+        this.time = new Date(System.currentTimeMillis());
     }
     /**
      * Returns the unique ID
@@ -288,6 +286,14 @@ public class Computer {
         else {
             this.status = "available";
         }
+    }
+
+    /**
+     * get the date and time the computer was added
+     * @return time cmputer was added
+     */
+    public Date getTime() {
+        return time;
     }
 
     @Override

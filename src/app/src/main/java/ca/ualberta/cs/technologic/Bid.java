@@ -1,5 +1,9 @@
 package ca.ualberta.cs.technologic;
 
+import android.text.format.Time;
+
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
@@ -12,6 +16,7 @@ public class Bid{
     private Float price;
     private String username;
     private String owner;
+    private Date time;
 
 
     /**
@@ -25,6 +30,7 @@ public class Bid{
         this.price = price;
         this.username = username;
         this.owner = owner;
+        this.time = new Date(System.currentTimeMillis());
     }
 
     /**
@@ -85,6 +91,14 @@ public class Bid{
 
     public String getOwner() {
         return owner;
+    }
+
+    /**
+     * get the time the bid was made
+     * @return time bid was made
+     */
+    public Date getTime() {
+        return time;
     }
 
     /**
