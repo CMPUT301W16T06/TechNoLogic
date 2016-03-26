@@ -68,10 +68,10 @@ public class MyComputers extends ActionBarActivity {
         //get all computer belonging to this user
         //getComputers();
 
-//        if (comps.size() == 0){
-//            Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
-//            myitems.show();
-//        }
+        if (currentComps.getCurrentComputers().size() == 0){
+            Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
+            myitems.show();
+        }
 
     }
 

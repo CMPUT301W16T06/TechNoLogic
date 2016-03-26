@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentBids;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
@@ -23,7 +24,10 @@ public class ReceivedBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private ArrayList<Computer> comps;
     final private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentBids cb = CurrentBids.getInstance();
     private ListView myitemlist;
+    ComputerAdapter listAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +44,27 @@ public class ReceivedBids extends ActionBarActivity {
                 Intent goToBids = new Intent(ReceivedBids.this, AcceptBid.class);
                 goToBids.putExtra("id", entry.getId().toString());
                 startActivity(goToBids);
+                listAdapter.notifyDataSetChanged();
 
             }
         });
 
+        listAdapter = new ComputerAdapter(this, cb.getCurrentBids());
+        myitemlist.setAdapter(listAdapter);
     }
 
     @Override
     protected void onStart() {
-        ComputerAdapter listAdapter;
+        //ComputerAdapter listAdapter;
         super.onStart();
+        listAdapter.notifyDataSetChanged();
         //gets all computer that user owns that have been bid on
-        getMyItems();
+        //getMyItems();
 
-        listAdapter = new ComputerAdapter(this, comps);
-        myitemlist.setAdapter(listAdapter);
+//        listAdapter = new ComputerAdapter(this, comps);
+//        myitemlist.setAdapter(listAdapter);
 
-        if (comps.size() == 0){
+        if (cb.getCurrentBids().size() == 0){
             Toast msg = Toast.makeText(getApplicationContext(), "No bids on your computers", Toast.LENGTH_SHORT);
             msg.show();
         }
