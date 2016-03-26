@@ -36,4 +36,7 @@ public class CurrentUser {
     public String getCurrentUser() {
         return currentUser;
     }
+    public void clear() {
+        currentUser = null;
+    }
 }
