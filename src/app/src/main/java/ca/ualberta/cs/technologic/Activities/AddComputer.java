@@ -17,7 +17,7 @@ import ca.ualberta.cs.technologic.R;
 public class AddComputer extends ActionBarActivity {
     final private CurrentUser cu = CurrentUser.getInstance();
     static final int REQUEST_IMAGE_CAPTURE = 1234;
-    private Bitmap thumbnail;
+    private Bitmap thumbnail = null;
     private ImageButton pictureBtn;
 
     @Override
@@ -67,7 +67,6 @@ public class AddComputer extends ActionBarActivity {
         try {
             computer = new Computer(username,make, model, year, processor, ram,
                     hardDrive, os, price, description, thumbnail);
-            computer.addThumbnail(thumbnail);
 
             Thread thread = new Thread(new Runnable() {
                 public void run() {

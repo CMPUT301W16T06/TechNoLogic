@@ -42,7 +42,7 @@ public class Login extends Activity{
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Boolean usernameValid = userLookup(username.getText().toString());
+                Boolean usernameValid = userLookup(username.getText().toString().toLowerCase());
                 //usernameValid = true;
 
                 if (usernameValid) {
