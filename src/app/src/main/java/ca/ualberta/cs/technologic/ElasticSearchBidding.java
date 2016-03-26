@@ -98,7 +98,9 @@ public class ElasticSearchBidding {
 
     public static void placeBid(Bid bid){
         addBid(bid);
-        if (ElasticSearchComputer.getComputersById(bid.getComputerID()).getStatus() != "bidded"){
+        Computer c = ElasticSearchComputer.getComputersById(bid.getComputerID());
+        if (c.getStatus() != "bidded"){
+
             ElasticSearchComputer.updateComputerStatus(bid.getComputerID(), "bidded");
         }
     }

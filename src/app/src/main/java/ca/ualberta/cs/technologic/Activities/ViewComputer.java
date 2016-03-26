@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
@@ -24,6 +25,7 @@ public class ViewComputer extends ActionBarActivity {
     private String id;
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,6 @@ public class ViewComputer extends ActionBarActivity {
         //save the bid that was made
         try {
             bid = new Bid(comp.getId(), price, username, comp.getUsername());
-
             Thread thread = new Thread(new Runnable() {
                 public void run() {
                     ElasticSearchBidding.placeBid(bid);
