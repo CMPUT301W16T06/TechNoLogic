@@ -147,6 +147,7 @@ public class AcceptBid extends ActionBarActivity {
         //http://developer.android.com/reference/android/location/Geocoder.html
         //http://stackoverflow.com/questions/3641304/get-latitude-and-longitude-using-zipcode
         Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
+        boolean x =  Geocoder.isPresent();
         try {
             List<Address> addresses = geoCoder.getFromLocationName(location, 1);
 
