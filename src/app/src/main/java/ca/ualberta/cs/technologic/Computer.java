@@ -1,7 +1,11 @@
 package ca.ualberta.cs.technologic;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
@@ -27,6 +31,8 @@ public class Computer {
     private String description;
     private String status = "available";
     private Date time;
+    protected transient Bitmap thumbnail;
+    protected String thumbnailBase64;
 
     /**
      * Contructor of a computer
@@ -295,6 +301,25 @@ public class Computer {
     public Date getTime() {
         return time;
     }
+    public void addThumbnail(Bitmap newThumbnail){
+        if (newThumbnail != null) {
+            thumbnail = newThumbnail;
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+            byte[] b = byteArrayOutputStream.toByteArray();
+            thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+        }
+    }
+
+    public Bitmap getThumbnail(){
+        if (thumbnail == null && thumbnailBase64 != null){
+            byte[] decodeString = Base64.decode(thumbnailBase64, Base64.DEFAULT);
+            thumbnail = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
+        }
+        return thumbnail;
+    }
 
     @Override
     public String toString() {
@@ -302,25 +327,4 @@ public class Computer {
                 + " | status:" + this.status;
     }
 
-    public void takePhoto() {
-    }
-
-    public void deletePhoto() {
-    }
-
-    public int getPhoto(){
-        return 0;
-    }
-
-    public int getPhotoSize() {
-        return 0;
-    }
-
-    public String getLocation() {
-        return "location";
-    }
-
-    public void setLocation(Location location) {
-
-    }
 }

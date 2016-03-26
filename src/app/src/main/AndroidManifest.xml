@@ -24,41 +24,41 @@
         </activity>
         <activity
             android:name=".Activities.NewUser"
-            android:label="@string/newuser"
+            android:label="@string/app_name"
             android:parentActivityName=".Activities.Login" />
         <activity
             android:name=".Activities.EditUser"
-            android:label="@string/edituser" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.HomePage"
-            android:label="@string/homepage" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.MyComputers"
-            android:label="@string/mycomputers" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.AddComputer"
-            android:label="@string/addcomputer" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.EditComputerInfo"
-            android:label="@string/computerinfo" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.LentOut"
-            android:label="@string/lentout" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.MyBorrows"
-            android:label="@string/myborrows" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.ReceivedBids"
-            android:label="@string/myitembids" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.AcceptBid"
-            android:label="@string/acceptbid" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.MyBids"
-            android:label="@string/mybids" />
+            android:label="@string/app_name" />
         <activity
             android:name=".Activities.ViewComputer"
-            android:label="@string/title_activity_item_view">
+            android:label="@string/app_name">
 
         </activity>
     </application>
