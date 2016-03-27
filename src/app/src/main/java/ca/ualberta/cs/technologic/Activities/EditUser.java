@@ -86,8 +86,6 @@ public class EditUser extends ActionBarActivity {
             public void onClick(View view) {
                 updatedUser = getUserInput();
                 update(previousUser, updatedUser);
-                //TODO Maybe not needed
-                cu.setCurrentUser(updatedUser.getUsername());
                 finish();
             }
         });
