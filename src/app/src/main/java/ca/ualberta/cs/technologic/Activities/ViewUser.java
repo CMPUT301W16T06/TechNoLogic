@@ -18,6 +18,7 @@ import ca.ualberta.cs.technologic.User;
  *  personal information.
  *
  *  //TODO: Put into rest of app. When starting an Intent to ViewUser, pass in a string with the tag "username"
+ *  //TODO: Do something with UI, buttons do not do anything currently.
  */
 public class ViewUser extends ActionBarActivity {
     private ArrayList<User> users;
