@@ -18,6 +18,10 @@ import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
+/**
+ * EditUser is the activity for when the User
+ *  wants to edit their personal information.
+ */
 public class EditUser extends ActionBarActivity {
     private ArrayList<User> currentUsers;
     private CurrentUser cu;
@@ -85,12 +89,22 @@ public class EditUser extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 updatedUser = getUserInput();
-                update(previousUser, updatedUser);
-                finish();
+                if (updatedUser != null) {
+                    update(previousUser, updatedUser);
+                    finish();
+                } else {
+                    Toast errorToast = Toast.makeText(getApplicationContext(),
+                            "One of the fields are empty!", Toast.LENGTH_SHORT);
+                    errorToast.show();
+                }
             }
         });
     }
 
+    /**
+     * Gets the User's input
+     * @return User object
+     */
     private User getUserInput() {
         // Get all Strings from EditText views
         String newUserName = ((TextView) findViewById(R.id.edit_userUsername)).getText().toString();
@@ -111,31 +125,41 @@ public class EditUser extends ActionBarActivity {
         inputUser.setPhone(newPhoneNum);
         inputUser.setAddress(newAddress);
 
-        Toast takenUser = Toast.makeText(getApplicationContext(),
-                inputUser.getUsername() + '|' + inputUser.getName() + '|' +inputUser.getEmail() + '|' + inputUser.getPhone() + '|' + inputUser.getAddress(), Toast.LENGTH_SHORT);
-        takenUser.show();
-
         return inputUser;
     }
 
+    /**
+     * Displays the User's current information
+     * @param user Current information to display
+     */
     private void displayUserInfo(User user){
-        TextView ET_newUserName = (TextView) findViewById(R.id.edit_userUsername);
-        EditText ET_newName = (EditText) findViewById(R.id.edit_userName);
-        EditText ET_newEmail = (EditText) findViewById(R.id.edit_userEmail);
-        EditText ET_newPhoneNum = (EditText) findViewById(R.id.edit_userPhone);
-        EditText ET_newAddress = (EditText) findViewById(R.id.edit_userAddress);
+        TextView UserName = (TextView) findViewById(R.id.edit_userUsername);
+        EditText Name = (EditText) findViewById(R.id.edit_userName);
+        EditText Email = (EditText) findViewById(R.id.edit_userEmail);
+        EditText PhoneNum = (EditText) findViewById(R.id.edit_userPhone);
+        EditText Address = (EditText) findViewById(R.id.edit_userAddress);
 
-        ET_newUserName.setText(user.getUsername());
-        ET_newName.setText(user.getName());
-        ET_newEmail.setText(user.getEmail());
-        ET_newPhoneNum.setText(user.getPhone());
-        ET_newAddress.setText(user.getAddress());
+        UserName.setText(user.getUsername());
+        Name.setText(user.getName());
+        Email.setText(user.getEmail());
+        PhoneNum.setText(user.getPhone());
+        Address.setText(user.getAddress());
     }
 
+    /**
+     * Helper function for getting strings
+     * @param editText EditText object to get string from
+     * @return String of the EditText
+     */
     private String EditTextToString (EditText editText) {
         return editText.getText().toString();
     }
 
+    /**
+     *  Runs ElasticSearch in order to get the User's information
+     * @param username String of a username
+     * @return User object with the same username
+     */
     private User getUserInfo(final String username) {
         //TODO: elastic search implementation
         currentUsers = new ArrayList<User>();
@@ -155,6 +179,12 @@ public class EditUser extends ActionBarActivity {
         return currentUsers.get(0);
     }
 
+    /**
+     *  Runs ElasticSearch in order to update the User's
+     *      personal information
+     * @param oldUser User's information before submit
+     * @param newUser User's information after submit
+     */
     private void update(final User oldUser, final User newUser) {
 
         try {

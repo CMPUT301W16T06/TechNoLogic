@@ -18,81 +18,37 @@ import ca.ualberta.cs.technologic.User;
  * The NewUser class is an activity for creating a new user or editing an existing user.
  * It will take inputs from the User and check if the Username exists in ElasticSearch.
  *
- * A few errors or issues that currently exist is the displaying of a return button which directs a
- * logged in user to the login screen and the possible duplication of a username.
  *
- * A fix or adjustment which will be done later is the splitting of this activity into
- * a EditUser and NewUser. This activity currently contains functions for both editing and
- * creating a new User which has gotten fairly large. This split will also solve the previous
- * issue of the menu bar and return button.
  */
 public class NewUser extends ActionBarActivity {
-    boolean isEdit;
     private User pendingUser;
     private ArrayList<User> currentUsers;
-/*    private CurrentUser cu;
-    private User prevUser;
-*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // Do not give access to Users who have not signed up
-        if (!isEdit) {
-            menu.clear();
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.newuser);
-/*
-        Intent intent = getIntent();
-        isEdit = intent.getBooleanExtra("bool",false);
-
-        if (isEdit) {
-            cu = CurrentUser.getInstance();
-            prevUser = getUserInfo(cu.getCurrentUser());
-            displayUserInfo(prevUser);
-        }
-*/
 
         // Set confirmUserButton click. Return Intent will be implemented along with Login
         Button confirmUserButton = (Button) findViewById(R.id.userSubmit);
         confirmUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Check if the filled in information is correct. No missing information and valid Username
-                // TODO: Return to Login if correct, otherwise stay and give notice
 
                 pendingUser = getUserInput();
-                //TODO: Validate the username. Do we want to validate all other String fields?
+
                 if (pendingUser == null) {
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "One or more fields are empty", Toast.LENGTH_SHORT);
                     takenUser.show();
-/*
-                } else if (isEdit) {
-                    Toast takenUser = Toast.makeText(getApplicationContext(),
-                            "Is edit user", Toast.LENGTH_SHORT);
-                    takenUser.show();
-                    update(prevUser, pendingUser);
-                    cu.setCurrentUser(pendingUser.getUsername());
-                    finish();
-*/
+
+                // PendingUser is not null, check availability
                 } else if (availUsername(pendingUser.getUsername())) {
-                    // Add to existingUsers, save and return Intent
                     Toast takenUser = Toast.makeText(getApplicationContext(),
                             "Is new user", Toast.LENGTH_SHORT);
                     takenUser.show();
@@ -164,68 +120,20 @@ public class NewUser extends ActionBarActivity {
     }
 
     /**
-     *  Get the user information on the given username
-     * @param username elastic search for this user
-     * @return User corresponding to the username
-     */
-/*
-    public User getUserInfo(final String username) {
-        //TODO: elastic search implementation
-        currentUsers = new ArrayList<User>();
-
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                currentUsers = ElasticSearchUser.getUsers(username);
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return currentUsers.get(0);
-    }
-*/
-    /**
-     *  Displays the User's current information so that they
-     *      can edit.
-     * @param user information to set the textfields to edit
-     */
-/*
-    public void displayUserInfo(User user){
-
-        EditText ET_newUserName = (EditText) findViewById(R.id.userUsername);
-        ET_newUserName.setEnabled(false);
-        ET_newUserName.setTextColor(Color.parseColor("#ffffff"));
-        ET_newUserName.setBackgroundResource(R.drawable.edittextdark);
-
-        EditText ET_newName = (EditText) findViewById(R.id.userName);
-        EditText ET_newEmail = (EditText) findViewById(R.id.userEmail);
-        EditText ET_newPhoneNum = (EditText) findViewById(R.id.userPhone);
-        EditText ET_newAddress = (EditText) findViewById(R.id.userAddress);
-
-        ET_newUserName.setText(user.getUsername());
-        ET_newName.setText(user.getName());
-        ET_newEmail.setText(user.getEmail());
-        ET_newPhoneNum.setText(user.getPhone());
-        ET_newAddress.setText(user.getAddress());
-    }
-*/
-    /**
      * Helper function for getting the text as a string from an EditText object
      * @param editText is an EditText object
      * @return returns the string of the EditText object
      */
-
     private String EditTextToString (EditText editText) {
 
         return editText.getText().toString();
     }
 
+    /**
+     * Runs ElasticSearch and adds a new User
+     * @param user User object to add in
+     */
     private void add(final User user) {
-        // TODO: Adding a new user
         try {
             Thread thread = new Thread(new Runnable() {
                 public void run() {
@@ -247,28 +155,4 @@ public class NewUser extends ActionBarActivity {
         }
 
     }
-/*
-    public void update(final User oldUser, final User newUser) {
-
-        try {
-            Thread thread = new Thread(new Runnable() {
-                public void run() {
-                    ElasticSearchUser.updateUser(oldUser, newUser);
-                }
-            });
-
-            thread.start();
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            // Everything is OK!
-            setResult(RESULT_OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-*/
 }

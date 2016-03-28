@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/view_userUsername"
+        android:hint="Username" />
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/view_userName"
+        android:hint="Name" />
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/view_userEmail"
+        android:hint="Email Address" />
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/view_userPhone"
+        android:hint="Phone Number" />
+
+    <TextView
+        android:fontFamily="sans-serif-light"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextlight"
+        android:layout_gravity="center"
+        android:id="@+id/view_userAddress"
+        android:hint="Address" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittextdark"
+        android:text="SUBMIT"
+        android:onClick=""
+        android:id="@+id/view_userSubmit"
+        android:fontFamily="sans-serif-light"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
