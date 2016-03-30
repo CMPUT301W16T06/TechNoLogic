@@ -5,10 +5,13 @@ import android.test.ActivityInstrumentationTestCase2;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * Created by Eric on 2016-02-11.
+ */
 public class BorrowTest extends ActivityInstrumentationTestCase2 {
 
-    public BorrowTest(Class activityClass) {
-        super(activityClass);
+    public BorrowTest() {
+        super(Computer.class);
     }
 
     /**
@@ -18,12 +21,13 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testViewBorrower() {
         // Initialize Users and Computers
+        User testUser1 = new User("Tom");
         User testUser2 = new User("Ashley");
 
         Computer testcomputer1 = new Computer("Tom", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
         Computer testcomputer2 = new Computer("Tom", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+                500, "iOs", Float.parseFloat("34.2"), "urg apple",null);
 
         // User1 owns and lends out Computers to user2
         ArrayList<Borrow> testBorrow = new ArrayList<Borrow>();
@@ -47,12 +51,13 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testViewOwner() {
         // Initialize Users and Computers
+        User testUser1 = new User("Tom");
         User testUser2 = new User("Ashley");
 
         Computer testcomputer1 = new Computer("Tom", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
         Computer testcomputer2 = new Computer("Tom", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+                500, "iOs", Float.parseFloat("34.2"), "urg apple",null);
 
         // user1 owns and lends out Computers
         //ashley is borrowing both computers

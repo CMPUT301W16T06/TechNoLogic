@@ -1,16 +1,19 @@
 package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.UUID;
 
 
-
-
-
+/**
+ * Created by Jessica on 2016-02-11.
+ */
 public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
-    public BiddingTest(Class activityClass) {
-        super(activityClass);
+    public BiddingTest() {
+        super(BiddingTest.class);
     }
 
     //05.01.01 As a borrower, I want to bid for an available thing, with a monetary rate
@@ -20,7 +23,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
         Computer testcomputer1 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
 
         //Have the user place a bid on the computer
         Bid bid = new Bid(testcomputer1.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
@@ -42,9 +45,9 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
         Computer testcomputer = new Computer("george", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
         Computer testcomputer2 = new Computer("bob", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+                500, "iOs", Float.parseFloat("34.2"), "urg apple",null);
         ArrayList<Bid> placedBids = new ArrayList<Bid>();
 
         //the user places a bid on two comupters for 1.12 and 2.23
@@ -75,11 +78,11 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         //initial setup of test variables
         User testUser = new User("george");
         Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
         Computer testComputer2 = new Computer("bob", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+                500, "iOs", Float.parseFloat("34.2"), "urg apple",null);
         Computer testComputer3 = new Computer("cooljohn123", "Linux", "Linux", 2012, "intel i7", 8,
-                500, "linux", Float.parseFloat("34.2"), "fancy linux");
+                500, "linux", Float.parseFloat("34.2"), "fancy linux",null);
         //NewBidsAlert for cooljohn123
         ArrayList<Bid> newBidsAlert = new ArrayList<Bid>();
         //List of all computers in the system
@@ -92,7 +95,11 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
                 testComputer.getUsername());
         testComputer.setStatus("Bidded");
+        Bid bid2 = new Bid(testComputer2.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
+                testComputer2.getUsername());
         testComputer2.setStatus("Bidded");
+        //All bids in the system
+        ArrayList<Bid> allBids = new ArrayList<Bid>();
 
         //Add all the bids for cooljohn123 items
         newBidsAlert.add(bid);
@@ -114,9 +121,10 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         //initial setup
         User testUser = new User("george");
         Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
         Computer testComputer2 = new Computer("cooljohn123", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+                500, "iOs", Float.parseFloat("34.2"), "urg apple",null);
+        ArrayList<Computer> testArray = new ArrayList<Computer>();
 
         //Have the user place bids on computers
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
@@ -150,7 +158,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         User testUser = new User("george");
         User testUser2 = new User("bob");
         Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
 
         //add into list that holds bids on a owners computers
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
@@ -181,7 +189,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         User testUser2 = new User("bob");
         User testUser3 = new User("DONALD TRUMP, MASTER OF THE UNIVERSE");
         Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+                500, "windows", Float.parseFloat("34.2"), "this is a cool computer",null);
 
         //Place three bids on the computer
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),

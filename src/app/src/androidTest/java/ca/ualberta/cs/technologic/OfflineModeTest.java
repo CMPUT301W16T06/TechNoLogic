@@ -3,10 +3,13 @@ package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+/**
+ * Created by Eric on 2016-02-11.
+ */
 public class OfflineModeTest extends ActivityInstrumentationTestCase2 {
 
-    public OfflineModeTest(Class activityClass) {
-        super(activityClass);
+    public OfflineModeTest() {
+        super(Computer.class);
     }
 
     /**
