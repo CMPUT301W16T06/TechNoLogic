@@ -1,34 +1,38 @@
 package ca.ualberta.cs.technologic.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class ItemInfo extends ActionBarActivity {
+public class EditComputerInfo extends ActionBarActivity {
     private String id;
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers currentComputers = CurrentComputers.getInstance();
+    private Bitmap thumbnail;
+    private ImageButton pictureBtn;
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
 
 
     @Override
@@ -37,6 +41,7 @@ public class ItemInfo extends ActionBarActivity {
         setContentView(R.layout.activity_item_info);
         Button deleteBtn = (Button) findViewById(R.id.btnDelete);
         Button updateBtn = (Button) findViewById(R.id.btnUpdate);
+        pictureBtn = (ImageButton) findViewById(R.id.pictureBtn);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
@@ -58,13 +63,24 @@ public class ItemInfo extends ActionBarActivity {
 
         //links the vlaues of the computer to the UI
         setComputerValues(comp);
+        pictureBtn.setImageBitmap(comp.getThumbnail());
+
+
+        pictureBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+            }
+        });
 
         //delete the selected computer
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteComputer();
-                //Intent goToItems3 = new Intent(ItemInfo.this, HomePage.class);
+                //Intent goToItems3 = new Intent(EditComputerInfo.this, HomePage.class);
                 //startActivity(goToItems3);
                 onBackPressed();
             }
@@ -75,11 +91,9 @@ public class ItemInfo extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 updateComputer();
-                //Intent goToItems2 = new Intent(ItemInfo.this, HomePage.class);
-                //startActivity(goToItems2);
-               // onBackPressed();
-                Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
-                toast1.show();
+                onBackPressed();
+                //Toast toast1 = Toast.makeText(getApplicationContext(), "Computer has been updated", Toast.LENGTH_SHORT);
+                //toast1.show();
             }
         });
     }
@@ -98,6 +112,7 @@ public class ItemInfo extends ActionBarActivity {
         //first check the status of the computer
         //will not delete a computer if it is bidded or borrowed
         if (comp.getStatus().equals("available")) {
+            currentComputers.deleteCurrentComputer(comp);
             try {
                 Thread thread = new Thread(new Runnable() {
                     public void run() {
@@ -124,7 +139,7 @@ public class ItemInfo extends ActionBarActivity {
     }
 
     /**
-     *    gets the new infomation when updating the
+     *    gets the new information when updating the
      *    and saved the information
      */
     private void updateComputer() {
@@ -140,11 +155,17 @@ public class ItemInfo extends ActionBarActivity {
         String status = comp.getStatus();
         String username = cu.getCurrentUser();
 
+        Computer c = new Computer(comp.getId(), username, make, model, year, processor, ram,
+                hardDrive, os, price, description, status, thumbnail);
+
+        currentComputers.deleteCurrentComputer(comp);
+        currentComputers.addCurrentComputer(c);
+
 
         final Computer computer;
         try {
             computer = new Computer(comp.getId(), username, make, model, year, processor, ram,
-                    hardDrive, os, price, description, status);
+                    hardDrive, os, price, description, status, thumbnail);
 
             Thread thread = new Thread(new Runnable() {
                 public void run() {
@@ -170,7 +191,7 @@ public class ItemInfo extends ActionBarActivity {
      *     Fill in all the fields of computer
      *     on loading
      */
-    public void setComputerValues(Computer c){
+    private void setComputerValues(Computer c){
         ((TextView)findViewById(R.id.infoStatus)).setText(c.getStatus());
         ((TextView)findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
@@ -180,22 +201,31 @@ public class ItemInfo extends ActionBarActivity {
         ((EditText)findViewById(R.id.infoMemory)).setText(c.getRam().toString());
         ((EditText)findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
         ((EditText)findViewById(R.id.infoOs)).setText(c.getOs());
-        ((EditText)findViewById(R.id.infoBaserate)).setText(c.getPrice().toString());
+        ((EditText)findViewById(R.id.infoBaserate)).setText(String.format("%.2f", c.getPrice()));
         ((EditText)findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
 
         TextView status = (TextView) findViewById(R.id.infoStatus);
 
         if (c.getStatus().equals("available")){
-            status.setTextColor(Color.parseColor("#3b5323"));
+            status.setTextColor(Color.parseColor("#008000"));
         }
         else if (c.getStatus().equals("bidded")){
-            status.setTextColor(Color.parseColor("#e6e600"));
+            status.setTextColor(Color.parseColor("#ff8c00"));
         }
         else{
-            status.setTextColor(Color.parseColor("#b20000"));
+            status.setTextColor(Color.parseColor("#0077ea"));
         }
 
+    }
+    //Took this from 301 Lab 10
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
+            Bundle extras = data .getExtras();
+            thumbnail = (Bitmap) extras.get("data");
+            pictureBtn.setImageBitmap(thumbnail);
+        }
     }
 
     @Override
@@ -204,28 +234,44 @@ public class ItemInfo extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                startActivity(new Intent(this, HomePage.class));
+                Intent intent0 = new Intent(this, HomePage.class);
+                intent0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent0);
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                Intent intent = new Intent(this, MyComputers.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             case R.id.accountsettings:
-                startActivity(new Intent(this, NewUser.class));
+                Intent intent1 = new Intent(this, EditUser.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent2 = new Intent(this, Login.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                Intent intent3 = new Intent(this, MyBids.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent3);
                 break;
             case R.id.myborrows:
-                startActivity(new Intent(this, MyBorrows.class));
+                Intent intent4 = new Intent(this, MyBorrows.class);
+                intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent4);
                 break;
             case R.id.lentout:
-                startActivity(new Intent(this, LentOut.class));
+                Intent intent5 = new Intent(this, LentOut.class);
+                intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent5);
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                Intent intent6 = new Intent(this, ReceivedBids.class);
+                intent6.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent6);
                 break;
         }
 

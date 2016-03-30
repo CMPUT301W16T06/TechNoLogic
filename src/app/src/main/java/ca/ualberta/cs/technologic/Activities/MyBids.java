@@ -5,38 +5,32 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import ca.ualberta.cs.technologic.Bid;
-import ca.ualberta.cs.technologic.Computer;
-import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.BidAdapter;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
-import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class Bids extends ActionBarActivity {
+public class MyBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private CurrentUser cu = CurrentUser.getInstance();
+    private ListView bidslist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bids);
-        ListView bidslist = (ListView) findViewById(R.id.bidslist);
+        bidslist = (ListView) findViewById(R.id.bidslist);
 
 //        bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                Intent goToInfo = new Intent(Bids.this, ItemInfo.class);
+////                Intent goToInfo = new Intent(MyBids.this, EditComputerInfo.class);
 ////                startActivity(goToInfo);
 //            }
 //        });
@@ -44,6 +38,7 @@ public class Bids extends ActionBarActivity {
 
     @Override
     protected void onStart() {
+        BidAdapter listAdapter;
         // TODO Auto-generated method stub
         super.onStart();
 
@@ -60,8 +55,9 @@ public class Bids extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ListView bidslist = (ListView) findViewById(R.id.bidslist);
-        ArrayAdapter<Bid> listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
+//        ArrayAdapter<Bid> listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
+//        bidslist.setAdapter(listAdapter);
+        listAdapter = new BidAdapter(this, bids, true);
         bidslist.setAdapter(listAdapter);
 
         if (bids.size() == 0){
@@ -83,28 +79,44 @@ public class Bids extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                startActivity(new Intent(this, HomePage.class));
+                Intent intent0 = new Intent(this, HomePage.class);
+                intent0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent0);
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                Intent intent = new Intent(this, MyComputers.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             case R.id.accountsettings:
-                startActivity(new Intent(this, NewUser.class));
+                Intent intent1 = new Intent(this, EditUser.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent2 = new Intent(this, Login.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                Intent intent3 = new Intent(this, MyBids.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent3);
                 break;
             case R.id.myborrows:
-                startActivity(new Intent(this, MyBorrows.class));
+                Intent intent4 = new Intent(this, MyBorrows.class);
+                intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent4);
                 break;
             case R.id.lentout:
-                startActivity(new Intent(this, LentOut.class));
+                Intent intent5 = new Intent(this, LentOut.class);
+                intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent5);
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                Intent intent6 = new Intent(this, ReceivedBids.class);
+                intent6.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent6);
                 break;
         }
 

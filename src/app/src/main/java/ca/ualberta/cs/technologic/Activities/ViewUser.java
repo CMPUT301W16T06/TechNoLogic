@@ -5,73 +5,26 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cs.technologic.Borrow;
-import ca.ualberta.cs.technologic.BorrowAdapter;
-import ca.ualberta.cs.technologic.Computer;
-import ca.ualberta.cs.technologic.CurrentUser;
-import ca.ualberta.cs.technologic.ElasticSearchBorrowing;
+import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
+import ca.ualberta.cs.technologic.User;
 
-public class LentOut extends ActionBarActivity {
-    private ArrayList<Borrow> lentOut;
-    private ArrayList<Computer> comps;
-    private CurrentUser cu = CurrentUser.getInstance();
-    private ListView lentlist;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lent_out);
-        lentlist = (ListView) findViewById(R.id.lentlist);
-
-    }
-
-    @Override
-    protected void onStart() {
-        BorrowAdapter listAdapter;
-        super.onStart();
-        //gets all computers that user has lent out to other users
-        getLentOut();
-
-        //ArrayAdapter<Borrow> listAdapter = new ArrayAdapter<Borrow>(this, R.layout.listviewtext, lentOut);
-        listAdapter = new BorrowAdapter(this, lentOut, false);
-        lentlist.setAdapter(listAdapter);
-
-        if (lentOut.size() == 0){
-            Toast msg = Toast.makeText(getApplicationContext(), "You have not lent out any computers", Toast.LENGTH_SHORT);
-            msg.show();
-        }
-    }
-
-    /**
-     * gets all computers that the user owns that have
-     * been lent out to other users
-     */
-    private void getLentOut(){
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                lentOut = ElasticSearchBorrowing.getLentOut(cu.getCurrentUser());
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
+/**
+ * ViewUser allows the User to view other User's
+ *  personal information.
+ *
+ *  //TODO: Put into rest of app. When starting an Intent to ViewUser, pass in a string with the tag "username"
+ *  //TODO: Do something with UI, buttons do not do anything currently.
+ */
+public class ViewUser extends ActionBarActivity {
+    private ArrayList<User> users;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -124,4 +77,47 @@ public class LentOut extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.viewuser);
+
+        Intent intent = getIntent();
+        String user = intent.getStringExtra("username");
+        User userToDisplay = getUserInfo(user);
+        displayUserInfo(userToDisplay);
+    }
+
+    private User getUserInfo(final String username) {
+        users = new ArrayList<User>();
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                users = ElasticSearchUser.getUsers(username);
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return users.get(0);
+    }
+
+    private void displayUserInfo(User user){
+        TextView UserName = (TextView) findViewById(R.id.view_userUsername);
+        TextView Name = (TextView) findViewById(R.id.view_userName);
+        TextView Email = (TextView) findViewById(R.id.view_userEmail);
+        TextView PhoneNum = (TextView) findViewById(R.id.view_userPhone);
+        TextView Address = (TextView) findViewById(R.id.view_userAddress);
+
+        UserName.setText(user.getUsername());
+        Name.setText(user.getName());
+        Email.setText(user.getEmail());
+        PhoneNum.setText(user.getPhone());
+        Address.setText(user.getAddress());
+    }
 }

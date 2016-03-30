@@ -1,20 +1,16 @@
 package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-
 import java.util.ArrayList;
-import java.util.UUID;
 
-import ca.ualberta.cs.technologic.Activities.Bids;
 
-/**
- * Created by Jessica on 2016-02-11.
- */
+
+
+
 public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
-    public BiddingTest() {
-        super(BiddingTest.class);
+    public BiddingTest(Class activityClass) {
+        super(activityClass);
     }
 
     //05.01.01 As a borrower, I want to bid for an available thing, with a monetary rate
@@ -96,11 +92,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
                 testComputer.getUsername());
         testComputer.setStatus("Bidded");
-        Bid bid2 = new Bid(testComputer2.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
-                testComputer2.getUsername());
         testComputer2.setStatus("Bidded");
-        //All bids in the system
-        ArrayList<Bid> allBids = new ArrayList<Bid>();
 
         //Add all the bids for cooljohn123 items
         newBidsAlert.add(bid);
@@ -125,7 +117,6 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
                 500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
         Computer testComputer2 = new Computer("cooljohn123", "Mac", "Macbook", 2012, "intel i7", 8,
                 500, "iOs", Float.parseFloat("34.2"), "urg apple");
-        ArrayList<Computer> testArray = new ArrayList<Computer>();
 
         //Have the user place bids on computers
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),

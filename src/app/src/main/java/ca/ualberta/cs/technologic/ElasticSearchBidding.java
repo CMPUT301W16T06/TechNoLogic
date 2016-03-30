@@ -2,7 +2,6 @@ package ca.ualberta.cs.technologic;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
@@ -11,7 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import io.searchbox.client.JestResult;
@@ -28,7 +26,6 @@ import io.searchbox.core.SearchResult;
  */
 public class ElasticSearchBidding {
     private static JestDroidClient client;
-    private static Gson gson;
 
     /**
      * Get bids
@@ -65,7 +62,7 @@ public class ElasticSearchBidding {
     /**
      * gets all bids for the computer matching the passed in id
      * @param id computer ID
-     * @return arraylist of Bids
+     * @return arraylist of MyBids
      */
     public static ArrayList<Bid> getAllBids(UUID id) {
         verifyClient();
@@ -96,13 +93,14 @@ public class ElasticSearchBidding {
     public static ArrayList<Computer> getMyItemBids(String owner) {
         verifyClient();
 
-        ArrayList<Computer> comps = ElasticSearchComputer.getComputersBidded(owner);
-        return comps;
+        return ElasticSearchComputer.getComputersBidded(owner);
     }
 
     public static void placeBid(Bid bid){
         addBid(bid);
-        if (ElasticSearchComputer.getComputersById(bid.getComputerID()).getStatus() != "bidded"){
+        Computer c = ElasticSearchComputer.getComputersById(bid.getComputerID());
+        if (c.getStatus() != "bidded"){
+
             ElasticSearchComputer.updateComputerStatus(bid.getComputerID(), "bidded");
         }
     }
@@ -111,7 +109,7 @@ public class ElasticSearchBidding {
      * adds a bid into the system
      * @param bid bid to be added
      */
-    public static void addBid(Bid bid) {
+    private static void addBid(Bid bid) {
         verifyClient();
 
         Index index = new Index.Builder(bid).index("bids").type("bid").build();
@@ -124,7 +122,6 @@ public class ElasticSearchBidding {
                 Log.i("what", execute.getJsonString());
                 Log.i("what", Integer.toString(execute.getResponseCode()));
             }
-            return;
         } catch (IOException e) {
             // TODO: Something more useful
             e.printStackTrace();
@@ -139,10 +136,10 @@ public class ElasticSearchBidding {
      * @param bidAccepted the bid that was accepted
      * @param allBids all bids that correspond to the computer
      */
-    public static void acceptBid(Bid bidAccepted, ArrayList<Bid> allBids){
+    public static void acceptBid(Bid bidAccepted, ArrayList<Bid> allBids, Double longitude, Double latitude){
         //add new entry into borrowing for accpeted bid
         Borrow borrow = new Borrow(bidAccepted.getComputerID(),
-                bidAccepted.getUsername(),bidAccepted.getOwner());
+                bidAccepted.getUsername(),bidAccepted.getOwner(), longitude, latitude);
         ElasticSearchBorrowing.addBorrow(borrow);
 
         //change the status of the computer
@@ -169,12 +166,12 @@ public class ElasticSearchBidding {
      * Removes the Bid given the id
      * @param bidID id of the bid to be delete
      */
-    public static void deleteBid(UUID bidID) {
+    private static void deleteBid(UUID bidID) {
         verifyClient();
 
         ArrayList<Bid> bids = new ArrayList<Bid>();
         List<SearchResult.Hit<Map,Void>> hits = null;
-        String elasticSearchID = "";
+        String elasticSearchID;
 
         String q ="{\"query\":{\"match\":{\"bidID\":\"" + bidID + "\"}}}";
         Search search = new Search.Builder(q).addIndex("bids").addType("bid").build();
@@ -203,7 +200,6 @@ public class ElasticSearchBidding {
                     Log.i("what", execute.getJsonString());
                     Log.i("what", Integer.toString(execute.getResponseCode()));
                 }
-                return;
             } catch (IOException e) {
                 // TODO: Something more useful
                 e.printStackTrace();
@@ -214,7 +210,7 @@ public class ElasticSearchBidding {
     /**
      * Verifies the elastic search DB
      */
-    public static void verifyClient() {
+    private static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");
             DroidClientConfig config = builder.build();

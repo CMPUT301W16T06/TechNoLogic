@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="ca.ualberta.cs.technologic.Activities.MyItems">
+    tools:context=".Activities.MyComputers">
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,12 +21,34 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
+        android:listSelector="@android:color/darker_gray"
         android:id="@+id/borrowlist"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
-        android:layout_toStartOf="@+id/addnewitem"
-        android:layout_above="@+id/addnewitem"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView" />
+
+    <Button
+        android:layout_width="150dp"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextdark"
+        android:text="Return"
+        android:id="@+id/returnComp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/textView"
+        android:layout_below="@+id/borrowlist" />
+
+    <Button
+        android:layout_width="150dp"
+        android:textColor="#ffffff"
+        android:fontFamily="sans-serif-light"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittextdark"
+        android:text="Location"
+        android:id="@+id/location"
+        android:layout_alignTop="@+id/returnComp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

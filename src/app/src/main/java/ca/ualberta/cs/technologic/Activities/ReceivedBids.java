@@ -7,26 +7,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentBids;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
-public class MyItemBids extends ActionBarActivity {
+public class ReceivedBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private ArrayList<Computer> comps;
-    private CurrentUser cu = CurrentUser.getInstance();
+    final private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentBids cb = CurrentBids.getInstance();
+    private ListView myitemlist;
     ComputerAdapter listAdapter;
-    ListView myitemlist;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,25 +41,30 @@ public class MyItemBids extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Computer entry = (Computer) parent.getAdapter().getItem(position);
-                Intent goToBids = new Intent(MyItemBids.this, AcceptBid.class);
+                Intent goToBids = new Intent(ReceivedBids.this, AcceptBid.class);
                 goToBids.putExtra("id", entry.getId().toString());
                 startActivity(goToBids);
+                listAdapter.notifyDataSetChanged();
 
             }
         });
 
+        listAdapter = new ComputerAdapter(this, cb.getCurrentBids());
+        myitemlist.setAdapter(listAdapter);
     }
 
     @Override
     protected void onStart() {
+        //ComputerAdapter listAdapter;
         super.onStart();
+        listAdapter.notifyDataSetChanged();
         //gets all computer that user owns that have been bid on
-        getMyItems();
+        //getMyItems();
 
-        listAdapter = new ComputerAdapter(this, comps);
-        myitemlist.setAdapter(listAdapter);
+//        listAdapter = new ComputerAdapter(this, comps);
+//        myitemlist.setAdapter(listAdapter);
 
-        if (comps.size() == 0){
+        if (cb.getCurrentBids().size() == 0){
             Toast msg = Toast.makeText(getApplicationContext(), "No bids on your computers", Toast.LENGTH_SHORT);
             msg.show();
         }
@@ -68,7 +74,7 @@ public class MyItemBids extends ActionBarActivity {
      * gets all computers that the user owns that have
      * been bid on by other users
      */
-    public void getMyItems(){
+    private void getMyItems(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchBidding.getMyItemBids(cu.getCurrentUser());
@@ -96,28 +102,44 @@ public class MyItemBids extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                startActivity(new Intent(this, HomePage.class));
+                Intent intent0 = new Intent(this, HomePage.class);
+                intent0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent0);
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                Intent intent = new Intent(this, MyComputers.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             case R.id.accountsettings:
-                startActivity(new Intent(this, NewUser.class));
+                Intent intent1 = new Intent(this, EditUser.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent2 = new Intent(this, Login.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                Intent intent3 = new Intent(this, MyBids.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent3);
                 break;
             case R.id.myborrows:
-                startActivity(new Intent(this, MyBorrows.class));
+                Intent intent4 = new Intent(this, MyBorrows.class);
+                intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent4);
                 break;
             case R.id.lentout:
-                startActivity(new Intent(this, LentOut.class));
+                Intent intent5 = new Intent(this, LentOut.class);
+                intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent5);
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                Intent intent6 = new Intent(this, ReceivedBids.class);
+                intent6.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent6);
                 break;
         }
 

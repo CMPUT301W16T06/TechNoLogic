@@ -1,14 +1,14 @@
 package ca.ualberta.cs.technologic;
 
-import android.app.Activity;
-import java.util.ArrayList;
+import android.text.format.Time;
+
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
 
-/**
- * Created by Jessica on 2016-02-11.
- */
+
 public class Bid{
     @JestId
     private UUID bidID;
@@ -16,6 +16,7 @@ public class Bid{
     private Float price;
     private String username;
     private String owner;
+    private Date time;
 
 
     /**
@@ -29,19 +30,20 @@ public class Bid{
         this.price = price;
         this.username = username;
         this.owner = owner;
+        this.time = new Date(System.currentTimeMillis());
     }
 
     /**
-     * Returns the bid ID of the Bid
-     * @return
+     *
+     * @return bid ID of the Bid
      */
     public UUID getBidID() {
         return bidID;
     }
 
     /**
-     * Returns the Computer ID of the bid
-     * @return
+     *
+     * @return Computer ID of the bid
      */
     public UUID getComputerID() {
         return computerID;
@@ -56,8 +58,8 @@ public class Bid{
     }
 
     /**
-     * Returns the price of the bid
-     * @return
+     *
+     * @return price of the bid
      */
     public Float getPrice() {
         return price;
@@ -72,8 +74,8 @@ public class Bid{
     }
 
     /**
-     * Returns the username of the bidder
-     * @return
+     *
+     * @return username of the bidder
      */
     public String getUsername() {
         return username;
@@ -89,6 +91,14 @@ public class Bid{
 
     public String getOwner() {
         return owner;
+    }
+
+    /**
+     * get the time the bid was made
+     * @return time bid was made
+     */
+    public Date getTime() {
+        return time;
     }
 
     /**

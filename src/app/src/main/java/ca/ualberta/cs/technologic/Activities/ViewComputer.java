@@ -1,15 +1,12 @@
 package ca.ualberta.cs.technologic.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,16 +14,18 @@ import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class ItemView extends ActionBarActivity {
+public class ViewComputer extends ActionBarActivity {
 
     private String id;
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class ItemView extends ActionBarActivity {
         setContentView(R.layout.activity_item_view);
         Button placebid = (Button) findViewById(R.id.placebid);
         TextView username = (TextView) findViewById(R.id.infoUsername);
+        ImageView image = (ImageView) findViewById(R.id.image);
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         TextView lblID = (TextView)findViewById(R.id.lblId);
@@ -55,6 +55,7 @@ public class ItemView extends ActionBarActivity {
 
         //binds the computer values to UI objects
         setComputerValues(comp);
+        image.setImageBitmap(comp.getThumbnail());
 
         username.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -88,7 +89,6 @@ public class ItemView extends ActionBarActivity {
         //save the bid that was made
         try {
             bid = new Bid(comp.getId(), price, username, comp.getUsername());
-
             Thread thread = new Thread(new Runnable() {
                 public void run() {
                     ElasticSearchBidding.placeBid(bid);
@@ -110,7 +110,7 @@ public class ItemView extends ActionBarActivity {
      * bind computer vlaues to the UI
      * @param c the computer
      */
-    public void setComputerValues(Computer c) {
+    private void setComputerValues(Computer c) {
         ((TextView) findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
         ((TextView) findViewById(R.id.infoModel)).setText(c.getModel());
@@ -119,7 +119,7 @@ public class ItemView extends ActionBarActivity {
         ((TextView) findViewById(R.id.infoMemory)).setText(c.getRam().toString());
         ((TextView) findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
         ((TextView) findViewById(R.id.infoOs)).setText(c.getOs());
-        ((TextView) findViewById(R.id.infoBaserate)).setText(c.getPrice().toString());
+        ((TextView) findViewById(R.id.infoBaserate)).setText(String.format("%.2f", c.getPrice()));
         ((TextView) findViewById(R.id.infoDescription)).setText(c.getDescription());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
 

@@ -1,13 +1,10 @@
 package ca.ualberta.cs.technologic;
 
-/**
- * Created by gknoblau on 2016-03-11.
- */
 public class CurrentUser {
     private String currentUser;
     private static CurrentUser firstInstance = null;
 
-    private CurrentUser() {};
+    private CurrentUser() {}
 
     /**
      * Makes a singleton
@@ -38,5 +35,8 @@ public class CurrentUser {
      */
     public String getCurrentUser() {
         return currentUser;
+    }
+    public void clear() {
+        currentUser = null;
     }
 }

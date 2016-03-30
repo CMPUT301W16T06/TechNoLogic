@@ -1,8 +1,13 @@
 package ca.ualberta.cs.technologic;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
@@ -25,8 +30,9 @@ public class Computer {
     private Float price;
     private String description;
     private String status = "available";
-//    private static final String FILENAME = "computers.sav";
-//    private ArrayList<Computer> computers = new ArrayList<Computer>();
+    private Date time;
+    protected transient Bitmap thumbnail;
+    protected String thumbnailBase64;
 
     /**
      * Contructor of a computer
@@ -42,7 +48,7 @@ public class Computer {
      * @param description
      */
     public Computer(String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description) {
+                    Integer hardDrive, String os, Float price, String description, Bitmap thumbnail) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.make = make;
@@ -55,12 +61,12 @@ public class Computer {
         this.price = price;
         this.description = description;
         this.setStatus(status);
-        //computers.add(this);
-
+        this.time = new Date(System.currentTimeMillis());
+        addThumbnail(thumbnail);
     }
 
     public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description, String status) {
+                    Integer hardDrive, String os, Float price, String description, String status, Bitmap thumbnail) {
         this.id = id;
         this.username = username;
         this.make = make;
@@ -73,8 +79,8 @@ public class Computer {
         this.price = price;
         this.description = description;
         this.setStatus(status);
-        //computers.add(this);
-
+        this.time = new Date(System.currentTimeMillis());
+        addThumbnail(thumbnail);
     }
     /**
      * Returns the unique ID
@@ -290,31 +296,37 @@ public class Computer {
         }
     }
 
+    /**
+     * get the date and time the computer was added
+     * @return time cmputer was added
+     */
+    public Date getTime() {
+        return time;
+    }
+    public void addThumbnail(Bitmap newThumbnail){
+        if (newThumbnail != null) {
+            thumbnail = newThumbnail;
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+
+            byte[] b = byteArrayOutputStream.toByteArray();
+            thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+        }
+    }
+
+    public Bitmap getThumbnail(){
+        if (thumbnail == null && thumbnailBase64 != null){
+            byte[] decodeString = Base64.decode(thumbnailBase64, Base64.DEFAULT);
+            thumbnail = BitmapFactory.decodeByteArray(decodeString, 0, decodeString.length);
+        }
+        return thumbnail;
+    }
+
     @Override
     public String toString() {
         return "Computer:" + this.id.toString() + " | " + this.description
                 + " | status:" + this.status;
     }
 
-    public void takePhoto() {
-    }
-
-    public void deletePhoto() {
-    }
-
-    public int getPhoto(){
-        return 0;
-    }
-
-    public int getPhotoSize() {
-        return 0;
-    }
-
-    public String getLocation() {
-        return "location";
-    }
-
-    public void setLocation(Location location) {
-
-    }
 }

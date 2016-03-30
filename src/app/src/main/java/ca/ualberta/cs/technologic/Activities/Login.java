@@ -11,18 +11,21 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.CurrentBids;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
-/**
- * Created by gknoblau on 2016-02-16.
- */
-public class LoginActivity extends Activity{
+public class Login extends Activity{
 
     private ArrayList<User> users =  new ArrayList<User>();
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
+    private CurrentBids cb = CurrentBids.getInstance();
+    private EditText username;
 
     /** Called when the activity is first created. */
     @Override
@@ -30,36 +33,46 @@ public class LoginActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        final EditText username = (EditText) findViewById(R.id.username);
-        //final EditText password = (EditText) findViewById(R.id.password);
+        username = (EditText) findViewById(R.id.username);
         Button loginButton = (Button) findViewById(R.id.login);
         TextView newUserButton = (TextView) findViewById(R.id.newUser);
+
+        try {
+            cu.clear();
+            cc.clear();
+            cb.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Boolean usernameValid = userLookup(username.getText().toString());
+                Boolean usernameValid = userLookup(username.getText().toString().toLowerCase());
                 //usernameValid = true;
 
                 if (usernameValid) {
-                    Intent intent = new Intent(LoginActivity.this, HomePage.class);
-                    cu.setCurrentUser(username.getText().toString());
+                    Intent intent = new Intent(Login.this, HomePage.class);
+                    setUser();
+                    getComputers();
+                    getBids();
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
                     toast.show();
+
                 }
             }
         });
         newUserButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, NewUser.class);
+                Intent intent = new Intent(Login.this, NewUser.class);
                 startActivity(intent);
             }
         });
     }
 
-    public Boolean userLookup(final String username) {
+    private Boolean userLookup(final String username) {
             // TODO: Check wantedUsername against existing Users
             // TODO: Fix lowercase problem
             if (username.equals("")) {
@@ -87,5 +100,40 @@ public class LoginActivity extends Activity{
         super.onStart();
 
     }
+    private  void setUser() {
+        cu.setCurrentUser(username.getText().toString());
+
+    }
+
+    private void getComputers() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cc.setCurrentComputers(ElasticSearchComputer.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getBids() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cb.setCurrentBids(ElasticSearchComputer.getComputersBidded(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

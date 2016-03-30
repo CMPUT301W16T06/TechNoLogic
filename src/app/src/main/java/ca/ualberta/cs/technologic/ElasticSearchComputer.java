@@ -7,15 +7,10 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import org.apache.http.client.HttpClient;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import io.searchbox.client.JestResult;
@@ -24,10 +19,6 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
-import io.searchbox.core.search.aggregation.MetricAggregation;
-
-import static io.searchbox.core.SearchResult.*;
 
 /**
  * Created by Jessica on 2016-03-10.
@@ -48,10 +39,8 @@ public class ElasticSearchComputer {
      */
     public static ArrayList<Computer> getComputers(String username) {
         verifyClient();
-        CurrentUser cu = CurrentUser.getInstance();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
-        List<SearchResult.Hit<Map,Void>> hits = null;
 
         String query = "{\n" +
                         "\"size\" : 1000\n" +
@@ -70,7 +59,6 @@ public class ElasticSearchComputer {
             SearchResult result = client.execute(search);
             if (result.isSucceeded()) {
                 List<Computer> found = result.getSourceAsObjectList(Computer.class);
-                hits = result.getHits(Map.class);
                 computers.addAll(found);
             }
         } catch (IOException e) {
@@ -85,7 +73,6 @@ public class ElasticSearchComputer {
         CurrentUser cu = CurrentUser.getInstance();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
-        List<SearchResult.Hit<Map,Void>> hits = null;
 
         String query = "{\n" +
                 "\"size\" : 1000\n" +
@@ -96,7 +83,6 @@ public class ElasticSearchComputer {
             SearchResult result = client.execute(search);
             if (result.isSucceeded()) {
                 List<Computer> found = result.getSourceAsObjectList(Computer.class);
-                hits = result.getHits(Map.class);
                 computers.addAll(found);
             }
         } catch (IOException e) {
@@ -126,7 +112,6 @@ public class ElasticSearchComputer {
         CurrentUser cu = CurrentUser.getInstance();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
-        List<SearchResult.Hit<Map,Void>> hits = null;
 
         String query ="{\"query\":{\"match_phrase\":{\"description\":\"" + searchString + "\"}}}";
 
@@ -135,7 +120,6 @@ public class ElasticSearchComputer {
             SearchResult result = client.execute(search);
             if (result.isSucceeded()) {
                 List<Computer> found = result.getSourceAsObjectList(Computer.class);
-                hits = result.getHits(Map.class);
                 computers.addAll(found);
             }
         } catch (IOException e) {
@@ -163,10 +147,8 @@ public class ElasticSearchComputer {
      */
     public static ArrayList<Computer> getComputersBidded(String username) {
         verifyClient();
-        CurrentUser cu = CurrentUser.getInstance();
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
-        List<SearchResult.Hit<Map,Void>> hits = null;
 
         String query ="{\"query\":{\"match\":{\"username\":\"" + username + "\"}}}";
 
@@ -175,7 +157,6 @@ public class ElasticSearchComputer {
             SearchResult result = client.execute(search);
             if (result.isSucceeded()) {
                 List<Computer> found = result.getSourceAsObjectList(Computer.class);
-                hits = result.getHits(Map.class);
                 computers.addAll(found);
             }
         } catch (IOException e) {
@@ -249,7 +230,6 @@ public class ElasticSearchComputer {
                 Log.i("what", execute.getJsonString());
                 Log.i("what", Integer.toString(execute.getResponseCode()));
             }
-            return;
         } catch (IOException e) {
             // TODO: Something more useful
             e.printStackTrace();
@@ -285,7 +265,7 @@ public class ElasticSearchComputer {
 
         ArrayList<Computer> computers = new ArrayList<Computer>();
         List<SearchResult.Hit<Map,Void>> hits = null;
-        String elasticSearchID = "";
+        String elasticSearchID;
 //        String q = "{\n" +
 //                "\"size\" : 1000\n" +
 //                "}";
@@ -304,26 +284,7 @@ public class ElasticSearchComputer {
 
         SearchResult.Hit hit = hits.get(0);
         Map source = (Map)hit.source;
-        Set<Map.Entry> s =  source.entrySet();
         elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
-
-
-
-//        for(int i = 0; i < computers.size(); i++){
-//            SearchResult.Hit hit = hits.get(i);
-//            Map source = (Map)hit.source;
-//            Set<Map.Entry> s =  source.entrySet();
-//
-//
-//            for (Map.Entry entry : s) {
-//                if (entry.getKey().equals("id")) {
-//                    if (entry.getValue().equals(id)) {
-//                        elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
-//
-//                    }
-//                }
-//            }
-//        }
 
         if (elasticSearchID != "") {
             Delete delete = new Delete.Builder(elasticSearchID).index("computers").type("computer").build();
@@ -335,7 +296,6 @@ public class ElasticSearchComputer {
                     Log.i("what", execute.getJsonString());
                     Log.i("what", Integer.toString(execute.getResponseCode()));
                 }
-                return;
             } catch (IOException e) {
                 // TODO: Something more useful
                 e.printStackTrace();
@@ -346,7 +306,7 @@ public class ElasticSearchComputer {
     /**
      * Verifies the elastic search DB
      */
-    public static void verifyClient() {
+    private static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");
             DroidClientConfig config = builder.build();

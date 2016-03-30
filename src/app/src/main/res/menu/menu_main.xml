@@ -1,5 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.jordan.schraa_fueltrack.MainActivity">
 
@@ -11,12 +10,12 @@
 
     <item
         android:id="@+id/myitems"
-        android:title="My Items"
+        android:title="My Computers"
         android:fontFamily="sans-serif-light" />
 
     <item
         android:id="@+id/myitembids"
-        android:title="My Item Bids"
+        android:title="Received Bids"
         android:fontFamily="sans-serif-light" />
 
     <item

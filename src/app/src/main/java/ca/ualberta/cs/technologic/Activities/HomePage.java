@@ -7,14 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
@@ -26,10 +23,9 @@ public class HomePage extends ActionBarActivity {
 
     private ArrayList<Computer> comps = null;
     private CurrentUser cu = CurrentUser.getInstance();
-    String username = cu.toString();
-    ListView itemslist;
-    Button go;
-    EditText search;
+    private String username = cu.toString();
+    private ListView itemslist;
+    private EditText search;
 
     /**
      * Set up on click listeners for itemlist click and go click
@@ -37,6 +33,7 @@ public class HomePage extends ActionBarActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Button go;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         itemslist = (ListView) findViewById(R.id.homelist);
@@ -47,7 +44,7 @@ public class HomePage extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Computer entry = (Computer) parent.getAdapter().getItem(position);
-                Intent goToInfo = new Intent(HomePage.this, ItemView.class);
+                Intent goToInfo = new Intent(HomePage.this, ViewComputer.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
             }
@@ -78,7 +75,7 @@ public class HomePage extends ActionBarActivity {
      * Gets all computers from the DB
      * @see ElasticSearchComputer
     */
-    public void getComputers(){
+    private void getComputers(){
         Thread thread = new Thread(new Runnable() {
             public void run() {
                 comps = ElasticSearchComputer.getAllComputers();
@@ -96,7 +93,7 @@ public class HomePage extends ActionBarActivity {
     /**
      * Gets computers from search from DB
      */
-    public void getComputersSearch(){
+    private void getComputersSearch(){
         //Toast toast1 = Toast.makeText(getApplicationContext(), search.getText().toString(), Toast.LENGTH_SHORT);
         //toast1.show();
         Thread thread = new Thread(new Runnable() {
@@ -130,31 +127,44 @@ public class HomePage extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                //I used this for testing to make sure the username could be accessed from anywhere.
-                //Toast toast = Toast.makeText(getApplicationContext(), cu.getCurrentUser(), Toast.LENGTH_SHORT);
-                //toast.show();
-                startActivity(new Intent(this, HomePage.class));
+                Intent intent0 = new Intent(this, Maps.class);
+                intent0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent0);
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                Intent intent = new Intent(this, MyComputers.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             case R.id.accountsettings:
-                startActivity((new Intent(this, NewUser.class).putExtra("bool", true)));
+                Intent intent1 = new Intent(this, EditUser.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent2 = new Intent(this, Login.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                Intent intent3 = new Intent(this, MyBids.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent3);
                 break;
             case R.id.myborrows:
-                startActivity(new Intent(this, MyBorrows.class));
+                Intent intent4 = new Intent(this, MyBorrows.class);
+                intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent4);
                 break;
             case R.id.lentout:
-                startActivity(new Intent(this, LentOut.class));
+                Intent intent5 = new Intent(this, LentOut.class);
+                intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent5);
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                Intent intent6 = new Intent(this, ReceivedBids.class);
+                intent6.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent6);
                 break;
         }
 

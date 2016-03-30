@@ -7,13 +7,10 @@ import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
 
-import org.apache.http.client.HttpClient;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import io.searchbox.client.JestResult;
@@ -22,12 +19,13 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
 /**
  * Created by Jessica on 2016-03-10.
  *
  * Adapted from https://github.com/earthiverse/lonelyTwitter/blob/complete/app/src/main/java/ca/ualberta/cs/lonelytwitter/ElasticsearchTweetController.java 2016-03-10
+ *
+ * This class holds methods for creating and executing an Elastic Search query
  */
 
 public class ElasticSearchUser {
@@ -84,7 +82,6 @@ public class ElasticSearchUser {
                 Log.i("what", execute.getJsonString());
                 Log.i("what", Integer.toString(execute.getResponseCode()));
             }
-            return;
         } catch (IOException e) {
             // TODO: Something more useful
             e.printStackTrace();
@@ -96,13 +93,13 @@ public class ElasticSearchUser {
      * Delete the user given the username
      * @param id of the User to be delete
      */
-    public static void deleteUser(UUID id) {
+    private static void deleteUser(UUID id) {
         verifyClient();
 
 
         ArrayList<User> users = new ArrayList<User>();
         List<SearchResult.Hit<Map,Void>> hits = null;
-        String elasticSearchID = "";
+        String elasticSearchID;
 
         String q ="{\"query\":{\"match\":{\"id\":\"" + id + "\"}}}";
         Search search = new Search.Builder(q).addIndex("users").addType("user").build();
@@ -121,7 +118,6 @@ public class ElasticSearchUser {
 
         SearchResult.Hit hit = hits.get(0);
         Map source = (Map)hit.source;
-        Set<Map.Entry> s =  source.entrySet();
         elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
 
         Delete delete = new Delete.Builder(elasticSearchID).index("users").type("user").build();
@@ -133,7 +129,6 @@ public class ElasticSearchUser {
                 Log.i("what", execute.getJsonString());
                 Log.i("what", Integer.toString(execute.getResponseCode()));
             }
-            return;
         } catch (IOException e) {
             // TODO: Something more useful
             e.printStackTrace();
@@ -148,7 +143,7 @@ public class ElasticSearchUser {
     /**
      * Verifies the elastic search DB
      */
-    public static void verifyClient() {
+    private static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");
             DroidClientConfig config = builder.build();

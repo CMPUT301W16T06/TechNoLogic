@@ -2,23 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    >
 
     <TextView
+        android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
         android:layout_marginTop="50dp"
-        android:textColor="#ffffff"
-        android:background="@drawable/edittextdark"
-        android:text="Username"
+        android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:gravity="left|center"
-        android:fontFamily="sans-serif-light"
-        android:id="@+id/edit_userUsername"
+        android:id="@+id/view_userUsername"
         android:hint="Username" />
 
-    <EditText
+    <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -26,10 +24,10 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/edit_userName"
+        android:id="@+id/view_userName"
         android:hint="Name" />
 
-    <EditText
+    <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -37,10 +35,10 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/edit_userEmail"
+        android:id="@+id/view_userEmail"
         android:hint="Email Address" />
 
-    <EditText
+    <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -48,10 +46,10 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/edit_userPhone"
+        android:id="@+id/view_userPhone"
         android:hint="Phone Number" />
 
-    <EditText
+    <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -59,7 +57,7 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
-        android:id="@+id/edit_userAddress"
+        android:id="@+id/view_userAddress"
         android:hint="Address" />
 
     <Button
@@ -68,9 +66,9 @@
         android:textColor="#ffffff"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextdark"
-        android:text="CHANGE INFORMATION"
+        android:text="SUBMIT"
         android:onClick=""
-        android:id="@+id/edit_userSubmit"
+        android:id="@+id/view_userSubmit"
         android:fontFamily="sans-serif-light"
         android:layout_gravity="center"/>
 

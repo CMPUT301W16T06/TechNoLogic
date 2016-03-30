@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,20 +15,22 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
-public class MyItems extends ActionBarActivity {
+public class MyComputers extends ActionBarActivity {
 
-    private ArrayList<Computer> comps = null;
+    private ArrayList<Computer> comps = new ArrayList<Computer>();
+    private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
     private CurrentUser cu = CurrentUser.getInstance();
-    ListView myitemslist;
-    ComputerAdapter listAdapter;
-
+    private CurrentComputers currentComps = CurrentComputers.getInstance();
+    private ComputerAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ListView myitemslist;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_items);
         Button addNewItem = (Button) findViewById(R.id.addnewitem);
@@ -39,9 +40,8 @@ public class MyItems extends ActionBarActivity {
         addNewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent goToAddItems = new Intent(MyItems.this, AddItems.class);
+                Intent goToAddItems = new Intent(MyComputers.this, AddComputer.class);
                 startActivity(goToAddItems);
-                onBackPressed();
             }
         });
 
@@ -50,44 +50,45 @@ public class MyItems extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Computer entry = (Computer) parent.getAdapter().getItem(position);
-                Intent goToInfo = new Intent(MyItems.this, ItemInfo.class);
+                Intent goToInfo = new Intent(MyComputers.this, EditComputerInfo.class);
                 goToInfo.putExtra("id", entry.getId().toString());
                 startActivity(goToInfo);
-                onBackPressed();
             }
         });
 
+        listAdapter = new ComputerAdapter(this, currentComps.getCurrentComputers());
+        myitemslist.setAdapter(listAdapter);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        //get all computer belonging to this user
-        getComputers();
-        listAdapter = new ComputerAdapter(this, comps);
-        myitemslist.setAdapter(listAdapter);
 
-        if (comps.size() == 0){
+        listAdapter.notifyDataSetChanged();
+        //get all computer belonging to this user
+        //getComputers();
+
+        if (currentComps.getCurrentComputers().size() == 0){
             Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
             myitems.show();
         }
+
     }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        getComputers();
-        ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
-        myitemslist.setAdapter(listAdapter);
-    }
+//    @Override
+//    protected void onResume(){
+//        super.onResume();
+//        getComputers();
+//    }
 
     /**
-     *     gets all computers belonging to the current logged in user
+     * gets all computers belonging to the current logged in user
      */
-    public void getComputers(){
+    private void getComputers(){
+        compsTemp.clear();
         Thread thread = new Thread(new Runnable() {
             public void run() {
-                comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
+                compsTemp = ElasticSearchComputer.getComputers(cu.getCurrentUser());
             }
         });
         thread.start();
@@ -97,6 +98,10 @@ public class MyItems extends ActionBarActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        comps.clear();
+        comps.addAll(compsTemp);
+        listAdapter.notifyDataSetChanged();
     }
 
 
@@ -113,28 +118,44 @@ public class MyItems extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                startActivity(new Intent(this, HomePage.class));
+                Intent intent0 = new Intent(this, HomePage.class);
+                intent0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent0);
                 break;
             case R.id.myitems:
-                startActivity(new Intent(this, MyItems.class));
+                Intent intent = new Intent(this, MyComputers.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             case R.id.accountsettings:
-                startActivity(new Intent(this, NewUser.class));
+                Intent intent1 = new Intent(this, EditUser.class);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
                 break;
             case R.id.logout:
-                startActivity(new Intent(this, LoginActivity.class));
+                Intent intent2 = new Intent(this, Login.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
                 break;
             case R.id.mybids:
-                startActivity(new Intent(this, Bids.class));
+                Intent intent3 = new Intent(this, MyBids.class);
+                intent3.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent3);
                 break;
             case R.id.myborrows:
-                startActivity(new Intent(this, MyBorrows.class));
+                Intent intent4 = new Intent(this, MyBorrows.class);
+                intent4.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent4);
                 break;
             case R.id.lentout:
-                startActivity(new Intent(this, LentOut.class));
+                Intent intent5 = new Intent(this, LentOut.class);
+                intent5.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent5);
                 break;
             case R.id.myitembids:
-                startActivity(new Intent(this, MyItemBids.class));
+                Intent intent6 = new Intent(this, ReceivedBids.class);
+                intent6.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent6);
                 break;
         }
 

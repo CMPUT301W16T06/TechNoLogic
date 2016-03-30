@@ -1,23 +1,6 @@
 package ca.ualberta.cs.technologic;
 
-import android.app.Activity;
-import android.provider.ContactsContract;
-import android.location.Address;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.security.KeyStore;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
@@ -38,6 +21,7 @@ public class User{
     private String email;
     private String phone;
     private String address;
+    private Date time;
 
 
     /**
@@ -47,8 +31,7 @@ public class User{
     public User(String username) {
         this.username = username;
         this.id = UUID.randomUUID();
-        //need to add a check to see if the username is unique
-        //jk check is done in the controller
+        this.time = new Date(System.currentTimeMillis());
     }
 
     public UUID getId() {
@@ -137,6 +120,14 @@ public class User{
      */
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    /**
+     * Get the time when the user was used
+     * @return
+     */
+    public Date getTime() {
+        return time;
     }
 
     /**
