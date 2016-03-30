@@ -14,10 +14,23 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
     //Test for corresponding US 2.01.01 (View_Status)
     //***EDITED
     public void testsetStatus(){
+<<<<<<< HEAD
+        User user1 = new User("Tom");
+
+
+        Computer testcomputer1 = new Computer(UUID.randomUUID(),"cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available");
+
+        //Computer testcomputer2 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
+              //  500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+
+=======
 
         Computer testcomputer1 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
                 500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
 
+>>>>>>> origin/master
         testcomputer1.setStatus("bidded");
         assertEquals("bidded",testcomputer1.getStatus());
 
@@ -28,7 +41,10 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         }
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
     //Test to make sure a user can attach a photograph to a computer object
     //Test for corresponding US 09.01.01 (Attach_photo)
     //***EDIT

@@ -32,7 +32,11 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
 
         //checks if the computer is in the elastic search
+<<<<<<< HEAD
+        assertEquals(testcomputer1, ElasticSearchComputer.getComputersById(testcomputer1.getId()));
+=======
         assertEquals(testcomputer1, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
+>>>>>>> origin/master
 
         //try adding the same computer twice, and make sure it raises error
         try {
