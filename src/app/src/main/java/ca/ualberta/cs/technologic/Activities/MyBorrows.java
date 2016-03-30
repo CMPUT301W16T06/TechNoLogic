@@ -11,7 +11,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 import ca.ualberta.cs.technologic.Borrow;
 import ca.ualberta.cs.technologic.BorrowAdapter;
@@ -28,6 +31,8 @@ public class MyBorrows extends ActionBarActivity {
     private BorrowAdapter listAdatper;
     boolean selected;
     private Borrow selectedBorrow;
+
+    private double[] location = new double[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +75,25 @@ public class MyBorrows extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selected = true;
                 selectedBorrow = (Borrow) parent.getAdapter().getItem(position);
+                if (selected) {
+                    Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            location = ElasticSearchBorrowing.getLocation(selectedBorrow.getBorrowID());
+                        }
+                    });
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                Intent intent10 = new Intent(view.getContext(), Maps.class);
+                intent10.putExtra("Location", location);
+                startActivity(intent10);
             }
         });
-
     }
 
     @Override

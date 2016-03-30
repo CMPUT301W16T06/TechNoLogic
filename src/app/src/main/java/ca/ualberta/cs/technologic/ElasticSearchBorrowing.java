@@ -119,6 +119,32 @@ public class ElasticSearchBorrowing {
         ElasticSearchComputer.updateComputerStatus(borrow.getComputerID(),"available");
     }
 
+    public static double[] getLocation(UUID borrowID) {
+        verifyClient();
+
+        ArrayList<Borrow> borrows = new ArrayList<Borrow>();
+        double[] location = new double[2];
+
+
+        String query = "";
+
+        query ="{\"query\":{\"match\":{\"borrowID\":\"" + borrowID + "\"}}}";
+
+        Search search = new Search.Builder(query).addIndex("borrows").addType("borrow").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Borrow> found = result.getSourceAsObjectList(Borrow.class);
+                borrows.addAll(found);
+                location[0] = borrows.get(0).getLatitude();
+                location[1] = (borrows.get(0).getLongitude());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return location;
+
+    }
     /**
      * remove the borrow entry from the system
      * @param borrowID

@@ -127,7 +127,7 @@ public class HomePage extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                Intent intent0 = new Intent(this, HomePage.class);
+                Intent intent0 = new Intent(this, Maps.class);
                 intent0.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent0);
                 break;
