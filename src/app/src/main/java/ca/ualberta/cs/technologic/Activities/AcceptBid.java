@@ -25,7 +25,9 @@ import java.util.UUID;
 
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.BidAdapter;
+import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentBids;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
@@ -41,6 +43,7 @@ public class AcceptBid extends ActionBarActivity {
     private Double latitude;
     private Boolean done = Boolean.FALSE;
     private CurrentBids cb = CurrentBids.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,16 +159,16 @@ public class AcceptBid extends ActionBarActivity {
                 // Use the address as needed
                 longitude = address.getLongitude();
                 latitude = address.getLatitude();
-                //String message = String.format("Latitude: %f, Longitude: %f",
-                //        latitude, longitude);
-                //Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+                String message = String.format("Latitude: %f, Longitude: %f",
+                        latitude, longitude);
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
                 sendBid();
             } else {
                 // Display appropriate message when Geocoder services are not available
                 Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
-                longitude = -17.666667;
-                latitude = -149.416667;
-                sendBid();
+//                longitude = -17.666667;
+//                latitude = -149.416667;
+//                sendBid();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -187,6 +190,7 @@ public class AcceptBid extends ActionBarActivity {
             e.printStackTrace();
         }
         Toast bidAccepted = Toast.makeText(getApplicationContext(), "Bid has been accepted!", Toast.LENGTH_SHORT);
+        cc.updateComputerStatus(selectedBid.getComputerID(), "borrowed");
         bidAccepted.show();
         bids.clear();
         //listAdapter.notifyDataSetChanged();

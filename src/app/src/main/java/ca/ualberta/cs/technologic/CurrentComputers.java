@@ -53,6 +53,22 @@ public class CurrentComputers {
             this.currentComputers.remove(index);
         }
     }
+
+    public void updateComputerStatus(UUID compID, String status){
+        int index = -1;
+        for (int i = 0 ; i < this.currentComputers.size() ; i++){
+            UUID id1 = (this.currentComputers.get(i)).getId();
+            UUID id2 = compID;
+            if (id1.equals(id2)){
+                index = i;
+                break;
+            }
+        }
+        if (index >= 0) {
+            this.currentComputers.get(index).setStatus(status);
+        }
+    }
+
     public void clear() {
         currentComputers.clear();
     }
