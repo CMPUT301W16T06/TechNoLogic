@@ -40,6 +40,7 @@ public class MyBorrows extends ActionBarActivity {
         setContentView(R.layout.activity_my_borrows);
         borrowlist = (ListView) findViewById(R.id.borrowlist);
         Button returnBtn = (Button) findViewById(R.id.returnComp);
+        Button locationBtn = (Button) findViewById(R.id.location);
 
 
         //when accept button is pressed, bid is converted to borrowed
@@ -70,12 +71,10 @@ public class MyBorrows extends ActionBarActivity {
             }
         });
 
-        borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        locationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selected = true;
-                selectedBorrow = (Borrow) parent.getAdapter().getItem(position);
-                if (selected) {
+            public void onClick(View v) {
+                if(selected) {
                     Thread thread = new Thread(new Runnable() {
                         public void run() {
                             location = ElasticSearchBorrowing.getLocation(selectedBorrow.getBorrowID());
@@ -88,10 +87,19 @@ public class MyBorrows extends ActionBarActivity {
                         e.printStackTrace();
                     }
                 }
-
-                Intent intent10 = new Intent(view.getContext(), Maps.class);
+                Intent intent10 = new Intent(v.getContext(), Maps.class);
                 intent10.putExtra("Location", location);
                 startActivity(intent10);
+            }
+        });
+
+
+        borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                selected = true;
+                selectedBorrow = (Borrow) parent.getAdapter().getItem(position);
+
             }
         });
     }
