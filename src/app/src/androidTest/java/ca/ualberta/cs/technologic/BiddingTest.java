@@ -2,9 +2,7 @@ package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
 import java.util.ArrayList;
-
-
-
+import java.util.UUID;
 
 
 public class BiddingTest extends ActivityInstrumentationTestCase2 {
@@ -19,19 +17,22 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     public void testPlaceBid () {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
-        Computer testcomputer1 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+        Computer testComputer = null;
+        testComputer = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer.getTime(),
+                testComputer.getThumbnail());
 
         //Have the user place a bid on the computer
-        Bid bid = new Bid(testcomputer1.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
-                testcomputer1.getUsername());
-        testcomputer1.setStatus("Bidded");
+        Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
+                testComputer.getUsername());
+        testComputer.setStatus("Bidded");
 
         //assert that the bid is 1.12 and that the bid was placed by the user and the
         //computer is owned by bob
-        assertEquals(bid.getComputerID(),testcomputer1.getId());
+        assertEquals(bid.getComputerID(),testComputer.getId());
         assertEquals(bid.getPrice(),Float.parseFloat("1.12"));
-        assertEquals(bid.getOwner(),testcomputer1.getUsername());
+        assertEquals(bid.getOwner(),testComputer.getUsername());
 
     }
 
@@ -41,20 +42,26 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     public void testMyBids () {
         //initial setup of test variables
         User testUser = new User("cooljohn123");
-        Computer testcomputer = new Computer("george", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-        Computer testcomputer2 = new Computer("bob", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+        Computer testComputer = null;
+        testComputer = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer.getTime(),
+                testComputer.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer = new Computer(UUID.randomUUID(), "bob", "Mac",
+                "Macbook",2012,"intel i7", 8, 500,"iOs",Float.parseFloat("34.2"),
+                "urgh apple", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
         ArrayList<Bid> placedBids = new ArrayList<Bid>();
 
         //the user places a bid on two comupters for 1.12 and 2.23
-        Bid bid = new Bid(testcomputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
-                testcomputer.getUsername());
-        testcomputer.setStatus("Bidded");
+        Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
+                testComputer.getUsername());
+        testComputer.setStatus("Bidded");
         placedBids.add(bid);
-        Bid bid2 = new Bid(testcomputer2.getId(), Float.parseFloat("2.23"),testUser.getUsername(),
-                testcomputer2.getUsername());
-        testcomputer2.setStatus("Bidded");
+        Bid bid2 = new Bid(testComputer2.getId(), Float.parseFloat("2.23"),testUser.getUsername(),
+                testComputer2.getUsername());
+        testComputer2.setStatus("Bidded");
         placedBids.add(bid2);
 
         assertEquals(placedBids.size(),2);
@@ -64,22 +71,31 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         }
         assertEquals(placedBids.get(0).getPrice(),Float.parseFloat("1.12"));
         assertEquals(placedBids.get(1).getPrice(),Float.parseFloat("2.23"));
-        assertEquals(placedBids.get(0).getComputerID(),testcomputer.getId());
+        assertEquals(placedBids.get(0).getComputerID(),testComputer.getId());
         assertEquals(placedBids.get(0),bid);
     }
 
     //Test for viewing the bids on an owners computer
     //Test that corresponds with US 5.03.01 (Bid_Notification)
-    //***EDITED
+    //***EDIT
     public void testNotifications(){
         //initial setup of test variables
         User testUser = new User("george");
-        Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-        Computer testComputer2 = new Computer("bob", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
-        Computer testComputer3 = new Computer("cooljohn123", "Linux", "Linux", 2012, "intel i7", 8,
-                500, "linux", Float.parseFloat("34.2"), "fancy linux");
+        Computer testComputer = null;
+        testComputer = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer.getTime(),
+                testComputer.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer = new Computer(UUID.randomUUID(), "bob", "Mac",
+                "Macbook",2012,"intel i7", 8, 500,"iOs",Float.parseFloat("34.2"),
+                "urgh apple", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
+        Computer testComputer3 = null;
+        testComputer = new Computer(UUID.randomUUID(), "cooljohn123", "Linux",
+                "Linux",2012,"intel i7", 8, 500,"linux",Float.parseFloat("34.2"),
+                "fancy linux", "available", testComputer3.getTime(),
+                testComputer3.getThumbnail());
         //NewBidsAlert for cooljohn123
         ArrayList<Bid> newBidsAlert = new ArrayList<Bid>();
         //List of all computers in the system
@@ -113,15 +129,21 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
     public void testViewMyComputerBids(){
         //initial setup
         User testUser = new User("george");
-        Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-        Computer testComputer2 = new Computer("cooljohn123", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
 
         //Have the user place bids on computers
-        Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
-                testComputer.getUsername());
-        testComputer.setStatus("Bidded");
+        Bid bid = new Bid(testComputer1.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
+                testComputer1.getUsername());
+        testComputer1.setStatus("Bidded");
         Bid bid2 = new Bid(testComputer2.getId(), Float.parseFloat("2.23"),testUser.getUsername(),
                 testComputer2.getUsername());
         testComputer2.setStatus("Bidded");
@@ -135,7 +157,7 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
 
         //check that the id matches the the computer that was added
         //and that the computer belongs to cooljohn123
-        assertEquals(johnBids.get(0).getComputerID(), testComputer.getId());
+        assertEquals(johnBids.get(0).getComputerID(), testComputer1.getId());
         assertEquals(johnBids.get(1).getComputerID(), testComputer2.getId());
         assertEquals(johnBids.get(0).getOwner(), "cooljohn123");
         assertEquals(johnBids.get(1).getOwner(), "cooljohn123");
@@ -149,8 +171,11 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         //initial setup
         User testUser = new User("george");
         User testUser2 = new User("bob");
-        Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+        Computer testComputer = null;
+        testComputer = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer.getTime(),
+                testComputer.getThumbnail());
 
         //add into list that holds bids on a owners computers
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),
@@ -180,8 +205,11 @@ public class BiddingTest extends ActivityInstrumentationTestCase2 {
         User testUser = new User("george");
         User testUser2 = new User("bob");
         User testUser3 = new User("DONALD TRUMP, MASTER OF THE UNIVERSE");
-        Computer testComputer = new Computer("cooljohn123", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
+        Computer testComputer = null;
+        testComputer = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer.getTime(),
+                testComputer.getThumbnail());
 
         //Place three bids on the computer
         Bid bid = new Bid(testComputer.getId(), Float.parseFloat("1.12"),testUser.getUsername(),

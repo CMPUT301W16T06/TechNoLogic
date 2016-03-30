@@ -36,6 +36,7 @@ public class Computer {
 
     /**
      * Contructor of a computer
+     * @param id
      * @param username
      * @param make
      * @param model
@@ -45,10 +46,12 @@ public class Computer {
      * @param hardDrive
      * @param os
      * @param price
+     * @param s
      * @param description
+     * @param time
      */
-    public Computer(String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description, Bitmap thumbnail) {
+    public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
+                    Integer hardDrive, String os, Float price, String s, String description, Date time, Bitmap thumbnail) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.make = make;
@@ -82,6 +85,9 @@ public class Computer {
         this.time = new Date(System.currentTimeMillis());
         addThumbnail(thumbnail);
     }
+
+
+
     /**
      * Returns the unique ID
      * @return
@@ -303,6 +309,7 @@ public class Computer {
     public Date getTime() {
         return time;
     }
+
     public void addThumbnail(Bitmap newThumbnail){
         if (newThumbnail != null) {
             thumbnail = newThumbnail;

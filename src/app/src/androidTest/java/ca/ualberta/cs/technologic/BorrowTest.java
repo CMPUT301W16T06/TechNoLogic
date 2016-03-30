@@ -20,22 +20,28 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         // Initialize Users and Computers
         User testUser2 = new User("Ashley");
 
-        Computer testcomputer1 = new Computer("Tom", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-        Computer testcomputer2 = new Computer("Tom", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer2 = new Computer(UUID.randomUUID(), "bob", "Apple",
+                "iMac",2014,"intel i7", 8, 500,"iOS",Float.parseFloat("34.2"),
+                "COMPUTER 2", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
 
         // User1 owns and lends out Computers to user2
         ArrayList<Borrow> testBorrow = new ArrayList<Borrow>();
-        Borrow borrow1 = new Borrow(testcomputer1.getId(),testUser2.getUsername());
-        Borrow borrow2 = new Borrow(testcomputer2.getId(),testUser2.getUsername());
+        Borrow borrow1 = new Borrow(testComputer1.getId(),testUser2.getUsername());
+        Borrow borrow2 = new Borrow(testComputer2.getId(),testUser2.getUsername());
         testBorrow.add(borrow1);
         testBorrow.add(borrow2);
         // user1 owns and lends out Computers
 
         ArrayList<UUID> compID = new ArrayList<UUID>();
-        compID.add(testcomputer1.getId());
-        compID.add(testcomputer2.getId());
+        compID.add(testComputer1.getId());
+        compID.add(testComputer2.getId());
 
         assertEquals("Should be same ArrayList", compID.get(0), testBorrow.get(0).getComputerID());
     }
@@ -49,23 +55,29 @@ public class BorrowTest extends ActivityInstrumentationTestCase2 {
         // Initialize Users and Computers
         User testUser2 = new User("Ashley");
 
-        Computer testcomputer1 = new Computer("Tom", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-        Computer testcomputer2 = new Computer("Tom", "Mac", "Macbook", 2012, "intel i7", 8,
-                500, "iOs", Float.parseFloat("34.2"), "urg apple");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer2 = new Computer(UUID.randomUUID(), "bob", "Apple",
+                "iMac",2014,"intel i7", 8, 500,"iOS",Float.parseFloat("34.2"),
+                "COMPUTER 2", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
 
         // user1 owns and lends out Computers
         //ashley is borrowing both computers
         ArrayList<Borrow> lentOut = new ArrayList<Borrow>();
-        Borrow borrow1 = new Borrow(testcomputer1.getId(),testUser2.getUsername());
-        Borrow borrow2 = new Borrow(testcomputer2.getId(),testUser2.getUsername());
+        Borrow borrow1 = new Borrow(testComputer1.getId(),testUser2.getUsername());
+        Borrow borrow2 = new Borrow(testComputer2.getId(),testUser2.getUsername());
         lentOut.add(borrow1);
         lentOut.add(borrow2);
         // user1 owns and lends out Computers
 
         ArrayList<UUID> compID = new ArrayList<UUID>();
-        compID.add(testcomputer1.getId());
-        compID.add(testcomputer2.getId());
+        compID.add(testComputer1.getId());
+        compID.add(testComputer2.getId());
 
         assertEquals("Should be same ArrayList", compID.get(0), lentOut.get(0).getBorrowID());
     }

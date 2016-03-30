@@ -22,25 +22,24 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     // ***EDITED
     public void testaddComputer() {
         //initial setup of test variables
-        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
-                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
-
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
 
         //setting status to bidded
-        testcomputer1.setStatus("bidded");
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
+        testComputer1.setStatus("bidded");
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
 
         //checks if the computer is in the elastic search
-<<<<<<< HEAD
-        assertEquals(testcomputer1, ElasticSearchComputer.getComputersById(testcomputer1.getId()));
-=======
-        assertEquals(testcomputer1, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
->>>>>>> origin/master
+        assertEquals(testComputer1, ElasticSearchComputer.getComputersById(testComputer1.getId()));
+        assertEquals(testComputer1, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testComputer1.getUsername()));
+
 
         //try adding the same computer twice, and make sure it raises error
         try {
-            ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
+            ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
             assertTrue(Boolean.FALSE);
         } catch (IllegalArgumentException e) {
             assertTrue(Boolean.TRUE);
@@ -53,22 +52,28 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //***EDITED
     public void testgetComputers() {
         //initial setup of test variables
-        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
-                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"), "COMPUTER 1", "available");
-        Computer testcomputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Apple", "MacBook",
-                2014, "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 2", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
 
         //add computer objects to elastic search
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer2);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer2);
 
         //checks status
-        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getStatus());
-        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer2.getId()).getStatus());
+        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getStatus());
+        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer2.getId()).getStatus());
 
         //checks description
-        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription());
-        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer2.getId()).getDescription());
+        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getDescription());
+        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer2.getId()).getDescription());
 
     }
 
@@ -78,20 +83,26 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //***EDITED
     public void testgetComputerIndex() {
         //initial setup of test variables
-        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
-                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"), "COMPUTER 1", "available");
-        Computer testcomputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Apple", "MacBook", 2014,
-                "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 2", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
 
         //add computer objects to elastic search
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer2);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer2);
 
         //checks if you can get the id
-        assertEquals(testcomputer1.getId(), ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getId());
+        assertEquals(testComputer1.getId(), ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getId());
 
-        assertEquals("COMPUTER 2", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer2.getId()).getDescription());
-        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer2.getId()).getStatus());
+        assertEquals("COMPUTER 2", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer2.getId()).getDescription());
+        assertEquals("available", ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer2.getId()).getStatus());
     }
 
     // Tests the ability to edit a computer if you know it's UUID
@@ -99,24 +110,28 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //***EDITED
     public void testeditComputer() {
         //initial setup of test variables
-        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
-                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"), "COMPUTER 1", "available");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
 
         //stores initial UUID
-        UUID tempId = testcomputer1.getId();
+        UUID tempId = testComputer1.getId();
 
         //add computer object to elastic search
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
 
         //edited computer
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Apple", "MacBook", 2014,
-                "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
+        testComputer1 = new Computer(testComputer1.getId(), "cooljohn123", "Apple", "MacBook", 2014,
+                "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
 
         //updates computer with information
-        ca.ualberta.cs.technologic.ElasticSearchComputer.updateComputer(testcomputer1);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.updateComputer(testComputer1);
 
         //make sure the userComputer maintains unique UUID/
-        assertNotSame(tempId, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getId());
+        assertNotSame(tempId, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getId());
 
     }
 
@@ -124,27 +139,32 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //***EDITED
     public void testdeleteComputer() {
         //initial setup of test variables
-        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
-                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
-                "COMPUTER 1", "available");
-        Computer testcomputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Apple", "MacBook",
-                2014, "intel i7", 8, 500, "Mac", Float.parseFloat("56.2"), "COMPUTER 2", "available");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
+        Computer testComputer2 = null;
+        testComputer2 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 2", "available", testComputer2.getTime(),
+                testComputer2.getThumbnail());
 
         //add computer objects to elastic search
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer2);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer2);
 
         //delete the first computer in the array
-        ca.ualberta.cs.technologic.ElasticSearchComputer.deleteComputer(String.valueOf(testcomputer1.getId()));
-        assertEquals(testcomputer2, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
+        ca.ualberta.cs.technologic.ElasticSearchComputer.deleteComputer(String.valueOf(testComputer1.getId()));
+        assertEquals(testComputer2, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testComputer1.getUsername()));
 
         //empty the array
-        ca.ualberta.cs.technologic.ElasticSearchComputer.deleteComputer(String.valueOf(testcomputer2.getId()));
+        ca.ualberta.cs.technologic.ElasticSearchComputer.deleteComputer(String.valueOf(testComputer2.getId()));
 
         //try deleting item not in the array
         //make sure it throws and exception
         try {
-            ca.ualberta.cs.technologic.ElasticSearchComputer.deleteComputer(String.valueOf(testcomputer1.getId()));
+            ca.ualberta.cs.technologic.ElasticSearchComputer.deleteComputer(String.valueOf(testComputer1.getId()));
             assertFalse(Boolean.TRUE);
         } catch (Exception e) {
             assertTrue(Boolean.TRUE);
@@ -208,27 +228,29 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
     //***EDIT
     public void testSearch() {
         //initial setup of test variables
-        Computer testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft", "surface",
-                2014, "intel i7", 8, 500, "windows", Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+        Computer testComputer1 = null;
+        testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
+                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "COMPUTER 1", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
         String testWords = "Microsoft surface this is a cool computer";
 
-        testcomputer1.setStatus("bidded");
-        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
+        testComputer1.setStatus("bidded");
+        ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
 
         //Tests that the search works
-        if (testcomputer1.getStatus() == "bidded") {
-            assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription().contains(testWords));
-            assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getMake().contains(testWords));
-            assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getModel().contains(testWords));
-            assertEquals(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription(), "this is a cool computer");
-            assertEquals(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getUsername(), "cooljohn123");
-            assertEquals(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getStatus(), "bidded");
+        if (testComputer1.getStatus() == "bidded") {
+            assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getDescription().contains(testWords));
+            assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getMake().contains(testWords));
+            assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getModel().contains(testWords));
+            assertEquals(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getDescription(), "this is a cool computer");
+            assertEquals(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getUsername(), "cooljohn123");
+            assertEquals(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getStatus(), "bidded");
 
         } else {
-            assertFalse(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getDescription().contains(testWords));
-            assertFalse(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getMake().contains(testWords));
-            assertFalse(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getModel().contains(testWords));
+            assertFalse(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getDescription().contains(testWords));
+            assertFalse(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getMake().contains(testWords));
+            assertFalse(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testComputer1.getId()).getModel().contains(testWords));
         }
 
 

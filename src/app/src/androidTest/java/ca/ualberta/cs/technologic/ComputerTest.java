@@ -3,6 +3,8 @@ package ca.ualberta.cs.technologic;
 import android.location.Location;
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.UUID;
+
 
 public class ComputerTest extends ActivityInstrumentationTestCase2 {
 
@@ -14,23 +16,13 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
     //Test for corresponding US 2.01.01 (View_Status)
     //***EDITED
     public void testsetStatus(){
-<<<<<<< HEAD
         User user1 = new User("Tom");
+        Computer testcomputer1 = null;
+        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
+                2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
-
-        Computer testcomputer1 = new Computer(UUID.randomUUID(),"cooljohn123", "Microsoft",
-                "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
-
-        //Computer testcomputer2 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
-              //  500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-
-=======
-
-        Computer testcomputer1 = new Computer("bob", "Microsoft", "surface", 2014, "intel i7", 8,
-                500, "windows", Float.parseFloat("34.2"), "this is a cool computer");
-
->>>>>>> origin/master
         testcomputer1.setStatus("bidded");
         assertEquals("bidded",testcomputer1.getStatus());
 
@@ -41,10 +33,6 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         }
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
     //Test to make sure a user can attach a photograph to a computer object
     //Test for corresponding US 09.01.01 (Attach_photo)
     //***EDIT
@@ -53,13 +41,14 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
-        ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).takePhoto();
+        ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getThumbnail();
 
         //Photos not implemented in the computer class yet
-        assertNotSame(testcomputer1.getPhoto(),null);
+        assertNotSame(testcomputer1.getThumbnail(),null);
 
     }
 
@@ -71,10 +60,11 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
-        ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).takePhoto();
+        ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getThumbnail();
         ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).deletePhoto();
         assertEquals(testcomputer1, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testcomputer1.getUsername()));
     }
@@ -87,7 +77,8 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
         ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).takePhoto();
@@ -103,10 +94,11 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
-        ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).takePhoto();
+        ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).addThumbnail();
         assertTrue(ca.ualberta.cs.technologic.ElasticSearchComputer.getComputersById(testcomputer1.getId()).getPhotoSize() > 65536);
     }
 
@@ -118,7 +110,8 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
         //setting status to bidded
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);
@@ -138,7 +131,8 @@ public class ComputerTest extends ActivityInstrumentationTestCase2 {
         Computer testcomputer1 = null;
         testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft","surface",
                 2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
         //setting status to bidded
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testcomputer1);

@@ -2,6 +2,8 @@ package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.UUID;
+
 
 public class ReturningTest extends ActivityInstrumentationTestCase2 {
 
@@ -17,9 +19,10 @@ public class ReturningTest extends ActivityInstrumentationTestCase2 {
     public void testReturn() {
         //initial setup of test variables
         Computer testcomputer1 = null;
-        testcomputer1 = new Computer(testcomputer1.getId(), "cooljohn123", "Microsoft",
+        testcomputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
                 "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available");
+                "this is a cool computer", "available", testcomputer1.getTime(),
+                testcomputer1.getThumbnail());
 
 
         // Check before return
