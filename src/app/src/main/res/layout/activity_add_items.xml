@@ -13,8 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/addcomputer"
+        android:text="ADD COMPUTER"
         android:id="@+id/textView2"
+        android:fontFamily="sans-serif-light"
+        android:textSize="26sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -22,112 +24,121 @@
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
         android:hint="@string/make"
         android:id="@+id/make"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/textView2"
+        android:textSize="16sp"
+        android:paddingLeft="14dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/model"
         android:layout_centerHorizontal="true" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/model"
         android:id="@+id/model"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/make"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/harddrive"
+        android:layout_alignStart="@+id/make" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/harddrive"
         android:id="@+id/harddrive"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/model"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/memory"
+        android:layout_alignStart="@+id/model" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/memory"
         android:id="@+id/memory"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/harddrive"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/processor"
+        android:layout_alignStart="@+id/harddrive" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/processor"
         android:id="@+id/processor"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/memory"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/os"
+        android:layout_alignStart="@+id/memory" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/os"
         android:id="@+id/os"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/processor"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/year"
+        android:layout_alignStart="@+id/processor" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/year"
         android:id="@+id/year"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/os"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/baserate"
+        android:layout_alignStart="@+id/os" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/baserate"
         android:id="@+id/baserate"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/year"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/description"
+        android:layout_alignStart="@+id/year" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="40dp"
         android:background="@drawable/edittextlight"
-        android:paddingLeft="20dp"
+        android:paddingLeft="14dp"
         android:hint="@string/description"
         android:id="@+id/description"
-        android:layout_marginTop="5dp"
-        android:layout_below="@+id/baserate"
-        android:layout_centerHorizontal="true" />
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-light"
+        android:layout_above="@+id/submit"
+        android:layout_alignStart="@+id/baserate"
+        android:layout_marginBottom="17dp" />
 
     <Button
         android:layout_width="280dp"
         android:layout_height="50dp"
         android:background="@drawable/edittextdark"
-        android:text="@string/submit"
+        android:text="SUBMIT"
         android:id="@+id/submit"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/description"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif-light"
+        android:textSize="16sp"
         android:layout_alignEnd="@+id/description"
         android:layout_toEndOf="@+id/pictureButton"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignParentBottom="true" />
 
     <ImageButton
         android:layout_width="50dp"

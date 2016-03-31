@@ -12,13 +12,14 @@
     <EditText
         android:layout_width="280dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
-        android:hint="search"
+        android:paddingLeft="17dp"
+        android:hint="Search..."
         android:id="@+id/search"
         android:background="@drawable/edittextlight"
         android:fontFamily="sans-serif-light"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="15sp" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -26,7 +27,10 @@
         android:layout_marginTop="10dp"
         android:id="@+id/homelist"
         android:layout_below="@+id/search"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:drawSelectorOnTop="false"
+        android:fastScrollAlwaysVisible="true"
+        android:smoothScrollbar="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -35,11 +39,13 @@
         android:text="GO"
         android:id="@+id/go"
         android:layout_marginLeft="5dp"
-        android:textSize="18sp"
-        android:background="@drawable/edittextdark"
+        android:textSize="20sp"
+        android:background="#373737"
         android:textColor="#ffffff"
         android:fontFamily="sans-serif-light"
         android:layout_alignBottom="@+id/search"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/search" />
+        android:layout_toEndOf="@+id/search"
+        android:textStyle="bold"
+        android:typeface="sans" />
 </RelativeLayout>

@@ -17,7 +17,8 @@
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:fontFamily="sans-serif-light"/>
+        android:fontFamily="sans-serif-light"
+        android:textSize="26sp" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -29,7 +30,8 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/textView"
         android:layout_above="@+id/accept"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:smoothScrollbar="true" />
 
     <Button
         android:layout_width="150dp"
@@ -37,10 +39,11 @@
         android:fontFamily="sans-serif-light"
         android:layout_height="wrap_content"
         android:background="@drawable/edittextdark"
-        android:text="@string/accept"
+        android:text="ACCEPT"
         android:id="@+id/accept"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textSize="16sp" />
 
     <Button
         android:textColor="#ffffff"
@@ -48,8 +51,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edittextdark"
-        android:text="@string/decline"
+        android:text="DECLINE"
         android:id="@+id/decline"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="16sp" />
 </RelativeLayout>
