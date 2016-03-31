@@ -1,0 +1,11 @@
+#this is stephens code to get the json object, I think, it might be in the wrong order
+# my_json will have hits and that includes all the objects so go through, count, etc.
+
+from os import system
+data = system('curl -XGET http://cmput301.softwareprocess.es:8080/lab8/trees/_search?pretty')
+
+import os
+import json
+my_json = json.loads(data)
+for key,val in my_json.iteritems():
+  print key
