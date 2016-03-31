@@ -2,12 +2,14 @@ package ca.ualberta.cs.technologic.Activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -154,12 +156,13 @@ public class AddComputer extends ActionBarActivity {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-
                     // Everything is OK!
                     setResult(RESULT_OK);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                fileComps.clear();
+                saveComputerFile(fileComps);
             }
         }
     }

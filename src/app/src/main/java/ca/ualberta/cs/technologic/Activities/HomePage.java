@@ -2,6 +2,7 @@ package ca.ualberta.cs.technologic.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,8 +11,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
@@ -56,6 +60,8 @@ public class HomePage extends ActionBarActivity {
                 getComputersSearch();
             }
         });
+
+        setUpNotifications();
     }
 
     /**
@@ -112,6 +118,38 @@ public class HomePage extends ActionBarActivity {
         //toast.show();
         ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
         itemslist.setAdapter(listAdapter);
+
+    }
+
+    //IN PROGRESS DON'T DELETE
+    //taken from stackoverflow Mar-3-2016
+    //http://stackoverflow.com/questions/11434056/how-to-run-a-method-every-x-seconds
+    //queries database every 20 seconds to see if there are any new notifications
+    private void setUpNotifications(){
+//        final Handler h = new Handler();
+//        final int delay = 15000; //milliseconds
+//
+//        h.postDelayed(new Runnable() {
+//            int number = 0;
+//            public void run() {
+//                Thread thread = new Thread(new Runnable() {
+//                    public void run() {
+//                        ArrayList<Computer> compsTemp = ElasticSearchComputer.getComputers(cu.getCurrentUser());
+//                        number = compsTemp.size();
+//                    }
+//                });
+//                thread.start();
+//
+//                try {
+//                    thread.join();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Toast myitems = Toast.makeText(getApplicationContext(), "notification:"+number, Toast.LENGTH_SHORT);
+//                myitems.show();
+//                h.postDelayed(this, delay);
+//            }
+//        }, delay);
     }
 
     @Override

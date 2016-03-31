@@ -2,6 +2,7 @@ package ca.ualberta.cs.technologic.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +61,8 @@ public class MyComputers extends ActionBarActivity {
 
         listAdapter = new ComputerAdapter(this, currentComps.getCurrentComputers());
         myitemslist.setAdapter(listAdapter);
+
+
     }
 
     @Override
