@@ -21,32 +21,34 @@
         android:text="ID# "
         android:id="@+id/lblId"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
-        android:paddingRight="40dp"
         android:text="Seller:"
         android:id="@+id/lblUsername"
+        android:fontFamily="sans-serif-light"
         android:layout_below="@+id/lblId"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/lblStatus"/>
+        android:layout_toStartOf="@+id/infoMake"
+        android:paddingLeft="42dp"
+        android:paddingRight="3dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="17dp"
         android:text="test"
         android:id="@+id/infoUsername"
-        android:layout_below="@+id/lblId"
-        android:layout_toRightOf="@+id/lblUsername"
-        android:layout_alignTop="@+id/lblUsername" />
+        android:fontFamily="sans-serif-light"
+        android:layout_alignTop="@+id/lblUsername"
+        android:layout_toEndOf="@+id/lblStatus" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,23 +56,26 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
-        android:paddingRight="40dp"
         android:text="Status:"
         android:id="@+id/lblStatus"
         android:layout_below="@+id/lblUsername"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="35dp"
+        android:paddingRight="5dp" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="17dp"
         android:text="test"
         android:id="@+id/infoStatus"
         android:layout_below="@+id/lblUsername"
         android:layout_toRightOf="@+id/lblStatus"
-        android:layout_alignTop="@+id/lblStatus" />
+        android:layout_alignTop="@+id/lblStatus"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,22 +83,24 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
-        android:paddingRight="50dp"
         android:text="Make:"
         android:id="@+id/lblMake"
-        android:layout_below="@+id/lblStatus" />
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@+id/lblStatus"
+        android:layout_toStartOf="@+id/infoStatus"
+        android:paddingRight="5dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/make"
         android:id="@+id/infoMake"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblMake"
         android:layout_alignTop="@+id/lblMake"
-        />
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -101,22 +108,25 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="15sp"
         android:paddingTop="10dp"
-        android:layout_marginTop="5dp"
         android:text="Model:"
         android:id="@+id/lblModel"
-        android:layout_below="@+id/lblMake" />
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@+id/infoMake"
+        android:layout_toStartOf="@+id/infoMake"
+        android:paddingRight="5dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/model"
         android:id="@+id/infoModel"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblModel"
         android:layout_alignTop="@+id/lblModel"
-        android:layout_alignLeft="@id/infoMake"/>
+        android:layout_alignLeft="@id/infoMake"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -127,19 +137,23 @@
         android:layout_marginTop="5dp"
         android:text="Harddrive:"
         android:id="@+id/lblHarddive"
-        android:layout_below="@+id/lblModel" />
+        android:layout_below="@+id/lblModel"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="13dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/harddrive"
         android:id="@+id/infoHarddrive"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblHarddive"
         android:layout_alignTop="@+id/lblHarddive"
-        android:layout_alignLeft="@id/infoModel"/>
+        android:layout_alignLeft="@id/infoModel"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -150,19 +164,23 @@
         android:layout_marginTop="5dp"
         android:text="Memory:"
         android:id="@+id/lblMemory"
-        android:layout_below="@+id/lblHarddive" />
+        android:layout_below="@+id/lblHarddive"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="22dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/memory"
         android:id="@+id/infoMemory"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblMemory"
         android:layout_alignTop="@+id/lblMemory"
-        android:layout_alignLeft="@id/infoHarddrive"/>
+        android:layout_alignLeft="@id/infoHarddrive"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -173,19 +191,23 @@
         android:layout_marginTop="5dp"
         android:text="Processor:"
         android:id="@+id/lblProcessor"
-        android:layout_below="@+id/lblMemory" />
+        android:layout_below="@+id/lblMemory"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="10dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/processor"
         android:id="@+id/infoProcessor"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblProcessor"
         android:layout_alignTop="@+id/lblProcessor"
-        android:layout_alignLeft="@id/infoMemory"/>
+        android:layout_alignLeft="@id/infoMemory"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -196,19 +218,23 @@
         android:layout_marginTop="5dp"
         android:text="OS:"
         android:id="@+id/lblOs"
-        android:layout_below="@+id/lblProcessor" />
+        android:layout_below="@+id/lblProcessor"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="59dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/os"
         android:id="@+id/infoOs"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblOs"
         android:layout_alignTop="@+id/lblOs"
-        android:layout_alignLeft="@id/infoProcessor"/>
+        android:layout_alignLeft="@id/infoProcessor"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -219,19 +245,23 @@
         android:layout_marginTop="5dp"
         android:text="Year:"
         android:id="@+id/lblYear"
-        android:layout_below="@+id/lblOs" />
+        android:layout_below="@+id/lblOs"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="48dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/year"
         android:id="@+id/infoYear"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblYear"
         android:layout_alignTop="@+id/lblYear"
-        android:layout_alignLeft="@id/infoOs"/>
+        android:layout_alignLeft="@id/infoOs"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -242,19 +272,23 @@
         android:layout_marginTop="5dp"
         android:text="Base Rate:"
         android:id="@+id/lblBaserate"
-        android:layout_below="@+id/lblYear" />
+        android:layout_below="@+id/lblYear"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="11dp" />
     <EditText
         android:layout_width="280dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/baserate"
         android:id="@+id/infoBaserate"
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/lblBaserate"
         android:layout_alignTop="@+id/lblBaserate"
-        android:layout_alignLeft="@id/infoYear"/>
+        android:layout_alignLeft="@id/infoYear"
+        android:fontFamily="sans-serif-light" />
 
     <TextView
         android:layout_height="35dp"
@@ -265,30 +299,34 @@
         android:layout_marginTop="5dp"
         android:text="Description:"
         android:id="@+id/lblDescription"
-        android:layout_below="@+id/lblBaserate" />
+        android:layout_below="@+id/lblBaserate"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="5dp"
+        android:paddingLeft="2dp" />
     <EditText
         android:textAlignment="textStart"
         android:layout_width="280dp"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         android:background="@drawable/edittextlight"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:hint="@string/description"
         android:id="@+id/infoDescription"
         android:layout_marginTop="5dp"
-        android:paddingRight="10dp"
         android:paddingTop="10dp"
         android:gravity="top"
         android:layout_toRightOf="@+id/lblDescription"
         android:layout_alignTop="@+id/lblDescription"
-        android:layout_alignLeft="@id/infoBaserate"/>
+        android:layout_alignLeft="@id/infoBaserate"
+        android:fontFamily="sans-serif-light"
+        android:paddingRight="10dp" />
 
     <Button
         android:layout_width="110dp"
         android:layout_height="35dp"
         android:background="@drawable/edittextdark"
         android:textSize="15sp"
-        android:text="@string/update"
+        android:text="UPDATE"
         android:id="@+id/btnUpdate"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
@@ -303,7 +341,7 @@
         android:layout_height="35dp"
         android:background="@drawable/edittextdark"
         android:textSize="15sp"
-        android:text="@string/delete"
+        android:text="DELETE"
         android:id="@+id/btnDelete"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/btnUpdate"
@@ -319,8 +357,8 @@
         android:layout_height="50dp"
         android:id="@+id/pictureBtn"
         android:background="@android:drawable/ic_menu_camera"
-        android:layout_alignBottom="@+id/btnUpdate"
-        android:layout_alignEnd="@+id/lblMemory" />
+        android:layout_below="@+id/infoDescription"
+        android:layout_alignEnd="@+id/lblProcessor" />
 
 </RelativeLayout>
 </ScrollView>
