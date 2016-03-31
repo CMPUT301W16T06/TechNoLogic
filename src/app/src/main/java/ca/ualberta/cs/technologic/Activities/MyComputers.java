@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
 import ca.ualberta.cs.technologic.CurrentComputers;
@@ -27,6 +28,7 @@ public class MyComputers extends ActionBarActivity {
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers currentComps = CurrentComputers.getInstance();
     private ComputerAdapter listAdapter;
+    private boolean connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ public class MyComputers extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        checkConnection();
 
         listAdapter.notifyDataSetChanged();
         //get all computer belonging to this user
@@ -102,6 +106,10 @@ public class MyComputers extends ActionBarActivity {
         comps.clear();
         comps.addAll(compsTemp);
         listAdapter.notifyDataSetChanged();
+    }
+
+    private void checkConnection(){
+        connection = OfflineMode.getEnabled(this);
     }
 
 

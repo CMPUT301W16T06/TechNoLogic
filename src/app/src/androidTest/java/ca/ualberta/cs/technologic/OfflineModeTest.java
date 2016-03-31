@@ -10,12 +10,12 @@ public class OfflineModeTest extends ActivityInstrumentationTestCase2 {
     }
 
     /**
-     * testOfflineMode checks the state of AirplaneMode on the phone
+     * testOfflineMode checks the state of OfflineMode on the phone
      *  Corresponds to US 08.01.01
      */
     public void testOfflineMode() {
 
-        AirplaneMode mode = new AirplaneMode();
+        OfflineMode mode = new OfflineMode();
         mode.setEnabled(false);
 
         assertEquals("Expect airplane mode off", false, mode.getEnabled());

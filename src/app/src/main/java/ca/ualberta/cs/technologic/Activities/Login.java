@@ -49,7 +49,7 @@ public class Login extends Activity{
 
             public void onClick(View v) {
                 Boolean usernameValid = userLookup(username.getText().toString().toLowerCase());
-                //usernameValid = true;
+                //boolean usernameValid = true;
 
                 if (usernameValid) {
                     Intent intent = new Intent(Login.this, HomePage.class);

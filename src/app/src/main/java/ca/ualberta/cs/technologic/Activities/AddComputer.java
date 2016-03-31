@@ -9,8 +9,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.UUID;
 
+import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentUser;
@@ -23,6 +37,9 @@ public class AddComputer extends ActionBarActivity {
     private Bitmap thumbnail = null;
     private ImageButton pictureBtn;
     private CurrentComputers currentComputers = CurrentComputers.getInstance();
+    private boolean connection;
+    private String fileName = "computers.sav";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +65,8 @@ public class AddComputer extends ActionBarActivity {
                 //startActivity(goToItems1);
             }
         });
+
+        checkCompsToSave();
     }
 
     /**
@@ -55,6 +74,9 @@ public class AddComputer extends ActionBarActivity {
      * needs to retrieve all values from the UI
      */
     private void saveComputer(){
+
+        connection = OfflineMode.getEnabled(this);
+
         UUID id = UUID.randomUUID();
         String make = ((EditText)findViewById(R.id.make)).getText().toString();
         String model = ((EditText)findViewById(R.id.model)).getText().toString();
@@ -73,31 +95,36 @@ public class AddComputer extends ActionBarActivity {
         currentComputers.addCurrentComputer(c);
 
 
-        final Computer computer;
-        try {
-            computer = new Computer(id, username,make, model, year, processor, ram,
-                    hardDrive, os, price, description, "available", thumbnail);
-
-            Thread thread = new Thread(new Runnable() {
-                public void run() {
-                    ElasticSearchComputer.addComputer(computer);
-                }
-            });
-            thread.start();
+        if (connection) {
+            final Computer computer;
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                computer = new Computer(id, username, make, model, year, processor, ram,
+                        hardDrive, os, price, description, "available", thumbnail);
+
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        ElasticSearchComputer.addComputer(computer);
+                    }
+                });
+                thread.start();
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                // Everything is OK!
+                setResult(RESULT_OK);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            // Everything is OK!
-            setResult(RESULT_OK);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            ArrayList<Computer> fileComps = loadComputersFile();
+            fileComps.add(c);
+            saveComputerFile(fileComps);
         }
-
-
     }
+
     //Took this from 301 Lab 10
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -107,5 +134,92 @@ public class AddComputer extends ActionBarActivity {
             pictureBtn.setImageBitmap(thumbnail);
         }
     }
+
+    private void checkCompsToSave(){
+        connection = OfflineMode.getEnabled(this);
+        if (connection) {
+            final ArrayList<Computer> fileComps = loadComputersFile();
+            if (fileComps.size() > 0) {
+                try {
+                    final Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            for (final Computer cFile : fileComps) {
+                                ElasticSearchComputer.addComputer(cFile);
+                            }
+                        }
+                    });
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    // Everything is OK!
+                    setResult(RESULT_OK);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    //Takes an array of Computer objects that need to be saved
+    // and saves it to file while offline
+    public void saveComputerFile(ArrayList<Computer> compsToSave){
+        //try to save to file
+        try {
+            //create file stream to write to file, 0 for default write mode
+            FileOutputStream fos = openFileOutput(fileName, 0);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
+            Gson gson = new Gson();
+
+            //converts array of Fuel objects to Json to store in file
+            //and writes to file
+            gson.toJson(compsToSave, out);
+            out.flush();
+            fos.close();
+
+            //catch errors and throws runtime exceptions
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException();
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
+    }
+
+    //Read the file and store the Computer objects into an Array and return that Array
+    public ArrayList<Computer> loadComputersFile() {
+        //computers from file will be stored in this array
+        ArrayList<Computer> fileComputers;
+
+        //try to read in fuel entries from file
+        try {
+            //create file stream to read a file
+            FileInputStream fis = openFileInput(fileName);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            //Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html Jan-21-2016
+            //convert the type stored in file to an array of Computer objects
+            Type listType = new TypeToken<ArrayList<Computer>>() {
+            }.getType();
+            fileComputers = gson.fromJson(in, listType);
+
+            //catching errors
+            //if file does not exist then create and empty array
+        } catch (Exception e){
+            if (e.getClass() == FileNotFoundException.class){
+                fileComputers = new ArrayList<Computer>();
+            } else {
+                throw new RuntimeException();
+            }
+        }
+
+        //return the array of Fuel objects
+        return fileComputers;
+    }
+
 
 }
