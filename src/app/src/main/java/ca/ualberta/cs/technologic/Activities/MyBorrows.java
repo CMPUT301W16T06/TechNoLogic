@@ -23,6 +23,7 @@ import ca.ualberta.cs.technologic.BorrowAdapter;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchBorrowing;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
@@ -37,6 +38,7 @@ public class MyBorrows extends ActionBarActivity {
     private BorrowAdapter listAdatper;
     boolean selected;
     private Borrow selectedBorrow;
+    private Integer notificationCount = 0;
 
     private double[] location = new double[2];
 
@@ -116,6 +118,9 @@ public class MyBorrows extends ActionBarActivity {
 
         //check connectivity and if there are computers to save
         checkCompsToSave();
+
+        //check if there are new bids and notify
+        getNotificaitons();
 
         //gets all computers that user is borrowing
         getMyBorrows();
@@ -200,6 +205,33 @@ public class MyBorrows extends ActionBarActivity {
                 }
             }
         }
+    }
+
+    /**
+     * check if there are any new bids for the current user
+     * display notification if there are new bids
+     */
+    private void getNotificaitons(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                notificationCount = ElasticSearchBidding.getNotifications(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (notificationCount > 0){
+            Toast notify = Toast.makeText(getApplicationContext(),
+                    "You have " + notificationCount.toString() + " new bid(s)!", Toast.LENGTH_SHORT);
+            notify.show();
+            notificationCount = 0;
+        }
+
     }
 
     @Override

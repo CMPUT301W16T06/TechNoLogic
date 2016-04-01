@@ -106,12 +106,13 @@ public class ElasticSearchBidding {
     }
 
     /**
-     * adds a bid into the system
+     * adds a bid into the system and notification
      * @param bid bid to be added
      */
     private static void addBid(Bid bid) {
         verifyClient();
 
+        //add bid to the database
         Index index = new Index.Builder(bid).index("bids").type("bid").build();
 
         try {
@@ -127,7 +128,121 @@ public class ElasticSearchBidding {
             e.printStackTrace();
         }
 
+        //add notification to the database
+        Notification n = new Notification(bid.getOwner());
+        addNotification(n);
     }
+
+    public static void addNotification(Notification n){
+        verifyClient();
+
+        ArrayList<Notification> notifications = new ArrayList<Notification>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+        String elasticSearchID;
+        Integer previousCount = 0;
+
+        String q ="{\"query\":{\"match\":{\"username\":\"" + n.getUsername() + "\"}}}";
+        Search search = new Search.Builder(q).addIndex("notifications").addType("notification").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Notification> found = result.getSourceAsObjectList(Notification.class);
+                hits = result.getHits(Map.class);
+                notifications.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (notifications.size() > 0 ) {
+            previousCount = notifications.get(0).getCount();
+            SearchResult.Hit hit = hits.get(0);
+            Map source = (Map) hit.source;
+            elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
+
+            if (elasticSearchID != "") {
+                Delete delete = new Delete.Builder(elasticSearchID).index("notifications").type("notification").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if (execute.isSucceeded()) {
+                        //TODO: something
+                    } else {
+                        Log.i("what", execute.getJsonString());
+                        Log.i("what", Integer.toString(execute.getResponseCode()));
+                    }
+                } catch (IOException e) {
+                    // TODO: Something more useful
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //update the notification count
+        n.setCount(previousCount + 1);
+
+        Index indexNot = new Index.Builder(n).index("notifications").type("notification").build();
+        try {
+            DocumentResult execute = client.execute(indexNot);
+            if(execute.isSucceeded()) {
+                //TODO: something
+            } else {
+                Log.i("what", execute.getJsonString());
+                Log.i("what", Integer.toString(execute.getResponseCode()));
+            }
+        } catch (IOException e) {
+            // TODO: Something more useful
+            e.printStackTrace();
+        }
+    }
+
+    public static Integer getNotifications(String owner){
+        verifyClient();
+
+        ArrayList<Notification> notifications = new ArrayList<Notification>();
+        List<SearchResult.Hit<Map,Void>> hits = null;
+        String elasticSearchID;
+
+        String q ="{\"query\":{\"match\":{\"username\":\"" + owner + "\"}}}";
+        Search search = new Search.Builder(q).addIndex("notifications").addType("notification").build();
+        try {
+            SearchResult result = client.execute(search);
+            if (result.isSucceeded()) {
+                List<Notification> found = result.getSourceAsObjectList(Notification.class);
+                hits = result.getHits(Map.class);
+                notifications.addAll(found);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (notifications.size() > 0 ) {
+            SearchResult.Hit hit = hits.get(0);
+            Map source = (Map) hit.source;
+            elasticSearchID = (String) source.get(JestResult.ES_METADATA_ID);
+
+            if (elasticSearchID != "") {
+                Delete delete = new Delete.Builder(elasticSearchID).index("notifications").type("notification").build();
+                try {
+                    DocumentResult execute = client.execute(delete);
+                    if (execute.isSucceeded()) {
+                        //TODO: something
+                    } else {
+                        Log.i("what", execute.getJsonString());
+                        Log.i("what", Integer.toString(execute.getResponseCode()));
+                    }
+                } catch (IOException e) {
+                    // TODO: Something more useful
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        if (notifications.size() > 0){
+            return notifications.get(0).getCount();
+        } else {
+            return 0;
+        }
+
+    }
+
 
     /**
      * for an accepted bid, make a new borrow object
