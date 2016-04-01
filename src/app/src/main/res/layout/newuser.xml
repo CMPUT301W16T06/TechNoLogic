@@ -9,56 +9,61 @@
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/userUsername"
-        android:hint="Username" />
+        android:hint="Username"
+        android:textSize="15sp" />
 
     <EditText
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/userName"
-        android:hint="Name" />
+        android:hint="Name"
+        android:textSize="15sp" />
 
     <EditText
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/userEmail"
-        android:hint="Email Address" />
+        android:hint="Email Address"
+        android:textSize="15sp" />
 
     <EditText
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/userPhone"
-        android:hint="Phone Number" />
+        android:hint="Phone Number"
+        android:textSize="15sp" />
 
     <EditText
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/userAddress"
-        android:hint="Address" />
+        android:hint="Address"
+        android:textSize="15sp" />
 
     <Button
         android:layout_width="250dp"
@@ -70,6 +75,7 @@
         android:onClick=""
         android:id="@+id/userSubmit"
         android:fontFamily="sans-serif-light"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:textSize="15sp" />
 
 </LinearLayout>

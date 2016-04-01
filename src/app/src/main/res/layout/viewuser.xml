@@ -9,56 +9,61 @@
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/view_userUsername"
-        android:hint="Username" />
+        android:hint="Username"
+        android:paddingTop="16dp" />
 
     <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/view_userName"
-        android:hint="Name" />
+        android:hint="Name"
+        android:paddingTop="16dp" />
 
     <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/view_userEmail"
-        android:hint="Email Address" />
+        android:hint="Email Address"
+        android:paddingTop="16dp" />
 
     <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/view_userPhone"
-        android:hint="Phone Number" />
+        android:hint="Phone Number"
+        android:paddingTop="16dp" />
 
     <TextView
         android:fontFamily="sans-serif-light"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:paddingLeft="20dp"
+        android:paddingLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/edittextlight"
         android:layout_gravity="center"
         android:id="@+id/view_userAddress"
-        android:hint="Address" />
+        android:hint="Address"
+        android:paddingTop="16dp" />
 
     <Button
         android:layout_width="250dp"
