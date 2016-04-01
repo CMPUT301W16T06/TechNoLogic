@@ -6,9 +6,8 @@ import java.util.UUID;
 
 
 public class BiddingTest extends ActivityInstrumentationTestCase2 {
-
-    public BiddingTest(Class activityClass) {
-        super(activityClass);
+    public BiddingTest () {
+        super(BiddingTest.class);
     }
 
     //05.01.01 As a borrower, I want to bid for an available thing, with a monetary rate
