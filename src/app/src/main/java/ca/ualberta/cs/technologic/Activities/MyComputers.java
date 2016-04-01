@@ -12,8 +12,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
@@ -28,6 +31,7 @@ public class MyComputers extends ActionBarActivity {
     private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers currentComps = CurrentComputers.getInstance();
+    private CurrentOffline co = CurrentOffline.getInstance();
     private ComputerAdapter listAdapter;
     private boolean connection;
 
@@ -69,7 +73,8 @@ public class MyComputers extends ActionBarActivity {
     protected void onStart() {
         super.onStart();
 
-        checkConnection();
+        //check the connectivity and if there are computers to save
+        checkCompsToSave();
 
         listAdapter.notifyDataSetChanged();
         //get all computer belonging to this user
@@ -111,10 +116,58 @@ public class MyComputers extends ActionBarActivity {
         listAdapter.notifyDataSetChanged();
     }
 
-    private void checkConnection(){
-        connection = OfflineMode.getEnabled(this);
-    }
+    /**
+     * checks the connectivity to the internet
+     * if connected to the internet then checks if there are computers to add
+     * to the database
+     */
+    private void checkCompsToSave(){
+        boolean connection = OfflineMode.getEnabled(this);
+        if (connection) {
+            //final ArrayList<Computer> fileComps = loadComputersFile();
+            final ArrayList<Computer> fileComps = co.getCurrentOffline();
+            if (fileComps.size() > 0) {
+                try {
+                    final Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            for (final Computer cFile : fileComps) {
+                                ElasticSearchComputer.addComputer(cFile);
+                            }
+                        }
+                    });
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // Everything is OK!
+                    setResult(RESULT_OK);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                fileComps.clear();
 
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            FileOutputStream fos = openFileOutput("computers.sav", 0);
+                            co.saveCurrentOffline(fos);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

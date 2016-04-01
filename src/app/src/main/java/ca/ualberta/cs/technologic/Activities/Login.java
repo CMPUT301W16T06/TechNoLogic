@@ -9,10 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
+import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentBids;
 import ca.ualberta.cs.technologic.CurrentComputers;
+import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.ElasticSearchUser;
@@ -25,6 +29,7 @@ public class Login extends Activity{
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers cc = CurrentComputers.getInstance();
     private CurrentBids cb = CurrentBids.getInstance();
+    private CurrentOffline co = CurrentOffline.getInstance();
     private EditText username;
 
     /** Called when the activity is first created. */
@@ -56,6 +61,7 @@ public class Login extends Activity{
                     setUser();
                     getComputers();
                     getBids();
+                    getOffline();
                     startActivity(intent);
                 } else {
                     Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
@@ -70,6 +76,8 @@ public class Login extends Activity{
                 startActivity(intent);
             }
         });
+
+
     }
 
     private Boolean userLookup(final String username) {
@@ -134,6 +142,29 @@ public class Login extends Activity{
             e.printStackTrace();
         }
     }
+
+    private void getOffline() {
+        Thread thread = new Thread(new Runnable() {
+            ArrayList<Computer> c = new ArrayList<Computer>();
+            public void run() {
+                try {
+                    FileInputStream fis = openFileInput("computers.sav");
+                    c = co.loadComputersFile(fis);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                co.setCurrentOffline(c);
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

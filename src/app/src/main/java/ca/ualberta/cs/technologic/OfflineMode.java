@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class OfflineMode extends Activity {
     private boolean isEnabled;
-    private String fileName = "computers.sav";
 
     /**
      * Constructor for OfflineMode class
@@ -56,63 +55,6 @@ public class OfflineMode extends Activity {
             connected = false;
         //return isEnabled;
         return connected;
-    }
-
-    //Takes an array of Computer objects that need to be saved
-    // and saves it to file while offline
-    public void saveComputerFile(ArrayList<Computer> compsToSave){
-        //try to save to file
-        try {
-            //create file stream to write to file, 0 for default write mode
-            FileOutputStream fos = openFileOutput(fileName, 0);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-
-            //converts array of Fuel objects to Json to store in file
-            //and writes to file
-            gson.toJson(compsToSave, out);
-            out.flush();
-            fos.close();
-
-            //catch errors and throws runtime exceptions
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException();
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-    }
-
-    //Read the file and store the Computer objects into an Array and return that Array
-    public ArrayList<Computer> loadComputersFile() {
-        //computers from file will be stored in this array
-        ArrayList<Computer> fileComputers;
-
-        //try to read in fuel entries from file
-        try {
-            //create file stream to read a file
-            FileInputStream fis = openFileInput(fileName);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-            Gson gson = new Gson();
-
-            //Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html Jan-21-2016
-            //convert the type stored in file to an array of Computer objects
-            Type listType = new TypeToken<ArrayList<Computer>>() {
-            }.getType();
-            fileComputers = gson.fromJson(in, listType);
-
-            //catching errors
-            //if file does not exist then create and empty array
-        } catch (Exception e){
-            if (e.getClass() == FileNotFoundException.class){
-                fileComputers = new ArrayList<Computer>();
-            } else {
-                throw new RuntimeException();
-            }
-        }
-
-        //return the array of Fuel objects
-        return fileComputers;
     }
 
     /**

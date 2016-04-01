@@ -13,14 +13,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
+import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
 
 public class HomePage extends ActionBarActivity {
@@ -30,12 +35,8 @@ public class HomePage extends ActionBarActivity {
     private String username = cu.toString();
     private ListView itemslist;
     private EditText search;
+    private CurrentOffline co = CurrentOffline.getInstance();
 
-    /**
-     * Set up on click listeners for itemlist click and go click
-     * @param savedInstanceState
-     */
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         Button go;
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class HomePage extends ActionBarActivity {
         });
 
         setUpNotifications();
+//        checkCompsToSave();
     }
 
     /**
@@ -71,6 +73,10 @@ public class HomePage extends ActionBarActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
+
+        //check the connectivity, if connected to internet then check if there
+        //are computers to add save to the database
+        checkCompsToSave();
 
         getComputers();
         ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
@@ -150,6 +156,59 @@ public class HomePage extends ActionBarActivity {
 //                h.postDelayed(this, delay);
 //            }
 //        }, delay);
+    }
+
+    /**
+     * checks the connectivity to the internet
+     * if connected to the internet then checks if there are computers to add
+     * to the database
+     */
+    private void checkCompsToSave(){
+        boolean connection = OfflineMode.getEnabled(this);
+        if (connection) {
+            //final ArrayList<Computer> fileComps = loadComputersFile();
+            final ArrayList<Computer> fileComps = co.getCurrentOffline();
+            if (fileComps.size() > 0) {
+                try {
+                    final Thread thread = new Thread(new Runnable() {
+                        public void run() {
+                            for (final Computer cFile : fileComps) {
+                                ElasticSearchComputer.addComputer(cFile);
+                            }
+                        }
+                    });
+                    thread.start();
+                    try {
+                        thread.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // Everything is OK!
+                    setResult(RESULT_OK);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                fileComps.clear();
+
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            FileOutputStream fos = openFileOutput("computers.sav", 0);
+                            co.saveCurrentOffline(fos);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread.start();
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

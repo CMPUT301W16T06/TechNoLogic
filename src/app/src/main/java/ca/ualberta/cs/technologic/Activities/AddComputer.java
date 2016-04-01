@@ -26,6 +26,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentComputers;
@@ -41,6 +42,7 @@ public class AddComputer extends ActionBarActivity {
     private CurrentComputers currentComputers = CurrentComputers.getInstance();
     private boolean connection;
     private String fileName = "computers.sav";
+    private CurrentOffline currentOffline = CurrentOffline.getInstance();
 
 
     @Override
@@ -68,7 +70,7 @@ public class AddComputer extends ActionBarActivity {
             }
         });
 
-        checkCompsToSave();
+        //checkCompsToSave();
     }
 
     /**
@@ -124,6 +126,9 @@ public class AddComputer extends ActionBarActivity {
             ArrayList<Computer> fileComps = loadComputersFile();
             fileComps.add(c);
             saveComputerFile(fileComps);
+
+            //add to singleton too
+            currentOffline.addCurrentOffline(c);
         }
     }
 
@@ -167,8 +172,10 @@ public class AddComputer extends ActionBarActivity {
         }
     }
 
-    //Takes an array of Computer objects that need to be saved
-    // and saves it to file while offline
+    /**
+     * Takes an array of computers from a file and saves to database
+     * @param compsToSave computers to save
+     */
     public void saveComputerFile(ArrayList<Computer> compsToSave){
         //try to save to file
         try {
