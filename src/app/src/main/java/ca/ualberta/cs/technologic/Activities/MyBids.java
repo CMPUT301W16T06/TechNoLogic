@@ -27,6 +27,7 @@ public class MyBids extends ActionBarActivity {
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentOffline co = CurrentOffline.getInstance();
     private ListView bidslist;
+    private Integer notificationCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class MyBids extends ActionBarActivity {
 
         //check connectivity and if there are computers to save
         checkCompsToSave();
+
+        //check if there are new bids and notify
+        getNotificaitons();
 
         //get all bids that the current user has made on other computers
         Thread thread = new Thread(new Runnable() {
@@ -127,6 +131,33 @@ public class MyBids extends ActionBarActivity {
                 }
             }
         }
+    }
+
+    /**
+     * check if there are any new bids for the current user
+     * display notification if there are new bids
+     */
+    private void getNotificaitons(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                notificationCount = ElasticSearchBidding.getNotifications(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (notificationCount > 0){
+            Toast notify = Toast.makeText(getApplicationContext(),
+                    "You have " + notificationCount.toString() + " new bid(s)!", Toast.LENGTH_SHORT);
+            notify.show();
+            notificationCount = 0;
+        }
+
     }
 
     @Override

@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import ca.ualberta.cs.technologic.CurrentOffline;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
@@ -33,7 +34,7 @@ public class MyComputers extends ActionBarActivity {
     private CurrentComputers currentComps = CurrentComputers.getInstance();
     private CurrentOffline co = CurrentOffline.getInstance();
     private ComputerAdapter listAdapter;
-    private boolean connection;
+    private Integer notificationCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,9 @@ public class MyComputers extends ActionBarActivity {
         //check the connectivity and if there are computers to save
         checkCompsToSave();
 
+        //check if there are new bids and notify
+        getNotificaitons();
+
         listAdapter.notifyDataSetChanged();
         //get all computer belonging to this user
         //getComputers();
@@ -86,12 +90,6 @@ public class MyComputers extends ActionBarActivity {
         }
 
     }
-
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//        getComputers();
-//    }
 
     /**
      * gets all computers belonging to the current logged in user
@@ -167,6 +165,33 @@ public class MyComputers extends ActionBarActivity {
                 }
             }
         }
+    }
+
+    /**
+     * check if there are any new bids for the current user
+     * display notification if there are new bids
+     */
+    private void getNotificaitons(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                notificationCount = ElasticSearchBidding.getNotifications(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (notificationCount > 0){
+            Toast notify = Toast.makeText(getApplicationContext(),
+                    "You have " + notificationCount.toString() + " new bid(s)!", Toast.LENGTH_SHORT);
+            notify.show();
+            notificationCount = 0;
+        }
+
     }
 
     @Override

@@ -17,6 +17,7 @@ import ca.ualberta.cs.technologic.BorrowAdapter;
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchBorrowing;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
@@ -28,6 +29,7 @@ public class LentOut extends ActionBarActivity {
     private CurrentUser cu = CurrentUser.getInstance();
     private ListView lentlist;
     private CurrentOffline co = CurrentOffline.getInstance();
+    private Integer notificationCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,9 @@ public class LentOut extends ActionBarActivity {
         //check the connectivity, if connected to internet then check if there
         //are computers to add
         checkCompsToSave();
+
+        //check if there are new bids and notify
+        getNotificaitons();
 
         //gets all computers that user has lent out to other users
         getLentOut();
@@ -129,6 +134,33 @@ public class LentOut extends ActionBarActivity {
                 }
             }
         }
+    }
+
+    /**
+     * check if there are any new bids for the current user
+     * display notification if there are new bids
+     */
+    private void getNotificaitons(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                notificationCount = ElasticSearchBidding.getNotifications(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (notificationCount > 0){
+            Toast notify = Toast.makeText(getApplicationContext(),
+                    "You have " + notificationCount.toString() + " new bid(s)!", Toast.LENGTH_SHORT);
+            notify.show();
+            notificationCount = 0;
+        }
+
     }
 
     @Override

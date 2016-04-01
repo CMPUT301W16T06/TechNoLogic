@@ -24,6 +24,7 @@ import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
+import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
@@ -36,6 +37,7 @@ public class HomePage extends ActionBarActivity {
     private ListView itemslist;
     private EditText search;
     private CurrentOffline co = CurrentOffline.getInstance();
+    private Integer notificationCount = 0;
 
     protected void onCreate(Bundle savedInstanceState) {
         Button go;
@@ -62,8 +64,6 @@ public class HomePage extends ActionBarActivity {
             }
         });
 
-        setUpNotifications();
-//        checkCompsToSave();
     }
 
     /**
@@ -77,6 +77,9 @@ public class HomePage extends ActionBarActivity {
         //check the connectivity, if connected to internet then check if there
         //are computers to add save to the database
         checkCompsToSave();
+
+        //check if there are any new bids and notify
+        getNotificaitons();
 
         getComputers();
         ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
@@ -126,6 +129,34 @@ public class HomePage extends ActionBarActivity {
         itemslist.setAdapter(listAdapter);
 
     }
+
+    /**
+     * check if there are any new bids for the current user
+     * display notification if there are new bids
+     */
+    private void getNotificaitons(){
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                notificationCount = ElasticSearchBidding.getNotifications(cu.getCurrentUser());
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (notificationCount > 0){
+            Toast notify = Toast.makeText(getApplicationContext(),
+                    "You have "+notificationCount.toString()+" new bid(s)!", Toast.LENGTH_SHORT);
+            notify.show();
+            notificationCount = 0;
+        }
+
+    }
+
 
     //IN PROGRESS DON'T DELETE
     //taken from stackoverflow Mar-3-2016
