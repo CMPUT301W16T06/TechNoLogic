@@ -23,6 +23,10 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Contains a list of all the computers that you currently have lent out to other people
+ */
+
 public class LentOut extends ActionBarActivity {
     private ArrayList<Borrow> lentOut;
     private ArrayList<Computer> comps;

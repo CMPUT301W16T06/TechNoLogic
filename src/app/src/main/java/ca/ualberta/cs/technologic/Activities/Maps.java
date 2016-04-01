@@ -19,6 +19,10 @@ import java.util.ArrayList;
 
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Allows the user to enter latitude and longitude and a map pops up
+ */
+
 //http://stackoverflow.com/questions/21120970/google-maps-android-api-v2-problems-with-android-4-3
 public class Maps extends FragmentActivity {
     private GoogleMap googleMap;

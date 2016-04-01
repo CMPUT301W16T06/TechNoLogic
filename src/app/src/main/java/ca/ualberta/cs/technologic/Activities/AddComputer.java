@@ -34,6 +34,12 @@ import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Allows user to enter all the information on a new computer
+ * Press add to at the end to add the computer to the database
+ * Will not accept strings in the place of ints
+ */
+
 public class AddComputer extends ActionBarActivity {
     final private CurrentUser cu = CurrentUser.getInstance();
     static final int REQUEST_IMAGE_CAPTURE = 1234;

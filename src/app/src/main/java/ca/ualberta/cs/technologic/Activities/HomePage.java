@@ -29,6 +29,11 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Homepage where the user can search for computers and view all availbe and bidded on computers
+ * Borrowed computers and computers the user owns will not show up here
+ */
+
 public class HomePage extends ActionBarActivity {
 
     private ArrayList<Computer> comps = null;

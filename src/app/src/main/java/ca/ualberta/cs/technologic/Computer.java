@@ -13,8 +13,8 @@ import java.util.UUID;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by gknoblau on 2016-02-06.
- * I added a status variable that can only be Available, Bidded or Borrowed- Jordan
+ * One of the main classes contians all the information on computer including a picture
+ * Main item that is being traded on the app
  */
 public class Computer {
     @JestId

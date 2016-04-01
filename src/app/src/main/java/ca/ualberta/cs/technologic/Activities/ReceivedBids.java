@@ -25,6 +25,11 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * View the details of a computer and its status
+ * You can also click on the owner name and you can view the owner
+ */
+
 public class ReceivedBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private ArrayList<Computer> comps;

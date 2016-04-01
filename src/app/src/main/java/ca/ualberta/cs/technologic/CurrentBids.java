@@ -5,7 +5,7 @@ import java.util.UUID;
 
 
 /**
- * Created by gknoblau on 3/26/16.
+ * A singleton class the get the state of MyBids
  */
 public class CurrentBids {
     private ArrayList<Computer> currentBids;

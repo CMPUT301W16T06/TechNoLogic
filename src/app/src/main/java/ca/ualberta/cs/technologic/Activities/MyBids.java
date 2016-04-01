@@ -22,6 +22,11 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Shows a list of items that you have bid on
+ * you can click on an item and view its details
+ */
+
 public class MyBids extends ActionBarActivity {
     private ArrayList<Bid> bids;
     private CurrentUser cu = CurrentUser.getInstance();

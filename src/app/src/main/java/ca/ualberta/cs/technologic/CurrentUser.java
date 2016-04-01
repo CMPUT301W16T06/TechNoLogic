@@ -1,5 +1,8 @@
 package ca.ualberta.cs.technologic;
 
+/**
+ * A singleton class for the current user
+ */
 public class CurrentUser {
     private String currentUser;
     private static CurrentUser firstInstance = null;

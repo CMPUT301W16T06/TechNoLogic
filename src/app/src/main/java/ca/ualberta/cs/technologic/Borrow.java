@@ -5,6 +5,11 @@ import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
 
+/**
+ * When a bid is accepted it is turned into a borrow
+ * which contians the same information as bid as well as a meeting place and a time
+ */
+
 public class Borrow{
     @JestId
     private UUID borrowID;

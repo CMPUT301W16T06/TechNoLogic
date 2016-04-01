@@ -23,6 +23,11 @@ import ca.ualberta.cs.technologic.ElasticSearchUser;
 import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
+/**
+ * Allows the user to login,
+ * the user can also create a new account if they dont already have one
+ */
+
 public class Login extends Activity{
 
     private ArrayList<User> users =  new ArrayList<User>();

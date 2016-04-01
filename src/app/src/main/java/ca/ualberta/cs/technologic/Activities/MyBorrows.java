@@ -29,6 +29,11 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.OfflineMode;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Contains a list of computers that you are currently borrowing
+ * You can also return a computer from this screen
+ */
+
 public class MyBorrows extends ActionBarActivity {
     private ArrayList<Borrow> borrows;
     private ArrayList<Computer> comps;

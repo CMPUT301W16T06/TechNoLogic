@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 /**
- * Created by gknoblau on 3/26/16.
+ * A singleton class that gets all the computers
  */
 public class CurrentComputers {
     private ArrayList<Computer> currentComputers;

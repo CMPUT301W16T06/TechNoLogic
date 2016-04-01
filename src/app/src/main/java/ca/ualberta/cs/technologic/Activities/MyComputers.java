@@ -26,6 +26,11 @@ import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Shows a list of computers that you own and their status, availbie bidded or borrowed
+ * The user can also add a new computer from this page
+ */
+
 public class MyComputers extends ActionBarActivity {
 
     private ArrayList<Computer> comps = new ArrayList<Computer>();

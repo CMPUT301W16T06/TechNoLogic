@@ -6,11 +6,7 @@ import java.util.UUID;
 import io.searchbox.annotations.JestId;
 
 /**
- * Created by gknoblau on 2016-02-06.
- * Changed the password back to just a string - Jordan
- * Added deleteComputer, addComputer, editComputer and getComputerIndex methods (not implemented)
- * We have to add checking that username is unique in constructor and setUsername
- * Changed everything to strings cause its not working and I don't wanna deal with typecasting right now... -greg
+ * The class that contains all the information on the user
 **/
 
 public class User{

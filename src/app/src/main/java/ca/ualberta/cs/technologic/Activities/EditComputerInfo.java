@@ -25,6 +25,11 @@ import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Edit the computer the user already owns
+ * Will not accept strings in the place of ints
+ */
+
 public class EditComputerInfo extends ActionBarActivity {
     private String id;
     private Computer comp;

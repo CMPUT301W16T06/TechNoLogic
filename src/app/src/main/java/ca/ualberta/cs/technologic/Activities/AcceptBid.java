@@ -31,6 +31,12 @@ import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
 import ca.ualberta.cs.technologic.R;
 
+/**
+ * Activity to Accept a Bid on your item. You can look at all your bids
+ * and either accept and deline them, if you accept a bid it will decline all
+ * other bids on that computer
+ */
+
 public class AcceptBid extends ActionBarActivity {
     private ArrayList<Bid> bids = null;
     private String compID;

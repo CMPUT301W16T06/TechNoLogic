@@ -8,6 +8,10 @@ import java.util.UUID;
 
 import io.searchbox.annotations.JestId;
 
+/**
+ * Bid class contains all the information on each bid
+ */
+
 
 public class Bid{
     @JestId
