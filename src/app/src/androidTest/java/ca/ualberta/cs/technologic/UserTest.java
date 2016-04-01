@@ -2,11 +2,8 @@
 package ca.ualberta.cs.technologic;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
 
 import java.util.UUID;
-
-import ca.ualberta.cs.technologic.Activities.Login;
 
 /**
  * Created by Jordan on 08/02/2016.
@@ -16,13 +13,9 @@ import ca.ualberta.cs.technologic.Activities.Login;
  */
 public class UserTest extends ActivityInstrumentationTestCase2 {
 
-    public UserTest () {
-        super(UserTest.class);
+    public UserTest(Class activityClass) {
+        super(activityClass);
     }
-
-    //public UserTest(Class activityClass) {
-        //super(activityClass);
-    //}
 
     //Tests the adding of a computer item to the user's computer list
     //Test that corresponds with US 1.01.01 (Add_Computer)
@@ -32,9 +25,8 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         Computer testComputer1 = null;
         testComputer1 = new Computer(UUID.randomUUID(), "cooljohn123", "Microsoft",
                 "surface",2014,"intel i7", 8, 500,"windows",Float.parseFloat("34.2"),
-                "this is a cool computer", "available", null, null);
-
-        assertNotNull(testComputer1);
+                "this is a cool computer", "available", testComputer1.getTime(),
+                testComputer1.getThumbnail());
 
         //setting status to bidded
         testComputer1.setStatus("bidded");
