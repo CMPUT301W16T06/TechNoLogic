@@ -1,12 +1,15 @@
 
-package ca.ualberta.cs.technologic;
+package ca.ualberta.cs.technologic.oldTests;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
+
+import junit.framework.Assert;
 
 import java.util.UUID;
 
-import ca.ualberta.cs.technologic.Activities.Login;
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.ElasticSearchComputer;
+import ca.ualberta.cs.technologic.User;
 
 /**
  * Created by Jordan on 08/02/2016.
@@ -41,7 +44,7 @@ public class UserTest extends ActivityInstrumentationTestCase2 {
         ca.ualberta.cs.technologic.ElasticSearchComputer.addComputer(testComputer1);
 
         //checks if the computer is in the elastic search
-        assertEquals(testComputer1, ElasticSearchComputer.getComputersById(testComputer1.getId()));
+        Assert.assertEquals(testComputer1, ElasticSearchComputer.getComputersById(testComputer1.getId()));
         assertEquals(testComputer1, ca.ualberta.cs.technologic.ElasticSearchComputer.getComputers(testComputer1.getUsername()));
 
 

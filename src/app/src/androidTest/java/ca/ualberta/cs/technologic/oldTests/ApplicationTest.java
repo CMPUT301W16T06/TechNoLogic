@@ -1,4 +1,4 @@
-package ca.ualberta.cs.technologic;
+package ca.ualberta.cs.technologic.oldTests;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

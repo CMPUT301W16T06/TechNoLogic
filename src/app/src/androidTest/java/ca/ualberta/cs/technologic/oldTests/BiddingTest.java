@@ -1,8 +1,12 @@
-package ca.ualberta.cs.technologic;
+package ca.ualberta.cs.technologic.oldTests;
 
 import android.test.ActivityInstrumentationTestCase2;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import ca.ualberta.cs.technologic.Bid;
+import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.User;
 
 
 public class BiddingTest extends ActivityInstrumentationTestCase2 {
