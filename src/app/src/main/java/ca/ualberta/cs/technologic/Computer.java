@@ -33,6 +33,8 @@ public class Computer {
     private Date time;
     protected transient Bitmap thumbnail;
     protected String thumbnailBase64;
+    static int TARGET_IMAGE_SIZE_BYTES = 65536;
+
 
     /**
      * Contructor of a computer
@@ -314,11 +316,16 @@ public class Computer {
         if (newThumbnail != null) {
             thumbnail = newThumbnail;
 
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            thumbnailBase64 = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
 
-            byte[] b = byteArrayOutputStream.toByteArray();
-            thumbnailBase64 = Base64.encodeToString(b, Base64.DEFAULT);
+            while(thumbnailBase64.length() > TARGET_IMAGE_SIZE_BYTES){
+                newThumbnail = Bitmap.createScaledBitmap(newThumbnail, newThumbnail.getWidth() / 2, newThumbnail.getHeight() / 2, false);
+                ByteArrayOutputStream stream2 = new ByteArrayOutputStream();
+                newThumbnail.compress(Bitmap.CompressFormat.PNG, 100, stream2);
+                thumbnailBase64 = Base64.encodeToString(stream.toByteArray(), Base64.DEFAULT);
+            }
         }
     }
 

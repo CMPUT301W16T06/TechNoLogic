@@ -1,12 +1,15 @@
 package ca.ualberta.cs.technologic.Activities;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +33,7 @@ public class EditComputerInfo extends ActionBarActivity {
     private Computer comp;
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers currentComputers = CurrentComputers.getInstance();
-    private Bitmap thumbnail;
+    private Bitmap thumbnail = null;
     private ImageButton pictureBtn;
     static final int REQUEST_IMAGE_CAPTURE = 1234;
 
@@ -63,14 +66,19 @@ public class EditComputerInfo extends ActionBarActivity {
 
         //links the vlaues of the computer to the UI
         setComputerValues(comp);
-        pictureBtn.setImageBitmap(comp.getThumbnail());
+        thumbnail = comp.getThumbnail();
+        pictureBtn.setImageBitmap(thumbnail);
 
 
         pictureBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                if (null != thumbnail) {
+                    popUp();
+                } else {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (intent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                    }
                 }
             }
         });
@@ -218,6 +226,42 @@ public class EditComputerInfo extends ActionBarActivity {
         }
 
     }
+
+    private void popUp() {
+
+        //http://developer.android.com/guide/topics/ui/dialogs.html
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("What do you really wanna do?");
+        //builder.setMessage("Specify Location for Pickup:");
+
+
+
+        // Add the buttons
+        builder.setPositiveButton("Take new photo", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
+
+            }
+        });
+        builder.setNegativeButton("Delete Photo", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                thumbnail = null;
+                pictureBtn = (ImageButton) findViewById(R.id.pictureBtn);
+                pictureBtn.setImageBitmap(thumbnail);
+
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
     //Took this from 301 Lab 10
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
