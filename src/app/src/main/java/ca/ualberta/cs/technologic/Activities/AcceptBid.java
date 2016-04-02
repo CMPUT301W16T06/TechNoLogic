@@ -116,6 +116,12 @@ public class AcceptBid extends ActionBarActivity {
         bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (view.getId() == R.id.owner) {
+                    Intent intent = new Intent(view.getContext(), ViewUser.class);
+                    String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
+                    intent.putExtra("username", sellerName);
+                    startActivity(intent);
+                }
                 selected = true;
                 selectedBid = (Bid) parent.getAdapter().getItem(position);
                 bidID = selectedBid.getBidID();
@@ -227,15 +233,6 @@ public class AcceptBid extends ActionBarActivity {
         //listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         listAdapter = new BidAdapter(this, bids, false);
         bidslist.setAdapter(listAdapter);
-        bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(view.getContext(), ViewUser.class);
-                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
-                intent.putExtra("username", sellerName);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

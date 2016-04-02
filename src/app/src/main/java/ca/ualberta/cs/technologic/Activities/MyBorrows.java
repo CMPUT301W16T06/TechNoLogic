@@ -111,6 +111,12 @@ public class MyBorrows extends ActionBarActivity {
         borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (view.getId() == R.id.owner) {
+                    Intent intent = new Intent(view.getContext(), ViewUser.class);
+                    String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
+                    intent.putExtra("username", sellerName);
+                    startActivity(intent);
+                }
                 selected = true;
                 selectedBorrow = (Borrow) parent.getAdapter().getItem(position);
 
@@ -134,15 +140,6 @@ public class MyBorrows extends ActionBarActivity {
         //ArrayAdapter<Borrow> listAdapter = new ArrayAdapter<Borrow>(this, R.layout.listviewtext, borrows);
         listAdatper = new BorrowAdapter(this, borrows, true);
         borrowlist.setAdapter(listAdatper);
-        borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(view.getContext(), ViewUser.class);
-                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
-                intent.putExtra("username", sellerName);
-                startActivity(intent);
-            }
-        });
 
         if (borrows.size() == 0){
             Toast msg = Toast.makeText(getApplicationContext(), "You are borrowing no computers", Toast.LENGTH_SHORT);

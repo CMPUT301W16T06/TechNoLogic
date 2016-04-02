@@ -84,10 +84,12 @@ public class MyBids extends ActionBarActivity {
         bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(view.getContext(), ViewUser.class);
-                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
-                intent.putExtra("username", sellerName);
-                startActivity(intent);
+                if (view.getId() == R.id.owner) {
+                    Intent intent = new Intent(view.getContext(), ViewUser.class);
+                    String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
+                    intent.putExtra("username", sellerName);
+                    startActivity(intent);
+                }
             }
         });
         if (bids.size() == 0){
