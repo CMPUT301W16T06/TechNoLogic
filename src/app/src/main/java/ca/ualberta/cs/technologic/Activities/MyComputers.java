@@ -85,9 +85,9 @@ public class MyComputers extends ActionBarActivity {
         //check if there are new bids and notify
         getNotificaitons();
 
+        //makes sure the list view is up to date
         listAdapter.notifyDataSetChanged();
-        //get all computer belonging to this user
-        //getComputers();
+
 
         if (currentComps.getCurrentComputers().size() == 0){
             Toast myitems = Toast.makeText(getApplicationContext(), "You have no Computers", Toast.LENGTH_SHORT);
@@ -196,7 +196,6 @@ public class MyComputers extends ActionBarActivity {
             notify.show();
             notificationCount = 0;
         }
-
     }
 
     @Override

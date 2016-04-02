@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import ca.ualberta.cs.technologic.Bid;
 import ca.ualberta.cs.technologic.BidAdapter;
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
@@ -31,11 +32,18 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class MyBids extends ActionBarActivity {
-    private ArrayList<Bid> bids;
+
+    //singleton
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentOffline co = CurrentOffline.getInstance();
-    private ListView bidslist;
+    private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //variables
+    private ArrayList<Bid> bids;
     private Integer notificationCount = 0;
+
+    //UI elements
+    private ListView bidslist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,11 @@ public class MyBids extends ActionBarActivity {
 
         //check if there are new bids and notify
         getNotificaitons();
+
+        //update computer singleton
+        //get changes done by external users, ie. bidding
+        getComputerSingleton();
+
 
         //get all bids that the current user has made on other computers
         Thread thread = new Thread(new Runnable() {
@@ -176,6 +189,24 @@ public class MyBids extends ActionBarActivity {
             notificationCount = 0;
         }
 
+    }
+
+    /**
+     * gets the computers for the computer singleton
+     */
+    private void getComputerSingleton() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cc.setCurrentComputers(ElasticSearchComputer.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ import java.util.ConcurrentModificationException;
 
 import ca.ualberta.cs.technologic.Computer;
 import ca.ualberta.cs.technologic.ComputerAdapter;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
@@ -36,13 +37,20 @@ import ca.ualberta.cs.technologic.R;
 
 public class HomePage extends ActionBarActivity {
 
-    private ArrayList<Computer> comps = null;
+    //singletons
     private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentOffline co = CurrentOffline.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //variables
+    private ArrayList<Computer> comps = null;
     private String username = cu.toString();
+    private Integer notificationCount = 0;
+
+    //UI elements
     private ListView itemslist;
     private EditText search;
-    private CurrentOffline co = CurrentOffline.getInstance();
-    private Integer notificationCount = 0;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         Button go;
@@ -85,6 +93,10 @@ public class HomePage extends ActionBarActivity {
 
         //check if there are any new bids and notify
         getNotificaitons();
+
+        //update computer singleton
+        //get changes done by external users, ie. bidding
+        getComputerSingleton();
 
         getComputers();
         ComputerAdapter listAdapter = new ComputerAdapter(this, comps);
@@ -162,38 +174,6 @@ public class HomePage extends ActionBarActivity {
 
     }
 
-
-    //IN PROGRESS DON'T DELETE
-    //taken from stackoverflow Mar-3-2016
-    //http://stackoverflow.com/questions/11434056/how-to-run-a-method-every-x-seconds
-    //queries database every 20 seconds to see if there are any new notifications
-    private void setUpNotifications(){
-//        final Handler h = new Handler();
-//        final int delay = 15000; //milliseconds
-//
-//        h.postDelayed(new Runnable() {
-//            int number = 0;
-//            public void run() {
-//                Thread thread = new Thread(new Runnable() {
-//                    public void run() {
-//                        ArrayList<Computer> compsTemp = ElasticSearchComputer.getComputers(cu.getCurrentUser());
-//                        number = compsTemp.size();
-//                    }
-//                });
-//                thread.start();
-//
-//                try {
-//                    thread.join();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                Toast myitems = Toast.makeText(getApplicationContext(), "notification:"+number, Toast.LENGTH_SHORT);
-//                myitems.show();
-//                h.postDelayed(this, delay);
-//            }
-//        }, delay);
-    }
-
     /**
      * checks the connectivity to the internet
      * if connected to the internet then checks if there are computers to add
@@ -244,6 +224,24 @@ public class HomePage extends ActionBarActivity {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    /**
+     * gets the computers for the computer singleton
+     */
+    private void getComputerSingleton() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cc.setCurrentComputers(ElasticSearchComputer.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 

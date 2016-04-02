@@ -65,7 +65,11 @@ public class CurrentComputers {
             }
         }
         if (index >= 0) {
-            this.currentComputers.get(index).setStatus(status);
+            Computer c = this.currentComputers.get(index);
+            c.setStatus(status);
+            this.currentComputers.remove(index);
+            this.currentComputers.add(c);
+            //this.currentComputers.get(index).setStatus(status);
         }
     }
 

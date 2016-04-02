@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import ca.ualberta.cs.technologic.Borrow;
 import ca.ualberta.cs.technologic.BorrowAdapter;
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
@@ -31,12 +32,19 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class LentOut extends ActionBarActivity {
+
+    //singleton
+    private CurrentUser cu = CurrentUser.getInstance();
+    private CurrentOffline co = CurrentOffline.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //varaibles
     private ArrayList<Borrow> lentOut;
     private ArrayList<Computer> comps;
-    private CurrentUser cu = CurrentUser.getInstance();
-    private ListView lentlist;
-    private CurrentOffline co = CurrentOffline.getInstance();
     private Integer notificationCount = 0;
+
+    //UI elements
+    private ListView lentlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +65,10 @@ public class LentOut extends ActionBarActivity {
 
         //check if there are new bids and notify
         getNotificaitons();
+
+        //update computer singleton
+        //get changes done by external users, ie. bidding
+        getComputerSingleton();
 
         //gets all computers that user has lent out to other users
         getLentOut();
@@ -178,7 +190,24 @@ public class LentOut extends ActionBarActivity {
             notify.show();
             notificationCount = 0;
         }
+    }
 
+    /**
+     * gets the computers for the computer singleton
+     */
+    private void getComputerSingleton() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cc.setCurrentComputers(ElasticSearchComputer.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

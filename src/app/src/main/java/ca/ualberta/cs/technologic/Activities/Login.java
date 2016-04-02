@@ -30,11 +30,16 @@ import ca.ualberta.cs.technologic.User;
 
 public class Login extends Activity{
 
-    private ArrayList<User> users =  new ArrayList<User>();
+    //singletons
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers cc = CurrentComputers.getInstance();
     private CurrentBids cb = CurrentBids.getInstance();
     private CurrentOffline co = CurrentOffline.getInstance();
+
+    //variables
+    private ArrayList<User> users =  new ArrayList<User>();
+
+    //UI elements
     private EditText username;
 
     /** Called when the activity is first created. */
@@ -85,6 +90,11 @@ public class Login extends Activity{
 
     }
 
+    /**
+     * check if the user exists in the systems
+     * @param username the username entered
+     * @return true if username exists, false if not
+     */
     private Boolean userLookup(final String username) {
             // TODO: Check wantedUsername against existing Users
             // TODO: Fix lowercase problem
@@ -118,6 +128,9 @@ public class Login extends Activity{
 
     }
 
+    /**
+     * gets the computers for the computer singleton
+     */
     private void getComputers() {
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -133,6 +146,9 @@ public class Login extends Activity{
         }
     }
 
+    /**
+     * gets the bids for the bids singleton
+     */
     private void getBids() {
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -148,6 +164,9 @@ public class Login extends Activity{
         }
     }
 
+    /**
+     * get information for Offline singleton
+     */
     private void getOffline() {
         Thread thread = new Thread(new Runnable() {
             ArrayList<Computer> c = new ArrayList<Computer>();

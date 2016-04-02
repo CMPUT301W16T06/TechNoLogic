@@ -74,6 +74,7 @@ public class AcceptBid extends ActionBarActivity {
                     Toast noBidSelected = Toast.makeText(getApplicationContext(), "You must select a bid!", Toast.LENGTH_SHORT);
                     noBidSelected.show();
                 }
+
             }
         });
 

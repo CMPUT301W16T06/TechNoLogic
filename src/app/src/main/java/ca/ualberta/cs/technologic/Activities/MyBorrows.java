@@ -22,6 +22,7 @@ import java.util.Map;
 import ca.ualberta.cs.technologic.Borrow;
 import ca.ualberta.cs.technologic.BorrowAdapter;
 import ca.ualberta.cs.technologic.Computer;
+import ca.ualberta.cs.technologic.CurrentComputers;
 import ca.ualberta.cs.technologic.CurrentOffline;
 import ca.ualberta.cs.technologic.CurrentUser;
 import ca.ualberta.cs.technologic.ElasticSearchBidding;
@@ -36,17 +37,25 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class MyBorrows extends ActionBarActivity {
-    private ArrayList<Borrow> borrows;
-    private ArrayList<Computer> comps;
+
+    //singletons
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentOffline co = CurrentOffline.getInstance();
-    private ListView borrowlist;
-    private BorrowAdapter listAdatper;
+    private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //variables
+    private ArrayList<Borrow> borrows;
+    private ArrayList<Computer> comps;
     boolean selected;
     private Borrow selectedBorrow;
     private Integer notificationCount = 0;
-
     private double[] location = new double[2];
+
+    //UI elements
+    private ListView borrowlist;
+    private BorrowAdapter listAdatper;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +90,11 @@ public class MyBorrows extends ActionBarActivity {
                     borrows.remove(selectedBorrow);
                     listAdatper.notifyDataSetChanged();
                     //onBackPressed();
+                }
+                else {
+                    Toast sel = Toast.makeText(getApplicationContext(), "Select a Computer to return", Toast.LENGTH_SHORT);
+                    sel.show();
+
                 }
             }
         });
@@ -133,6 +147,10 @@ public class MyBorrows extends ActionBarActivity {
 
         //check if there are new bids and notify
         getNotificaitons();
+
+        //update computer singleton
+        //get changes done by external users, ie. bidding
+        getComputerSingleton();
 
         //gets all computers that user is borrowing
         getMyBorrows();
@@ -243,7 +261,24 @@ public class MyBorrows extends ActionBarActivity {
             notify.show();
             notificationCount = 0;
         }
+    }
 
+    /**
+     * gets the computers for the computer singleton
+     */
+    private void getComputerSingleton() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                cc.setCurrentComputers(ElasticSearchComputer.getComputers(cu.getCurrentUser()));
+            }
+        });
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
