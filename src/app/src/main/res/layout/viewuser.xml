@@ -64,7 +64,8 @@
         android:id="@+id/view_userAddress"
         android:hint="Address"
         android:paddingTop="16dp" />
-
+    
+<!-- Some button
     <Button
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -76,5 +77,5 @@
         android:id="@+id/view_userSubmit"
         android:fontFamily="sans-serif-light"
         android:layout_gravity="center"/>
-
+-->
 </LinearLayout>
