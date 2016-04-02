@@ -74,6 +74,9 @@
             android:label="@string/app_name" />
         <activity
             android:name=".Activities.ViewComputer"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".Activities.ViewUser"
             android:label="@string/app_name">
 
         </activity>

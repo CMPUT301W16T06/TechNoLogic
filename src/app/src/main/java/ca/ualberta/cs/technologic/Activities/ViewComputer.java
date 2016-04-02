@@ -39,6 +39,7 @@ public class ViewComputer extends ActionBarActivity {
         TextView lblID = (TextView)findViewById(R.id.lblId);
         lblID.setText("ID: " + id);
 
+
         //gets the computer information to display
         Thread thread = new Thread(new Runnable() {
             public void run() {
@@ -57,10 +58,14 @@ public class ViewComputer extends ActionBarActivity {
         setComputerValues(comp);
         image.setImageBitmap(comp.getThumbnail());
 
-        username.setOnClickListener(new View.OnClickListener(){
+        username.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 //TODO: go to the user's page when clicked
+                Intent intent = new Intent(v.getContext(), ViewUser.class);
+                String sellerName = ((TextView) findViewById(R.id.infoUsername)).getText().toString();
+                intent.putExtra("username", sellerName);
+                startActivity(intent);
             }
         });
 
