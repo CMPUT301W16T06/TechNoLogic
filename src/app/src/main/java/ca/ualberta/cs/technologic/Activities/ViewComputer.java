@@ -114,10 +114,10 @@ public class ViewComputer extends ActionBarActivity {
         ((TextView) findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((TextView) findViewById(R.id.infoMake)).setText(c.getMake());
         ((TextView) findViewById(R.id.infoModel)).setText(c.getModel());
-        ((TextView) findViewById(R.id.infoYear)).setText(c.getYear().toString());
+        ((TextView) findViewById(R.id.infoYear)).setText(c.getYear());
         ((TextView) findViewById(R.id.infoProcessor)).setText(c.getProcessor());
-        ((TextView) findViewById(R.id.infoMemory)).setText(c.getRam().toString());
-        ((TextView) findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
+        ((TextView) findViewById(R.id.infoMemory)).setText(c.getRam());
+        ((TextView) findViewById(R.id.infoHarddrive)).setText(c.getHardDrive());
         ((TextView) findViewById(R.id.infoOs)).setText(c.getOs());
         ((TextView) findViewById(R.id.infoBaserate)).setText(String.format("%.2f", c.getPrice()));
         ((TextView) findViewById(R.id.infoDescription)).setText(c.getDescription());

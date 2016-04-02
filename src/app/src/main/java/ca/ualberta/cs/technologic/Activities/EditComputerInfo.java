@@ -158,10 +158,10 @@ public class EditComputerInfo extends ActionBarActivity {
     private void updateComputer() {
         String make = ((EditText)findViewById(R.id.infoMake)).getText().toString();
         String model = ((EditText)findViewById(R.id.infoModel)).getText().toString();
-        Integer year = Integer.parseInt(((EditText) findViewById(R.id.infoYear)).getText().toString());
+        String year = ((EditText) findViewById(R.id.infoYear)).getText().toString();
         String processor= ((EditText)findViewById(R.id.infoProcessor)).getText().toString();
-        Integer ram = Integer.parseInt(((EditText) findViewById(R.id.infoMemory)).getText().toString());
-        Integer hardDrive = Integer.parseInt(((EditText) findViewById(R.id.infoHarddrive)).getText().toString());
+        String ram = ((EditText) findViewById(R.id.infoMemory)).getText().toString();
+        String hardDrive = ((EditText) findViewById(R.id.infoHarddrive)).getText().toString();
         String os = ((EditText)findViewById(R.id.infoOs)).getText().toString();
         Float price = Float.parseFloat(((EditText) findViewById(R.id.infoBaserate)).getText().toString());
         String description = ((EditText)findViewById(R.id.infoDescription)).getText().toString();
@@ -209,10 +209,10 @@ public class EditComputerInfo extends ActionBarActivity {
         ((TextView)findViewById(R.id.infoUsername)).setText(c.getUsername());
         ((EditText)findViewById(R.id.infoMake)).setText(c.getMake());
         ((EditText)findViewById(R.id.infoModel)).setText(c.getModel());
-        ((EditText)findViewById(R.id.infoYear)).setText(c.getYear().toString());
+        ((EditText)findViewById(R.id.infoYear)).setText(c.getYear());
         ((EditText)findViewById(R.id.infoProcessor)).setText(c.getProcessor());
-        ((EditText)findViewById(R.id.infoMemory)).setText(c.getRam().toString());
-        ((EditText)findViewById(R.id.infoHarddrive)).setText(c.getHardDrive().toString());
+        ((EditText)findViewById(R.id.infoMemory)).setText(c.getRam());
+        ((EditText)findViewById(R.id.infoHarddrive)).setText(c.getHardDrive());
         ((EditText)findViewById(R.id.infoOs)).setText(c.getOs());
         ((EditText)findViewById(R.id.infoBaserate)).setText(String.format("%.2f", c.getPrice()));
         ((EditText)findViewById(R.id.infoDescription)).setText(c.getDescription());

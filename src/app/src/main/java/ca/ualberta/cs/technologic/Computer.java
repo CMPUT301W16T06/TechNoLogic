@@ -22,10 +22,10 @@ public class Computer {
     private String username;
     private String make;
     private String model;
-    private Integer year;
+    private String year;
     private String processor;
-    private Integer ram;
-    private Integer hardDrive;
+    private String ram;
+    private String hardDrive;
     private String os;
     private Float price;
     private String description;
@@ -52,8 +52,8 @@ public class Computer {
      * @param description
      * @param time
      */
-    public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String s, String description, Date time, Bitmap thumbnail) {
+    public Computer(UUID id, String username, String make, String model, String year, String processor, String ram,
+                    String hardDrive, String os, Float price, String s, String description, Date time, Bitmap thumbnail) {
         this.id = UUID.randomUUID();
         this.username = username;
         this.make = make;
@@ -70,8 +70,8 @@ public class Computer {
         addThumbnail(thumbnail);
     }
 
-    public Computer(UUID id, String username, String make, String model, Integer year, String processor, Integer ram,
-                    Integer hardDrive, String os, Float price, String description, String status, Bitmap thumbnail) {
+    public Computer(UUID id, String username, String make, String model, String year, String processor, String ram,
+                    String hardDrive, String os, Float price, String description, String status, Bitmap thumbnail) {
         this.id = id;
         this.username = username;
         this.make = make;
@@ -155,7 +155,7 @@ public class Computer {
      *
      * @return
      */
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -164,7 +164,7 @@ public class Computer {
      *
      * @param year
      */
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -191,7 +191,7 @@ public class Computer {
      *
      * @return
      */
-    public Integer getRam() {
+    public String getRam() {
         return ram;
     }
 
@@ -200,7 +200,7 @@ public class Computer {
      *
      * @param ram
      */
-    public void setRam(Integer ram) {
+    public void setRam(String ram) {
         this.ram = ram;
     }
 
@@ -209,7 +209,7 @@ public class Computer {
      *
      * @return
      */
-    public Integer getHardDrive() {
+    public String getHardDrive() {
         return hardDrive;
     }
 
@@ -218,7 +218,7 @@ public class Computer {
      *
      * @param hardDrive
      */
-    public void setHardDrive(Integer hardDrive) {
+    public void setHardDrive(String hardDrive) {
         this.hardDrive = hardDrive;
     }
 

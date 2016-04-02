@@ -90,10 +90,10 @@ public class AddComputer extends ActionBarActivity {
         UUID id = UUID.randomUUID();
         String make = ((EditText)findViewById(R.id.make)).getText().toString();
         String model = ((EditText)findViewById(R.id.model)).getText().toString();
-        Integer year = Integer.parseInt(((EditText) findViewById(R.id.year)).getText().toString());
+        String year = ((EditText) findViewById(R.id.year)).getText().toString();
         String processor= ((EditText)findViewById(R.id.processor)).getText().toString();
-        Integer ram = Integer.parseInt(((EditText) findViewById(R.id.memory)).getText().toString());
-        Integer hardDrive = Integer.parseInt(((EditText) findViewById(R.id.harddrive)).getText().toString());
+        String ram = ((EditText) findViewById(R.id.memory)).getText().toString();
+        String hardDrive = ((EditText) findViewById(R.id.harddrive)).getText().toString();
         String os = ((EditText)findViewById(R.id.os)).getText().toString();
         Float price = Float.parseFloat(((EditText) findViewById(R.id.baserate)).getText().toString());
         String description = ((EditText)findViewById(R.id.description)).getText().toString();
