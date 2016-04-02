@@ -12,7 +12,7 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="0.02"
         android:layout_toRightOf="@+id/description"
-        android:onClick="viewUserInfo"/>
+        android:clickable="true" />
 
     <TextView
         android:id="@+id/price"

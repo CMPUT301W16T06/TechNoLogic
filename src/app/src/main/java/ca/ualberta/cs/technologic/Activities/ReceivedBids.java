@@ -63,6 +63,7 @@ public class ReceivedBids extends ActionBarActivity {
 
         listAdapter = new ComputerAdapter(this, cb.getCurrentBids());
         myitemlist.setAdapter(listAdapter);
+
     }
 
     @Override

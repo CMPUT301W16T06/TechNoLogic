@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -67,7 +68,7 @@ public class AcceptBid extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //check if bid is selected
-                if (selected){
+                if (selected) {
                     getLocation();
                 } else {
                     Toast noBidSelected = Toast.makeText(getApplicationContext(), "You must select a bid!", Toast.LENGTH_SHORT);
@@ -103,7 +104,7 @@ public class AcceptBid extends ActionBarActivity {
                     bids.remove(selectedBid);
                     listAdapter.notifyDataSetChanged();
 
-                    if (bids.size() == 0){
+                    if (bids.size() == 0) {
                         cb.deleteCurrentComputer(selectedBid.getComputerID());
                         onBackPressed();
                     }
@@ -226,6 +227,15 @@ public class AcceptBid extends ActionBarActivity {
         //listAdapter = new ArrayAdapter<Bid>(this, R.layout.listviewtext, bids);
         listAdapter = new BidAdapter(this, bids, false);
         bidslist.setAdapter(listAdapter);
+        bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(view.getContext(), ViewUser.class);
+                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
+                intent.putExtra("username", sellerName);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -284,5 +294,6 @@ public class AcceptBid extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

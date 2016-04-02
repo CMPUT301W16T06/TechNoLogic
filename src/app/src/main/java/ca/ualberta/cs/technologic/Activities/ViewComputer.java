@@ -63,7 +63,7 @@ public class ViewComputer extends ActionBarActivity {
             public void onClick(View v) {
                 //TODO: go to the user's page when clicked
                 Intent intent = new Intent(v.getContext(), ViewUser.class);
-                String sellerName = ((TextView) findViewById(R.id.infoUsername)).getText().toString();
+                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
                 intent.putExtra("username", sellerName);
                 startActivity(intent);
             }

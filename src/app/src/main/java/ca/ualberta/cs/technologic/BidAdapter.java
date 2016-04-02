@@ -1,13 +1,17 @@
 package ca.ualberta.cs.technologic;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import ca.ualberta.cs.technologic.Activities.ViewUser;
 
 
 public class BidAdapter extends ArrayAdapter<Bid> {
@@ -19,7 +23,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         final Computer[] c = new Computer[1];
         // Get the data item for this position
         final Bid bid = getItem(position);
@@ -47,13 +51,19 @@ public class BidAdapter extends ArrayAdapter<Bid> {
             e.printStackTrace();
         }
         description.setText(c[0].getDescription());
-        price.setText("bid: $"+String.format("%.2f", bid.getPrice()));
+        price.setText("bid: $" + String.format("%.2f", bid.getPrice()));
 
         if (myBids) {
             owner.setText("owner: " + bid.getOwner());
         } else {
             owner.setText("bidder: " + bid.getUsername());
         }
+        owner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ListView) parent).performItemClick(view, position, 0);
+            }
+        });
 //        //change the color of the availability
 //        if (computer.getStatus().equals("available")){
 //            status.setTextColor(Color.parseColor("#3b5323"));
