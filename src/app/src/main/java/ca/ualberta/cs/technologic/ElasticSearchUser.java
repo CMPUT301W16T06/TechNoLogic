@@ -93,7 +93,7 @@ public class ElasticSearchUser {
      * Delete the user given the username
      * @param id of the User to be delete
      */
-    private static void deleteUser(UUID id) {
+    public static void deleteUser(UUID id) {
         verifyClient();
 
 
