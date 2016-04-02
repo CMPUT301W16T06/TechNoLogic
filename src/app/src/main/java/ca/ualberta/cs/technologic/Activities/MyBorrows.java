@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -133,6 +134,15 @@ public class MyBorrows extends ActionBarActivity {
         //ArrayAdapter<Borrow> listAdapter = new ArrayAdapter<Borrow>(this, R.layout.listviewtext, borrows);
         listAdatper = new BorrowAdapter(this, borrows, true);
         borrowlist.setAdapter(listAdatper);
+        borrowlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(view.getContext(), ViewUser.class);
+                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
+                intent.putExtra("username", sellerName);
+                startActivity(intent);
+            }
+        });
 
         if (borrows.size() == 0){
             Toast msg = Toast.makeText(getApplicationContext(), "You are borrowing no computers", Toast.LENGTH_SHORT);

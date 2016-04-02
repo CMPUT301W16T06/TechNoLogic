@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -61,6 +64,15 @@ public class LentOut extends ActionBarActivity {
         //ArrayAdapter<Borrow> listAdapter = new ArrayAdapter<Borrow>(this, R.layout.listviewtext, lentOut);
         listAdapter = new BorrowAdapter(this, lentOut, false);
         lentlist.setAdapter(listAdapter);
+        lentlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(view.getContext(), ViewUser.class);
+                String sellerName = ((TextView) findViewById(R.id.owner)).getText().toString();
+                intent.putExtra("username", sellerName);
+                startActivity(intent);
+            }
+        });
 
         if (lentOut.size() == 0){
             Toast msg = Toast.makeText(getApplicationContext(), "You have not lent out any computers", Toast.LENGTH_SHORT);
