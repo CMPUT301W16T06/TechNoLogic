@@ -15,10 +15,10 @@ import ca.ualberta.cs.technologic.R;
 import ca.ualberta.cs.technologic.User;
 
 /**
- * The NewUser class is an activity for creating a new user or editing an existing user.
+ * The NewUser class is an activity for creating a new user.
  * It will take inputs from the User and check if the Username exists in ElasticSearch.
- *
- *
+ *  It will only allow the User account to be created if the Username
+ *  does not exist in ElasticSearch.
  */
 public class NewUser extends ActionBarActivity {
     //variables
@@ -92,7 +92,8 @@ public class NewUser extends ActionBarActivity {
 
     /**
      * Gets the input text fields filled out by the User
-     * @return User object
+     * @return User object if successful
+     *          null if one of the fields are empty
      */
     private User getUserInput() {
         // Get all Strings from EditText views
@@ -102,7 +103,8 @@ public class NewUser extends ActionBarActivity {
         String newPhoneNum = EditTextToString((EditText) findViewById(R.id.userPhone));
         String newAddress = EditTextToString((EditText) findViewById(R.id.userAddress));
 
-        if (newUserName.equals("") || newName.equals("") || newEmail.equals("") || newPhoneNum.equals("") || newAddress.equals("")) {
+        if (newUserName.equals("") || newName.equals("") || newEmail.equals("") ||
+                newPhoneNum.equals("") || newAddress.equals("")) {
             return null;
         }
         // Create new user with the input information
@@ -112,10 +114,6 @@ public class NewUser extends ActionBarActivity {
         inputUser.setEmail(newEmail);
         inputUser.setPhone(newPhoneNum);
         inputUser.setAddress(newAddress);
-
-        Toast takenUser = Toast.makeText(getApplicationContext(),
-                inputUser.getUsername() + '|' + inputUser.getName() + '|' +inputUser.getEmail() + '|' + inputUser.getPhone() + '|' + inputUser.getAddress(), Toast.LENGTH_SHORT);
-        takenUser.show();
 
         return inputUser;
     }

@@ -21,6 +21,9 @@ import ca.ualberta.cs.technologic.User;
 /**
  * EditUser is the activity for when the User
  *  wants to edit their personal information.
+ *  It will display their current information,
+ *  and then allow the User to update all fields
+ *  of information except for their username.
  */
 public class EditUser extends ActionBarActivity {
     //variables
@@ -41,11 +44,6 @@ public class EditUser extends ActionBarActivity {
 
         switch (id) {
             case R.id.home:
-                //I used this for testing to make sure the username could be accessed from anywhere.
-                //Toast toast = Toast.makeText(getApplicationContext(), cu.getCurrentUser(), Toast.LENGTH_SHORT);
-                //toast.show();
-//                startActivity(new Intent(this, HomePage.class));
-//                finish();
                 break;
             case R.id.myitems:
                 Intent intent = new Intent(this, MyComputers.class);
@@ -115,18 +113,21 @@ public class EditUser extends ActionBarActivity {
     }
 
     /**
-     * Gets the User's input
+     * Gets the User's input with updated account
+     *  information.
      * @return User object
      */
     private User getUserInput() {
-        // Get all Strings from EditText views
+        // Get all Strings from EditText views. We want to check if any fields are empty or else
+        // it may cause errors.
         String newUserName = ((TextView) findViewById(R.id.edit_userUsername)).getText().toString();
         String newName = EditTextToString((EditText) findViewById(R.id.edit_userName));
         String newEmail = EditTextToString((EditText) findViewById(R.id.edit_userEmail));
         String newPhoneNum = EditTextToString((EditText) findViewById(R.id.edit_userPhone));
         String newAddress = EditTextToString((EditText) findViewById(R.id.edit_userAddress));
 
-        if (newUserName.equals("") || newName.equals("") || newEmail.equals("") || newPhoneNum.equals("") || newAddress.equals("")) {
+        if (newUserName.equals("") || newName.equals("") || newEmail.equals("")
+                || newPhoneNum.equals("") || newAddress.equals("")) {
             return null;
         }
 

@@ -74,7 +74,8 @@ public class Login extends Activity{
                     getOffline();
                     startActivity(intent);
                 } else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Wrong Username or password", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "Wrong Username or password", Toast.LENGTH_SHORT);
                     toast.show();
 
                 }
@@ -96,8 +97,6 @@ public class Login extends Activity{
      * @return true if username exists, false if not
      */
     private Boolean userLookup(final String username) {
-            // TODO: Check wantedUsername against existing Users
-            // TODO: Fix lowercase problem
             if (username.equals("")) {
                 return false;
             }
