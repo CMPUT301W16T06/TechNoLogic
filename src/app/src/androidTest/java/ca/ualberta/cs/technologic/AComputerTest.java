@@ -41,7 +41,6 @@ public class AComputerTest extends ActivityInstrumentationTestCase2<Login> {
     public void setUp() throws Exception {
         super.setUp();
         getActivity();
-        SystemClock.sleep(5000);
     }
 
     public void testAddComputer() {
@@ -146,20 +145,20 @@ public class AComputerTest extends ActivityInstrumentationTestCase2<Login> {
         thread3.start();
         assertEquals(compsTemp.size(), 0);
 
-        //Add an extra computer for other tests
-        onView(withId(R.id.addnewitem)).perform(click());
-        //Add information on computer
-        onView(withId(R.id.make)).perform(typeText("Windows"));
-        onView(withId(R.id.model)).perform(typeText("Surface Pro"));
-        onView(withId(R.id.harddrive)).perform(typeText("400"));
-        onView(withId(R.id.memory)).perform(typeText("16"));
-        onView(withId(R.id.processor)).perform(typeText("Intel i7"));
-        onView(withId(R.id.os)).perform(typeText("Windows"));
-        onView(withId(R.id.year)).perform(typeText("2015"));
-        onView(withId(R.id.baserate)).perform(typeText("40"));
-        onView(withId(R.id.description)).perform(typeText("Cool Computer"));
-
-        onView(withId(R.id.submit)).perform(click());
+//        //Add an extra computer for other tests
+//        onView(withId(R.id.addnewitem)).perform(click());
+//        //Add information on computer
+//        onView(withId(R.id.make)).perform(typeText("Windows"));
+//        onView(withId(R.id.model)).perform(typeText("Surface Pro"));
+//        onView(withId(R.id.harddrive)).perform(typeText("400"));
+//        onView(withId(R.id.memory)).perform(typeText("16"));
+//        onView(withId(R.id.processor)).perform(typeText("Intel i7"));
+//        onView(withId(R.id.os)).perform(typeText("Windows"));
+//        onView(withId(R.id.year)).perform(typeText("2015"));
+//        onView(withId(R.id.baserate)).perform(typeText("40"));
+//        onView(withId(R.id.description)).perform(typeText("Cool Computer"));
+//
+//        onView(withId(R.id.submit)).perform(click());
 
     }
 }

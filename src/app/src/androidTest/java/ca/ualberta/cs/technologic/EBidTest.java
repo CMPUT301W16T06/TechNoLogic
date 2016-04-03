@@ -24,8 +24,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Created by Jordan on 02/04/2016.
  */
-public class DBidTest extends ActivityInstrumentationTestCase2<Login> {
-    public DBidTest(){
+public class EBidTest extends ActivityInstrumentationTestCase2<Login> {
+    public EBidTest(){
         super(Login.class);
     }
 
@@ -33,7 +33,6 @@ public class DBidTest extends ActivityInstrumentationTestCase2<Login> {
     public void setUp() throws Exception {
         super.setUp();
         getActivity();
-        SystemClock.sleep(5000);
     }
 
     public void testBCheckBidded(){

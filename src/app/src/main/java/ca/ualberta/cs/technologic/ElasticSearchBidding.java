@@ -291,7 +291,7 @@ public class ElasticSearchBidding {
      * Removes the Bid given the id
      * @param bidID id of the bid to be delete
      */
-    private static void deleteBid(UUID bidID) {
+    public static void deleteBid(UUID bidID) {
         verifyClient();
 
         ArrayList<Bid> bids = new ArrayList<Bid>();

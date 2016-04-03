@@ -34,7 +34,6 @@ public class UserInfoTest extends ActivityInstrumentationTestCase2<Login> {
     public void setUp() throws Exception {
         super.setUp();
         getActivity();
-        SystemClock.sleep(5000);
     }
 
 

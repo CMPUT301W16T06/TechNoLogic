@@ -19,7 +19,6 @@ public class BComputerClassTest extends ActivityInstrumentationTestCase2 {
                 "cooljohn123","Microsoft","Surface","2014",
                 "intel i7","8","500","windows",Float.parseFloat("34.2"),"computer","available",null,null);
 
-
         testComputer.setStatus("bidded");
         assertEquals(testComputer.getStatus(),"bidded");
     }
