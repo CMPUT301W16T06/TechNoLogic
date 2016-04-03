@@ -113,8 +113,12 @@ public class AcceptBid extends ActionBarActivity {
 
                     if (bids.size() == 0) {
                         cb.deleteCurrentComputer(selectedBid.getComputerID());
+                        cc.updateComputerStatus(selectedBid.getComputerID(), "available");
                         onBackPressed();
                     }
+                } else {
+                    Toast noBidSelected = Toast.makeText(getApplicationContext(), "You must select a bid!", Toast.LENGTH_SHORT);
+                    noBidSelected.show();
                 }
             }
         });
@@ -149,21 +153,30 @@ public class AcceptBid extends ActionBarActivity {
         builder.setTitle("Pickup Location");
         builder.setMessage("Specify Location for Pickup:");
 
-
-
         // Add the buttons
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 EditText locationEdit = (EditText) inflator.findViewById(R.id.location);
-                String location = locationEdit.getText().toString();
-                getCoordinates(location);
+                final String location = locationEdit.getText().toString();
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        getCoordinates(location);
+                    }
+                });
+                thread.start();
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //getCoordinates(location);
 
             }
         });
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 
     private void getCoordinates(String location) {

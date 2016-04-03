@@ -65,7 +65,7 @@ Add Validity checks to the input fields
 
 Week: Apr 10 - 16
 
-Refactor code
+Add transaction module - tracking time borrowed and costs
 
 ———————————————————————————————————————————————————————————————
 

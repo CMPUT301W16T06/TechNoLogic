@@ -88,7 +88,7 @@ public class ReceivedBids extends ActionBarActivity {
 
         //update computer singleton
         //get changes done by external users, ie. bidding
-        getComputerSingleton();
+        //getComputerSingleton();
 
         listAdapter.notifyDataSetChanged();
 
