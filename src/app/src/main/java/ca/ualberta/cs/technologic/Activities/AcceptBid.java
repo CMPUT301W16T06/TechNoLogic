@@ -39,18 +39,24 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class AcceptBid extends ActionBarActivity {
+    //Singletons
+    private CurrentBids cb = CurrentBids.getInstance();
+    private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //variables
     private ArrayList<Bid> bids = null;
     private String compID;
     private UUID bidID;
     private Bid selectedBid;
     private boolean selected = false;
-    private ListView bidslist;
-    private BidAdapter listAdapter;
     private Double longitude;
     private Double latitude;
     private Boolean done = Boolean.FALSE;
-    private CurrentBids cb = CurrentBids.getInstance();
-    private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //UI elements
+    private ListView bidslist;
+    private BidAdapter listAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

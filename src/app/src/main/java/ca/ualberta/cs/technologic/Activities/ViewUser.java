@@ -16,12 +16,11 @@ import ca.ualberta.cs.technologic.User;
 /**
  * ViewUser allows the User to view other User's
  *  personal information.
- *
- *  //TODO: Put into rest of app. When starting an Intent to ViewUser, pass in a string with the tag "username"
- *  //TODO: Do something with UI, buttons do not do anything currently.
  */
 public class ViewUser extends ActionBarActivity {
+    //variables
     private ArrayList<User> users;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -88,6 +87,11 @@ public class ViewUser extends ActionBarActivity {
         displayUserInfo(userToDisplay);
     }
 
+    /**
+     * Gets the info associated with the given user
+     * @param username user to obtain info
+     * @return info of given user
+     */
     private User getUserInfo(final String username) {
         users = new ArrayList<User>();
 
@@ -107,6 +111,10 @@ public class ViewUser extends ActionBarActivity {
         return users.get(0);
     }
 
+    /**
+     * link the user info to the UI elements to display
+     * @param user information to display
+     */
     private void displayUserInfo(User user){
         TextView UserName = (TextView) findViewById(R.id.view_userUsername);
         TextView Name = (TextView) findViewById(R.id.view_userName);

@@ -50,14 +50,6 @@ public class MyBids extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bids);
         bidslist = (ListView) findViewById(R.id.bidslist);
-
-//        bidslist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-////                Intent goToInfo = new Intent(MyBids.this, EditComputerInfo.class);
-////                startActivity(goToInfo);
-//            }
-//        });
     }
 
     @Override

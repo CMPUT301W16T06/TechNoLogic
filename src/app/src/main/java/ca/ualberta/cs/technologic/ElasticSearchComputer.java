@@ -34,7 +34,7 @@ public class ElasticSearchComputer {
      * Get computers
      * Can specify the username, gets all the computers belonging to that user
      * If username is "" then all computers will be return
-     * @param username
+     * @param username username to get computers
      * @return Arraylist of computers
      */
     public static ArrayList<Computer> getComputers(String username) {
@@ -68,6 +68,10 @@ public class ElasticSearchComputer {
         return computers;
     }
 
+    /**
+     * gets all the computers
+     * @return computers
+     */
     public static ArrayList<Computer> getAllComputers() {
         verifyClient();
         CurrentUser cu = CurrentUser.getInstance();
@@ -104,8 +108,8 @@ public class ElasticSearchComputer {
 
     /**
      * Returns the list of computers that matched the search description
-     * @param searchString
-     * @return
+     * @param searchString string to search
+     * @return comptuers with matching description
      */
     public static ArrayList<Computer> getComputersSearch(String searchString) {
         verifyClient();
@@ -142,7 +146,7 @@ public class ElasticSearchComputer {
      * Get computers
      * Can specify the username, gets all the computers belonging to that user
      * If username is "" then all computers will be return
-     * @param username
+     * @param username user to get computers
      * @return Arraylist of computers
      */
     public static ArrayList<Computer> getComputersBidded(String username) {
@@ -178,8 +182,8 @@ public class ElasticSearchComputer {
 
         /**
          *  Gets the computer that has the specified ID
-         * @param id
-         * @return
+         * @param id computer id to match
+         * @return computer that matches id
          */
     public static Computer getComputersById(UUID id) {
         verifyClient();
@@ -202,12 +206,6 @@ public class ElasticSearchComputer {
             e.printStackTrace();
         }
         return computers.get(0);
-//        for (Computer c : computers){
-//            if (c.getId().equals(id)){
-//                return c;
-//            }
-//        }
-//        return null;
     }
 
 

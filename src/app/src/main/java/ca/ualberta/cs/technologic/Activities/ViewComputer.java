@@ -21,11 +21,13 @@ import ca.ualberta.cs.technologic.ElasticSearchComputer;
 import ca.ualberta.cs.technologic.R;
 
 public class ViewComputer extends ActionBarActivity {
-
-    private String id;
-    private Computer comp;
+    //singleton
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers cc = CurrentComputers.getInstance();
+
+    //varibles
+    private String id;
+    private Computer comp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

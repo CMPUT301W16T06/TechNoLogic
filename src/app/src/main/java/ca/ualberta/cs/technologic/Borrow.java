@@ -140,28 +140,11 @@ public class Borrow{
     }
 
     /**
-     * format the bid object for display when listed
-     * shows the description of computer, owner, bidder and price
-     * @return
+     * format for display
+     * @return shows the bid ID
      */
     @Override
     public String toString() {
-        final Computer[] comp = {null};
-        final UUID id = this.computerID;
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                //comps = ElasticSearchComputer.getComputers(cu.getCurrentUser());
-                comp[0] = ElasticSearchComputer.getComputersById(id);
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return comp[0].getDescription() + "\n" + "owner:" + this.owner + "\n" +
-                "borrower:" + this.username;
+        return this.borrowID.toString();
     }
 }

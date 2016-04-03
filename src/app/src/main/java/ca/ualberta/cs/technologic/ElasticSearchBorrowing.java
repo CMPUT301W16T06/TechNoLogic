@@ -189,6 +189,9 @@ public class ElasticSearchBorrowing {
         }
     }
 
+    /**
+     * verify client for elastic search
+     */
     private static void verifyClient() {
         if(client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://test-technologic.rhcloud.com");

@@ -21,6 +21,7 @@ import ca.ualberta.cs.technologic.User;
  *
  */
 public class NewUser extends ActionBarActivity {
+    //variables
     private User pendingUser;
     private ArrayList<User> currentUsers;
 

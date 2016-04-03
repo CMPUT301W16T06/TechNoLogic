@@ -27,18 +27,34 @@ public class CurrentComputers {
         return firstInstance;
     }
 
+    /**
+     * gets the singleton of computers for a user
+     * @return arraylist of computers
+     */
     public ArrayList<Computer> getCurrentComputers() {
         return currentComputers;
     }
 
+    /**
+     * set the singleton to the given computers
+     * @param currentComputers computers for the singleton
+     */
     public void setCurrentComputers(ArrayList<Computer> currentComputers) {
         this.currentComputers = currentComputers;
     }
 
+    /**
+     * adds computers to the singleton
+     * @param newCurrentComputer computer to add
+     */
     public void addCurrentComputer(Computer newCurrentComputer){
         this.currentComputers.add(newCurrentComputer);
     }
 
+    /**
+     * delete a computer from the singleton
+     * @param deleteCurrentComputer computer to delete
+     */
     public void deleteCurrentComputer(Computer deleteCurrentComputer){
         int index = -1;
         for (int i = 0 ; i < this.currentComputers.size() ; i++){
@@ -54,6 +70,11 @@ public class CurrentComputers {
         }
     }
 
+    /**
+     * updates the singleton when a computers status changes
+     * @param compID computer that has changed its status
+     * @param status current status of the computer
+     */
     public void updateComputerStatus(UUID compID, String status){
         int index = -1;
         for (int i = 0 ; i < this.currentComputers.size() ; i++){

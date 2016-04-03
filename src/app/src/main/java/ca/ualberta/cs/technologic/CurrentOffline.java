@@ -42,18 +42,35 @@ public class CurrentOffline {
         return firstInstance;
     }
 
+    /**
+     * gets the singleton for offline behaviour, will be computers that
+     * have been added but not saved
+     * @return arraylist of computers
+     */
     public ArrayList<Computer> getCurrentOffline() {
         return this.currentComputerFile;
     }
 
+    /**
+     * sets the singleton to the given computers
+     * @param comps computers for the singleton
+     */
     public void setCurrentOffline(ArrayList<Computer> comps) {
         this.currentComputerFile = comps;
     }
 
+    /**
+     * adds a new computer to the singleton
+     * @param newCurrentComputer computer to add
+     */
     public void addCurrentOffline(Computer newCurrentComputer){
         this.currentComputerFile.add(newCurrentComputer);
     }
 
+    /**
+     * when internet connected save computers to elastic search
+     * @param fos file output strem for writing
+     */
     public void saveCurrentOffline(FileOutputStream fos){
         saveComputerFile(this.currentComputerFile, fos);
         this.currentComputerFile.clear();

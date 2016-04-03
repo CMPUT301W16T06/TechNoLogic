@@ -32,14 +32,18 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class MyComputers extends ActionBarActivity {
-
-    private ArrayList<Computer> comps = new ArrayList<Computer>();
-    private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
+    //singleton
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers currentComps = CurrentComputers.getInstance();
     private CurrentOffline co = CurrentOffline.getInstance();
-    private ComputerAdapter listAdapter;
+
+    //variables
+    private ArrayList<Computer> comps = new ArrayList<Computer>();
+    private ArrayList<Computer> compsTemp = new ArrayList<Computer>();
     private Integer notificationCount = 0;
+
+    //UI elements
+    private ComputerAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,29 +98,6 @@ public class MyComputers extends ActionBarActivity {
             myitems.show();
         }
 
-    }
-
-    /**
-     * gets all computers belonging to the current logged in user
-     */
-    private void getComputers(){
-        compsTemp.clear();
-        Thread thread = new Thread(new Runnable() {
-            public void run() {
-                compsTemp = ElasticSearchComputer.getComputers(cu.getCurrentUser());
-            }
-        });
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        comps.clear();
-        comps.addAll(compsTemp);
-        listAdapter.notifyDataSetChanged();
     }
 
     /**

@@ -23,6 +23,7 @@ import ca.ualberta.cs.technologic.User;
  *  wants to edit their personal information.
  */
 public class EditUser extends ActionBarActivity {
+    //variables
     private ArrayList<User> currentUsers;
     private CurrentUser cu;
     private User previousUser;

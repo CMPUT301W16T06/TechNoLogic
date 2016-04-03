@@ -31,7 +31,7 @@ public class ElasticSearchBidding {
      * Get bids
      * Can specify the username, gets all the bids that a user has made on other computers
      * If username is "" then all bids will be return
-     * @param username
+     * @param username username to get bids
      * @return Arraylist of bids
      */
     public static ArrayList<Bid> getMyBids(String username) {
@@ -87,7 +87,7 @@ public class ElasticSearchBidding {
     /**
      * Get computers
      * returns all computers taht the owner has that have been bid on
-     * @param owner
+     * @param owner username to get items with bids
      * @return Arraylist of computers
      */
     public static ArrayList<Computer> getMyItemBids(String owner) {
@@ -133,6 +133,11 @@ public class ElasticSearchBidding {
         addNotification(n);
     }
 
+    /**
+     * when a bid is add, add a notification count for the user
+     * find the current number and then add 1
+     * @param n notification to add
+     */
     public static void addNotification(Notification n){
         verifyClient();
 
@@ -194,6 +199,11 @@ public class ElasticSearchBidding {
         }
     }
 
+    /**
+     * gets the notification for a particular user
+     * @param owner user to get notifications for
+     * @return number of notifications for that user
+     */
     public static Integer getNotifications(String owner){
         verifyClient();
 

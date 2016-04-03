@@ -34,14 +34,18 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class EditComputerInfo extends ActionBarActivity {
-    private String id;
-    private Computer comp;
+    //singleton
     private CurrentUser cu = CurrentUser.getInstance();
     private CurrentComputers currentComputers = CurrentComputers.getInstance();
+
+    //variables
+    private String id;
+    private Computer comp;
     private Bitmap thumbnail = null;
-    private ImageButton pictureBtn;
     static final int REQUEST_IMAGE_CAPTURE = 1234;
 
+    //UI elements
+    private ImageButton pictureBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

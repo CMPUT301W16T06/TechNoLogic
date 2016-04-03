@@ -36,7 +36,7 @@ public class ElasticSearchUser {
      * Get user
      * Can specify the username, gets user if mathces the username
      * If username is "" then all user will be return
-     * @param username
+     * @param username username to search
      * @return Arraylist of users
      */
     public static ArrayList<User> getUsers(String username) {

@@ -64,16 +64,7 @@ public class BidAdapter extends ArrayAdapter<Bid> {
                 ((ListView) parent).performItemClick(view, position, 0);
             }
         });
-//        //change the color of the availability
-//        if (computer.getStatus().equals("available")){
-//            status.setTextColor(Color.parseColor("#3b5323"));
-//        }
-//        else if (computer.getStatus().equals("bidded")){
-//            status.setTextColor(Color.parseColor("#e6e600"));
-//        }
-//        else{
-//            status.setTextColor(Color.parseColor("#b20000"));
-//        }
+
         // Return the completed view to render on screen
         return convertView;
     }

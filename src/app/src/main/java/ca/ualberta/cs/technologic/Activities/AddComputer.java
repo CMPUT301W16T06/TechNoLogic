@@ -41,15 +41,19 @@ import ca.ualberta.cs.technologic.R;
  */
 
 public class AddComputer extends ActionBarActivity {
+    //Singleton
     final private CurrentUser cu = CurrentUser.getInstance();
-    static final int REQUEST_IMAGE_CAPTURE = 1234;
-    private Bitmap thumbnail = null;
-    private ImageButton pictureBtn;
     private CurrentComputers currentComputers = CurrentComputers.getInstance();
-    private boolean connection;
-    private String fileName = "computers.sav";
     private CurrentOffline currentOffline = CurrentOffline.getInstance();
 
+    //variables
+    static final int REQUEST_IMAGE_CAPTURE = 1234;
+    private Bitmap thumbnail = null;
+    private boolean connection;
+    private String fileName = "computers.sav";
+
+    //UI elements
+    private ImageButton pictureBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +75,9 @@ public class AddComputer extends ActionBarActivity {
             public void onClick(View v) {
                 saveComputer();
                 onBackPressed();
-                //Intent goToItems1 = new Intent(AddComputer.this, HomePage.class);
-                //startActivity(goToItems1);
             }
         });
 
-        //checkCompsToSave();
     }
 
     /**
@@ -148,6 +149,10 @@ public class AddComputer extends ActionBarActivity {
         }
     }
 
+    /**
+     * check the connectivity and if connected to the internet
+     * save computers that have been added
+     */
     private void checkCompsToSave(){
         connection = OfflineMode.getEnabled(this);
         if (connection) {

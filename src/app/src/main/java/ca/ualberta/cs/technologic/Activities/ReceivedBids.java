@@ -91,11 +91,6 @@ public class ReceivedBids extends ActionBarActivity {
         getComputerSingleton();
 
         listAdapter.notifyDataSetChanged();
-        //gets all computer that user owns that have been bid on
-        //getMyItems();
-
-//        listAdapter = new ComputerAdapter(this, comps);
-//        myitemlist.setAdapter(listAdapter);
 
         if (cb.getCurrentBids().size() == 0){
             Toast msg = Toast.makeText(getApplicationContext(), "No bids on your computers", Toast.LENGTH_SHORT);

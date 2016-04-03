@@ -29,14 +29,26 @@ public class CurrentBids {
         return firstInstance;
     }
 
+    /**
+     * gets the current computers taht have been bid on
+     * @return computers with bids
+     */
     public ArrayList<Computer> getCurrentBids() {
         return this.currentBids;
     }
 
+    /**
+     * sets the singleton with the provided computers
+     * @param currentBids computers for the singleton
+     */
     public void setCurrentBids(ArrayList<Computer> currentBids) {
         this.currentBids = currentBids;
     }
 
+    /**
+     * adds a new computer to the singleton
+     * @param newCurrentBid new computer to add
+     */
     public void addCurrentComputer(Computer newCurrentBid){
         this.currentBids.add(newCurrentBid);
     }
@@ -45,6 +57,10 @@ public class CurrentBids {
 //        this.currentBids.remove(deleteCurrentBid);
 //    }
 
+    /**
+     * removes the computer from the singleton
+     * @param deleteCurrentComputerID computer to remove
+     */
     public void deleteCurrentComputer(UUID deleteCurrentComputerID){
         int index = -1;
         for (int i = 0 ; i < this.currentBids.size() ; i++){

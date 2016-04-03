@@ -25,6 +25,7 @@ import ca.ualberta.cs.technologic.R;
 
 //http://stackoverflow.com/questions/21120970/google-maps-android-api-v2-problems-with-android-4-3
 public class Maps extends FragmentActivity {
+    //variables
     private GoogleMap googleMap;
     private Double latitude = -37.814251;
     private Double longitude = 144.963169;
