@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/background_image">
 
     <TextView
         android:fontFamily="sans-serif-light"
@@ -12,17 +13,18 @@
         android:layout_marginTop="-100dp"
         android:textSize="30sp"
         android:layout_marginBottom="50dp"
-        />
+        android:paddingLeft="6dp" />
 
     <EditText
-        android:fontFamily="sans-serif-light"
+        android:fontFamily="sans-serif"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:paddingLeft="20dp"
         android:background="@drawable/edittextlight"
         android:id="@+id/username"
         android:hint="Username"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:singleLine="false" />
 
     <Button
             android:layout_width="250dp"
