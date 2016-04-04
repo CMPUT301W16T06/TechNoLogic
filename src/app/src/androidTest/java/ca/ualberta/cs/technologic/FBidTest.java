@@ -24,8 +24,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Created by Jordan on 02/04/2016.
  */
-public class EBidTest extends ActivityInstrumentationTestCase2<Login> {
-    public EBidTest(){
+public class FBidTest extends ActivityInstrumentationTestCase2<Login> {
+    public FBidTest(){
         super(Login.class);
     }
 
@@ -36,20 +36,37 @@ public class EBidTest extends ActivityInstrumentationTestCase2<Login> {
     }
 
     public void testBCheckBidded(){
-        //US 05.02.01 | As a borrower, I want to view a list of things I have bidded on that are
-        // pending, each thing with its description, owner username, and my bid
-        //Login
-        onView(withId(R.id.username)).perform(typeText("jordan"));
-        onView(withId(R.id.login)).perform(click());
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText("My Bids")).perform(click());
+        //Setup
+        final Computer testComputer = new Computer(UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d"),
+                "schraa", "Microsoft", "Surface", "2014",
+                "intel i7", "8", "500", "windows", Float.parseFloat("34.2"),
+                "Cool Computer", "Cool Computer", null, null);
+        final Bid testBid = new Bid(testComputer.getId(),Float.parseFloat("23.42"),"jordan","schraa");
+        final Bid testBid1 = new Bid(testComputer.getId(),Float.parseFloat("43.23"),"jordan","schraa");
+        final Bid testBid2 = new Bid(testComputer.getId(),Float.parseFloat("35.32"),"jordan","schraa");
 
-        //Check to make sure the bid is displayed in a list
-        onView(withId(R.id.bidslist)).check(matches(isDisplayed()));
 
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText("Log Out")).perform(click());
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                ArrayList<Bid> bids =
+                        ElasticSearchBidding.getMyBids("jordan");
+                for (Bid bidded : bids){
+                    ElasticSearchBidding.deleteBid(bidded.getBidID());
+                }
 
+                ArrayList<Computer> cmput = ElasticSearchComputer.getComputers("schraa");
+                for (Computer testComp : cmput){
+                    ElasticSearchComputer.deleteComputer(testComp.getId().toString());
+                }
+                ElasticSearchComputer.addComputer(testComputer);
+                ElasticSearchBidding.placeBid(testBid);
+                ElasticSearchBidding.placeBid(testBid1);
+                ElasticSearchBidding.placeBid(testBid2);
+
+            }
+        });
+        thread.start();
+        assertTrue(true);
 
         //Login for owner
         onView(withId(R.id.username)).perform(typeText("schraa"));
@@ -87,17 +104,15 @@ public class EBidTest extends ActivityInstrumentationTestCase2<Login> {
         onView(withId(R.id.acceptbidslist)).perform(click());
         onView(withId(R.id.accept)).perform(click());
 
+        //Make sure the bid has been Deleted to Elastic Search
+        Thread thread1 = new Thread(new Runnable() {
+            public void run() {
+                ArrayList<Bid> bids =
+                        ElasticSearchBidding.getMyBids("jordan");
+                assertEquals(bids.size(),0);
+            }
+        });
+        thread1.start();
 
-
-//        //Make sure the bid has been Deleted to Elastic Search
-//        Thread thread = new Thread(new Runnable() {
-//            public void run() {
-//                ArrayList<Bid> bids =
-//                        ElasticSearchBidding.getMyBids("jordan");
-//                assertEquals(bids.size(),0);
-//            }
-//        });
-//        thread.start();
-//
     }
 }

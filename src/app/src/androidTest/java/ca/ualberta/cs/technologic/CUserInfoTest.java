@@ -25,8 +25,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  * Created by Jordan on 01/04/2016.
  */
 
-public class UserInfoTest extends ActivityInstrumentationTestCase2<Login> {
-    public UserInfoTest() {
+public class CUserInfoTest extends ActivityInstrumentationTestCase2<Login> {
+    public CUserInfoTest() {
         super(Login.class);
     }
 
@@ -75,6 +75,9 @@ public class UserInfoTest extends ActivityInstrumentationTestCase2<Login> {
 
         onView(withId(R.id.edit_userName)).perform(clearText()).perform(typeText("Billy Joel"));
         onView(withId(R.id.edit_userSubmit)).perform(click());
+
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Log Out")).perform(click());
 
         //Make sure the user was actually edited
         Thread thread3 = new Thread(new Runnable() {

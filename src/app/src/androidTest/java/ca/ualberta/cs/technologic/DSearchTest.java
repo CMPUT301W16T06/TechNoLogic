@@ -1,5 +1,6 @@
 package ca.ualberta.cs.technologic;
 
+import android.content.Intent;
 import android.os.SystemClock;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 import java.util.regex.Matcher;
 
+import ca.ualberta.cs.technologic.Activities.LentOut;
 import ca.ualberta.cs.technologic.Activities.Login;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -28,8 +30,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 /**
  * Created by Jordan on 01/04/2016.
  */
-public class CSearchTest extends ActivityInstrumentationTestCase2<Login> {
-    public CSearchTest(){
+public class DSearchTest extends ActivityInstrumentationTestCase2<Login> {
+    public DSearchTest(){
         super(Login.class);
     }
 
@@ -39,21 +41,31 @@ public class CSearchTest extends ActivityInstrumentationTestCase2<Login> {
         getActivity();
     }
 
-    public void testASearch(){
+    public void testSearch() {
         //Add Computer for test
         final Computer testComputer = new Computer(UUID.fromString("38400000-8cf0-11bd-b23e-10b96e4ef00d"),
-                "schraa","Microsoft","Surface","2014",
-                "intel i7","8","500","windows",Float.parseFloat("34.2"),
-                "Cool Computer","Cool Computer",null,null);
+                "schraa", "Microsoft", "Surface", "2014",
+                "intel i7", "8", "500", "windows", Float.parseFloat("34.2"),
+                "Cool Computer", "Cool Computer", null, null);
 
+        //setup
         Thread thread = new Thread(new Runnable() {
             public void run() {
+                ArrayList<Computer> cmput = ElasticSearchComputer.getComputers("schraa");
+                for (Computer testComp : cmput){
+                    ElasticSearchComputer.deleteComputer(testComp.getId().toString());
+                }
+                ArrayList<Bid> bids =
+                        ElasticSearchBidding.getMyBids("jordan");
+                for (Bid bidded : bids){
+                    ElasticSearchBidding.deleteBid(bidded.getBidID());
+                }
                 ElasticSearchComputer.addComputer(testComputer);
 
             }
         });
         thread.start();
-        assertNotNull(ElasticSearchComputer.getComputers("schraa"));
+        //assertNotNull(ElasticSearchComputer.getComputers("schraa"));
 
         //US 04.01.01 | As a borrower, I want to specify a set of keywords, and search for all
         //things not currently borrowed whose description contains all the keywords
@@ -80,22 +92,6 @@ public class CSearchTest extends ActivityInstrumentationTestCase2<Login> {
         onView(withId(R.id.placebid)).perform(click());
         Espresso.pressBack();
 
-    }
-
-    public void testCleanup(){
-        //Make sure the bid has been added to Elastic Search and clean up
-        Thread thread3 = new Thread(new Runnable() {
-            public void run() {
-                ArrayList<Bid> bids =
-                        ElasticSearchBidding.getMyBids("jordan");
-                assertEquals(bids.size(),1);
-                ElasticSearchBidding.deleteBid(bids.get(0).getBidID());
-                ArrayList<Computer> testComp = ElasticSearchComputer.getComputers("schraa");
-                ElasticSearchComputer.deleteComputer(testComp.get(0).getId().toString());
-            }
-        });
-        thread3.start();
-        assertTrue(true);
     }
 
 //    public void testCheckBidded(){

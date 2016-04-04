@@ -44,6 +44,21 @@ public class AComputerTest extends ActivityInstrumentationTestCase2<Login> {
     }
 
     public void testAddComputer() {
+        Thread thread = new Thread(new Runnable() {
+            public void run() {
+                ArrayList<Bid> bids =
+                        ElasticSearchBidding.getMyBids("jordan");
+                for (Bid bidded : bids){
+                    ElasticSearchBidding.deleteBid(bidded.getBidID());
+                }
+                ArrayList<Computer> cmput = ElasticSearchComputer.getComputers("schraa");
+                for (Computer testComp : cmput){
+                    ElasticSearchComputer.deleteComputer(testComp.getId().toString());
+                }
+            }
+        });
+        thread.start();
+        assertNotNull(ElasticSearchComputer.getComputers("schraa"));
         //Login
         onView(withId(R.id.username)).perform(typeText("schraa"));
         onView(withId(R.id.login)).perform(click());
@@ -69,13 +84,13 @@ public class AComputerTest extends ActivityInstrumentationTestCase2<Login> {
 
         //Make sure computer has been added with correct information
         ArrayList<Computer> compsTemp = new ArrayList<Computer>();
-        Thread thread = new Thread(new Runnable() {
+        Thread thread1 = new Thread(new Runnable() {
             public void run() {
                 ArrayList<Computer> compsTemp =
                         ElasticSearchComputer.getComputers("schraa");
             }
         });
-        thread.start();
+        thread1.start();
         assertNotNull(compsTemp);
         for (Computer cmput : compsTemp) {
             if (cmput.getDescription().equals("This is a fancy computer")) {
@@ -135,6 +150,9 @@ public class AComputerTest extends ActivityInstrumentationTestCase2<Login> {
             onView(withId(R.id.btnDelete)).perform(click());
         }
 
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+        onView(withText("Log Out")).perform(click());
+
         //Make sure the computer has been deleted
         Thread thread3 = new Thread(new Runnable() {
             public void run() {
@@ -144,21 +162,6 @@ public class AComputerTest extends ActivityInstrumentationTestCase2<Login> {
         });
         thread3.start();
         assertEquals(compsTemp.size(), 0);
-
-//        //Add an extra computer for other tests
-//        onView(withId(R.id.addnewitem)).perform(click());
-//        //Add information on computer
-//        onView(withId(R.id.make)).perform(typeText("Windows"));
-//        onView(withId(R.id.model)).perform(typeText("Surface Pro"));
-//        onView(withId(R.id.harddrive)).perform(typeText("400"));
-//        onView(withId(R.id.memory)).perform(typeText("16"));
-//        onView(withId(R.id.processor)).perform(typeText("Intel i7"));
-//        onView(withId(R.id.os)).perform(typeText("Windows"));
-//        onView(withId(R.id.year)).perform(typeText("2015"));
-//        onView(withId(R.id.baserate)).perform(typeText("40"));
-//        onView(withId(R.id.description)).perform(typeText("Cool Computer"));
-//
-//        onView(withId(R.id.submit)).perform(click());
 
     }
 }
