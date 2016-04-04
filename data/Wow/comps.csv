@@ -1,0 +1,11 @@
+id,username,make,model,hardrive,processor,os,ram,price,description,status,time
+208f857b-77c3-49a5-91fe-340df1c471a6,greg,Microsoft,Surface,4,i5,Windows 10,16,9.5,Borrow me!,bidded,2016-04-03T10:13:19-0600
+65f576f9-17bf-4a1e-8782-25ab259d4f27,jessica,Apple,Macbook,4,i5,OSX,16,11.5,Good laptop,available,2016-04-03T10:34:47-0600
+86cf0d91-e2da-4dea-a966-dbe888179d3a,jessica,Asus,ZenBook,16,i7,Windows 10,16,14.0,Stylish laptop for the girl on the go,borrowed,2016-04-03T10:08:36-0600
+dbb089ad-aee7-486c-9de3-9a4ef1f61022,eric,Microsoft rip-off,TI 80,10,TI 80,TI,3,10.0,Good calculator,bidded,2016-04-03T20:33:15-0600
+cfc8f227-5be4-4f6b-b361-9ae8d1a8d6ec,emmie,microsoft,greg,500,i2,x,64,2.0,lol,available,2016-04-03T20:23:51-0600
+729ad138-8347-427a-8604-2df5964f0b75,greg,Lenovo,Thinkpad,10,i7,Windows 10,32,15.0,Barely used laptop,bidded,2016-04-03T20:03:12-0600
+5d32e12a-5814-4c5e-bbae-3eee2099f24f,emmie,mac,macbook air ,500,i7,el Capitan ,64,26.99,gently used laptop with purple case ,borrowed,2016-04-03T18:44:27-0600
+f539c6d9-8381-4a4b-b5d0-77b074b27035,eric,Lenovo,Chromebook,4,i5,Windows,16,8.0,Old laptop but still works well,bidded,2016-04-03T10:16:45-0600
+7d2e646a-2fcf-479f-8aa1-4cc3e0d39230,claireb,macbook,pro,5,k,g,6,106780.0,go,available,2016-04-03T20:29:54-0600
+46fce895-7c18-48ee-98bf-8df9a2eb5f71,emmie,max,kristyna,500,i9,yose,600,1.0,pls buy ,bidded,2016-04-03T20:37:43-0600
