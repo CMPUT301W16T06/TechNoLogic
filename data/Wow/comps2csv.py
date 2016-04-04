@@ -4,12 +4,14 @@ import json
 import csv
 
 f = csv.writer(open("comps.csv", "w+"))
+d = open("results.txt", "a+")
 f.writerow(["id", "username", "make", "model", "hardrive", "processor", "os", "ram", "price", "description", "status", "time"])
 
 response = urllib.urlopen('http://test-technologic.rhcloud.com/computers/_search')
 my_json = json.loads(response.read())
 
 #print my_json['hits']['hits']
+count = 0
 
 for comp in my_json['hits']['hits']:
   make =  comp['_source']['make']
@@ -27,7 +29,13 @@ for comp in my_json['hits']['hits']:
 
   print id1, username, make, model, hardrive, processor, os, ram, price, description, status, time
   print "\n"
+  count = count + 1
   f.writerow([id1, username, make, model, hardrive, processor, os, ram, price, description, status, time])
+
+count = str(count)
+d.write("The number of current computers:" + count)
+d.write("\n")
+d.close()
 
 
   

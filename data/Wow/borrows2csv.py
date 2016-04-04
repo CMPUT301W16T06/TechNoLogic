@@ -4,12 +4,14 @@ import json
 import csv
 
 f = csv.writer(open("borrows.csv", "w+"))
+d = open("results.txt", "a+")
 f.writerow(["borrowid", "computerid", "owner", "username", "latitude", "longitude","time"])
 
 response = urllib.urlopen('http://test-technologic.rhcloud.com/borrows/_search')
 my_json = json.loads(response.read())
 
 #print my_json['hits']['hits']
+count = 0
 
 for comp in my_json['hits']['hits']:
   borrowid =  comp['_source']['borrowID']
@@ -23,7 +25,14 @@ for comp in my_json['hits']['hits']:
 
   print borrowid, computerid, owner, username, latitude, longitude, time
   print "\n"
+  count = count + 1
   f.writerow([borrowid, computerid, owner, username, latitude, longitude, time])
+
+count = str(count)
+d.write("The number of current borrows:" + count)
+d.write("\n")
+d.close()
+
 
 
   

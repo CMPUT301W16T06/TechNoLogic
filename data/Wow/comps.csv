@@ -1,6 +1,6 @@
 id,username,make,model,hardrive,processor,os,ram,price,description,status,time
 208f857b-77c3-49a5-91fe-340df1c471a6,greg,Microsoft,Surface,4,i5,Windows 10,16,9.5,Borrow me!,bidded,2016-04-03T10:13:19-0600
-65f576f9-17bf-4a1e-8782-25ab259d4f27,jessica,Apple,Macbook,4,i5,OSX,16,11.5,Good laptop,available,2016-04-03T10:34:47-0600
+65f576f9-17bf-4a1e-8782-25ab259d4f27,jessica,Apple,Macbook,4,i5,OSX,16,11.5,Good laptop,available,2016-04-03T12:34:47-0400
 86cf0d91-e2da-4dea-a966-dbe888179d3a,jessica,Asus,ZenBook,16,i7,Windows 10,16,14.0,Stylish laptop for the girl on the go,borrowed,2016-04-03T10:08:36-0600
 dbb089ad-aee7-486c-9de3-9a4ef1f61022,eric,Microsoft rip-off,TI 80,10,TI 80,TI,3,10.0,Good calculator,bidded,2016-04-03T20:33:15-0600
 cfc8f227-5be4-4f6b-b361-9ae8d1a8d6ec,emmie,microsoft,greg,500,i2,x,64,2.0,lol,available,2016-04-03T20:23:51-0600

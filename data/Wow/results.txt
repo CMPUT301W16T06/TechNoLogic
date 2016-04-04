@@ -1,0 +1,4 @@
+The number of current users:7
+The number of current computers:10
+The number of current borrows:4
+The number of current bids:10
