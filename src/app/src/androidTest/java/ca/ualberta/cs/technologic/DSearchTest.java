@@ -94,34 +94,4 @@ public class DSearchTest extends ActivityInstrumentationTestCase2<Login> {
 
     }
 
-//    public void testCheckBidded(){
-//        //US 05.02.01 | As a borrower, I want to view a list of things I have bidded on that are
-//        // pending, each thing with its description, owner username, and my bid
-//        onView(withId(R.id.username)).perform(typeText("jordan"));
-//        onView(withId(R.id.login)).perform(click());
-//        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-//        onView(withText("My Bids")).perform(click());
-//
-//        //Check to make sure the bid is displayed in a list
-//        onView(withId(R.id.bidslist)).check(matches(isDisplayed()));
-//
-//        //Clean up
-//        Thread thread = new Thread(new Runnable() {
-//            public void run() {
-//                ArrayList<Bid> bids =
-//                        ElasticSearchBidding.getMyBids("jordan");
-//                for (Bid bid : bids){
-//                    ElasticSearchBidding.deleteBid(bid.getBidID());
-//                }
-//                ArrayList<Computer> testComp = ElasticSearchComputer.getComputers("schraa");
-//                ElasticSearchComputer.deleteComputer(testComp.get(0).getId().toString());
-//            }
-//        });
-//        thread.start();
-//        assertTrue(true);
-//
-//        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-//        onView(withText("Log Out")).perform(click());
-//    }
-
 }
