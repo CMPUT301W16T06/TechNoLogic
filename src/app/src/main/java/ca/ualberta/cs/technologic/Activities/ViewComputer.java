@@ -109,6 +109,7 @@ public class ViewComputer extends ActionBarActivity {
                     Toast bidplaced = Toast.makeText(getApplicationContext(),
                             "Your bid has been placed", Toast.LENGTH_SHORT);
                     bidplaced.show();
+                    ((EditText) findViewById(R.id.infoBid)).setText("");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
