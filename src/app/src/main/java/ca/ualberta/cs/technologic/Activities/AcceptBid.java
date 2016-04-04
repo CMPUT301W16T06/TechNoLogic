@@ -107,6 +107,7 @@ public class AcceptBid extends ActionBarActivity {
                     }
                     Toast bidDeclined = Toast.makeText(getApplicationContext(), "Bid has been declined.", Toast.LENGTH_SHORT);
                     bidDeclined.show();
+                    selected = false;
 
                     bids.remove(selectedBid);
                     listAdapter.notifyDataSetChanged();
