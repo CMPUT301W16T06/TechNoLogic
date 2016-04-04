@@ -53,8 +53,6 @@ public class Login extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        getCoordinates();
-        
         username = (EditText) findViewById(R.id.username);
         Button loginButton = (Button) findViewById(R.id.login);
         TextView newUserButton = (TextView) findViewById(R.id.newUser);
@@ -96,36 +94,6 @@ public class Login extends Activity{
         });
 
 
-    }
-
-    private void getCoordinates() {
-        //http://developer.android.com/reference/android/location/Geocoder.html
-        //http://stackoverflow.com/questions/3641304/get-latitude-and-longitude-using-zipcode
-        String location = "Edmonton";
-        Geocoder geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
-        boolean x = Geocoder.isPresent();
-        try {
-            List<Address> addresses = geoCoder.getFromLocationName(location, 1);
-
-            if (addresses != null && !addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                // Use the address as needed
-                Double longitude = address.getLongitude();
-                Double latitude = address.getLatitude();
-                String message = String.format("Latitude: %f, Longitude: %f",
-                        latitude, longitude);
-                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-                //sendBid();
-            } else {
-                // Display appropriate message when Geocoder services are not available
-                Toast.makeText(this, "Unable to geocode zipcode", Toast.LENGTH_LONG).show();
-//                longitude = -17.666667;
-//                latitude = -149.416667;
-//                sendBid();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     /**

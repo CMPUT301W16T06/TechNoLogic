@@ -157,20 +157,20 @@ public class AcceptBid extends ActionBarActivity {
         builder.setPositiveButton(R.string.okay, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 EditText locationEdit = (EditText) inflator.findViewById(R.id.location);
-                final String location = locationEdit.getText().toString();
-                Thread thread = new Thread(new Runnable() {
-                    public void run() {
-                        getCoordinates(location);
-                    }
-                });
-                thread.start();
-
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //getCoordinates(location);
+                String location = locationEdit.getText().toString();
+//                Thread thread = new Thread(new Runnable() {
+//                    public void run() {
+//                        getCoordinates(location);
+//                    }
+//                });
+//                thread.start();
+//
+//                try {
+//                    thread.join();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+                getCoordinates(location);
 
             }
         });
@@ -204,6 +204,7 @@ public class AcceptBid extends ActionBarActivity {
 //                sendBid();
             }
         } catch (IOException e) {
+            Toast.makeText(this, "Location services down. Come back to accept bids later", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
 
