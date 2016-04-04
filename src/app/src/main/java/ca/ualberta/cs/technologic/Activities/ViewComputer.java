@@ -76,9 +76,6 @@ public class ViewComputer extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 placeBid();
-                Toast bidplaced = Toast.makeText(getApplicationContext(),
-                        "Your bid has been placed", Toast.LENGTH_SHORT);
-                bidplaced.show();
             }
         });
 
@@ -91,24 +88,33 @@ public class ViewComputer extends ActionBarActivity {
         //get the inputted bid price
         Float price = Float.parseFloat(((EditText) findViewById(R.id.infoBid)).getText().toString());
         String username = cu.getCurrentUser();
+        if (price.equals("")) {
+            Toast bidplaced = Toast.makeText(getApplicationContext(),
+                    "Enter a bid", Toast.LENGTH_SHORT);
+            bidplaced.show();
+        } else {
 
-        final Bid bid;
-        //save the bid that was made
-        try {
-            bid = new Bid(comp.getId(), price, username, comp.getUsername());
-            Thread thread = new Thread(new Runnable() {
-                public void run() {
-                    ElasticSearchBidding.placeBid(bid);
-                }
-            });
-            thread.start();
+            final Bid bid;
+            //save the bid that was made
             try {
-                thread.join();
-            } catch (InterruptedException e) {
+                bid = new Bid(comp.getId(), price, username, comp.getUsername());
+                Thread thread = new Thread(new Runnable() {
+                    public void run() {
+                        ElasticSearchBidding.placeBid(bid);
+                    }
+                });
+                thread.start();
+                try {
+                    thread.join();
+                    Toast bidplaced = Toast.makeText(getApplicationContext(),
+                            "Your bid has been placed", Toast.LENGTH_SHORT);
+                    bidplaced.show();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
